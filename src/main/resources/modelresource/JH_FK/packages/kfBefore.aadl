@@ -1,0 +1,183 @@
+package kfBefore
+public
+	with Composition;
+	
+	system kf
+		features
+			bus_data: requires bus access Composition::bus_1553B; --1553B总线信号											
+			cy_info: out data port;		
+	interrupt: in event port;
+	end kf;
+	
+	system implementation kf.before
+		subcomponents
+			zdsc_hdxld: process zdsc_hdxld.impl;
+			yz: process yz.impl;
+			lz_judgement: process lz_judgement.impl;
+			LSP: processor LSP;
+			RAM: memory RAM;
+		 properties
+			Actual_Processor_Binding => (reference (LSP)) applies to zdsc_hdxld;--将zdsc_hdxld过程绑定处理器LSP
+			Actual_Processor_Binding => (reference (LSP)) applies to yz;
+			Actual_Processor_Binding => (reference (LSP)) applies to lz_judgement;
+			Actual_Memory_Binding => (reference (RAM)) applies to zdsc_hdxld;--将zdsc_hdxld和数据缓冲区进行绑定
+			Actual_Memory_Binding => (reference (RAM)) applies to yz;
+			Actual_Memory_Binding => (reference (RAM)) applies to lz_judgement;
+	end kf.before;
+	
+	--zdsc及hdxld过程--
+	
+	process zdsc_hdxld
+		features
+			calculation_parameters: in data port;--计算参数
+			zg_data: in data port;
+			jpt: out data port;
+			self_alignment_angle: out data port;--自对准角度
+			geography_monitoring_attitude: out data port;--地理系监测姿态角
+			launching_speed: out data port;--发射系速度
+	control_commands: in event port;--控制命令
+			test_state: in event port;--测试状态
+			
+			zdsc_state: out event port;
+	end zdsc_hdxld;
+	
+	process implementation zdsc_hdxld.impl
+		subcomponents
+			zdsc: thread zdsc;
+			hdxld: thread hdxld;
+			
+	connections
+		zgDataTozdsc: port zg_data -> zdsc.zg_data;
+        TestStateTozdsc: port test_state -> zdsc.test_state;
+        ControlCommandsTozdsc: port control_commands -> zdsc.control_commands;
+        CalculationParametersTozdsc: port calculation_parameters -> zdsc.calculation_parameters;
+        CalculationParametersTohdxld: port calculation_parameters -> hdxld.calculation_parameters;
+        zgDataTohdxld: port zg_data -> hdxld.zg_data;
+        TestStateTohdxld: port test_state -> hdxld.test_state;
+        ControlCommandsTohdxld: port control_commands -> hdxld.control_commands;
+        zdscjptOut: port zdsc.jpt -> jpt;
+        zdscSelfAlignmentAngleOut: port zdsc.self_alignment_angle -> self_alignment_angle;
+        zdscStateOut: port zdsc.zdsc_state -> zdsc_state;
+        hdxldLaunchingSpeedOut: port hdxld.launching_speed -> launching_speed;
+        hdxldGeograplyMonitoringAttitudeOut: port hdxld.geography_monitoring_attitude -> geography_monitoring_attitude;
+            
+   end zdsc_hdxld.impl;
+	
+	thread zdsc
+		features
+			calculation_parameters: in data port;--计算参数
+			zg_data: in data port;
+			jpt: out data port;
+			self_alignment_angle: out data port;--自对准角度
+	control_commands: in event port;--控制命令
+			test_state: in event port;--测试状态
+			
+			zdsc_state: out event port;
+	end zdsc;
+	thread implementation zdsc.impl			
+	end zdsc.impl;
+	
+	thread hdxld
+		features
+			calculation_parameters: in data port;--计算参数
+			zg_data: in data port;
+			geography_monitoring_attitude: out data port;--地理系监测姿态角
+			launching_speed: out data port;--发射系速度	    
+	control_commands: in event port;--控制命令
+			test_state: in event port;
+	end hdxld;
+	thread implementation hdxld.impl		
+	end hdxld.impl;
+		
+	
+	--yz数据装订过程--
+	process yz
+		features
+			yz_data_in: in data port;
+			
+			yz_data_out: out data port;
+			upload_data_accumulation_sum: out data port;--上传数据累加和
+	test_task_code: in event port;--测试任务码
+			task_parameters: in event port;--任务参数
+			error_code: out event port;
+	end yz;
+	
+	process implementation yz.impl
+		subcomponents
+			yz_upload: thread yz_upload;
+			yz_download: thread yz_download;
+					
+	    connections
+		   yzDataToyzDownload: port yz_data_in -> yz_download.yz_data_in;
+           TestTaskCodeToyzDownload: port test_task_code -> yz_download.test_task_code;
+           TaskParametersToyzDownload: port task_parameters -> yz_download.task_parameters;
+           TastTaskCodeToyzUpload: port test_task_code -> yz_upload.test_task_code;
+           TaskParametersToyzUpload: port task_parameters -> yz_upload.task_parameters;
+           yzDownloadErrorCode: port yz_download.error_code -> error_code;
+           yzUploadyzData: port yz_upload.yz_data_out -> yz_data_out;
+           yzUploadErrorCode: port yz_upload.error_code -> error_code;
+           yzUploadDataAccumulationSum: port yz_upload.upload_data_accumulation_sum -> upload_data_accumulation_sum;
+    end yz.impl;
+	
+	thread yz_upload
+		features
+			yz_data_out: out data port;
+			upload_data_accumulation_sum: out data port;--上传数据累加和
+	test_task_code: in event port;--测试任务码
+			task_parameters: in event port;--任务参数
+			
+			error_code: out event port;
+	end yz_upload;
+	thread implementation yz_upload.impl		
+	end yz_upload.impl;
+
+	
+	thread yz_download
+		features
+			yz_data_in: in data port;
+			
+			test_task_code: in event port;--测试任务码
+			task_parameters: in event port;--任务参数
+			error_code: out event port;--错误码
+	end yz_download;
+	thread implementation yz_download.impl		
+	end yz_download.impl;
+	
+	--lz信号判断过程--
+	process lz_judgement
+		features
+			hdxld_state: in event port;
+			switch_input: in event port;
+			lz_state_info: in event port;
+			
+			lz_state: out event port;
+	end lz_judgement;
+	
+	process implementation lz_judgement.impl		
+	end lz_judgement.impl;
+	
+	  --kf系统中的处理器
+    processor LSP  		
+    end LSP;
+    
+    processor implementation lsp.impl
+    		subcomponents
+    			kfBefore: virtual processor kfBefore.impl;    		
+    end lsp.impl;
+    
+    --kf系统中的存储器
+    memory RAM    	
+    end RAM;
+    
+    memory implementation RAM.impl  	
+    end RAM.impl;
+    
+    --虚拟处理器
+    virtual processor kfBefore
+		properties
+			Scheduling_Protocol => (RMS);
+	end kfBefore;
+	virtual processor implementation kfBefore.impl
+	end kfBefore.impl;
+		
+end kfBefore;

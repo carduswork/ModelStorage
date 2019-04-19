@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pi:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:al="http://eclipse.org/graphiti/mm/algorithms" xmlns:pi="http://eclipse.org/graphiti/mm/pictograms" visible="true" gridUnit="10" diagramTypeId="AADL Diagram" name="lzSignalJudgment" snapToGrid="true" version="0.11.0">
+  <properties key="independentObject" value="package lzSignalJudgment"/>
+  <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.1" foreground="//@colors.0" lineWidth="1" transparency="0.0" width="1000" height="1000"/>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::lz_judgement"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="116" height="50" x="80" y="80" style="//@styles.0/@styles.0">
+      <points x="20"/>
+      <points x="116"/>
+      <points x="96" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.0">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::lz_judgement"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="116" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="lz_judgement"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::lz_judgement.impl"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="148" height="50" x="80" y="180" style="//@styles.0/@styles.0/@styles.0">
+      <points x="20"/>
+      <points x="148"/>
+      <points x="128" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.0">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::lz_judgement.impl"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="148" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="lz_judgement.impl"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::zdsc_hdxld"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="101" height="50" x="208" y="306" style="//@styles.0/@styles.0">
+      <points x="20"/>
+      <points x="101"/>
+      <points x="81" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.1">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::zdsc_hdxld"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="101" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="zdsc_hdxld"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::yz_download"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="114" height="50" x="447" y="322" style="//@styles.0/@styles.1">
+      <points x="20"/>
+      <points x="114"/>
+      <points x="94" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::yz_download"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="114" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="yz_download"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::zdsc_hdxld.impl"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="133" height="50" x="621" y="688" style="//@styles.0/@styles.0/@styles.0">
+      <points x="20"/>
+      <points x="133"/>
+      <points x="113" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.1">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::zdsc_hdxld.impl"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="133" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="zdsc_hdxld.impl"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::yz_upload"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="100" height="50" x="554" y="498" style="//@styles.0/@styles.1">
+      <points x="20"/>
+      <points x="100"/>
+      <points x="80" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.2">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::yz_upload"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="100" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="yz_upload"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::yz_upload.impl"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="127" height="50" x="376" y="444" style="//@styles.0/@styles.1/@styles.0">
+      <points x="20"/>
+      <points x="127"/>
+      <points x="107" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.2">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::yz_upload.impl"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="127" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="yz_upload.impl"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::zdsc.impl"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="100" height="50" x="128" y="705" style="//@styles.0/@styles.1/@styles.0">
+      <points x="20"/>
+      <points x="100"/>
+      <points x="80" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.3">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::zdsc.impl"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="100" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="zdsc.impl"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::hdxld"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="100" height="50" x="644" y="575" style="//@styles.0/@styles.1">
+      <points x="20"/>
+      <points x="100"/>
+      <points x="80" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.5">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::hdxld"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="100" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="hdxld"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::kf.before"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineStyle="UNSPECIFIED" width="100" height="50" x="350" y="687" style="//@styles.0/@styles.2/@styles.0" cornerHeight="25" cornerWidth="25"/>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.4">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::kf.before"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="100" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="kf.before"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::hdxld.impl"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="100" height="50" x="583" y="416" style="//@styles.0/@styles.1/@styles.0">
+      <points x="20"/>
+      <points x="100"/>
+      <points x="80" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.5">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::hdxld.impl"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="100" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="hdxld.impl"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::kf"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:RoundedRectangle" lineStyle="UNSPECIFIED" width="100" height="50" x="508" y="574" style="//@styles.0/@styles.2" cornerHeight="25" cornerWidth="25"/>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.4">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::kf"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="100" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="kf"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::zdsc"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="100" height="50" x="159" y="519" style="//@styles.0/@styles.1">
+      <points x="20"/>
+      <points x="100"/>
+      <points x="80" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.3">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::zdsc"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="100" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="zdsc"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::yz.impl"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="100" height="50" x="657" y="193" style="//@styles.0/@styles.0/@styles.0">
+      <points x="20"/>
+      <points x="100"/>
+      <points x="80" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" outgoingConnections="//@connections.6">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::yz.impl"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="100" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="yz.impl"/>
+    </children>
+  </children>
+  <children xsi:type="pi:ContainerShape" visible="true" active="true">
+    <properties key="independentObject" value="classifier lzSignalJudgment::yz"/>
+    <properties key="is_layed_out" value="true"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" width="100" height="50" x="312" y="226" style="//@styles.0/@styles.0">
+      <points x="20"/>
+      <points x="100"/>
+      <points x="80" y="50"/>
+      <points y="50"/>
+    </graphicsAlgorithm>
+    <anchors xsi:type="pi:ChopboxAnchor" incomingConnections="//@connections.6">
+      <properties key="name" value="chopbox"/>
+    </anchors>
+    <children visible="true">
+      <properties key="is_manually_positioned" value="true"/>
+      <properties key="independentObject" value="classifier lzSignalJudgment::yz"/>
+      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="100" height="50" style="//@styles.1" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED" value="yz"/>
+    </children>
+  </children>
+  <styles background="//@colors.1" foreground="//@colors.2" lineWidth="1" lineVisible="true" transparency="0.0" id="classifier" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED">
+    <styles lineWidth="2" lineStyle="UNSPECIFIED" id="process" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED">
+      <styles lineWidth="3" lineStyle="UNSPECIFIED" id="process-implementation" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED"/>
+    </styles>
+    <styles lineWidth="2" lineStyle="DASH" id="thread" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED">
+      <styles lineWidth="3" lineStyle="UNSPECIFIED" id="thread-implementation" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED"/>
+    </styles>
+    <styles lineWidth="2" lineStyle="UNSPECIFIED" id="system" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED">
+      <styles lineWidth="3" lineStyle="UNSPECIFIED" id="system-implementation" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED"/>
+    </styles>
+  </styles>
+  <styles foreground="//@colors.2" lineStyle="UNSPECIFIED" filled="false" id="label" font="//@fonts.0"/>
+  <styles background="//@colors.1" foreground="//@colors.2" lineWidth="2" lineStyle="DASH" lineVisible="true" id="implements" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED"/>
+  <styles background="//@colors.1" foreground="//@colors.2" lineWidth="2" lineVisible="true" id="generalization-arrowhead" horizontalAlignment="UNSPECIFIED" verticalAlignment="UNSPECIFIED"/>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.0" end="//@children.0/@anchors.0">
+    <properties key="independentObject" value="realization lzSignalJudgment::lz_judgement.impl"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" lineStyle="UNSPECIFIED" style="//@styles.2"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" style="//@styles.3">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.4/@anchors.0" end="//@children.2/@anchors.0">
+    <properties key="independentObject" value="realization lzSignalJudgment::zdsc_hdxld.impl"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" lineStyle="UNSPECIFIED" style="//@styles.2"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" style="//@styles.3">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.6/@anchors.0" end="//@children.5/@anchors.0">
+    <properties key="independentObject" value="realization lzSignalJudgment::yz_upload.impl"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" lineStyle="UNSPECIFIED" style="//@styles.2"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" style="//@styles.3">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.7/@anchors.0" end="//@children.12/@anchors.0">
+    <properties key="independentObject" value="realization lzSignalJudgment::zdsc.impl"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" lineStyle="UNSPECIFIED" style="//@styles.2"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" style="//@styles.3">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.9/@anchors.0" end="//@children.11/@anchors.0">
+    <properties key="independentObject" value="realization lzSignalJudgment::kf.before"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" lineStyle="UNSPECIFIED" style="//@styles.2"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" style="//@styles.3">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.10/@anchors.0" end="//@children.8/@anchors.0">
+    <properties key="independentObject" value="realization lzSignalJudgment::hdxld.impl"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" lineStyle="UNSPECIFIED" style="//@styles.2"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" style="//@styles.3">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.13/@anchors.0" end="//@children.14/@anchors.0">
+    <properties key="independentObject" value="realization lzSignalJudgment::yz.impl"/>
+    <properties key="is_ghost" value="false"/>
+    <graphicsAlgorithm xsi:type="al:Polyline" lineStyle="UNSPECIFIED" style="//@styles.2"/>
+    <connectionDecorators visible="true" locationRelative="true" location="1.0">
+      <graphicsAlgorithm xsi:type="al:Polygon" lineStyle="UNSPECIFIED" style="//@styles.3">
+        <points x="-15" y="10"/>
+        <points/>
+        <points x="-15" y="-10"/>
+      </graphicsAlgorithm>
+    </connectionDecorators>
+  </connections>
+  <colors red="227" green="238" blue="249"/>
+  <colors red="255" green="255" blue="255"/>
+  <colors/>
+  <fonts name="Arial" size="10" bold="true"/>
+</pi:Diagram>

@@ -1,0 +1,69 @@
+package Composition
+public
+	--与kf相互关联的硬件组件及接口--
+							
+	--kfc--
+	device kfc
+		features				
+			bus_data: requires bus access bus_1553B;
+	end kfc;	
+	device implementation kfc.impl		
+	end kfc.impl;
+	
+	--cy--
+	device cy
+		features
+			cy_info: in data port;
+	end cy;	
+	device implementation cy.impl		
+	end cy.impl;
+	
+	--zg--
+	device zg
+		features
+			bus_data: requires bus access bus_1553B;
+	end zg;
+	device implementation zg.impl		
+	end zg.impl;
+	
+	--gjfs
+	device gjfs
+		features
+			bus_data: requires bus access bus_1553B;
+	end gjfs;
+	device implementation gjfs.impl		
+	end gjfs.impl;
+	
+	--hdhz--
+	device hdhz
+		features
+			bus_data: requires bus access bus_1553B;
+			interrupt: out event port;
+	end hdhz;
+	device implementation hdhz.impl		
+	end hdhz.impl;
+	
+	--综合控制器
+	device ICU
+		features
+			bus_data: requires bus access bus_1553B;
+	end ICU;
+	device implementation ICU.impl		
+	end ICU.impl;
+	
+	--GNSS,向kf发送中断信号
+	device GNSS
+		features
+			interrupt: out event port;
+	end GNSS;
+	device implementation GNSS.impl		
+	end GNSS.impl;
+	
+	--1553B总线--	
+    bus bus_1553B    
+    end bus_1553B;  
+    bus implementation bus_1553B.impl
+    end bus_1553B.impl;
+    
+  
+end Composition;

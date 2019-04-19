@@ -1,0 +1,55 @@
+package HardwareConnection
+public
+	with Composition;
+
+		
+	system hd		
+	end hd;
+	
+	system implementation hd.impl
+		subcomponents			
+			kf: device Composition::kf.impl;
+			ze: device Composition::ze.impl;
+			zm: device Composition::zm.impl;
+			kfc: device Composition::kfc.impl;
+			cdsd: device Composition::cdsd.impl;
+			qdp: device Composition::qdp.impl;
+			cxtc:device Composition::cxtc.impl;
+			bus_1553B: bus Composition::bus_1553B.impl;
+			ldst:device Composition::ldst.impl;
+
+		connections
+			busTOkf1: bus access bus_1553B -> kf.bus_data1;	
+			busTOkf2: bus access bus_1553B -> kf.bus_data2;
+			
+			busTOkfc1: bus access bus_1553B -> kfc.bus_data1;	
+			busTOkfc2: bus access bus_1553B -> kfc.bus_data2;
+			
+			busTOze1: bus access bus_1553B -> ze.bus_data1;	
+			busTOze2: bus access bus_1553B -> ze.bus_data2;
+            
+            busTOzm1: bus access bus_1553B -> zm.bus_data1;	
+			busTOzm2: bus access bus_1553B -> zm.bus_data2;
+			
+            cdsdToqdp:port cdsd.dcd_info -> qdp.dcd_info;
+            qdpTocdsd:port qdp.hjcdo_info -> cdsd.hjcd_info;
+            
+            kfcTOkf1:port kfc.zlk_info ->kf.zl_info;
+            kfcTOkf2:port kfc.dhzk_info ->kf.dhz_info;
+            
+            kfcTOze:port kfc.zlz_info ->ze.zl_info;
+            zeTOkfc:port ze.st_info -> kfc.st_info;
+            
+            kfcTOqdp1:port kfc.dmd_info ->qdp.dmd_info;
+            kfcTOqdp2:port kfc.dhzp_info ->qdp.dhz_info;
+            kfcTOqdp3:port kfc.hjcdo ->qdp.hjcdi_info;
+                        
+            qdpTOkf:port qdp.dgk_info ->kf.dgk_info;
+            qdpTOze:port qdp.dgz_info ->ze.dgz_info;
+            
+            cxtcTokf:port cxtc.tck_info ->kf.tck_info;
+            cxtcToze:port cxtc.tck_info ->ze.tcz_info;
+            
+            ldstTokfc:port kfc.sthd ->ldst.sthd;
+end hd.impl;
+end HardwareConnection;

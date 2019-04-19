@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aadl2:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" name="HardwareArchitecture" publicSection="#//@ownedPublicSection">
+  <ownedPublicSection importedUnit="aadl2:Package Composition.aadl#Composition aadl2:Package kfBefore.aadl#kfBefore">
+    <ownedComment body="--与kf关联的硬件组件之间的关系--"/>
+    <ownedClassifier xsi:type="aadl2:SystemType" name="jh"/>
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="jh.kf">
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
+      <ownedAccessConnection name="busANDkf">
+        <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedSystemSubcomponent.0" connectionEnd="aadl2:BusAccess kfBefore.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedBusAccess.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.0"/>
+      </ownedAccessConnection>
+      <ownedAccessConnection name="busANDkfc">
+        <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.0" connectionEnd="aadl2:BusAccess Composition.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedBusAccess.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.0"/>
+      </ownedAccessConnection>
+      <ownedAccessConnection name="busANDzg">
+        <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.2" connectionEnd="aadl2:BusAccess Composition.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedBusAccess.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.0"/>
+      </ownedAccessConnection>
+      <ownedAccessConnection name="busADNhdhz">
+        <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.4" connectionEnd="aadl2:BusAccess Composition.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedBusAccess.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.0"/>
+      </ownedAccessConnection>
+      <ownedAccessConnection name="busANDICU">
+        <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.5" connectionEnd="aadl2:BusAccess Composition.aadl#/0/@ownedPublicSection/@ownedClassifier.10/@ownedBusAccess.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.0"/>
+      </ownedAccessConnection>
+      <ownedAccessConnection name="busANDgjfs">
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.1/@ownedBusSubcomponent.0"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.3" connectionEnd="aadl2:BusAccess Composition.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedBusAccess.0"/>
+      </ownedAccessConnection>
+      <ownedPortConnection name="kfTOcy">
+        <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.1" connectionEnd="aadl2:DataPort Composition.aadl#/0/@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.0"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.1/@ownedSystemSubcomponent.0" connectionEnd="aadl2:DataPort kfBefore.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.0"/>
+      </ownedPortConnection>
+      <ownedPortConnection name="hdhzTOkf">
+        <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedSystemSubcomponent.0" connectionEnd="aadl2:EventPort kfBefore.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedEventPort.0"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.4" connectionEnd="aadl2:EventPort Composition.aadl#/0/@ownedPublicSection/@ownedClassifier.8/@ownedEventPort.0"/>
+      </ownedPortConnection>
+      <ownedPortConnection name="GNSSTOkf">
+        <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedSystemSubcomponent.0" connectionEnd="aadl2:EventPort kfBefore.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedEventPort.0"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.6" connectionEnd="aadl2:EventPort Composition.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedEventPort.0"/>
+      </ownedPortConnection>
+      <ownedBusSubcomponent name="bus_1553B" busSubcomponentType="aadl2:BusImplementation Composition.aadl#Composition.bus_1553B.impl"/>
+      <ownedDeviceSubcomponent name="kfc" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.kfc.impl"/>
+      <ownedDeviceSubcomponent name="cy" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.cy.impl"/>
+      <ownedDeviceSubcomponent name="zg" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.zg.impl"/>
+      <ownedDeviceSubcomponent name="gjfs" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.gjfs.impl"/>
+      <ownedDeviceSubcomponent name="hdhz" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.hdhz.impl"/>
+      <ownedDeviceSubcomponent name="ICU" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.ICU.impl"/>
+      <ownedDeviceSubcomponent name="GNSS" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.GNSS.impl"/>
+      <ownedSystemSubcomponent name="kf" systemSubcomponentType="aadl2:SystemImplementation kfBefore.aadl#kfBefore.kf.before"/>
+    </ownedClassifier>
+  </ownedPublicSection>
+</aadl2:Package>

@@ -1,0 +1,35 @@
+package HardwareArchitecture
+	--与kf关联的硬件组件之间的关系--
+public
+
+	with Composition;
+	with kfBefore;
+	system jh		
+	end jh;
+	
+	system implementation jh.kf
+		subcomponents
+			kf: system kfBefore::kf.before;
+			kfc: device Composition::kfc.impl;
+			cy: device Composition::cy.impl;
+			zg: device Composition::zg.impl;
+			gjfs: device Composition::gjfs.impl;
+			hdhz: device Composition::hdhz.impl;
+			ICU: device Composition::ICU.impl;
+			GNSS: device Composition::GNSS.impl;
+			bus_1553B: bus Composition::bus_1553B.impl;
+
+		connections
+			busANDkf: bus access bus_1553B -> kf.bus_data;
+			busANDkfc: bus access bus_1553B -> kfc.bus_data;
+			busANDzg: bus access bus_1553B -> zg.bus_data;
+			busADNhdhz: bus access bus_1553B -> hdhz.bus_data;
+			busANDICU: bus access bus_1553B -> ICU.bus_data;
+			busANDgjfs: bus access gjfs.bus_data -> bus_1553B;
+			kfTOcy: port kf.cy_info -> cy.cy_info;
+            hdhzTOkf: port hdhz.interrupt -> kf.interrupt;
+            GNSSTOkf: port GNSS.interrupt -> kf.interrupt;
+end jh.kf;
+		
+
+end HardwareArchitecture;

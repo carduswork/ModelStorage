@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="extractor.DAO.mapper.PortsMapper">
+  <resultMap id="BaseResultMap" type="extractor.model.Ports">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="portname" jdbcType="VARCHAR" property="portname" />
+    <result column="porttype" jdbcType="VARCHAR" property="porttype" />
+    <result column="componentID" jdbcType="INTEGER" property="componentid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, portname, porttype, componentID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ports
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ports
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="extractor.model.Ports">
+    insert into ports (ID, portname, porttype, 
+      componentID)
+    values (#{id,jdbcType=INTEGER}, #{portname,jdbcType=VARCHAR}, #{porttype,jdbcType=VARCHAR}, 
+      #{componentid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="extractor.model.Ports">
+    insert into ports
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="portname != null">
+        portname,
+      </if>
+      <if test="porttype != null">
+        porttype,
+      </if>
+      <if test="componentid != null">
+        componentID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="portname != null">
+        #{portname,jdbcType=VARCHAR},
+      </if>
+      <if test="porttype != null">
+        #{porttype,jdbcType=VARCHAR},
+      </if>
+      <if test="componentid != null">
+        #{componentid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="extractor.model.Ports">
+    update ports
+    <set>
+      <if test="portname != null">
+        portname = #{portname,jdbcType=VARCHAR},
+      </if>
+      <if test="porttype != null">
+        porttype = #{porttype,jdbcType=VARCHAR},
+      </if>
+      <if test="componentid != null">
+        componentID = #{componentid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="extractor.model.Ports">
+    update ports
+    set portname = #{portname,jdbcType=VARCHAR},
+      porttype = #{porttype,jdbcType=VARCHAR},
+      componentID = #{componentid,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
