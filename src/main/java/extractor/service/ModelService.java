@@ -74,5 +74,4 @@ public class ModelService {
 			insert_connection(v);
 	});
 	}
-
 }

@@ -14,9 +14,11 @@ import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Service;
 
+import extractor.model.Device;
 import extractor.model.Ports;
 import extractor.model.component;
 import extractor.model.connections;
+import javassist.expr.NewArray;
 
 //解析模型,本模块只负责模型文件的解析
 @Service("ModelResolver")
@@ -25,7 +27,8 @@ public class ModelResolver {
 	static Map<String, component> componentlist = new HashMap<String, component>();
 	static Map<String, Ports> portlist = new HashMap<String, Ports>();
 	static Map<String, connections> conneclist = new HashMap<String, connections>();
-	
+	static Map<String, Device> devicelist = new HashMap<String, Device>();
+
 	public static Document ModelResolver(String url) throws DocumentException {
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(url);
@@ -48,7 +51,7 @@ public class ModelResolver {
 				element = (Element) document.selectSingleNode(GetXPath(startpath));
 				component c = componentlist.get(element.attributeValue("name"));
 				connections.setStartcomponentid(c.getComponentid());
-				
+
 				element = (Element) v;
 				String endpath = element.element("ownedValue").element("ownedValue").element("ownedListElement")
 						.element("path").attributeValue("namedElement");
@@ -58,11 +61,6 @@ public class ModelResolver {
 				connections.setEndcomponentid(c2.getComponentid());
 				conneclist.put("", connections);
 			});
-//			sourcenode = document.selectSingleNode(
-//					"//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedPropertyAssociation/appliesTo/path/@namedElement");
-//			destNode = document.selectSingleNode(
-//					"//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedPropertyAssociation/ownedValue/ownedValue/ownedListElement/path/@namedElement");
-
 		}
 	}
 
@@ -73,18 +71,11 @@ public class ModelResolver {
 		Document document = ModelResolver(modelfilename);
 
 		List<String> namelist = new ArrayList<>();
-//		List<String> descriptionlist = new ArrayList<>();
-//		List<String> periodlist = new ArrayList<>();
-
-//		Map<String, List<String>> connectionlist = new HashMap<String, List<String>>();
-//		Map<String, List<String>> statelist = new HashMap<String, List<String>>();
-//		Map<String, List<String>> Exceptionlist = new HashMap<String, List<String>>();
 
 		if (modelType.equals("aadl")) {
 
 			components = document.selectNodes(
 					"//ownedClassifier[@xsi:type='aadl2:ThreadType' or @xsi:type='aadl2:ProcessType' or @xsi:type='aadl2:ProcessorType' or @xsi:type='aadl2:MemoryType']");
-
 			List<? extends Node> ports = null;
 			for (Node n : components) {
 				Element element = (Element) n;
@@ -104,6 +95,13 @@ public class ModelResolver {
 					ports1.setPortname(element2.attributeValue("name"));
 					ports1.setComponentid(idString);
 					portlist.put(element2.attributeValue("name"), ports1);
+				}
+				// 硬件组件在device表里注册一下
+				if (element.attributeValue("xsi:type").equals("aadl2:MemoryType")
+						|| element.attributeValue("xsi:type").equals("aadl2:ProcessorType")) {
+					Device d = new Device();
+					d.setDeviceid(idString);
+					devicelist.put(element.attributeValue("name"), d);
 				}
 			}
 		} else if (modelType.equals("sysml")) {
@@ -134,16 +132,17 @@ public class ModelResolver {
 			result.add(matcher.group());
 		}
 		for (int j = 1; j < result.size(); j++) {
-			
-			result.set(j,getinc(result.get(j)));
+
+			result.set(j, getinc(result.get(j)));
 		}
-		return "//" + result.get(0) + "/" + result.get(1) + "]/" + result.get(2)+"]";
+		return "//" + result.get(0) + "/" + result.get(1) + "]/" + result.get(2) + "]";
 	}
+
 	private static String getinc(String source) {
-		String csub=source.substring(0,source.length()-2);
-		String intsub=source.substring(source.length()-1);
-		intsub=String.valueOf(Integer.parseInt(intsub)+1);
-		return csub+"["+intsub;
-		
+		String csub = source.substring(0, source.length() - 2);
+		String intsub = source.substring(source.length() - 1);
+		intsub = String.valueOf(Integer.parseInt(intsub) + 1);
+		return csub + "[" + intsub;
+
 	}
 }
