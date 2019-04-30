@@ -1,22 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aadl2:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" name="kfBefore" publicSection="#//@ownedPublicSection">
+<aadl2:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:errorModel="http://www.aadl.info/EMV2" name="kfBefore" publicSection="#//@ownedPublicSection">
   <ownedPublicSection importedUnit="aadl2:Package Composition.aadl#Composition">
     <ownedClassifier xsi:type="aadl2:SystemType" name="kf">
+      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**&#xD;&#xA;&#x9;&#x9;use types ErrorLib;-- 定义接口的错误&#xD;&#xA;&#x9;&#x9;use behavior ErrorLib::FailStopState;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;error propagations&#xD;&#xA;&#x9;&#x9;cy_info: out propagation {InvalidParameter,UnexceptedError};&#xD;&#xA;&#x9;&#x9;interrupt:in propagation {Violation};&#xD;&#xA;&#x9;&#x9;flows&#xD;&#xA;&#x9;&#x9;&#x9;-- 传播路径&#xD;&#xA;&#x9;&#x9;&#x9;NoFlightSystem: error source cy_info{InvalidParameter} when {HardwareFault};&#xD;&#xA;&#x9;&#x9;&#x9;ErraticFlightSystem: error source cy_info{UnexceptedError};&#xD;&#xA;&#x9;&#x9;&#x9;ErraticPilot: error path interrupt{Violation} -> cy_info{InvalidParameter};&#xD;&#xA;&#x9;&#x9;end propagations;&#xD;&#xA;&#x9;&#x9;component error behavior&#xD;&#xA;&#x9; &#x9;events&#xD;&#xA;&#x9; &#x9;  PowerFailure: error event;&#xD;&#xA;&#x9;&#x9;transitions&#xD;&#xA;&#x9;&#x9;&#x9;Operational -[PowerFailure]-> FailStop;&#xD;&#xA;&#xD;&#xA;&#x9; &#x9;end component;&#xD;&#xA;&#x9;**}">
+        <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib" useBehavior="ErrorLib.aadl#emv2$ErrorLib.FailStopState">
+          <ownedComment body="-- 定义接口的错误"/>
+          <propagations direction="out">
+            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.0"/>
+            <typeSet>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.UnexceptedError"/>
+            </typeSet>
+          </propagations>
+          <propagations>
+            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.0/@ownedEventPort.0"/>
+            <typeSet>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.Violation"/>
+            </typeSet>
+          </propagations>
+          <flows xsi:type="errorModel:ErrorSource" name="NoFlightSystem" outgoing="#//@ownedPublicSection/@ownedClassifier.0/@ownedAnnexSubclause.0/@parsedAnnexSubclause/@propagations.0">
+            <ownedComment body="-- 传播路径"/>
+            <typeTokenConstraint>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
+            </typeTokenConstraint>
+            <failureModeType>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.HardwareFault"/>
+            </failureModeType>
+          </flows>
+          <flows xsi:type="errorModel:ErrorSource" name="ErraticFlightSystem" outgoing="#//@ownedPublicSection/@ownedClassifier.0/@ownedAnnexSubclause.0/@parsedAnnexSubclause/@propagations.0">
+            <typeTokenConstraint>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.UnexceptedError"/>
+            </typeTokenConstraint>
+          </flows>
+          <flows xsi:type="errorModel:ErrorPath" name="ErraticPilot" incoming="#//@ownedPublicSection/@ownedClassifier.0/@ownedAnnexSubclause.0/@parsedAnnexSubclause/@propagations.1" outgoing="#//@ownedPublicSection/@ownedClassifier.0/@ownedAnnexSubclause.0/@parsedAnnexSubclause/@propagations.0">
+            <typeTokenConstraint>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.Violation"/>
+            </typeTokenConstraint>
+            <targetToken>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
+            </targetToken>
+          </flows>
+          <events xsi:type="errorModel:ErrorEvent" name="PowerFailure"/>
+          <transitions source="ErrorLib.aadl#/0/@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.0/@states.0" target="ErrorLib.aadl#/0/@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.0/@states.1">
+            <condition xsi:type="errorModel:ConditionElement">
+              <qualifiedErrorPropagationReference xsi:type="errorModel:QualifiedErrorEventOrPropagation">
+                <emv2Target namedElement="#//@ownedPublicSection/@ownedClassifier.0/@ownedAnnexSubclause.0/@parsedAnnexSubclause/@events.0"/>
+              </qualifiedErrorPropagationReference>
+            </condition>
+          </transitions>
+        </parsedAnnexSubclause>
+      </ownedAnnexSubclause>
+      <ownedAbstractFeature name="ObservableFailure" out="true"/>
       <ownedBusAccess name="bus_data" kind="requires" busFeatureClassifier="aadl2:BusType Composition.aadl#Composition.bus_1553B"/>
       <ownedDataPort name="cy_info" out="true">
         <ownedComment body="--1553B总线信号&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;"/>
       </ownedDataPort>
       <ownedEventPort name="interrupt" in="true"/>
     </ownedClassifier>
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="kf.tt">
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
+    </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:SystemImplementation" name="kf.before">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <appliesTo>
-          <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.0"/>
+          <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessSubcomponent.0"/>
         </appliesTo>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
             <ownedListElement xsi:type="aadl2:ReferenceValue">
-              <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessorSubcomponent.0"/>
+              <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessorSubcomponent.0"/>
             </ownedListElement>
           </ownedValue>
         </ownedValue>
@@ -24,36 +76,36 @@
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <ownedComment body="--将zdsc_hdxld过程绑定处理器LSP"/>
         <appliesTo>
-          <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.1"/>
+          <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessSubcomponent.1"/>
         </appliesTo>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
             <ownedListElement xsi:type="aadl2:ReferenceValue">
-              <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessorSubcomponent.0"/>
+              <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessorSubcomponent.0"/>
             </ownedListElement>
           </ownedValue>
         </ownedValue>
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <appliesTo>
-          <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.2"/>
+          <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessSubcomponent.2"/>
         </appliesTo>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
             <ownedListElement xsi:type="aadl2:ReferenceValue">
-              <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessorSubcomponent.0"/>
+              <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessorSubcomponent.0"/>
             </ownedListElement>
           </ownedValue>
         </ownedValue>
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding">
         <appliesTo>
-          <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.0"/>
+          <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessSubcomponent.0"/>
         </appliesTo>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
             <ownedListElement xsi:type="aadl2:ReferenceValue">
-              <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedMemorySubcomponent.0"/>
+              <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedMemorySubcomponent.0"/>
             </ownedListElement>
           </ownedValue>
         </ownedValue>
@@ -61,34 +113,34 @@
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding">
         <ownedComment body="--将zdsc_hdxld和数据缓冲区进行绑定"/>
         <appliesTo>
-          <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.1"/>
+          <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessSubcomponent.1"/>
         </appliesTo>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
             <ownedListElement xsi:type="aadl2:ReferenceValue">
-              <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedMemorySubcomponent.0"/>
+              <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedMemorySubcomponent.0"/>
             </ownedListElement>
           </ownedValue>
         </ownedValue>
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding">
         <appliesTo>
-          <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.2"/>
+          <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessSubcomponent.2"/>
         </appliesTo>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
             <ownedListElement xsi:type="aadl2:ReferenceValue">
-              <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedMemorySubcomponent.0"/>
+              <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedMemorySubcomponent.0"/>
             </ownedListElement>
           </ownedValue>
         </ownedValue>
       </ownedPropertyAssociation>
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
-      <ownedMemorySubcomponent name="RAM" memorySubcomponentType="#//@ownedPublicSection/@ownedClassifier.18"/>
-      <ownedProcessSubcomponent name="zdsc_hdxld" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.3"/>
-      <ownedProcessSubcomponent name="yz" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.9"/>
-      <ownedProcessSubcomponent name="lz_judgement" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.15"/>
-      <ownedProcessorSubcomponent name="LSP" processorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.16"/>
+      <ownedMemorySubcomponent name="RAM" memorySubcomponentType="#//@ownedPublicSection/@ownedClassifier.19"/>
+      <ownedProcessSubcomponent name="zdsc_hdxld" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.4"/>
+      <ownedProcessSubcomponent name="yz" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.10"/>
+      <ownedProcessSubcomponent name="lz_judgement" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.16"/>
+      <ownedProcessorSubcomponent name="LSP" processorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.17"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessType" name="zdsc_hdxld">
       <ownedComment body="--zdsc及hdxld过程--"/>
@@ -115,61 +167,61 @@
       </ownedEventPort>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="zdsc_hdxld.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.2"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.3"/>
       <ownedPortConnection name="zgDataTozdsc">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.4/@ownedDataPort.1"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.1"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.5/@ownedDataPort.1"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.1"/>
       </ownedPortConnection>
       <ownedPortConnection name="TestStateTozdsc">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.4/@ownedEventPort.1"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedEventPort.1"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.5/@ownedEventPort.1"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedEventPort.1"/>
       </ownedPortConnection>
       <ownedPortConnection name="ControlCommandsTozdsc">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.4/@ownedEventPort.0"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedEventPort.0"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.5/@ownedEventPort.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedEventPort.0"/>
       </ownedPortConnection>
       <ownedPortConnection name="CalculationParametersTozdsc">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.4/@ownedDataPort.0"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.0"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.5/@ownedDataPort.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.0"/>
       </ownedPortConnection>
       <ownedPortConnection name="CalculationParametersTohdxld">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.0"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.0"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.7/@ownedDataPort.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.0"/>
       </ownedPortConnection>
       <ownedPortConnection name="zgDataTohdxld">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.1"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.1"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.7/@ownedDataPort.1"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.1"/>
       </ownedPortConnection>
       <ownedPortConnection name="TestStateTohdxld">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.6/@ownedEventPort.1"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedEventPort.1"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.7/@ownedEventPort.1"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedEventPort.1"/>
       </ownedPortConnection>
       <ownedPortConnection name="ControlCommandsTohdxld">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.6/@ownedEventPort.0"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedEventPort.0"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.7/@ownedEventPort.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedEventPort.0"/>
       </ownedPortConnection>
       <ownedPortConnection name="zdscjptOut">
-        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.2"/>
-        <source context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.4/@ownedDataPort.2"/>
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.2"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.5/@ownedDataPort.2"/>
       </ownedPortConnection>
       <ownedPortConnection name="zdscSelfAlignmentAngleOut">
-        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.3"/>
-        <source context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.4/@ownedDataPort.3"/>
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.3"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.5/@ownedDataPort.3"/>
       </ownedPortConnection>
       <ownedPortConnection name="zdscStateOut">
-        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedEventPort.2"/>
-        <source context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.4/@ownedEventPort.2"/>
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedEventPort.2"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.5/@ownedEventPort.2"/>
       </ownedPortConnection>
       <ownedPortConnection name="hdxldLaunchingSpeedOut">
-        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.5"/>
-        <source context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.3"/>
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.5"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.7/@ownedDataPort.3"/>
       </ownedPortConnection>
       <ownedPortConnection name="hdxldGeograplyMonitoringAttitudeOut">
-        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.4"/>
-        <source context="#//@ownedPublicSection/@ownedClassifier.3/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.2"/>
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.3/@ownedDataPort.4"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.4/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.7/@ownedDataPort.2"/>
       </ownedPortConnection>
-      <ownedThreadSubcomponent name="zdsc" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.4"/>
-      <ownedThreadSubcomponent name="hdxld" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.6"/>
+      <ownedThreadSubcomponent name="zdsc" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.5"/>
+      <ownedThreadSubcomponent name="hdxld" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.7"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadType" name="zdsc">
       <ownedDataPort name="calculation_parameters" in="true"/>
@@ -189,7 +241,7 @@
       </ownedEventPort>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="zdsc.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.4"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.5"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadType" name="hdxld">
       <ownedDataPort name="calculation_parameters" in="true"/>
@@ -208,7 +260,7 @@
       </ownedEventPort>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="hdxld.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.6"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.7"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessType" name="yz">
       <ownedComment body="--yz数据装订过程--"/>
@@ -226,45 +278,45 @@
       </ownedEventPort>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="yz.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.8"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.9"/>
       <ownedPortConnection name="yzDataToyzDownload">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.12/@ownedDataPort.0"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedDataPort.0"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.10/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.13/@ownedDataPort.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.9/@ownedDataPort.0"/>
       </ownedPortConnection>
       <ownedPortConnection name="TestTaskCodeToyzDownload">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.12/@ownedEventPort.0"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedEventPort.0"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.10/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.13/@ownedEventPort.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.9/@ownedEventPort.0"/>
       </ownedPortConnection>
       <ownedPortConnection name="TaskParametersToyzDownload">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.12/@ownedEventPort.1"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedEventPort.1"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.10/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.13/@ownedEventPort.1"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.9/@ownedEventPort.1"/>
       </ownedPortConnection>
       <ownedPortConnection name="TastTaskCodeToyzUpload">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.10/@ownedEventPort.0"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedEventPort.0"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.10/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.11/@ownedEventPort.0"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.9/@ownedEventPort.0"/>
       </ownedPortConnection>
       <ownedPortConnection name="TaskParametersToyzUpload">
-        <destination context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.10/@ownedEventPort.1"/>
-        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedEventPort.1"/>
+        <destination context="#//@ownedPublicSection/@ownedClassifier.10/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.11/@ownedEventPort.1"/>
+        <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.9/@ownedEventPort.1"/>
       </ownedPortConnection>
       <ownedPortConnection name="yzDownloadErrorCode">
-        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedEventPort.2"/>
-        <source context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.12/@ownedEventPort.2"/>
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.9/@ownedEventPort.2"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.10/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.13/@ownedEventPort.2"/>
       </ownedPortConnection>
       <ownedPortConnection name="yzUploadyzData">
-        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedDataPort.1"/>
-        <source context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.0"/>
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.9/@ownedDataPort.1"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.10/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.11/@ownedDataPort.0"/>
       </ownedPortConnection>
       <ownedPortConnection name="yzUploadErrorCode">
-        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedEventPort.2"/>
-        <source context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.10/@ownedEventPort.2"/>
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.9/@ownedEventPort.2"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.10/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.11/@ownedEventPort.2"/>
       </ownedPortConnection>
       <ownedPortConnection name="yzUploadDataAccumulationSum">
-        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedDataPort.2"/>
-        <source context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.1"/>
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.9/@ownedDataPort.2"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.10/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.11/@ownedDataPort.1"/>
       </ownedPortConnection>
-      <ownedThreadSubcomponent name="yz_upload" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.10"/>
-      <ownedThreadSubcomponent name="yz_download" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.12"/>
+      <ownedThreadSubcomponent name="yz_upload" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.11"/>
+      <ownedThreadSubcomponent name="yz_download" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.13"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadType" name="yz_upload">
       <ownedDataPort name="yz_data_out" out="true"/>
@@ -280,7 +332,7 @@
       </ownedEventPort>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="yz_upload.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.10"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.11"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadType" name="yz_download">
       <ownedComment body="--错误码"/>
@@ -294,7 +346,7 @@
       </ownedEventPort>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="yz_download.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.12"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.13"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessType" name="lz_judgement">
       <ownedComment body="--lz信号判断过程--"/>
@@ -304,20 +356,20 @@
       <ownedEventPort name="lz_state" out="true"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="lz_judgement.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.14"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.15"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessorType" name="LSP">
       <ownedComment body="--kf系统中的处理器"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessorImplementation" name="lsp.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.16"/>
-      <ownedVirtualProcessorSubcomponent name="kfBefore" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.21"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.17"/>
+      <ownedVirtualProcessorSubcomponent name="kfBefore" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.22"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:MemoryType" name="RAM">
       <ownedComment body="--kf系统中的存储器"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:MemoryImplementation" name="RAM.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.18"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.19"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:VirtualProcessorType" name="kfBefore">
       <ownedComment body="--虚拟处理器"/>
@@ -330,7 +382,7 @@
       </ownedPropertyAssociation>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:VirtualProcessorImplementation" name="kfBefore.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.20"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.21"/>
     </ownedClassifier>
   </ownedPublicSection>
 </aadl2:Package>

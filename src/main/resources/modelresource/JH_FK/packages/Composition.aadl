@@ -10,10 +10,24 @@ public
 	device implementation kfc.impl		
 	end kfc.impl;
 	
-	--cy--
+	--cy系统--
 	device cy
 		features
 			cy_info: in data port;
+			
+			tt:out feature;
+		annex EMV2 {**
+			use types ErrorLib;-- 定义接口的错误
+		use behavior ErrorLib::FailStopState;
+		error propagations
+		cy_info: in propagation {InvalidParameter,UnexceptedError};
+		tt:out propagation{UnexceptedError};
+		flows
+			-- 传播路径
+			NoFlightSystem:  error path cy_info{InvalidParameter} -> tt{UnexceptedError};
+
+		end propagations;
+		**};
 	end cy;	
 	device implementation cy.impl		
 	end cy.impl;

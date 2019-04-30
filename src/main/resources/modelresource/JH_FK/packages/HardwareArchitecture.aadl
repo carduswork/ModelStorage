@@ -4,12 +4,25 @@ public
 
 	with Composition;
 	with kfBefore;
-	system jh		
+	system jh
+		features
+--	satelliteSignal: in feature;	
+--	pilotInput: in data port;
+		ObservableFailure2: out feature;		
+--	annex EMV2 {**
+--		use types ErrorLib;-- 定义接口的错误
+--		use behavior ErrorLib::FailStopState;
+--		error propagations
+--		ObservableFailure2: out propagation {InvalidParameter,UnexceptedError};
+--
+--		end propagations;
+--	**};
 	end jh;
 	
 	system implementation jh.kf
 		subcomponents
 			kf: system kfBefore::kf.before;
+			tt:system kfBefore::kf.tt;
 			kfc: device Composition::kfc.impl;
 			cy: device Composition::cy.impl;
 			zg: device Composition::zg.impl;

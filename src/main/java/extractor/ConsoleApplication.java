@@ -19,7 +19,8 @@ public class ConsoleApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		ms.match("src/main/resources/modelresource/JH_FK/packages/kfBefore.aaxl2", "aadl");
+		//ms.match("src/main/resources/modelresource/JH_FK/packages/kfBefore.aaxl2", "aadl");
+		ms.match("src/main/resources/modelresource/JH_FK/packages/Composition.aaxl2", "aadl");
 //		ms.match("src/main/resources/modelresource/dd05.uml", "sysml");
 //		ms.match("src/main/resources/modelresource/model_xml.xml", "simulink");
 	}

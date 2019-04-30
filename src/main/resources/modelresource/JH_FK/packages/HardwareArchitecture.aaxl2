@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aadl2:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" name="HardwareArchitecture" publicSection="#//@ownedPublicSection">
+<aadl2:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:errorModel="http://www.aadl.info/EMV2" name="HardwareArchitecture" publicSection="#//@ownedPublicSection">
   <ownedPublicSection importedUnit="aadl2:Package Composition.aadl#Composition aadl2:Package kfBefore.aadl#kfBefore">
     <ownedComment body="--与kf关联的硬件组件之间的关系--"/>
     <ownedClassifier xsi:type="aadl2:SystemType" name="jh"/>
     <ownedClassifier xsi:type="aadl2:SystemImplementation" name="jh.kf">
+      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**&#xD;&#xA;&#x9;&#x9;&#x9;use behavior ErrorLib::FailStopState;&#xD;&#xA;&#x9;&#x9;&#x9;composite error behavior&#xD;&#xA;&#x9;&#x9;-- flight system failure in terms of its part failure modes &#xD;&#xA;&#x9;&#x9;-- In this case we have redundant GPS instances&#xD;&#xA;&#x9;&#x9;&#x9;states&#xD;&#xA;&#x9;&#x9;&#x9;[1 ormore(kf.FailStop and tt.FailStop)&#xD;&#xA;&#x9;&#x9;&#x9;]-> FailStop;&#xD;&#xA;&#x9;&#x9;end composite;&#xD;&#xA;&#x9;**}">
+        <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useBehavior="ErrorLib.aadl#emv2$ErrorLib.FailStopState">
+          <ownedComment body="-- flight system failure in terms of its part failure modes "/>
+          <ownedComment body="-- In this case we have redundant GPS instances"/>
+          <states state="ErrorLib.aadl#/0/@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.0/@states.1">
+            <condition xsi:type="errorModel:OrmoreExpression" count="1">
+              <operands xsi:type="errorModel:AndExpression">
+                <operands xsi:type="errorModel:SConditionElement">
+                  <qualifiedState state="ErrorLib.aadl#/0/@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.0/@states.1">
+                    <subcomponent subcomponent="#//@ownedPublicSection/@ownedClassifier.1/@ownedSystemSubcomponent.0"/>
+                  </qualifiedState>
+                </operands>
+                <operands xsi:type="errorModel:SConditionElement">
+                  <qualifiedState state="ErrorLib.aadl#/0/@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.0/@states.1">
+                    <subcomponent subcomponent="#//@ownedPublicSection/@ownedClassifier.1/@ownedSystemSubcomponent.1"/>
+                  </qualifiedState>
+                </operands>
+              </operands>
+            </condition>
+          </states>
+        </parsedAnnexSubclause>
+      </ownedAnnexSubclause>
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
       <ownedAccessConnection name="busANDkf">
         <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedSystemSubcomponent.0" connectionEnd="aadl2:BusAccess kfBefore.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedBusAccess.0"/>
@@ -50,6 +72,7 @@
       <ownedDeviceSubcomponent name="ICU" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.ICU.impl"/>
       <ownedDeviceSubcomponent name="GNSS" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.GNSS.impl"/>
       <ownedSystemSubcomponent name="kf" systemSubcomponentType="aadl2:SystemImplementation kfBefore.aadl#kfBefore.kf.before"/>
+      <ownedSystemSubcomponent name="tt" systemSubcomponentType="aadl2:SystemImplementation kfBefore.aadl#kfBefore.kf.tt"/>
     </ownedClassifier>
   </ownedPublicSection>
 </aadl2:Package>

@@ -1,7 +1,11 @@
 package extractor.DAO.mapper;
 
-import extractor.model.Device;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
+import extractor.model.Device;
+@Mapper
+@Component
 public interface DeviceMapper {
     int deleteByPrimaryKey(Integer deviceid);
 

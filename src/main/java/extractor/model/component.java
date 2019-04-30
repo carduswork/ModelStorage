@@ -9,6 +9,8 @@ public class component {
 
     private String modeltype;
 
+    private String componentype;
+
     public Integer getComponentid() {
         return componentid;
     }
@@ -39,5 +41,13 @@ public class component {
 
     public void setModeltype(String modeltype) {
         this.modeltype = modeltype == null ? null : modeltype.trim();
+    }
+
+    public String getComponentype() {
+        return componentype;
+    }
+
+    public void setComponentype(String componentype) {
+        this.componentype = componentype == null ? null : componentype.trim();
     }
 }

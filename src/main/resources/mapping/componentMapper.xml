@@ -6,9 +6,10 @@
     <result column="Name" jdbcType="VARCHAR" property="name" />
     <result column="Type" jdbcType="VARCHAR" property="type" />
     <result column="ModelType" jdbcType="VARCHAR" property="modeltype" />
+    <result column="componentype" jdbcType="VARCHAR" property="componentype" />
   </resultMap>
   <sql id="Base_Column_List">
-    ComponentID, Name, Type, ModelType
+    ComponentID, Name, Type, ModelType, componentype
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -22,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="extractor.model.component">
     insert into components (ComponentID, Name, Type, 
-      ModelType)
+      ModelType, componentype)
     values (#{componentid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
-      #{modeltype,jdbcType=VARCHAR})
+      #{modeltype,jdbcType=VARCHAR}, #{componentype,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="extractor.model.component">
     insert into components
@@ -41,6 +42,9 @@
       <if test="modeltype != null">
         ModelType,
       </if>
+      <if test="componentype != null">
+        componentype,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="componentid != null">
@@ -54,6 +58,9 @@
       </if>
       <if test="modeltype != null">
         #{modeltype,jdbcType=VARCHAR},
+      </if>
+      <if test="componentype != null">
+        #{componentype,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -69,6 +76,9 @@
       <if test="modeltype != null">
         ModelType = #{modeltype,jdbcType=VARCHAR},
       </if>
+      <if test="componentype != null">
+        componentype = #{componentype,jdbcType=VARCHAR},
+      </if>
     </set>
     where ComponentID = #{componentid,jdbcType=INTEGER}
   </update>
@@ -76,7 +86,8 @@
     update components
     set Name = #{name,jdbcType=VARCHAR},
       Type = #{type,jdbcType=VARCHAR},
-      ModelType = #{modeltype,jdbcType=VARCHAR}
+      ModelType = #{modeltype,jdbcType=VARCHAR},
+      componentype = #{componentype,jdbcType=VARCHAR}
     where ComponentID = #{componentid,jdbcType=INTEGER}
-  </update>  
+  </update>
 </mapper>

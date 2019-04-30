@@ -10,7 +10,7 @@
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceType" name="cy">
-      <ownedComment body="--cy--&#xA;"/>
+      <ownedComment body="--cy系统--&#xA;"/>
       <ownedDataPort name="cy_info" in="true"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceImplementation" name="cy.impl">

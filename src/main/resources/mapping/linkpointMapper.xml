@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="extractor.DAO.mapper.linkpointMapper">
+  <resultMap id="BaseResultMap" type="extractor.model.linkpoint">
+    <id column="LinkpointID" jdbcType="INTEGER" property="linkpointid" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Period" jdbcType="VARCHAR" property="period" />
+    <result column="Postcondition" jdbcType="VARCHAR" property="postcondition" />
+    <result column="Precondition" jdbcType="VARCHAR" property="precondition" />
+    <result column="CommunicationchannelID" jdbcType="INTEGER" property="communicationchannelid" />
+    <result column="channel" jdbcType="INTEGER" property="channel" />
+    <result column="RequirementID" jdbcType="INTEGER" property="requirementid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    LinkpointID, Name, Period, Postcondition, Precondition, CommunicationchannelID, channel, 
+    RequirementID
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from linkpoint
+    where LinkpointID = #{linkpointid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from linkpoint
+    where LinkpointID = #{linkpointid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="extractor.model.linkpoint">
+    insert into linkpoint (LinkpointID, Name, Period, 
+      Postcondition, Precondition, CommunicationchannelID, 
+      channel, RequirementID)
+    values (#{linkpointid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{period,jdbcType=VARCHAR}, 
+      #{postcondition,jdbcType=VARCHAR}, #{precondition,jdbcType=VARCHAR}, #{communicationchannelid,jdbcType=INTEGER}, 
+      #{channel,jdbcType=INTEGER}, #{requirementid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="extractor.model.linkpoint">
+    insert into linkpoint
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="linkpointid != null">
+        LinkpointID,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="period != null">
+        Period,
+      </if>
+      <if test="postcondition != null">
+        Postcondition,
+      </if>
+      <if test="precondition != null">
+        Precondition,
+      </if>
+      <if test="communicationchannelid != null">
+        CommunicationchannelID,
+      </if>
+      <if test="channel != null">
+        channel,
+      </if>
+      <if test="requirementid != null">
+        RequirementID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="linkpointid != null">
+        #{linkpointid,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="postcondition != null">
+        #{postcondition,jdbcType=VARCHAR},
+      </if>
+      <if test="precondition != null">
+        #{precondition,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationchannelid != null">
+        #{communicationchannelid,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null">
+        #{channel,jdbcType=INTEGER},
+      </if>
+      <if test="requirementid != null">
+        #{requirementid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="extractor.model.linkpoint">
+    update linkpoint
+    <set>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null">
+        Period = #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="postcondition != null">
+        Postcondition = #{postcondition,jdbcType=VARCHAR},
+      </if>
+      <if test="precondition != null">
+        Precondition = #{precondition,jdbcType=VARCHAR},
+      </if>
+      <if test="communicationchannelid != null">
+        CommunicationchannelID = #{communicationchannelid,jdbcType=INTEGER},
+      </if>
+      <if test="channel != null">
+        channel = #{channel,jdbcType=INTEGER},
+      </if>
+      <if test="requirementid != null">
+        RequirementID = #{requirementid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where LinkpointID = #{linkpointid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="extractor.model.linkpoint">
+    update linkpoint
+    set Name = #{name,jdbcType=VARCHAR},
+      Period = #{period,jdbcType=VARCHAR},
+      Postcondition = #{postcondition,jdbcType=VARCHAR},
+      Precondition = #{precondition,jdbcType=VARCHAR},
+      CommunicationchannelID = #{communicationchannelid,jdbcType=INTEGER},
+      channel = #{channel,jdbcType=INTEGER},
+      RequirementID = #{requirementid,jdbcType=INTEGER}
+    where LinkpointID = #{linkpointid,jdbcType=INTEGER}
+  </update>
+</mapper>

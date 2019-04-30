@@ -1,13 +1,37 @@
 package kfBefore
 public
 	with Composition;
-	
+
 	system kf
 		features
 			bus_data: requires bus access Composition::bus_1553B; --1553B总线信号											
-			cy_info: out data port;		
-	interrupt: in event port;
+			cy_info: out data port;
+			ObservableFailure: out feature;
+			interrupt: in event port;
+		annex EMV2 {**
+		use types ErrorLib;-- 定义接口的错误
+		use behavior ErrorLib::FailStopState;		
+		error propagations
+		cy_info: out propagation {InvalidParameter,UnexceptedError};
+		interrupt:in propagation {Violation};
+		flows
+			-- 传播路径
+			NoFlightSystem: error source cy_info{InvalidParameter} when {HardwareFault};
+			ErraticFlightSystem: error source cy_info{UnexceptedError};
+			ErraticPilot: error path interrupt{Violation} -> cy_info{InvalidParameter};
+		end propagations;
+		component error behavior
+	 	events
+	 	  PowerFailure: error event;
+		transitions
+			Operational -[PowerFailure]-> FailStop;
+
+	 	end component;
+	**};
 	end kf;
+
+	system implementation kf.tt
+	end kf.tt;
 	
 	system implementation kf.before
 		subcomponents
@@ -23,6 +47,7 @@ public
 			Actual_Memory_Binding => (reference (RAM)) applies to zdsc_hdxld;--将zdsc_hdxld和数据缓冲区进行绑定
 			Actual_Memory_Binding => (reference (RAM)) applies to yz;
 			Actual_Memory_Binding => (reference (RAM)) applies to lz_judgement;
+			
 	end kf.before;
 	
 	--zdsc及hdxld过程--
