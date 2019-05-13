@@ -7,7 +7,7 @@ public class syncinterface {
 
     private String paralist;
 
-    private String return;
+    private String _return;
 
     public Integer getSyncinterfaceid() {
         return syncinterfaceid;
@@ -34,10 +34,10 @@ public class syncinterface {
     }
 
     public String getReturn() {
-        return return;
+        return _return;
     }
 
-    public void setReturn(String return) {
-        this.return = return == null ? null : return.trim();
+    public void setReturn(String _return) {
+        this._return = _return == null ? null : _return.trim();
     }
 }

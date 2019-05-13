@@ -1,7 +1,11 @@
 package extractor.DAO.mapper;
 
-import extractor.model.DispatchChannel;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
+import extractor.model.DispatchChannel;
+@Mapper
+@Component
 public interface DispatchChannelMapper {
     int deleteByPrimaryKey(Integer dispatchchannelid);
 

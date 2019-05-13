@@ -47,7 +47,7 @@
       This element was generated on Sat Apr 27 21:00:48 CST 2019.
     -->
     insert into transition (TransitionID, Guide, Name, 
-      trigger)
+      `trigger`)
     values (#{transitionid,jdbcType=INTEGER}, #{guide,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{trigger,jdbcType=INTEGER})
   </insert>

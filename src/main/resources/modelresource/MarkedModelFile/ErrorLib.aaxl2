@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aadl2:Package xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:errorModel="http://www.aadl.info/EMV2" xmi:version="2.0" name="ErrorLib" publicSection="#//@ownedPublicSection">
+  <ownedPublicSection>
+    <ownedAnnexLibrary xsi:type="aadl2:DefaultAnnexLibrary" name="EMV2" sourceText="{**
+		error types
+		use types ErrorLibrary;
+		--元模型中定义的错误类型
+		InvalidParameter: type;
+		Violation:type;
+		UnexceptedError:type;
+		HardwareFault:type;
+		end types;
+-- state machine for simple FailStop behavior
+error behavior FailStopState
+states
+	Operational : initial state ;
+	FailStop : state ;
+end behavior ;
+error behavior GPSProcessingFailed
+states
+	Operational : initial state ;
+	NoService : state ;
+	LowPrecision : state ;
+	Incorrect : state ;
+end behavior ;
+
+error behavior FailStopTransient
+events
+	Failure: error event;
+states
+	Operational : initial state ;
+	FailStop : state ;
+	transitions
+	-- sensor failure may be transient. We assume a 20% persistent sesnor failure rate.
+		FailureTransition: Operational -[Failure]-&gt; (FailStop with 0.2, Operational with 0.8);
+end behavior ;
+	**}">
+      <parsedAnnexLibrary xsi:type="errorModel:ErrorModelLibrary" name="EMV2" useTypes="../../Plugin_Resources/ErrorLibrary.aadl#emv2$ErrorLibrary">
+        <types name="InvalidParameter">
+          <ownedComment body="--元模型中定义的错误类型"/>
+        </types>
+        <types name="Violation"/>
+        <types name="UnexceptedError"/>
+        <types name="HardwareFault"/>
+        <behaviors name="FailStopState">
+          <ownedComment body="-- state machine for simple FailStop behavior"/>
+          <states name="Operational" intial="true"/>
+          <states name="FailStop"/>
+        </behaviors>
+        <behaviors name="GPSProcessingFailed">
+          <states name="Operational" intial="true"/>
+          <states name="NoService"/>
+          <states name="LowPrecision"/>
+          <states name="Incorrect"/>
+        </behaviors>
+        <behaviors name="FailStopTransient">
+          <events xsi:type="errorModel:ErrorEvent" name="Failure" id="1086150181"/>
+          <states name="Operational" intial="true"/>
+          <states name="FailStop"/>
+          <transitions name="FailureTransition" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0">
+            <ownedComment body="-- sensor failure may be transient. We assume a 20% persistent sesnor failure rate."/>
+            <condition xsi:type="errorModel:ConditionElement">
+              <qualifiedErrorPropagationReference xsi:type="errorModel:QualifiedErrorEventOrPropagation">
+                <emv2Target namedElement="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@events.0"/>
+              </qualifiedErrorPropagationReference>
+            </condition>
+            <destinationBranches target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.1">
+              <value realvalue="0.2"/>
+            </destinationBranches>
+            <destinationBranches target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0">
+              <value realvalue="0.8"/>
+            </destinationBranches>
+          </transitions>
+        </behaviors>
+      </parsedAnnexLibrary>
+    </ownedAnnexLibrary>
+  </ownedPublicSection>
+</aadl2:Package>

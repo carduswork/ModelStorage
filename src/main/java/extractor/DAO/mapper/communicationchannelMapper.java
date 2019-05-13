@@ -18,4 +18,6 @@ public interface communicationchannelMapper {
     int updateByPrimaryKeySelective(communicationchannel record);
 
     int updateByPrimaryKey(communicationchannel record);
+
+	Integer getgetCChannelBysd(Integer sid, Integer did);
 }

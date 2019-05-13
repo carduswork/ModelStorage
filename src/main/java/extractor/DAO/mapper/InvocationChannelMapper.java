@@ -1,7 +1,11 @@
 package extractor.DAO.mapper;
 
-import extractor.model.InvocationChannel;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
+import extractor.model.InvocationChannel;
+@Mapper
+@Component
 public interface InvocationChannelMapper {
     int deleteByPrimaryKey(Integer invocationchannelid);
 

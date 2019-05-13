@@ -1,93 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="extractor.DAO.mapper.componentMapper">
-  <resultMap id="BaseResultMap" type="extractor.model.component">
-    <id column="ComponentID" jdbcType="INTEGER" property="componentid" />
-    <result column="Name" jdbcType="VARCHAR" property="name" />
-    <result column="Type" jdbcType="VARCHAR" property="type" />
-    <result column="ModelType" jdbcType="VARCHAR" property="modeltype" />
-    <result column="componentype" jdbcType="VARCHAR" property="componentype" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    ComponentID, Name, Type, ModelType, componentype
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from components
-    where ComponentID = #{componentid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from components
-    where ComponentID = #{componentid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="extractor.model.component">
-    insert into components (ComponentID, Name, Type, 
-      ModelType, componentype)
-    values (#{componentid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
-      #{modeltype,jdbcType=VARCHAR}, #{componentype,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="extractor.model.component">
-    insert into components
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="componentid != null">
-        ComponentID,
-      </if>
-      <if test="name != null">
-        Name,
-      </if>
-      <if test="type != null">
-        Type,
-      </if>
-      <if test="modeltype != null">
-        ModelType,
-      </if>
-      <if test="componentype != null">
-        componentype,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="componentid != null">
-        #{componentid,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="modeltype != null">
-        #{modeltype,jdbcType=VARCHAR},
-      </if>
-      <if test="componentype != null">
-        #{componentype,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="extractor.model.component">
-    update components
-    <set>
-      <if test="name != null">
-        Name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        Type = #{type,jdbcType=VARCHAR},
-      </if>
-      <if test="modeltype != null">
-        ModelType = #{modeltype,jdbcType=VARCHAR},
-      </if>
-      <if test="componentype != null">
-        componentype = #{componentype,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where ComponentID = #{componentid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="extractor.model.component">
-    update components
-    set Name = #{name,jdbcType=VARCHAR},
-      Type = #{type,jdbcType=VARCHAR},
-      ModelType = #{modeltype,jdbcType=VARCHAR},
-      componentype = #{componentype,jdbcType=VARCHAR}
-    where ComponentID = #{componentid,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap"
+		type="extractor.model.component">
+		<id column="ComponentID" jdbcType="INTEGER" property="componentid" />
+		<result column="Name" jdbcType="VARCHAR" property="name" />
+		<result column="Type" jdbcType="VARCHAR" property="type" />
+		<result column="ModelType" jdbcType="VARCHAR"
+			property="modeltype" />
+		<result column="componentype" jdbcType="VARCHAR"
+			property="componentype" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ComponentID, Name, Type, ModelType, componentype
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from components
+		where ComponentID = #{componentid,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getIDbyName"
+		parameterType="java.lang.String" resultMap="BaseResultMap">
+		select ComponentID
+		from components
+		where Name = #{name}
+	</select>
+	
+	<!-- 一会0,一会arg0,这又要从1开始了，还叫param1，这么几句破参数换来换去的有意思吗 -->
+	<select id="getPortIDByComponentName" resultMap="BaseResultMap">
+		select portid from getdistinctport where Name=#{cmpname,jdbcType=VARCHAR} and portname=#{portname,jdbcType=VARCHAR}
+	</select>
+	
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from components
+		where ComponentID = #{componentid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="extractor.model.component">
+		insert into components (ComponentID, Name, Type,
+		ModelType, componentype)
+		values (#{componentid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR},
+		#{modeltype,jdbcType=VARCHAR}, #{componentype,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="extractor.model.component">
+		insert into components
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="componentid != null">
+				ComponentID,
+			</if>
+			<if test="name != null">
+				Name,
+			</if>
+			<if test="type != null">
+				Type,
+			</if>
+			<if test="modeltype != null">
+				ModelType,
+			</if>
+			<if test="componentype != null">
+				componentype,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="componentid != null">
+				#{componentid,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="modeltype != null">
+				#{modeltype,jdbcType=VARCHAR},
+			</if>
+			<if test="componentype != null">
+				#{componentype,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="extractor.model.component">
+		update components
+		<set>
+			<if test="name != null">
+				Name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				Type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="modeltype != null">
+				ModelType = #{modeltype,jdbcType=VARCHAR},
+			</if>
+			<if test="componentype != null">
+				componentype = #{componentype,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ComponentID = #{componentid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="extractor.model.component">
+		update components
+		set Name = #{name,jdbcType=VARCHAR},
+		Type = #{type,jdbcType=VARCHAR},
+		ModelType = #{modeltype,jdbcType=VARCHAR},
+		componentype = #{componentype,jdbcType=VARCHAR}
+		where ComponentID = #{componentid,jdbcType=INTEGER}
+	</update>
 </mapper>

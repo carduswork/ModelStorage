@@ -32,6 +32,9 @@
     from state
     where StateID = #{stateid,jdbcType=INTEGER}
   </select>
+  <select id="getStateID" parameterType="java.lang.String" resultMap="BaseResultMap">
+  	select StateID from state where `Name`=#{statename}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated
