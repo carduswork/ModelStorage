@@ -61,8 +61,8 @@ import javassist.bytecode.stackmap.BasicBlock.Catch;
 import net.bytebuddy.asm.Advice.Return;
 
 //解析模型,本模块只负责模型文件的解析
-@Service("ModelResolver")
-public class ModelResolver {
+@Service("AADLResolver")
+public class AADLResolver {
 //	@Autowired
 //	private ModelService ms;
 	// private ModelService ms;
@@ -975,13 +975,13 @@ public class ModelResolver {
 
 	// 模型元素与元模型进行匹配
 	public void srvmatchmeta() throws Exception {
-		ModelResolver.modeldirectory = "src/main/resources/modelresource/MarkedModelFile/";
+		AADLResolver.modeldirectory = "src/main/resources/modelresource/MarkedModelFile/";
 
-		ModelResolver.compositelibfile = aadlFiles.get("组件库");
-		ModelResolver.errlibfile = aadlFiles.get("错误库");
-		ModelResolver.hardmodelfile = aadlFiles.get("总体架构");
+		AADLResolver.compositelibfile = aadlFiles.get("组件库");
+		AADLResolver.errlibfile = aadlFiles.get("错误库");
+		AADLResolver.hardmodelfile = aadlFiles.get("总体架构");
 		MatchComponents(hardmodelfile, "aadl", "总体架构");
-		ModelResolver.componentlist.forEach((k, v) -> {
+		AADLResolver.componentlist.forEach((k, v) -> {
 			insert_component(v);
 		});
 
@@ -1013,7 +1013,7 @@ public class ModelResolver {
 		ivclist.forEach((v) -> {
 			insert_ivcchannel(v);
 		});
-		ModelResolver.dynamicfilename = aadlFiles.get("系统内部结构");
+		AADLResolver.dynamicfilename = aadlFiles.get("系统内部结构");
 		InnerSystem(dynamicfilename);
 
 		ExceptionResolver(dynamicfilename, "aadl");

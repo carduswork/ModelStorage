@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
 
-import extractor.service.ModelResolver;
+import extractor.service.AADLResolver;
 
 @Controller
 @EnableAutoConfiguration
 public class MainController {
 	@Autowired
-	ModelResolver ms;
+	AADLResolver ms;
 	Map<String, String> aadlFiles = new HashMap<String, String>();
 
 	public void setAadlFiles(Map<String, String> aadlFiles) {
