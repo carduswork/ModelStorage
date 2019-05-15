@@ -21,7 +21,9 @@
 		from components
 		where ComponentID = #{componentid,jdbcType=INTEGER}
 	</select>
-	
+	<select id="selectAll" resultMap="BaseResultMap">
+		select * from components where ModelType='aadl' and (Type='system' or 'device')
+	</select>
 	<select id="getIDbyName"
 		parameterType="java.lang.String" resultMap="BaseResultMap">
 		select ComponentID

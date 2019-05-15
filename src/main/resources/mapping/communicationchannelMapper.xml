@@ -31,6 +31,9 @@
 		where sourceid = #{param1}
 		and destid=#{param2}
 	</select>
+	<select id="getAll" resultMap="BaseResultMap">
+	select * from communicationchannel 
+	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
 		delete from communicationchannel

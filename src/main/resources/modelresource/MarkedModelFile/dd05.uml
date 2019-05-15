@@ -7,7 +7,7 @@
     <packageImport xmi:type="uml:PackageImport" xmi:id="_yDSfYB0oEemtiNpN9MPNvQ">
       <importedPackage xmi:type="uml:Package" href="pathmap://SysML14_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries"/>
     </packageImport>
-    <packagedElement xmi:type="uml:Class" xmi:id="170030765" name="kf">
+    <packagedElement xmi:type="uml:Class" xmi:id="484730836" name="kf">
       <ownedRule xmi:type="uml:Constraint" xmi:id="_zIPokB1lEemi2ObdwhdGOA" name="lz故障">
         <specification xmi:type="uml:OpaqueExpression" xmi:id="_9VOZ8B1lEemi2ObdwhdGOA" name="lz故障">
           <language>Natural language</language>
@@ -32,29 +32,29 @@
           <body>获取主hd状态异常||出筒信号采集异常||kf软件计算失效||kf软件hd开出/关闭指令发送异常</body>
         </specification>
       </ownedRule>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="1353382111" name="时钟接口" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="1974735516" name="hsd" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="1329487735" name="kf机外部存储器端口" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="-396579259" name="cy智能通信口" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="-1362019333" name="hdxw智能通信口" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="-923974199" name="时钟接口" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="449883609" name="hsd" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="164137380" name="kf机外部存储器端口" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="1593168680" name="cy智能通信口" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="-1278373925" name="hdxw智能通信口" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_N0aZ8B1KEemtiNpN9MPNvQ" name="开关量输入"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_hOqMIB1KEemtiNpN9MPNvQ" name="lcd输入"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_xseM8B1LEemtiNpN9MPNvQ" name="开关量输出"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="948683873" name="dhz" aggregation="composite"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="-726758127" name="lz" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="1800244067" name="dhz" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="-1363339548" name="lz" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_pvBfIB1UEemtiNpN9MPNvQ" name="sthd155B"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="-657937480" name="kf_未修综合控制器" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="2127767558" name="kf_未修综合控制器" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_8G9pQB4kEemke_7JY88zdA" name="伺服机构备份hd开出指令"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_iU_qkB4lEemke_7JY88zdA" name="伺服机构备份hd关闭指令"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_kBawIB4lEemke_7JY88zdA" name="尾罩分离备份hd开出指令"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_l2h3oB4lEemke_7JY88zdA" name="尾罩分离备份hd关闭指令"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-966155435" name="采集各设备信息"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1499133969" name="导航"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="905582261" name="制导"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="781262352" name="姿态控制计算"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="53300912" name="控制指令输出"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="1052572295" name="各单机设备采集"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1707807808" name="zy数据装定">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="237064522" name="采集各设备信息"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="15053195" name="导航"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="-1535524484" name="制导"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1847978385" name="姿态控制计算"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1884359939" name="控制指令输出"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1887989444" name="各单机设备采集"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="-1556714072" name="zy数据装定">
         <ownedRule xmi:type="uml:Constraint" xmi:id="_mKTn8B1kEemi2ObdwhdGOA" name="lz故障">
           <specification xmi:type="uml:OpaqueExpression" xmi:id="_mKUPAB1kEemi2ObdwhdGOA" name="遥测数据装定异常">
             <language>OCL</language>
@@ -62,7 +62,7 @@
           </specification>
         </ownedRule>
       </ownedOperation>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="701065917" name="zdsc计算">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="-2138112068" name="zdsc计算">
         <ownedRule xmi:type="uml:Constraint" xmi:id="_RvxdcB1kEemi2ObdwhdGOA" name="lz故障">
           <specification xmi:type="uml:OpaqueExpression" xmi:id="_RvyEgB1kEemi2ObdwhdGOA" name="zdsc计算异常">
             <language>OCL</language>
@@ -71,7 +71,7 @@
         </ownedRule>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="296743839" name="kfc">
+    <packagedElement xmi:type="uml:Class" xmi:id="984756251" name="kfc">
       <ownedRule xmi:type="uml:Constraint" xmi:id="_B41IAB1mEemi2ObdwhdGOA" name="允许st故障">
         <specification xmi:type="uml:OpaqueExpression" xmi:id="_K2HzIB1mEemi2ObdwhdGOA" name="允许st故障">
           <language>Natural language</language>
@@ -81,20 +81,20 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_vZQ3YB1PEemtiNpN9MPNvQ" name="电池激活信号"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_vxLysB1QEemtiNpN9MPNvQ" name="产生dhz"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_Fdcq0B1REemtiNpN9MPNvQ" name="产生lz"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="867257278" name="允许st" aggregation="composite"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="-713090419" name="允许st" aggregation="composite"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_jTu1oB4jEemke_7JY88zdA" name="开出sthd信号"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="129444075" name="导弹测试"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="138045192" name="发射流程总控制"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1090144651" name="导弹测试"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="-1655928336" name="发射流程总控制"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="950998441" name="ze">
+    <packagedElement xmi:type="uml:Class" xmi:id="1387022697" name="ze">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_BrPIAB1SEemtiNpN9MPNvQ" name="允许st"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="-686384428" name="sthd155B" aggregation="composite"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="145723939" name="指令查询"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1068398260" name="弹测量采集"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="340049495" name="指令处理"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1357484685" name="主hd输出"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="878777342" name="sthd155B" aggregation="composite"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="2138324636" name="指令查询"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="540197299" name="弹测量采集"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="-664379269" name="指令处理"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1945427179" name="主hd输出"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="1378901602" name="hd">
+    <packagedElement xmi:type="uml:Class" xmi:id="1504520149" name="hd">
       <nestedClassifier xmi:type="uml:Class" xmi:id="_vXvpsB0pEemtiNpN9MPNvQ" name="kf">
         <nestedClassifier xmi:type="uml:Class" xmi:id="_I6UykB4bEemke_7JY88zdA" name="转电信号"/>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_7_6xoB4aEemke_7JY88zdA" name="初始对准及地理系导航"/>
@@ -113,18 +113,18 @@
       <nestedClassifier xmi:type="uml:Class" xmi:id="_z8ZgoB0pEemtiNpN9MPNvQ" name="ze"/>
       <nestedClassifier xmi:type="uml:Class" xmi:id="_1NnQ4B0pEemtiNpN9MPNvQ" name="zm"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="436308459" name="配电器">
+    <packagedElement xmi:type="uml:Class" xmi:id="630642420" name="配电器">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_EoBmEB1OEemtiNpN9MPNvQ" name="电池激活信号"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="1811399171" name="电池激活" aggregation="composite"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1230267231" name="电池激活"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1687694845" name="电源分配"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="-454173801" name="电池激活" aggregation="composite"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="-1460813963" name="电池激活"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1446126417" name="电源分配"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="592994551" name="弹上电池">
+    <packagedElement xmi:type="uml:Class" xmi:id="1570189974" name="弹上电池">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_4RKXEB1NEemtiNpN9MPNvQ" name="电池电"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="939227784" name="kfc_sdcd" aggregation="composite"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1117968390" name="供电"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="506871857" name="kfc_sdcd" aggregation="composite"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="646821221" name="供电"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="-1490837571" name="电池电" informationSource="_C-ACIB0rEemtiNpN9MPNvQ" informationTarget="_8Mq4QB0qEemtiNpN9MPNvQ"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="-699765495" name="电池电" informationSource="_C-ACIB0rEemtiNpN9MPNvQ" informationTarget="_8Mq4QB0qEemtiNpN9MPNvQ"/>
     <packagedElement xmi:type="uml:InformationFlow" xmi:id="_ZdeVgB1PEemtiNpN9MPNvQ" name="电池激活信号" informationSource="_8Mq4QB0qEemtiNpN9MPNvQ" informationTarget="_C-ACIB0rEemtiNpN9MPNvQ"/>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_d1uvMB1PEemtiNpN9MPNvQ" name="Block24" client="_C-ACIB0rEemtiNpN9MPNvQ" supplier="_8Mq4QB0qEemtiNpN9MPNvQ"/>
     <packagedElement xmi:type="uml:InformationFlow" xmi:id="_9r290B1QEemtiNpN9MPNvQ" name="dhz" informationSource="_M6M3cB0pEemtiNpN9MPNvQ" informationTarget="_04lKUB1QEemtiNpN9MPNvQ"/>
@@ -154,23 +154,23 @@
       </specification>
     </packagedElement>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_spS6EB1jEemi2ObdwhdGOA" name="FlowProperty34" client="_Fdcq0B1REemtiNpN9MPNvQ" supplier="_hPdUAB1jEemi2ObdwhdGOA"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="-1264842776" name="Block35">
+    <packagedElement xmi:type="uml:Class" xmi:id="1699170131" name="Block35">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_cC-5AB1sEemi2ObdwhdGOA" name="Block1" type="_gl_KIB1sEemi2ObdwhdGOA" aggregation="composite" association="_gmIUEB1sEemi2ObdwhdGOA"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="357812640" name="初始对准及地理系导航"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="-2078037313" name="初始对准及地理系导航"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_gmIUEB1sEemi2ObdwhdGOA" memberEnd="_cC-5AB1sEemi2ObdwhdGOA _gmIUER1sEemi2ObdwhdGOA">
       <ownedEnd xmi:type="uml:Property" xmi:id="_gmIUER1sEemi2ObdwhdGOA" type="_Eq7NcB1sEemi2ObdwhdGOA" association="_gmIUEB1sEemi2ObdwhdGOA"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="213199659" name="非功能性需求"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="838170930" name="非功能性需求"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_OteIoB3pEemke_7JY88zdA" name="Refine39" client="_vXvpsB0pEemtiNpN9MPNvQ" supplier="_cEK5cB3oEemke_7JY88zdA"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="16533142" name="kf">
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1426415806" name="采集各设备信息"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="1397233210" name="导航"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1297788273" name="制导"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="399761746" name="姿态控制计算"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1571366780" name="控制指令输出"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="1393310185" name="各单机设备采集"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-246437882" name="遥测数据装定">
+    <packagedElement xmi:type="uml:Class" xmi:id="1965604666" name="kf">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="2072498209" name="采集各设备信息"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1574403141" name="导航"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1438643389" name="制导"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1383162579" name="姿态控制计算"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="253122902" name="控制指令输出"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="197615540" name="各单机设备采集"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="2084500253" name="遥测数据装定">
         <ownedRule xmi:type="uml:Constraint" xmi:id="_-phAAR3sEemke_7JY88zdA" name="lz故障">
           <specification xmi:type="uml:OpaqueExpression" xmi:id="_-phAAh3sEemke_7JY88zdA" name="遥测数据装定异常">
             <language>OCL</language>
@@ -179,19 +179,19 @@
         </ownedRule>
       </ownedOperation>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="324524997" name="ze">
-      <ownedOperation xmi:type="uml:Operation" xmi:id="677978743" name="指令查询"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="312495326" name="弹测量采集"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-852512856" name="指令处理"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="-684020179" name="ze">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="-1163413929" name="指令查询"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1466598863" name="弹测量采集"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="-553000884" name="指令处理"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="838232978" name="kfc">
-      <ownedOperation xmi:type="uml:Operation" xmi:id="715910437" name="导弹测试"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="-1952521799" name="发射流程总控制"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="-1203397290" name="kfc">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="-677963430" name="导弹测试"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="1297601049" name="发射流程总控制"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="1823396685" name="未修综合控制器"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="204554109" name="st动力装置"/>
-    <packagedElement xmi:type="uml:Class" xmi:id="-1721834340" name="未修综合控制器">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="1243931393" name="未修综合控制器_kf" aggregation="composite"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="1919431595" name="未修综合控制器"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="769241461" name="st动力装置"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="361611744" name="未修综合控制器">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="-1057948477" name="未修综合控制器_kf" aggregation="composite"/>
     </packagedElement>
     <packagedElement xmi:type="uml:InformationFlow" xmi:id="_5OQ90B4kEemke_7JY88zdA" name="ItemFlow46" informationSource="_cebVQB4kEemke_7JY88zdA" informationTarget="_v_-CQB4kEemke_7JY88zdA"/>
     <packagedElement xmi:type="uml:Interaction" xmi:id="_vvZ0wB_nEem27tX6jpfBIA" name="Interaction47">

@@ -1,9 +1,13 @@
 package extractor.DAO.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 import extractor.model._state;
+import extractor.model.linkpoint;
+
 @Mapper
 @Component
 public interface _stateMapper {
@@ -21,4 +25,6 @@ public interface _stateMapper {
 	int updateByPrimaryKey(_state record);
 
 	public Integer getStateID(String statename);
+
+	List<_state> getStateUnderCMP(Integer cmpid);
 }

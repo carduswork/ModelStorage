@@ -19,7 +19,7 @@ public class ConsoleApplication implements CommandLineRunner {
 	MainController mc;
 	
 	Map<String, String> aadlFiles=new HashMap<String,String>();
-	
+	Map<String, String> sysmlFiles=new HashMap<String,String>();
 	public static void main(String[] args) throws Exception {
 		SpringApplication.run(ConsoleApplication.class, args);
 	}
@@ -30,12 +30,15 @@ public class ConsoleApplication implements CommandLineRunner {
 		aadlFiles.put("总体架构","src/main/resources/modelresource/JH_FK/packages/HardwareArchitecture.aaxl2");
 		aadlFiles.put("错误库","src/main/resources/modelresource/JH_FK/packages/ErrorLib.aaxl2");
 		aadlFiles.put("组件库", "src/main/resources/modelresource/JH_FK/packages/Composition.aaxl2");
-		mc.setAadlFiles(aadlFiles);
-		mc.restore();
 		
-		mc.SetSysFileID("src/main/resources/modelresource/MarkedModelFile/HardwareArchitecture.aaxl2",
-				"src/main/resources/modelresource/MarkedModelFile/kfBefore.aaxl2");
-		
-		
+		sysmlFiles.put("文件", "src/main/resources/modelresource/wk.uml");
+		mc.startIntegration();
+//		mc.setAadlFiles(aadlFiles);
+//		mc.setSysmlFiles(sysmlFiles);
+//		mc.restore();
+//		
+//		mc.SetSysFileID("src/main/resources/modelresource/MarkedModelFile/HardwareArchitecture.aaxl2",
+//				"src/main/resources/modelresource/MarkedModelFile/kfBefore.aaxl2");				
 	}
+	
 }

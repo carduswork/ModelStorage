@@ -25,6 +25,7 @@ import extractor.DAO.mapper.InvocationChannelMapper;
 import extractor.DAO.mapper.MessageChannelMapper;
 import extractor.DAO.mapper._eventMapper;
 import extractor.DAO.mapper._exceptionMapper;
+import extractor.DAO.mapper._partitionMapper;
 import extractor.DAO.mapper._provideMapper;
 import extractor.DAO.mapper._requireMapper;
 import extractor.DAO.mapper._stateMapper;
@@ -43,6 +44,7 @@ import extractor.model.InvocationChannel;
 import extractor.model.MessageChannel;
 import extractor.model._event;
 import extractor.model._exception;
+import extractor.model._partition;
 import extractor.model._provide;
 import extractor.model._require;
 import extractor.model._state;
@@ -104,6 +106,8 @@ public class AADLResolver {
 
 	static List<transition> tslist = new ArrayList<transition>();
 	static List<transitionstate> ts_slist = new ArrayList<transitionstate>();
+
+	static List<_partition> partitionlist = new ArrayList<_partition>();
 
 	public static Document ModelResolver(String url) throws DocumentException {
 		SAXReader reader = new SAXReader();
@@ -372,15 +376,17 @@ public class AADLResolver {
 
 		// 从集成的角度看，先直接解析task，等以后有了shcedule再绑定上级
 		String gettask = "//ownedClassifier[@xsi:type='aadl2:ProcessType' or @xsi:type='aadl2:ThreadType']";
-
-		components = document.selectNodes(gettask);
-		TaskResolver(modelfilename);
-
-		String innerDevcvice = "//ownedClassifier[@xsi:type='aadl2:ProcessorType'or @xsi:type='aadl2:MemoryType']";
 		// 查找系统内部的组件
-		Integer idString3 = (int) GetID.getId();
+		// String innerDevcvice = "//ownedClassifier[@xsi:type='aadl2:ProcessorType'or
+		// @xsi:type='aadl2:MemoryType']";
+		String innerDevcvice = "//ownedClassifier[@xsi:type='aadl2:ProcessorType']";
+		// Integer idString3 = (int) GetID.getId();
 		components = document.selectNodes(innerDevcvice);
 		resolverChild(modelfilename, "device");
+
+		components = document.selectNodes(gettask);
+		// TODO 部署关系的解析
+		TaskResolver(modelfilename);
 
 		// SystemType的错误附件影响到下级的实现
 		// String getfathersyString = "";
@@ -394,28 +400,38 @@ public class AADLResolver {
 	}
 
 	// 内部的deivce与上级元素都需要放进component表中
-	private static void resolverChild(String filepath, String t) throws Exception {
+	private void resolverChild(String filepath, String t) throws Exception {
 		List<? extends Node> ports = null;
 		for (Node n : components) {
 			Element element = (Element) n;
-			component component = new component();
 			Integer idString2 = (int) GetID.getId();
 
 			AppendID.AppendID(filepath, n.getUniquePath(), idString2.toString());
 
+			component component = new component();
 			component.setModeltype("aadl");
 			component.setName(element.attributeValue("name"));
 			component.setComponentid(idString2);
-			component.setType("device");
+			component.setType("partition");
 
-			device d = new device();
-			d.setDeviceid(idString2);
-			devicelist.add(d);
+			insert_component(component);
+			// partition
+//			String a=element.attributeValue("xsi:type");
+//			if (element.attributeValue("xsi:type").equals("aadl2:ProcessorType")) {
+			// _partition partition = new _partition();
+			// partition.setPartitionid(idString2);
+			// partition.setRtosid();
+			// partitionlist.add(partition);
+			// }
+			// TODO RTOS与partition的部署关系
+//			device d = new device();
+//			d.setDeviceid(idString2);
+//			devicelist.add(d);
 			// 名下的linkpoint
 			String devicedef = modeldirectory + Getfilename(element.attributeValue("deviceSubcomponentType"));
 			LinkpointResolver(devicedef, ports, idString2, t, element.attributeValue("name"));
 
-			componentlist.put(element.attributeValue("name"), component);
+			// componentlist.put(element.attributeValue("name"), component);
 		}
 	}
 
@@ -443,6 +459,7 @@ public class AADLResolver {
 				component.setType("system");
 				rtos r = new rtos();
 				r.setRtosid(componentID);
+				// TODO 设置partitions的数量
 				rtoslist.add(r);
 
 				String sysdef = modeldirectory + Getfilename(element.attributeValue("systemSubcomponentType"));
@@ -463,6 +480,7 @@ public class AADLResolver {
 		}
 	}
 
+//TODO dataobject
 	private static void LinkpointResolver(String linkpointfile, List<? extends Node> ports, Integer fatherid,
 			String fathertype, String componetname) throws Exception {
 		switch (fathertype) {
@@ -742,7 +760,7 @@ public class AADLResolver {
 		List<? extends Node> stateInfo = document
 				.selectNodes("//ownedAnnexSubclause/parsedAnnexSubclause/states/condition/operands/operands");
 		if (stateInfo.size() != 0) {
-			//文件中定义了state
+			// 文件中定义了state
 			stateInfo.forEach((v) -> {
 				Element element = (Element) v;
 				try {
@@ -773,6 +791,7 @@ public class AADLResolver {
 			libstateinfo.forEach((v) -> {
 				_state stat = new _state();
 				stat.setComponentid(Integer.valueOf(Compositeid));
+				stat.setName(((Element) v).attributeValue("name"));
 				statelist.add(stat);
 			});
 		} catch (Exception e) {
@@ -807,12 +826,15 @@ public class AADLResolver {
 
 			component.setModeltype("aadl");
 			component.setName(element.attributeValue("name"));
-			component.setType("software");
+			component.setType("aadltask");
+			// TODO task作为component的存入
+			componentlist.put("", component);
 			// 解析task
 			_task t = new _task();
+			t.setName(component.getName());
 			t.setTaskid(idString);
-			// t.setStateid("");
-
+			// TODO 解析遍历partition
+			// t.setPartitionid(partitionlist.get(0).getPartitionid());
 			tasklist.add(t);
 			taskcomponentlist.put(element.attributeValue("name"), component);
 		}
@@ -883,6 +905,12 @@ public class AADLResolver {
 	private rtosMapper rsmMapper;
 	@Autowired
 	private _taskMapper _tm;
+	@Autowired
+	private _partitionMapper ptm;
+
+	private int insert_partition(_partition p) {
+		return ptm.insert(p);
+	}
 
 	private int insert_component(component c) {
 		return camArchMapper.insert(c);
@@ -1015,7 +1043,9 @@ public class AADLResolver {
 		});
 		AADLResolver.dynamicfilename = aadlFiles.get("系统内部结构");
 		InnerSystem(dynamicfilename);
-
+		partitionlist.forEach((v) -> {
+			insert_partition(v);
+		});
 		ExceptionResolver(dynamicfilename, "aadl");
 		exceptionlist.forEach((v) -> {
 			insert_exception(v);

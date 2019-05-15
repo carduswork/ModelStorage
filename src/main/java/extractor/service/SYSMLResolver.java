@@ -50,7 +50,7 @@ import extractor.model.transitionstate;
 public class SYSMLResolver {
 	Map<String, String> sysmlFiles = new HashMap<String, String>();
 	static String modeldirectory;
-	static List<component> componentlist;
+	static List<component> componentlist = new ArrayList<component>();
 	static List<linkpoint> portlist = new ArrayList<linkpoint>();
 	static List<_require> requirelist = new ArrayList<_require>();
 	static List<_provide> providelist = new ArrayList<_provide>();
@@ -210,8 +210,7 @@ public class SYSMLResolver {
 	public void MatchComponents(String filepath, String contenttype) throws Exception {
 		Document document = ModelResolver(filepath);
 
-		// List<String> namelist = new ArrayList<>();
-		String getCompponents = "//packagedElement[@xsi:type='uml:Class']";
+		String getCompponents = "//packagedElement[@xmi:type='uml:Class']";
 		List<? extends Node> com = document.selectNodes(getCompponents);
 		for (Node n : com) {
 			Element e = (Element) n;
@@ -221,6 +220,7 @@ public class SYSMLResolver {
 			AppendID.AppendID(filepath, n.getUniquePath(), idString.toString());
 			c.setComponentid(idString);
 			c.setName(e.attributeValue("name"));
+			c.setType("sysml");
 			componentlist.add(c);
 			if (e.element("ownedRule[@xmi:type='uml:Constraint']") != null) {
 				Element e2 = e.element("ownedRule[@xmi:type='uml:Constraint']");
@@ -276,10 +276,19 @@ public class SYSMLResolver {
 		List<? extends Node> namelist = document.selectNodes(gettask);
 		for (Node n : namelist) {
 			Element element2 = (Element) n;
+			component component = new component();
+			Integer idString = (int) GetID.getId();
+			component.setComponentid(idString);
+
+			component.setModeltype("sysml");
+			component.setName(element2.attributeValue("name"));
+			component.setType("sysmltask");
+			componentlist.add(component);
 			_task t = new _task();
 			t.setName(element2.attributeValue("name"));
-			// Integer taskid = (int) GetID.getId();
-			t.setTaskid(father.getComponentid());
+			t.setTaskid(idString);
+			//TODO 块图的partition不存在
+			//t.setPartitionid(father.getComponentid());
 			try {
 				AppendID.AppendID(modelfilename, element2.getUniquePath(), t.getTaskid().toString());
 			} catch (Exception e) {
@@ -289,7 +298,8 @@ public class SYSMLResolver {
 			// operation即task有错误定义
 			if (element2.element("ownedRule") != null) {
 				// TODO 解析错误
-				Element e2 = element2.element("ownedRule[@xmi:type='uml:Constraint']");
+				// Element e2 = element2.element("ownedRule[@xmi:type='uml:Constraint']");
+				Element e2 = element2.element("ownedRule");
 				_exception ex = new _exception();
 				ex.setName(e2.attributeValue("name"));
 				exceptionlist.add(ex);
@@ -300,7 +310,7 @@ public class SYSMLResolver {
 
 	private Integer GetCMPIDByXMIID(String filepath, String id) throws Exception {
 		Document document = ModelResolver(filepath);
-		String g = "//packagedElement[@xsi:type='uml:Class' and xmi:id='" + id + "']";
+		String g = "//packagedElement[@xmi:type='uml:Class' and xmi:id='" + id + "']";
 		Element element = (Element) document.selectSingleNode(g);
 		return Integer.valueOf(element.attributeValue("id"));
 	}

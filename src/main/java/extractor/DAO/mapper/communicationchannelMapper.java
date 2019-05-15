@@ -1,5 +1,7 @@
 package extractor.DAO.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -20,4 +22,6 @@ public interface communicationchannelMapper {
     int updateByPrimaryKey(communicationchannel record);
 
 	Integer getgetCChannelBysd(Integer sid, Integer did);
+	
+	List<communicationchannel> getAll();
 }

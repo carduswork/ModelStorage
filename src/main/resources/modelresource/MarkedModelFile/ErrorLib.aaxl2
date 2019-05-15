@@ -54,7 +54,7 @@ end behavior ;
           <states name="Incorrect"/>
         </behaviors>
         <behaviors name="FailStopTransient">
-          <events xsi:type="errorModel:ErrorEvent" name="Failure" id="1086150181"/>
+          <events xsi:type="errorModel:ErrorEvent" name="Failure" id="1888651319"/>
           <states name="Operational" intial="true"/>
           <states name="FailStop"/>
           <transitions name="FailureTransition" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0">
