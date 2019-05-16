@@ -2,12 +2,12 @@
 <aadl2:Package xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="2.0" name="operatorinterface" publicSection="#//@ownedPublicSection">
   <ownedPublicSection>
     <ownedClassifier xsi:type="aadl2:SystemType" name="operatorinterface">
-      <ownedDataPort name="ninput" in="true" id="-200238435"/>
-      <ownedDataPort name="soutput" out="true" id="-543367435"/>
-      <ownedDataPort name="operatorsettings" out="true" id="1277565577"/>
-      <ownedDataPort name="operatorFeedback" in="true" id="1443761253"/>
+      <ownedDataPort name="ninput" in="true" id="-1399201494"/>
+      <ownedDataPort name="soutput" out="true" id="-1203997544"/>
+      <ownedDataPort name="operatorsettings" out="true" id="-1957775778"/>
+      <ownedDataPort name="operatorFeedback" in="true" id="-1563551538"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="operatorinterface.impl" id="1174455959">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="operatorinterface.impl" id="-457564114">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
     </ownedClassifier>
   </ownedPublicSection>

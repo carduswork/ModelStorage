@@ -32,7 +32,7 @@
 		and destid=#{param2}
 	</select>
 	<select id="getAll" resultMap="BaseResultMap">
-	select * from communicationchannel 
+		SELECT  * FROM modelstorage.communicationchannel group by name;
 	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">

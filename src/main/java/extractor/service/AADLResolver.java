@@ -198,7 +198,6 @@ public class AADLResolver {
 				mclist.add(b);
 				break;
 			case "sync":
-
 //				String CompositeName = GetName(modelfilename, element.element("source").attributeValue("context"));
 //				String PortName = GetName(compositelibfile, element.element("source").attributeValue("connectionEnd"));
 //				Integer sourceportid = getPortIDByComponentName(CompositeName, PortName);
@@ -219,7 +218,7 @@ public class AADLResolver {
 						+ Getfilename(element.element("destination").attributeValue("connectionEnd"));
 //				String PortName1 = GetName(compositelibfile,
 //						element.element("destination").attributeValue("connectionEnd"));
-				String destid = GetElementID(CompositeFIleName,
+				String destid = GetElementID(CompositeName1,
 						element.element("destination").attributeValue("connectionEnd"));
 				// Integer destportid = getPortIDByComponentName(CompositeName1, PortName1);
 				// TODO 有的没source dest

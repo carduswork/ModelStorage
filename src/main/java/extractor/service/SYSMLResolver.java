@@ -266,6 +266,8 @@ public class SYSMLResolver {
 			communicationchannel cchannel = new communicationchannel();
 			Integer idString = (int) GetID.getId();
 			AppendID.AppendID4sysml(modelfilename, n.getUniquePath(), idString.toString());
+			//sysml没有分类一律按照sync处理
+			cchannel.setType("sync");
 			cchannel.setName(element.attributeValue("name"));
 			cchannel.setCommunicationchannelid(idString);
 			cchannel.setSourceid(GetCMPIDByXMIID(modelfilename, element.attributeValue("informationSource")));
@@ -314,9 +316,6 @@ public class SYSMLResolver {
 
 	private Integer GetCMPIDByXMIID(String filepath, String id) throws Exception {
 		Document document = ModelResolver(filepath);
-		if (id.contains(" ")) {
-
-		}
 		String g = "//ownedAttribute[@xmi:id='" + id + "']";
 		Element element = (Element) document.selectSingleNode(g);
 		if (element != null) {

@@ -2,10 +2,10 @@
 <aadl2:Package xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="2.0" name="alarm" publicSection="#//@ownedPublicSection">
   <ownedPublicSection>
     <ownedClassifier xsi:type="aadl2:SystemType" name="alarm">
-      <ownedDataPort name="currentT" in="true" id="-978965788"/>
-      <ownedDataPort name="alarmsignal" out="true" id="-778259032"/>
+      <ownedDataPort name="currentT" in="true" id="-831993261"/>
+      <ownedDataPort name="alarmsignal" out="true" id="-1754603479"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="alarm.impl" id="524501682">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="alarm.impl" id="2134496801">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
     </ownedClassifier>
   </ownedPublicSection>
