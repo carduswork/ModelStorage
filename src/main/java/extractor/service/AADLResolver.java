@@ -116,6 +116,7 @@ public class AADLResolver {
 	}
 
 //filename参数是hardwareArchitecture
+
 	public void MatchCChannel(String modelfilename, String modelType) throws Exception {
 		Document document = ModelResolver(modelfilename);
 		List<String> namelist = new ArrayList<>();
@@ -197,18 +198,36 @@ public class AADLResolver {
 				mclist.add(b);
 				break;
 			case "sync":
-				String CompositeName = GetName(modelfilename, element.element("source").attributeValue("context"));
 
-				String PortName = GetName(compositelibfile, element.element("source").attributeValue("connectionEnd"));
-				Integer sourceportid = getPortIDByComponentName(CompositeName, PortName);
-				cchannel.setSourceid(sourceportid);
+//				String CompositeName = GetName(modelfilename, element.element("source").attributeValue("context"));
+//				String PortName = GetName(compositelibfile, element.element("source").attributeValue("connectionEnd"));
+//				Integer sourceportid = getPortIDByComponentName(CompositeName, PortName);
+				String CompositeFIleName = modeldirectory 
+						+ Getfilename(element.element("source").attributeValue("connectionEnd"));
+				String sourceportid = GetElementID(CompositeFIleName,
+						element.element("source").attributeValue("connectionEnd"));
+				if (sourceportid.equals("")) {
+					cchannel.setSourceid(0);
+				} else {
 
-				String CompositeName1 = GetName(modelfilename,
-						element.element("destination").attributeValue("context"));
-				String PortName1 = GetName(compositelibfile,
+					cchannel.setSourceid(Integer.valueOf(sourceportid));
+				}
+
+//				String CompositeName1 = GetName(modelfilename,
+//						element.element("destination").attributeValue("context"));
+				String CompositeName1 = modeldirectory 
+						+ Getfilename(element.element("destination").attributeValue("connectionEnd"));
+//				String PortName1 = GetName(compositelibfile,
+//						element.element("destination").attributeValue("connectionEnd"));
+				String destid = GetElementID(CompositeFIleName,
 						element.element("destination").attributeValue("connectionEnd"));
-				Integer destportid = getPortIDByComponentName(CompositeName1, PortName1);
-				cchannel.setDestid(destportid);
+				// Integer destportid = getPortIDByComponentName(CompositeName1, PortName1);
+				// TODO 有的没source dest
+				if (destid.equals("")) {
+					cchannel.setDestid(0);
+				} else {
+					cchannel.setDestid(Integer.valueOf(destid));
+				}
 
 				cchannel.setType("sync");
 				InvocationChannel r = new InvocationChannel();
@@ -238,6 +257,21 @@ public class AADLResolver {
 		Element e = (Element) node;
 		if (e != null)
 			return e.attributeValue("name");
+		else
+			return "";
+	}
+
+	private static String GetElementID(String modelfilename, String rawpath) throws Exception {
+		Document document = ModelResolver(modelfilename);
+		CharSequence s = ".";
+		if (rawpath.contains(s)) {
+
+			rawpath = GetXPath(rawpath);
+		}
+		Node node = document.selectSingleNode(rawpath);
+		Element e = (Element) node;
+		if (e != null)
+			return e.attributeValue("id");
 		else
 			return "";
 	}
@@ -456,7 +490,7 @@ public class AADLResolver {
 				break;
 			case "sys":
 				dynamicfilename = Getfilename(element.attributeValue("systemSubcomponentType"));
-				component.setType("system");
+				component.setType("rtos");
 				rtos r = new rtos();
 				r.setRtosid(componentID);
 				// TODO 设置partitions的数量
@@ -783,19 +817,21 @@ public class AADLResolver {
 		}
 		// 5.10添加解析规则：如果引用了behavior则错误库中该behavior下的state一并引入进来
 		Node behaviorInfo = document.selectSingleNode("//ownedAnnexSubclause/parsedAnnexSubclause");
-		Element e1 = (Element) behaviorInfo;
-		try {
-			String s = "//ownedAnnexLibrary/parsedAnnexLibrary/behaviors[@name='"
-					+ getType(e1.attributeValue("useBehavior")) + "']/states";
-			List<? extends Node> libstateinfo = ModelResolver(errlibfile).selectNodes(s);
-			libstateinfo.forEach((v) -> {
-				_state stat = new _state();
-				stat.setComponentid(Integer.valueOf(Compositeid));
-				stat.setName(((Element) v).attributeValue("name"));
-				statelist.add(stat);
-			});
-		} catch (Exception e) {
-			e.printStackTrace();
+		if (behaviorInfo != null) {
+			Element e1 = (Element) behaviorInfo;
+			try {
+				String s = "//ownedAnnexLibrary/parsedAnnexLibrary/behaviors[@name='"
+						+ getType(e1.attributeValue("useBehavior")) + "']/states";
+				List<? extends Node> libstateinfo = ModelResolver(errlibfile).selectNodes(s);
+				libstateinfo.forEach((v) -> {
+					_state stat = new _state();
+					stat.setComponentid(Integer.valueOf(Compositeid));
+					stat.setName(((Element) v).attributeValue("name"));
+					statelist.add(stat);
+				});
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
@@ -826,7 +862,7 @@ public class AADLResolver {
 
 			component.setModeltype("aadl");
 			component.setName(element.attributeValue("name"));
-			component.setType("aadltask");
+			component.setType("task");
 			// TODO task作为component的存入
 			componentlist.put("", component);
 			// 解析task
@@ -1041,15 +1077,23 @@ public class AADLResolver {
 		ivclist.forEach((v) -> {
 			insert_ivcchannel(v);
 		});
-		AADLResolver.dynamicfilename = aadlFiles.get("系统内部结构");
-		InnerSystem(dynamicfilename);
+		String[] innersysfile = aadlFiles.get("系统内部结构").split(";");
+		for (String s : innersysfile) {
+			AADLResolver.dynamicfilename = s;
+
+			InnerSystem(dynamicfilename);
+		}
+
 		partitionlist.forEach((v) -> {
 			insert_partition(v);
 		});
-		ExceptionResolver(dynamicfilename, "aadl");
-		exceptionlist.forEach((v) -> {
-			insert_exception(v);
-		});
+		if (errlibfile != null) {
+			ExceptionResolver(dynamicfilename, "aadl");
+			exceptionlist.forEach((v) -> {
+				insert_exception(v);
+			});
+		}
+
 		Document d = ModelResolver(aadlFiles.get("系统内部结构"));
 		List<? extends Node> nodes = d.selectNodes("//ownedClassifier[@xsi:type='aadl2:SystemImplementation']");
 		for (Node n : nodes) {
@@ -1058,7 +1102,10 @@ public class AADLResolver {
 		statelist.forEach((v) -> {
 			insert_state(v);
 		});
-		eventResolver(aadlFiles.get("系统内部结构"), "aadl");
+		if (errlibfile != null) {
+
+			eventResolver(aadlFiles.get("系统内部结构"), "aadl");
+		}
 		eventlist.forEach((v) -> {
 			insert_event(v);
 		});

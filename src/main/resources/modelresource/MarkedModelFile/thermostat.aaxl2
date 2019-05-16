@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aadl2:Package xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="2.0" name="thermostat" publicSection="#//@ownedPublicSection">
+  <ownedPublicSection>
+    <ownedClassifier xsi:type="aadl2:SystemType" name="thermostat">
+      <ownedDataPort name="operatorFeedback" out="true" id="-108605686"/>
+      <ownedDataPort name="heatcontrol" out="true" id="-135049847"/>
+      <ownedDataPort name="currentTemperature" in="true" id="1637146009"/>
+      <ownedDataPort name="operatorsettings" in="true" id="1896521407"/>
+    </ownedClassifier>
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="860891248">
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
+    </ownedClassifier>
+  </ownedPublicSection>
+</aadl2:Package>

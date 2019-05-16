@@ -18,6 +18,7 @@ import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import extractor.DAO.mapper._exceptionMapper;
 import extractor.DAO.mapper._stateMapper;
 import extractor.DAO.mapper._taskMapper;
 import extractor.DAO.mapper.communicationchannelMapper;
@@ -30,6 +31,7 @@ import extractor.model.component;
 import extractor.model.portmap;
 import extractor.model.rtos;
 import extractor.model.linkpoint;
+import extractor.model._exception;
 
 //获取各种映射
 @Service("Map")
@@ -46,6 +48,8 @@ public class IntegrationService {
 	private _taskMapper _tm;
 	@Autowired
 	private communicationchannelMapper cchannelMapper;
+	@Autowired
+	private _exceptionMapper em;
 
 	public static Document ModelResolver(String url) throws DocumentException {
 		SAXReader reader = new SAXReader();
@@ -56,15 +60,9 @@ public class IntegrationService {
 	public void GenerateIntegaraton(String filename) {
 		String dir = "src/main/resources/INTEGRATIONMODEL/";
 		// 可配置
-		// filename="kfsys.xml";
-		// File s = new File(dir + "template.xml");
-		// File d = new File(dir + filename);
 		try {
-			// Files.copy(s.toPath(), d.toPath(), StandardCopyOption.REPLACE_EXISTING);
-			// Document d2 = ModelResolver(d.getPath());
 			Document d2 = DocumentHelper.createDocument();
 			// 设置系统名
-			// String getroot="//";
 			Element e_comp = d2.addElement("ownedPublicSection");
 			e_comp.addAttribute("name", filename);
 
@@ -76,6 +74,7 @@ public class IntegrationService {
 				comp.addAttribute("id", v.getComponentid().toString());
 				comp.addAttribute("type", v.getType());
 
+				//TODO in out的表示
 				// 设置linkpoint,transition
 				List<linkpoint> linpoints = lm.getPortUnderCMP(v.getComponentid());
 				linpoints.forEach((v2) -> {
@@ -86,12 +85,13 @@ public class IntegrationService {
 				// 设置state
 				List<_state> states = sm.getStateUnderCMP(v.getComponentid());
 				states.forEach((v3) -> {
-					Element lp = comp.addElement("state");
-					lp.addAttribute("name", v3.getName());
-					lp.addAttribute("id", v3.getStateid().toString());
+					if(v3!=null) {
+						Element lp = comp.addElement("state");
+						lp.addAttribute("name", v3.getName());
+						lp.addAttribute("id", v3.getStateid().toString());
+					}					
 				});
 				// 设置task
-
 			});
 			// 设置cchannel
 			List<communicationchannel> channellist = cchannelMapper.getAll();

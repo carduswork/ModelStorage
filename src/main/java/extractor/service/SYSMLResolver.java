@@ -217,10 +217,12 @@ public class SYSMLResolver {
 			component c = new component();
 			// 自带的xmi:id
 			Integer idString = (int) GetID.getId();
-			AppendID.AppendID(filepath, n.getUniquePath(), idString.toString());
+			AppendID.AppendID4sysml(filepath, n.getUniquePath(), idString.toString());
 			c.setComponentid(idString);
 			c.setName(e.attributeValue("name"));
-			c.setType("sysml");
+			c.setModeltype("sysml");
+			// TODO sysml组件种类鉴别
+			c.setType("rtos");
 			componentlist.add(c);
 			if (e.element("ownedRule[@xmi:type='uml:Constraint']") != null) {
 				Element e2 = e.element("ownedRule[@xmi:type='uml:Constraint']");
@@ -234,6 +236,7 @@ public class SYSMLResolver {
 		}
 	}
 
+//TODO provide,require
 	private static void LinkpointResolver(String linkpointfile, String fatherpath, component father) throws Exception {
 		Document document = ModelResolver(linkpointfile);
 		List<? extends Node> ports = document.selectNodes(fatherpath + "/ownedAttribute[@xmi:type='uml:Port']");
@@ -244,7 +247,7 @@ public class SYSMLResolver {
 			Integer linkpointID = (int) GetID.getId();
 			ports1.setLinkpointid(linkpointID);
 			try {
-				AppendID.AppendID(linkpointfile, element2.getUniquePath(), linkpointID.toString());
+				AppendID.AppendID4sysml(linkpointfile, element2.getUniquePath(), linkpointID.toString());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -256,12 +259,13 @@ public class SYSMLResolver {
 	public void MatchCChannel(String modelfilename, String modelType) throws Exception {
 		Document document = ModelResolver(modelfilename);
 		String getmessagechannel = "//packagedElement[@xmi:type='uml:InformationFlow']";
+		// String getmessagechannel = "//packagedElement[@xmi:type='uml:Association']";
 		List<? extends Node> namelist = document.selectNodes(getmessagechannel);
 		for (Node n : namelist) {
 			Element element = (Element) n;
 			communicationchannel cchannel = new communicationchannel();
 			Integer idString = (int) GetID.getId();
-			AppendID.AppendID(modelfilename, n.getUniquePath(), idString.toString());
+			AppendID.AppendID4sysml(modelfilename, n.getUniquePath(), idString.toString());
 			cchannel.setName(element.attributeValue("name"));
 			cchannel.setCommunicationchannelid(idString);
 			cchannel.setSourceid(GetCMPIDByXMIID(modelfilename, element.attributeValue("informationSource")));
@@ -282,22 +286,22 @@ public class SYSMLResolver {
 
 			component.setModeltype("sysml");
 			component.setName(element2.attributeValue("name"));
-			component.setType("sysmltask");
+			component.setType("task");
 			componentlist.add(component);
 			_task t = new _task();
 			t.setName(element2.attributeValue("name"));
 			t.setTaskid(idString);
-			//TODO 块图的partition不存在
-			//t.setPartitionid(father.getComponentid());
+			// TODO 块图的partition不存在
+			// t.setPartitionid(father.getComponentid());
 			try {
-				AppendID.AppendID(modelfilename, element2.getUniquePath(), t.getTaskid().toString());
+				AppendID.AppendID4sysml(modelfilename, element2.getUniquePath(), t.getTaskid().toString());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			tasklist.add(t);
 			// operation即task有错误定义
 			if (element2.element("ownedRule") != null) {
-				// TODO 解析错误
+				// TODO 解析错误exception
 				// Element e2 = element2.element("ownedRule[@xmi:type='uml:Constraint']");
 				Element e2 = element2.element("ownedRule");
 				_exception ex = new _exception();
@@ -310,8 +314,15 @@ public class SYSMLResolver {
 
 	private Integer GetCMPIDByXMIID(String filepath, String id) throws Exception {
 		Document document = ModelResolver(filepath);
-		String g = "//packagedElement[@xmi:type='uml:Class' and xmi:id='" + id + "']";
+		if (id.contains(" ")) {
+
+		}
+		String g = "//ownedAttribute[@xmi:id='" + id + "']";
 		Element element = (Element) document.selectSingleNode(g);
-		return Integer.valueOf(element.attributeValue("id"));
+		if (element != null) {
+
+			return Integer.valueOf(element.attributeValue("id4sysml"));
+		}
+		return 000;
 	}
 }

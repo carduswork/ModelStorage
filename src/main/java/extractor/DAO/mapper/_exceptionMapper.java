@@ -1,5 +1,7 @@
 package extractor.DAO.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -18,4 +20,6 @@ public interface _exceptionMapper {
     int updateByPrimaryKeySelective(_exception record);
 
     int updateByPrimaryKey(_exception record);
+    
+    List<_exception> getAll();
 }

@@ -21,8 +21,22 @@ public class AppendID {
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(filepath);
 		Element e = (Element) document.selectSingleNode(elementpath);
-		//System.out.println(e.attributeValue("name")+filepath);
-		e.addAttribute("id", idString.toString());
+		try {			
+			e.addAttribute("id", idString.toString());
+		}catch(Exception e2) {
+			System.out.println(elementpath);
+		}
+		OutputStream outStream = new FileOutputStream(filepath);
+		XMLWriter w = new XMLWriter(outStream);
+		w.write(document);
+		w.close();
+	}
+	//在.uml里面，xmi:id与id等价
+	public static void AppendID4sysml(String filepath, String elementpath, String idString) throws Exception{
+		SAXReader reader = new SAXReader();
+		Document document = reader.read(filepath);
+		Element e = (Element) document.selectSingleNode(elementpath);
+		e.addAttribute("id4sysml", idString.toString());
 		OutputStream outStream = new FileOutputStream(filepath);
 		XMLWriter w = new XMLWriter(outStream);
 		w.write(document);

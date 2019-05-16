@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aadl2:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" name="composition" publicSection="#//@ownedPublicSection">
+  <ownedPublicSection>
+    <ownedClassifier xsi:type="aadl2:DeviceType" name="temperature_sensor">
+      <ownedDataPort name="currentTemperature" out="true"/>
+      <ownedDataPort name="heat" in="true"/>
+    </ownedClassifier>
+    <ownedClassifier xsi:type="aadl2:DeviceImplementation" name="temperature_sensor.impl">
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
+    </ownedClassifier>
+    <ownedClassifier xsi:type="aadl2:DeviceType" name="heatsource">
+      <ownedDataPort name="heatcontrol" in="true"/>
+      <ownedDataPort name="heat" out="true"/>
+    </ownedClassifier>
+    <ownedClassifier xsi:type="aadl2:DeviceImplementation" name="heatsource.impl">
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.2"/>
+    </ownedClassifier>
+  </ownedPublicSection>
+</aadl2:Package>

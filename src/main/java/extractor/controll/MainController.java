@@ -43,15 +43,31 @@ public class MainController {
 	}
 	public void restore() throws Exception {
 		aadlFiles.forEach((k, v) -> {
-			File s = new File(v);
-			File d = new File(markedfolder + getName(v));
+			if(v.contains(";")) {
+				String[] innersysfile=v.split(";");
+				for(String v2:innersysfile) {
+					File s = new File(v2);
+					File d = new File(markedfolder + getName(v2));
 
-			try {
-				Files.copy(s.toPath(), d.toPath(), StandardCopyOption.REPLACE_EXISTING);
-				aadlFiles.put(k, d.getPath());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}			
+					try {
+						Files.copy(s.toPath(), d.toPath(), StandardCopyOption.REPLACE_EXISTING);
+						aadlFiles.put(k, d.getPath());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}else {
+				File s = new File(v);
+				File d = new File(markedfolder + getName(v));
+
+				try {
+					Files.copy(s.toPath(), d.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					aadlFiles.put(k, d.getPath());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+						
 		});
 		sysmlFiles.forEach((k, v) -> {
 			File s = new File(v);
@@ -59,7 +75,7 @@ public class MainController {
 
 			try {
 				Files.copy(s.toPath(), d.toPath(), StandardCopyOption.REPLACE_EXISTING);
-				aadlFiles.put(k, d.getPath());
+				sysmlFiles.put(k, d.getPath());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -72,13 +88,16 @@ public class MainController {
 		ms.initComponentID(archfilepath);
 		ms.SetSysFileID(archfilepath, sysfilepath);
 		ms.setAadlFiles(aadlFiles);
-		ms.srvmatchmeta();
+		
 		
 		sr.setSysmlFiles(sysmlFiles);
-		sr.srvmatchmeta();
+		
 		//foreach是倒序的
 	}
-
+	public void begin() throws Exception {
+		ms.srvmatchmeta();
+		sr.srvmatchmeta();
+	}
 	private static String getName(String typepath) {
 		if (typepath.contains("/")) {
 			String[] s = typepath.split("/");
