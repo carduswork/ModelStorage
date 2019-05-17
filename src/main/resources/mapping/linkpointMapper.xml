@@ -37,6 +37,7 @@
 		select portid,portname from getdistinctport where
 		ComponentID=#{cmpid} group by portid,portname
 	</select>
+
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
 		delete from linkpoint

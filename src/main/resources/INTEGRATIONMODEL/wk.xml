@@ -1,2 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ownedPublicSection name="wk.xml"><component name="alarm" id="-895312644" type="rtos"><linkpoint name="alarmsignal" id="-1754603479"/><linkpoint name="currentT" id="-831993261"/></component><component name="heatsource" id="-834573421" type="device"><linkpoint name="heat" id="-845412081"/><linkpoint name="heatcontrol" id="584088206"/></component><component name="operatorinterface" id="-444840704" type="rtos"><linkpoint name="operatorsettings" id="-1957775778"/><linkpoint name="operatorFeedback" id="-1563551538"/><linkpoint name="ninput" id="-1399201494"/><linkpoint name="soutput" id="-1203997544"/></component><component name="thermostat" id="363297209" type="rtos"><linkpoint name="operatorsettings" id="-2051275652"/><linkpoint name="operatorFeedback" id="-956677737"/><linkpoint name="heatcontrol" id="-210148434"/><linkpoint name="currentTemperature" id="252505671"/></component><component name="temperature_sensor" id="1939080588" type="device"><linkpoint name="currentTemperature" id="-1267680542"/><linkpoint name="heat" id="1208079921"/></component><communicationchannel name="ofb" id="-2033538687" type="sync" source="-956677737" dest="-1563551538"/><communicationchannel name="ct4a" id="-1909463353" type="sync" source="-2006896872" dest="459574382"/><communicationchannel name="hc" id="-1679853610" type="sync" source="-210148434" dest="584088206"/><communicationchannel name="ct" id="-1554780327" type="sync" source="-2006896872" dest="-178466816"/><communicationchannel name="os" id="-805685160" type="sync" source="-1957775778" dest="-2051275652"/></ownedPublicSection>
+<ownedPublicSection name="wk.xml">
+	<component id="683418720" name="temperature_sensor" type="device">
+		<linkpoint direction="in" id="105241765" name="heat"/>
+		<linkpoint direction="out" id="1516990788" name="currentTemperature"/>
+	</component>
+	<component id="733200483" name="operatorinterface" type="rtos">
+		<linkpoint direction="in" id="-1713324236" name="ninput"/>
+		<linkpoint direction="out" id="-463138355" name="operatorsettings"/>
+		<linkpoint direction="out" id="-98421871" name="soutput"/>
+		<linkpoint direction="in" id="616802313" name="operatorFeedback"/>
+	</component>
+	<component id="1092512985" name="thermostat" type="rtos">
+		<linkpoint direction="out" id="-1741108106" name="heatcontrol"/>
+		<linkpoint direction="in" id="-993870901" name="operatorsettings"/>
+		<linkpoint direction="out" id="1371394798" name="operatorFeedback"/>
+		<linkpoint direction="in" id="1627772429" name="currentTemperature"/>
+	</component>
+	<component id="1199523412" name="heatsource" type="device">
+		<linkpoint direction="in" id="-644057532" name="heatcontrol"/>
+		<linkpoint direction="out" id="1106518835" name="heat"/>
+	</component>
+	<component id="1482223403" name="alarm" type="rtos">
+		<linkpoint direction="in" id="-1370513056" name="currentT"/>
+		<linkpoint direction="out" id="2098001000" name="alarmsignal"/>
+	</component>
+	<communicationchannel dest="-1137991561" id="-1268349926" name="hc" source="-1296974476" type="sync"/>
+	<communicationchannel dest="-1370513056" id="-1065294345" name="ct4a" source="1516990788" type="sync"/>
+	<communicationchannel dest="418855963" id="-506167397" name="os" source="-793113252" type="sync"/>
+	<communicationchannel dest="616802313" id="-295949091" name="ofb" source="1371394798" type="sync"/>
+	<communicationchannel dest="21217141" id="-147480916" name="ct" source="-1652120446" type="sync"/>
+</ownedPublicSection>

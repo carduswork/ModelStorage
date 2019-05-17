@@ -14,7 +14,7 @@ public interface _requireMapper {
     int insertSelective(_require record);
 
     _require selectByPrimaryKey(Integer id);
-
+    _require selectByportid(Integer id);
     int updateByPrimaryKeySelective(_require record);
 
     int updateByPrimaryKey(_require record);

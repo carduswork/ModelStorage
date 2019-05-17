@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import extractor.DAO.mapper._exceptionMapper;
+import extractor.DAO.mapper._provideMapper;
+import extractor.DAO.mapper._requireMapper;
 import extractor.DAO.mapper._stateMapper;
 import extractor.DAO.mapper._taskMapper;
 import extractor.DAO.mapper.communicationchannelMapper;
@@ -50,6 +52,10 @@ public class IntegrationService {
 	private communicationchannelMapper cchannelMapper;
 	@Autowired
 	private _exceptionMapper em;
+	@Autowired
+	private _provideMapper pvm;
+	@Autowired
+	private _requireMapper rm;
 
 	public static Document ModelResolver(String url) throws DocumentException {
 		SAXReader reader = new SAXReader();
@@ -74,22 +80,28 @@ public class IntegrationService {
 				comp.addAttribute("id", v.getComponentid().toString());
 				comp.addAttribute("type", v.getType());
 
-				//TODO in out的表示
+				// TODO in out的表示
 				// 设置linkpoint,transition
 				List<linkpoint> linpoints = lm.getPortUnderCMP(v.getComponentid());
 				linpoints.forEach((v2) -> {
 					Element lp = comp.addElement("linkpoint");
 					lp.addAttribute("name", v2.getName());
 					lp.addAttribute("id", v2.getLinkpointid().toString());
+					if(pvm.selectByportid(v2.getLinkpointid())!=null) {
+						lp.addAttribute("direction", "out");
+					}
+					if(rm.selectByportid(v2.getLinkpointid())!=null) {
+						lp.addAttribute("direction", "in");
+					}
 				});
 				// 设置state
 				List<_state> states = sm.getStateUnderCMP(v.getComponentid());
 				states.forEach((v3) -> {
-					if(v3!=null) {
+					if (v3 != null) {
 						Element lp = comp.addElement("state");
 						lp.addAttribute("name", v3.getName());
 						lp.addAttribute("id", v3.getStateid().toString());
-					}					
+					}
 				});
 				// 设置task
 			});

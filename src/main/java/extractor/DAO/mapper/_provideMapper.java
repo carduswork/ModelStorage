@@ -14,6 +14,7 @@ public interface _provideMapper {
     int insertSelective(_provide record);
 
     _provide selectByPrimaryKey(Integer id);
+    _provide selectByportid(Integer id);
 
     int updateByPrimaryKeySelective(_provide record);
 

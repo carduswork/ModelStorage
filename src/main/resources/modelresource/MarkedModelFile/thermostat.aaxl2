@@ -2,12 +2,12 @@
 <aadl2:Package xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmi:version="2.0" name="thermostat" publicSection="#//@ownedPublicSection">
   <ownedPublicSection>
     <ownedClassifier xsi:type="aadl2:SystemType" name="thermostat">
-      <ownedDataPort name="operatorFeedback" out="true" id="-956677737"/>
-      <ownedDataPort name="heatcontrol" out="true" id="-210148434"/>
-      <ownedDataPort name="currentTemperature" in="true" id="252505671"/>
-      <ownedDataPort name="operatorsettings" in="true" id="-2051275652"/>
+      <ownedDataPort name="operatorFeedback" out="true" id="1371394798"/>
+      <ownedDataPort name="heatcontrol" out="true" id="-1741108106"/>
+      <ownedDataPort name="currentTemperature" in="true" id="1627772429"/>
+      <ownedDataPort name="operatorsettings" in="true" id="-993870901"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="363297209">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="1092512985">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
     </ownedClassifier>
   </ownedPublicSection>

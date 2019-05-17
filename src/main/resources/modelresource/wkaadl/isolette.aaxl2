@@ -27,11 +27,11 @@
         <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedSystemSubcomponent.2" connectionEnd="aadl2:DataPort alarm.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.0"/>
         <source context="#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.0" connectionEnd="aadl2:DataPort composition.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.0"/>
       </ownedPortConnection>
-      <ownedDeviceSubcomponent name="temperature_sensor" deviceSubcomponentType="aadl2:DeviceImplementation composition.aadl#composition.temperature_sensor.impl" id="646806207"/>
-      <ownedDeviceSubcomponent name="heatsource" deviceSubcomponentType="aadl2:DeviceImplementation composition.aadl#composition.heatsource.impl" id="1823677344"/>
-      <ownedSystemSubcomponent name="operatorinterface" systemSubcomponentType="aadl2:SystemImplementation operatorinterface.aadl#operatorinterface.operatorinterface.impl" id="174383234"/>
-      <ownedSystemSubcomponent name="thermostat" systemSubcomponentType="aadl2:SystemImplementation thermostat.aadl#thermostat.thermostat.impl" id="-1633770810"/>
-      <ownedSystemSubcomponent name="alarm" systemSubcomponentType="aadl2:SystemImplementation alarm.aadl#alarm.alarm.impl" id="-102705700"/>
+      <ownedDeviceSubcomponent name="temperature_sensor" deviceSubcomponentType="aadl2:DeviceImplementation composition.aadl#composition.temperature_sensor.impl" id="1863630569"/>
+      <ownedDeviceSubcomponent name="heatsource" deviceSubcomponentType="aadl2:DeviceImplementation composition.aadl#composition.heatsource.impl" id="469114233"/>
+      <ownedSystemSubcomponent name="operatorinterface" systemSubcomponentType="aadl2:SystemImplementation operatorinterface.aadl#operatorinterface.operatorinterface.impl" id="106013260"/>
+      <ownedSystemSubcomponent name="thermostat" systemSubcomponentType="aadl2:SystemImplementation thermostat.aadl#thermostat.thermostat.impl" id="-2103887819"/>
+      <ownedSystemSubcomponent name="alarm" systemSubcomponentType="aadl2:SystemImplementation alarm.aadl#alarm.alarm.impl" id="-387967868"/>
     </ownedClassifier>
   </ownedPublicSection>
 </aadl2:Package>
