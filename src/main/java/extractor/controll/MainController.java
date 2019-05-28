@@ -86,6 +86,7 @@ public class MainController {
 
 	public void SetSysFileID(String archfilepath, String sysfilepath) throws Exception {
 		ms.initComponentID(archfilepath);
+		//TODO 重复操作了
 		ms.SetSysFileID(archfilepath, sysfilepath);
 		ms.setAadlFiles(aadlFiles);
 		

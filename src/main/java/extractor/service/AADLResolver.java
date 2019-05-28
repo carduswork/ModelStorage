@@ -36,6 +36,7 @@ import extractor.DAO.mapper.componentMapper;
 import extractor.DAO.mapper.deviceMapper;
 import extractor.DAO.mapper.linkpointMapper;
 import extractor.DAO.mapper.rtosMapper;
+import extractor.DAO.mapper.taskscheduleMapper;
 import extractor.DAO.mapper.transitionMapper;
 import extractor.DAO.mapper.transitionstateMapper;
 import extractor.model.ASyncMessaging;
@@ -57,9 +58,11 @@ import extractor.model.linkpoint;
 import extractor.model.rtos;
 import extractor.model.shareddataaccess;
 import extractor.model.syncinterface;
+import extractor.model.taskschedule;
 import extractor.model.transition;
 import extractor.model.transitionstate;
 import javassist.bytecode.stackmap.BasicBlock.Catch;
+import javassist.expr.NewArray;
 import net.bytebuddy.asm.Advice.Return;
 
 //解析模型,本模块只负责模型文件的解析
@@ -108,6 +111,7 @@ public class AADLResolver {
 	static List<transitionstate> ts_slist = new ArrayList<transitionstate>();
 
 	static List<_partition> partitionlist = new ArrayList<_partition>();
+	static List<taskschedule> tscList = new ArrayList<taskschedule>();
 
 	public static Document ModelResolver(String url) throws DocumentException {
 		SAXReader reader = new SAXReader();
@@ -128,6 +132,7 @@ public class AADLResolver {
 			cchannels = document.selectNodes(getmessagechannel);
 			ResolveCChannel(modelfilename, "asyncmessaging");
 			// invocationChannel
+			// aadl将连接放在总体架构中
 			String getsync = "//ownedPublicSection/ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedPortConnection";
 			cchannels = document.selectNodes(getsync);
 			ResolveCChannel(modelfilename, "sync");
@@ -201,7 +206,8 @@ public class AADLResolver {
 //				String CompositeName = GetName(modelfilename, element.element("source").attributeValue("context"));
 //				String PortName = GetName(compositelibfile, element.element("source").attributeValue("connectionEnd"));
 //				Integer sourceportid = getPortIDByComponentName(CompositeName, PortName);
-				String CompositeFIleName = modeldirectory 
+				// 正则获取文件名
+				String CompositeFIleName = modeldirectory
 						+ Getfilename(element.element("source").attributeValue("connectionEnd"));
 				String sourceportid = GetElementID(CompositeFIleName,
 						element.element("source").attributeValue("connectionEnd"));
@@ -214,7 +220,7 @@ public class AADLResolver {
 
 //				String CompositeName1 = GetName(modelfilename,
 //						element.element("destination").attributeValue("context"));
-				String CompositeName1 = modeldirectory 
+				String CompositeName1 = modeldirectory
 						+ Getfilename(element.element("destination").attributeValue("connectionEnd"));
 //				String PortName1 = GetName(compositelibfile,
 //						element.element("destination").attributeValue("connectionEnd"));
@@ -272,6 +278,34 @@ public class AADLResolver {
 		if (e != null)
 			return e.attributeValue("id");
 		else
+			return "";
+	}
+
+	private static String GetSubCompID(String modelfilename, String rawpath) throws Exception {
+		Document document = ModelResolver(modelfilename);
+		CharSequence s = ".";
+		if (rawpath.contains(s)) {
+			// sub的路径
+			rawpath = GetXPath(rawpath);
+		}
+		Node node = document.selectSingleNode(rawpath);
+		Element e = (Element) node;
+		if (e != null) {
+			String reg = "(?<=@).[A-Za-z0-9\\.]+";
+			ArrayList<String> result = new ArrayList<String>();
+			Pattern pattern = Pattern.compile(reg);
+			Matcher matcher = pattern.matcher(e.attributeValue("processorSubcomponentType"));
+			while (matcher.find()) {
+				result.add(matcher.group());
+			}
+			for (int j = 1; j < result.size(); j++) {
+
+				result.set(j, getinc(result.get(j)));
+			}
+			e = (Element) document.selectSingleNode("//" + result.get(0) + "/" + result.get(1));
+
+			return e.attributeValue("id");
+		} else
 			return "";
 	}
 
@@ -862,14 +896,13 @@ public class AADLResolver {
 			component.setModeltype("aadl");
 			component.setName(element.attributeValue("name"));
 			component.setType("task");
-			// TODO task作为component的存入
+			// TODO task作为component的二次 存入
 			componentlist.put("", component);
 			// 解析task
 			_task t = new _task();
 			t.setName(component.getName());
 			t.setTaskid(idString);
-			// TODO 解析遍历partition
-			// t.setPartitionid(partitionlist.get(0).getPartitionid());
+
 			tasklist.add(t);
 			taskcomponentlist.put(element.attributeValue("name"), component);
 		}
@@ -891,6 +924,29 @@ public class AADLResolver {
 		return "";
 	}
 
+	private void partitionResolver(String filepath) throws Exception {
+		Document document = ModelResolver(filepath);
+		String getpartitionString = "//ownedPropertyAssociation";
+		List<? extends Node> partitions = document.selectNodes(getpartitionString);
+		for (Node n : partitions) {
+			Element e = (Element) n;
+			_partition p = new _partition();
+			Integer pid = (int) GetID.getId();
+			p.setPartitionid(pid);
+			String taskid = GetElementID(filepath,
+					e.element("appliesTo").element("path").attributeValue("namedElement"));
+			String rtosid = GetElementID(filepath, n.getParent().getUniquePath());
+			// 部署了哪个rtos
+			p.setRtosid(Integer.valueOf(rtosid));
+			// TODO partition作为component，设置task的partitionID
+			_task t = new _task();
+			t.setTaskid(Integer.valueOf(taskid));
+			t.setPartitionid(pid);
+			_tm.updateByPrimaryKeySelective(t);
+			partitionlist.add(p);
+		}
+	}
+
 	private static String GetSysname(String systemSubcomponentType) {
 		if (systemSubcomponentType != null) {
 			String reg = "(?<=#).*\\.[A-Za-z0-9]+";
@@ -908,6 +964,39 @@ public class AADLResolver {
 		return "";
 	}
 
+//哪个处理器处理了哪个task就是schedule
+	private void scheduleResolver(String modelfilename) throws Exception {
+		Document document = ModelResolver(modelfilename);
+		String getbindings = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedPropertyAssociation";
+		List<? extends Node> nodes = document.selectNodes(getbindings);
+		for (Node n : nodes) {
+			// 解析deploy关系
+			Element e = (Element) n;
+			// namedElement存储的是在impl里面声明的组件
+
+			String taskid = GetSubCompID(modelfilename,
+					e.element("appliesTo").element("path").attributeValue("namedElement"));
+			String getschedule = GetSubCompID(modelfilename, e.element("ownedValue").element("ownedValue")
+					.element("ownedListElement").element("path").attributeValue("namedElement"));
+			linkpoint l = new linkpoint();
+			Integer i = (int) GetID.getId();
+			l.setLinkpointid(i);
+			portlist.add(l);
+			// TODO
+			// linkpoint的加入存储,task绑定shcedule的id，这里的task已经有了id(前提是确保task在这之前解析了)，要写一个数据库操作获取
+			// 设置特定id的task的scheduleid，这里有一个外键约束，需要关闭外键约束先
+			taskschedule t = new taskschedule();
+			t.setTaskscheduleid(i);
+//			tscList.add(t);
+			tscmapper.insert(t);
+			_task t2 = new _task();
+			t2.setTaskscheduleid(Integer.valueOf(taskid));
+			_tm.updateByPrimaryKeySelective(t2);
+		}
+	}
+
+	@Autowired
+	private taskscheduleMapper tscmapper;
 	@Autowired
 	private componentMapper camArchMapper;
 	@Autowired

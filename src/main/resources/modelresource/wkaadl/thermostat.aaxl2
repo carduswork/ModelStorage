@@ -7,7 +7,7 @@
       <ownedDataPort name="currentTemperature" in="true"/>
       <ownedDataPort name="operatorsettings" in="true"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="-2103887819">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="981334211">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
     </ownedClassifier>
   </ownedPublicSection>
