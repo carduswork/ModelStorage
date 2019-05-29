@@ -1,8 +1,5 @@
 package extractor.service;
 
-import java.io.FileOutputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,14 +7,11 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.persistence.Id;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,9 +55,6 @@ import extractor.model.syncinterface;
 import extractor.model.taskschedule;
 import extractor.model.transition;
 import extractor.model.transitionstate;
-import javassist.bytecode.stackmap.BasicBlock.Catch;
-import javassist.expr.NewArray;
-import net.bytebuddy.asm.Advice.Return;
 
 //解析模型,本模块只负责模型文件的解析
 @Service("AADLResolver")
@@ -112,6 +103,135 @@ public class AADLResolver {
 
 	static List<_partition> partitionlist = new ArrayList<_partition>();
 	static List<taskschedule> tscList = new ArrayList<taskschedule>();
+	@Autowired
+	private taskscheduleMapper tscmapper;
+	@Autowired
+	private componentMapper camArchMapper;
+	@Autowired
+	private linkpointMapper portsMapper;
+	@Autowired
+	private _provideMapper pM;
+	@Autowired
+	private _requireMapper rm;
+	@Autowired
+	private transitionMapper tm;
+	@Autowired
+	private transitionstateMapper tsm;
+	@Autowired
+	private _eventMapper em;
+	@Autowired
+	private _stateMapper sm;
+	@Autowired
+	private deviceMapper dMapper;
+	@Autowired
+	private busMapper bm;
+	@Autowired
+	private communicationchannelMapper cchannelMapper;
+	@Autowired
+	private MessageChannelMapper mcm;
+	@Autowired
+	private InvocationChannelMapper ivcm;
+	@Autowired
+	private _exceptionMapper _em;
+	@Autowired
+	private rtosMapper rsmMapper;
+	@Autowired
+	private _taskMapper _tm;
+	@Autowired
+	private _partitionMapper ptm;
+
+	private int insert_partition(_partition p) {
+		return ptm.insert(p);
+	}
+
+	private int insert_component(component c) {
+		return camArchMapper.insert(c);
+	}
+
+	private int insert_bus(bus b) {
+		return bm.insert(b);
+	}
+
+	private int insert_ports(linkpoint p) {
+		return portsMapper.insert(p);
+	}
+
+	private int insert_require(_require r) {
+		return rm.insert(r);
+	}
+
+	private int insert_provide(_provide p) {
+		return pM.insert(p);
+	}
+
+	private int insert_cchannel(communicationchannel c) {
+		return cchannelMapper.insert(c);
+	}
+
+	private int insert_mchannel(MessageChannel m) {
+		return mcm.insert(m);
+	}
+
+	private int insert_ivcchannel(InvocationChannel i) {
+		return ivcm.insert(i);
+	}
+
+	private int insert_device(device d) {
+		return dMapper.insert(d);
+	}
+
+	private int insert_task(_task t) {
+		return _tm.insert(t);
+	}
+
+	private int insert_transition(transition t) {
+		return tm.insert(t);
+	}
+
+	private int insert_tss(transitionstate ts) {
+		return tsm.insert(ts);
+	}
+
+	private int insert_rtos(rtos r) {
+		return rsmMapper.insert(r);
+	}
+
+	private int insert_state(_state s) {
+		return sm.insert(s);
+	}
+
+	private int insert_event(_event e) {
+		return em.insert(e);
+	}
+
+	private int insert_exception(_exception e) {
+		return _em.insert(e);
+	}
+
+	public Integer getPortIDByComponentName(String name, String portname) {
+		Integer aIntegers = camArchMapper.getPortIDByComponentName(name, portname);
+		return camArchMapper.getPortIDByComponentName(name, portname);
+	}
+
+	public Integer getCmpIDbyName(String name) {
+		return camArchMapper.getIDbyName(name).getComponentid();
+	}
+
+	public Integer getCChannelBysd(Integer sid, Integer did) {
+		return cchannelMapper.getgetCChannelBysd(sid, did);
+	}
+
+	public Integer getEventID(String eventname) {
+		return em.getEventID(eventname).getEventid();
+	}
+
+	public Integer getStateID(String statename) {
+		return sm.getStateID(statename);
+	}
+
+	public void setAadlFiles(Map<String, String> aadlFiles) {
+		this.aadlFiles = aadlFiles;
+	}
 
 	public static Document ModelResolver(String url) throws DocumentException {
 		SAXReader reader = new SAXReader();
@@ -119,8 +239,125 @@ public class AADLResolver {
 		return document;
 	}
 
-//filename参数是hardwareArchitecture
+	// 模型元素与元模型进行匹配
+	public void srvmatchmeta() throws Exception {
+		AADLResolver.modeldirectory = "src/main/resources/modelresource/MarkedModelFile/";
+		AADLResolver.compositelibfile = aadlFiles.get("组件库");
+		AADLResolver.errlibfile = aadlFiles.get("错误库");
+		AADLResolver.hardmodelfile = aadlFiles.get("总体架构");
+		MatchComponents(hardmodelfile, "aadl", "总体架构");
+		AADLResolver.componentlist.forEach((k, v) -> {
+			insert_component(v);
+		});
+		rtoslist.forEach((v) -> {
+			insert_rtos(v);
+		});
+		buslist.forEach((v) -> {
+			insert_bus(v);
+		});
+		devicelist.forEach((v) -> {
+			insert_device(v);
+		});
+		portlist.forEach((v) -> {
+			insert_ports(v);
+		});
+		requirelist.forEach((v) -> {
+			insert_require(v);
+		});
+		providelist.forEach((v) -> {
+			insert_provide(v);
+		});
+		MatchCChannel(hardmodelfile, "aadl");
+		cclist.forEach((v) -> {
+			insert_cchannel(v);
+		});
+		mclist.forEach((v) -> {
+			insert_mchannel(v);
+		});
+		ivclist.forEach((v) -> {
+			insert_ivcchannel(v);
+		});
+		String[] innersysfile = aadlFiles.get("系统内部结构").split(";");
+		for (String s : innersysfile) {
+			AADLResolver.dynamicfilename = s;
+			InnerSystem(dynamicfilename);
+		}
 
+		partitionlist.forEach((v) -> {
+			insert_partition(v);
+		});
+		if (errlibfile != null) {
+			ExceptionResolver(dynamicfilename, "aadl");
+			exceptionlist.forEach((v) -> {
+				insert_exception(v);
+			});
+		}
+		Document d = ModelResolver(aadlFiles.get("系统内部结构"));
+		List<? extends Node> nodes = d.selectNodes("//ownedClassifier[@xsi:type='aadl2:SystemImplementation']");
+		for (Node n : nodes) {
+			StateResolver(aadlFiles.get("系统内部结构"), ((Element) n).attributeValue("id"));
+		}
+		statelist.forEach((v) -> {
+			insert_state(v);
+		});
+		if (errlibfile != null) {
+			eventResolver(aadlFiles.get("系统内部结构"), "aadl");
+		}
+		eventlist.forEach((v) -> {
+			insert_event(v);
+		});
+		TransitionResolver(aadlFiles.get("系统内部结构"), "aadl");
+		tslist.forEach((v) -> {
+			insert_transition(v);
+		});
+		ts_slist.forEach((v) -> {
+			insert_tss(v);
+		});
+		taskcomponentlist.forEach((k, v) -> {
+			insert_component(v);
+		});
+		tasklist.forEach((v) -> {
+			insert_task(v);
+		});
+		scheduleResolver(aadlFiles.get("系统内部结构"));
+	}
+
+	/* 当前模型的全部组件与port、task */
+	public void MatchComponents(String filepath, String modelType, String contenttype) throws Exception {
+		Document document = ModelResolver(filepath);
+
+		List<String> namelist = new ArrayList<>();
+		if (modelType.equals("aadl")) {
+			// 对hardware层级设计的三种与组件元素的解析
+			String getbus = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedBusSubcomponent";
+			String getsys = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedSystemSubcomponent";
+			String getdevice = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedDeviceSubcomponent";
+			// Integer id1 = (int) GetID.getId();
+			components = document.selectNodes(getbus);
+			ResolveComponents(filepath, "bus");
+			// Integer id2 = (int) GetID.getId();
+			components = document.selectNodes(getsys);
+			ResolveComponents(filepath, "sys");
+			components = document.selectNodes(getdevice);
+			ResolveComponents(filepath, "device");
+
+		} else if (modelType.equals("sysml")) {
+			components = document
+					.selectNodes("//packagedElement[@name='kf']/ownedOperation[@xmi:type='uml:Operation']");
+			for (Node n : components) {
+				Element element = (Element) n;
+				namelist.add(element.attributeValue("name"));
+			}
+		} else {
+			components = document.selectNodes("//ModelInformation/Model/System/System/Block");
+			for (Node n : components) {
+				Element element = (Element) n;
+				namelist.add(element.attributeValue("name"));
+			}
+		}
+	}
+
+	// filename参数是hardwareArchitecture
 	public void MatchCChannel(String modelfilename, String modelType) throws Exception {
 		Document document = ModelResolver(modelfilename);
 		List<String> namelist = new ArrayList<>();
@@ -214,7 +451,6 @@ public class AADLResolver {
 				if (sourceportid.equals("")) {
 					cchannel.setSourceid(0);
 				} else {
-
 					cchannel.setSourceid(Integer.valueOf(sourceportid));
 				}
 
@@ -233,7 +469,6 @@ public class AADLResolver {
 				} else {
 					cchannel.setDestid(Integer.valueOf(destid));
 				}
-
 				cchannel.setType("sync");
 				InvocationChannel r = new InvocationChannel();
 				r.setInvocationchannelid(idString);
@@ -248,129 +483,6 @@ public class AADLResolver {
 			}
 			cclist.add(cchannel);
 		}
-	}
-
-//解析source路径,传递context，跨文件查找
-	private static String GetName(String modelfilename, String rawpath) throws Exception {
-		Document document = ModelResolver(modelfilename);
-		CharSequence s = ".";
-		if (rawpath.contains(s)) {
-
-			rawpath = GetXPath(rawpath);
-		}
-		Node node = document.selectSingleNode(rawpath);
-		Element e = (Element) node;
-		if (e != null)
-			return e.attributeValue("name");
-		else
-			return "";
-	}
-
-	private static String GetElementID(String modelfilename, String rawpath) throws Exception {
-		Document document = ModelResolver(modelfilename);
-		CharSequence s = ".";
-		if (rawpath.contains(s)) {
-
-			rawpath = GetXPath(rawpath);
-		}
-		Node node = document.selectSingleNode(rawpath);
-		Element e = (Element) node;
-		if (e != null)
-			return e.attributeValue("id");
-		else
-			return "";
-	}
-
-	private static String GetSubCompID(String modelfilename, String rawpath) throws Exception {
-		Document document = ModelResolver(modelfilename);
-		CharSequence s = ".";
-		if (rawpath.contains(s)) {
-			// sub的路径
-			rawpath = GetXPath(rawpath);
-		}
-		Node node = document.selectSingleNode(rawpath);
-		Element e = (Element) node;
-		if (e != null) {
-			String reg = "(?<=@).[A-Za-z0-9\\.]+";
-			ArrayList<String> result = new ArrayList<String>();
-			Pattern pattern = Pattern.compile(reg);
-			Matcher matcher = pattern.matcher(e.attributeValue("processorSubcomponentType"));
-			while (matcher.find()) {
-				result.add(matcher.group());
-			}
-			for (int j = 1; j < result.size(); j++) {
-
-				result.set(j, getinc(result.get(j)));
-			}
-			e = (Element) document.selectSingleNode("//" + result.get(0) + "/" + result.get(1));
-
-			return e.attributeValue("id");
-		} else
-			return "";
-	}
-
-	/*
-	 * 根据路径获取ID,只支持三层结构的xpath
-	 */
-	private static String GetXPath(String path) {
-		String reg = "(?<=@).[A-Za-z0-9\\.]+";
-		ArrayList<String> result = new ArrayList<String>();
-		Pattern pattern = Pattern.compile(reg);
-		Matcher matcher = pattern.matcher(path);
-		while (matcher.find()) {
-			result.add(matcher.group());
-		}
-		for (int j = 1; j < result.size(); j++) {
-
-			result.set(j, getinc(result.get(j)));
-		}
-		return "//" + result.get(0) + "/" + result.get(1) + "/" + result.get(2);
-	}
-
-	private static String GetXPath4State(String path) {
-		String reg = "(?<=@).[A-Za-z0-9\\.]+";
-		ArrayList<String> result = new ArrayList<String>();
-		Pattern pattern = Pattern.compile(reg);
-		Matcher matcher = pattern.matcher(path);
-		while (matcher.find()) {
-			result.add(matcher.group());
-		}
-		for (int j = 1; j < result.size(); j++) {
-
-			result.set(j, getinc(result.get(j)));
-		}
-		return "//" + result.get(0) + "/" + result.get(1) + "/" + result.get(2) + "/" + result.get(3) + "/"
-				+ result.get(4);
-	}
-
-	private static String getinc(String source) {
-		CharSequence cs = ".";
-		if (source.contains(cs)) {
-			String reg4c = "[A-Za-z]+";
-			String reg4num = "[0-9]+";
-
-			Pattern pattern = Pattern.compile(reg4c);
-			Matcher matcher = pattern.matcher(source);
-			List<String> list = new ArrayList<>();
-			while (matcher.find()) {
-				list.add(matcher.group());
-			}
-			String c = list.get(0);
-
-			pattern = Pattern.compile(reg4num);
-			matcher = pattern.matcher(source);
-			list = new ArrayList<>();
-			while (matcher.find()) {
-				list.add(matcher.group());
-			}
-			Integer i = Integer.valueOf(list.get(0));
-			String num = (++i).toString();
-
-			return c + "[" + num + "]";
-		} else {
-			return source;
-		}
-
 	}
 
 	public void initComponentID(String filepath) throws Exception {
@@ -396,44 +508,6 @@ public class AADLResolver {
 		for (Node n : nodes) {
 			Integer idString3 = (int) GetID.getId();
 			AppendID.AppendID(filepath, n.getUniquePath(), idString3.toString());
-		}
-	}
-
-	/* 当前模型的全部组件与port、task */
-	public void MatchComponents(String filepath, String modelType, String contenttype) throws Exception {
-		Document document = ModelResolver(filepath);
-
-		List<String> namelist = new ArrayList<>();
-		if (modelType.equals("aadl")) {
-			// 对hardware层级设计的三种与组件元素的解析
-			String getbus = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedBusSubcomponent";
-			String getsys = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedSystemSubcomponent";
-			String getdevice = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedDeviceSubcomponent";
-
-			// Integer id1 = (int) GetID.getId();
-			components = document.selectNodes(getbus);
-			ResolveComponents(filepath, "bus");
-
-			// Integer id2 = (int) GetID.getId();
-			components = document.selectNodes(getsys);
-			ResolveComponents(filepath, "sys");
-
-			components = document.selectNodes(getdevice);
-			ResolveComponents(filepath, "device");
-
-		} else if (modelType.equals("sysml")) {
-			components = document
-					.selectNodes("//packagedElement[@name='kf']/ownedOperation[@xmi:type='uml:Operation']");
-			for (Node n : components) {
-				Element element = (Element) n;
-				namelist.add(element.attributeValue("name"));
-			}
-		} else {
-			components = document.selectNodes("//ModelInformation/Model/System/System/Block");
-			for (Node n : components) {
-				Element element = (Element) n;
-				namelist.add(element.attributeValue("name"));
-			}
 		}
 	}
 
@@ -763,13 +837,11 @@ public class AADLResolver {
 				// 关联event
 				Document d = ModelResolver(errlibfile);
 				Node nodes = d.selectSingleNode(GetXPath4State(getTriggerevent));
-//				for(Node n:nodes) {
 				String id = ((Element) nodes).attributeValue("id");
 				t.setTrigger(Integer.valueOf(id));
 				t.setName(getType(element.attributeValue("name")));
 				transitionstate tsTransitionstate = new transitionstate();
 				tslist.add(t);
-//				}
 				// e2.setTrigger(getEventID(GetName(modelfilename,
 				// GetXPath4State(getTriggerevent))));
 
@@ -978,239 +1050,24 @@ public class AADLResolver {
 					e.element("appliesTo").element("path").attributeValue("namedElement"));
 			String getschedule = GetSubCompID(modelfilename, e.element("ownedValue").element("ownedValue")
 					.element("ownedListElement").element("path").attributeValue("namedElement"));
-			linkpoint l = new linkpoint();
+			String schedulename = GetName(modelfilename, e.element("ownedValue").element("ownedValue")
+					.element("ownedListElement").element("path").attributeValue("namedElement"));
 			Integer i = (int) GetID.getId();
+			linkpoint l = new linkpoint();
 			l.setLinkpointid(i);
-			portlist.add(l);
+			l.setName(schedulename);
+			portsMapper.insert(l);
 			// TODO
 			// linkpoint的加入存储,task绑定shcedule的id，这里的task已经有了id(前提是确保task在这之前解析了)，要写一个数据库操作获取
-			// 设置特定id的task的scheduleid，这里有一个外键约束，需要关闭外键约束先
 			taskschedule t = new taskschedule();
 			t.setTaskscheduleid(i);
-//			tscList.add(t);
 			tscmapper.insert(t);
+			
 			_task t2 = new _task();
-			t2.setTaskscheduleid(Integer.valueOf(taskid));
+			t2.setTaskid(Integer.valueOf(taskid));
+			t2.setTaskscheduleid(i);
 			_tm.updateByPrimaryKeySelective(t2);
 		}
-	}
-
-	@Autowired
-	private taskscheduleMapper tscmapper;
-	@Autowired
-	private componentMapper camArchMapper;
-	@Autowired
-	private linkpointMapper portsMapper;
-	@Autowired
-	private _provideMapper pM;
-	@Autowired
-	private _requireMapper rm;
-	@Autowired
-	private transitionMapper tm;
-	@Autowired
-	private transitionstateMapper tsm;
-	@Autowired
-	private _eventMapper em;
-	@Autowired
-	private _stateMapper sm;
-	@Autowired
-	private deviceMapper dMapper;
-	@Autowired
-	private busMapper bm;
-	@Autowired
-	private communicationchannelMapper cchannelMapper;
-	@Autowired
-	private MessageChannelMapper mcm;
-	@Autowired
-	private InvocationChannelMapper ivcm;
-	@Autowired
-	private _exceptionMapper _em;
-	@Autowired
-	private rtosMapper rsmMapper;
-	@Autowired
-	private _taskMapper _tm;
-	@Autowired
-	private _partitionMapper ptm;
-
-	private int insert_partition(_partition p) {
-		return ptm.insert(p);
-	}
-
-	private int insert_component(component c) {
-		return camArchMapper.insert(c);
-	}
-
-	private int insert_bus(bus b) {
-		return bm.insert(b);
-	}
-
-	private int insert_ports(linkpoint p) {
-		return portsMapper.insert(p);
-	}
-
-	private int insert_require(_require r) {
-		return rm.insert(r);
-	}
-
-	private int insert_provide(_provide p) {
-		return pM.insert(p);
-	}
-
-	private int insert_cchannel(communicationchannel c) {
-		return cchannelMapper.insert(c);
-	}
-
-	private int insert_mchannel(MessageChannel m) {
-		return mcm.insert(m);
-	}
-
-	private int insert_ivcchannel(InvocationChannel i) {
-		return ivcm.insert(i);
-	}
-
-	private int insert_device(device d) {
-		return dMapper.insert(d);
-	}
-
-	private int insert_task(_task t) {
-		return _tm.insert(t);
-	}
-
-	private int insert_transition(transition t) {
-		return tm.insert(t);
-	}
-
-	private int insert_tss(transitionstate ts) {
-		return tsm.insert(ts);
-	}
-
-	private int insert_rtos(rtos r) {
-		return rsmMapper.insert(r);
-	}
-
-	private int insert_state(_state s) {
-		return sm.insert(s);
-	}
-
-	private int insert_event(_event e) {
-		return em.insert(e);
-	}
-
-	private int insert_exception(_exception e) {
-		return _em.insert(e);
-	}
-
-	public Integer getPortIDByComponentName(String name, String portname) {
-		Integer aIntegers = camArchMapper.getPortIDByComponentName(name, portname);
-		return camArchMapper.getPortIDByComponentName(name, portname);
-	}
-
-	public Integer getCmpIDbyName(String name) {
-		return camArchMapper.getIDbyName(name).getComponentid();
-	}
-
-	public Integer getCChannelBysd(Integer sid, Integer did) {
-		return cchannelMapper.getgetCChannelBysd(sid, did);
-	}
-
-	public Integer getEventID(String eventname) {
-		return em.getEventID(eventname).getEventid();
-	}
-
-	public Integer getStateID(String statename) {
-		return sm.getStateID(statename);
-	}
-
-	public void setAadlFiles(Map<String, String> aadlFiles) {
-		this.aadlFiles = aadlFiles;
-	}
-
-	// 模型元素与元模型进行匹配
-	public void srvmatchmeta() throws Exception {
-		AADLResolver.modeldirectory = "src/main/resources/modelresource/MarkedModelFile/";
-
-		AADLResolver.compositelibfile = aadlFiles.get("组件库");
-		AADLResolver.errlibfile = aadlFiles.get("错误库");
-		AADLResolver.hardmodelfile = aadlFiles.get("总体架构");
-		MatchComponents(hardmodelfile, "aadl", "总体架构");
-		AADLResolver.componentlist.forEach((k, v) -> {
-			insert_component(v);
-		});
-
-		rtoslist.forEach((v) -> {
-			insert_rtos(v);
-		});
-		buslist.forEach((v) -> {
-			insert_bus(v);
-		});
-		devicelist.forEach((v) -> {
-			insert_device(v);
-		});
-		portlist.forEach((v) -> {
-			insert_ports(v);
-		});
-		requirelist.forEach((v) -> {
-			insert_require(v);
-		});
-		providelist.forEach((v) -> {
-			insert_provide(v);
-		});
-		MatchCChannel(hardmodelfile, "aadl");
-		cclist.forEach((v) -> {
-			insert_cchannel(v);
-		});
-		mclist.forEach((v) -> {
-			insert_mchannel(v);
-		});
-		ivclist.forEach((v) -> {
-			insert_ivcchannel(v);
-		});
-		String[] innersysfile = aadlFiles.get("系统内部结构").split(";");
-		for (String s : innersysfile) {
-			AADLResolver.dynamicfilename = s;
-
-			InnerSystem(dynamicfilename);
-		}
-
-		partitionlist.forEach((v) -> {
-			insert_partition(v);
-		});
-		if (errlibfile != null) {
-			ExceptionResolver(dynamicfilename, "aadl");
-			exceptionlist.forEach((v) -> {
-				insert_exception(v);
-			});
-		}
-
-		Document d = ModelResolver(aadlFiles.get("系统内部结构"));
-		List<? extends Node> nodes = d.selectNodes("//ownedClassifier[@xsi:type='aadl2:SystemImplementation']");
-		for (Node n : nodes) {
-			StateResolver(aadlFiles.get("系统内部结构"), ((Element) n).attributeValue("id"));
-		}
-		statelist.forEach((v) -> {
-			insert_state(v);
-		});
-		if (errlibfile != null) {
-
-			eventResolver(aadlFiles.get("系统内部结构"), "aadl");
-		}
-		eventlist.forEach((v) -> {
-			insert_event(v);
-		});
-		TransitionResolver(aadlFiles.get("系统内部结构"), "aadl");
-		tslist.forEach((v) -> {
-			insert_transition(v);
-		});
-		ts_slist.forEach((v) -> {
-			insert_tss(v);
-		});
-		taskcomponentlist.forEach((k, v) -> {
-			insert_component(v);
-		});
-		tasklist.forEach((v) -> {
-			insert_task(v);
-		});
-
 	}
 
 	public void SetSysFileID(String archfilepath, String sysfilepath) throws Exception {
@@ -1228,5 +1085,138 @@ public class AADLResolver {
 
 			AppendID.AppendID(sysfilepath, sys, e.attributeValue("id"));
 		}
+	}
+
+	// 解析source路径,传递context，跨文件查找
+	private static String GetName(String modelfilename, String rawpath) throws Exception {
+		Document document = ModelResolver(modelfilename);
+		CharSequence s = ".";
+		if (rawpath.contains(s)) {
+
+			rawpath = GetXPath(rawpath);
+		}
+		Node node = document.selectSingleNode(rawpath);
+		Element e = (Element) node;
+		if (e != null)
+			return e.attributeValue("name");
+		else
+			return "";
+	}
+
+	private static String GetElementID(String modelfilename, String rawpath) throws Exception {
+		Document document = ModelResolver(modelfilename);
+		CharSequence s = ".";
+		if (rawpath.contains(s)) {
+
+			rawpath = GetXPath(rawpath);
+		}
+		Node node = document.selectSingleNode(rawpath);
+		Element e = (Element) node;
+		if (e != null)
+			return e.attributeValue("id");
+		else
+			return "";
+	}
+
+//sub指向的是impl，所以要通过name找到id
+	private static String GetSubCompID(String modelfilename, String rawpath) throws Exception {
+		Document document = ModelResolver(modelfilename);
+		CharSequence s = ".";
+		if (rawpath.contains(s)) {
+			// sub的路径
+			rawpath = GetXPath(rawpath);
+		}
+		Node node = document.selectSingleNode(rawpath);
+		Element e = (Element) node;
+		if (e != null) {
+			String reg = "(?<=@).[A-Za-z0-9\\.]+";
+			ArrayList<String> result = new ArrayList<String>();
+			Pattern pattern = Pattern.compile(reg);
+			String s1 = "";
+			if (e.attributeValue("processorSubcomponentType") != null) {
+				s1 = e.attributeValue("processorSubcomponentType");
+			} else if (e.attributeValue("processSubcomponentType") != null) {
+				s1 = e.attributeValue("processSubcomponentType");
+			}else {
+				s1=e.attributeValue("memorySubcomponentType");
+			}
+			Matcher matcher = pattern.matcher(s1);
+			while (matcher.find()) {
+				result.add(matcher.group());
+			}
+			for (int j = 1; j < result.size(); j++) {
+
+				result.set(j, getinc(result.get(j)));
+			}
+			String name = ((Element) document.selectSingleNode("//" + result.get(0) + "/" + result.get(1)))
+					.attributeValue("name").split("\\.")[0];
+			return ((Element) document.selectSingleNode("//ownedClassifier[@name='" + name + "']"))
+					.attributeValue("id");
+		} else
+			return "";
+	}
+
+	/*
+	 * 根据路径获取ID,只支持三层结构的xpath
+	 */
+	private static String GetXPath(String path) {
+		String reg = "(?<=@).[A-Za-z0-9\\.]+";
+		ArrayList<String> result = new ArrayList<String>();
+		Pattern pattern = Pattern.compile(reg);
+		Matcher matcher = pattern.matcher(path);
+		while (matcher.find()) {
+			result.add(matcher.group());
+		}
+		for (int j = 1; j < result.size(); j++) {
+
+			result.set(j, getinc(result.get(j)));
+		}
+		return "//" + result.get(0) + "/" + result.get(1) + "/" + result.get(2);
+	}
+
+	private static String GetXPath4State(String path) {
+		String reg = "(?<=@).[A-Za-z0-9\\.]+";
+		ArrayList<String> result = new ArrayList<String>();
+		Pattern pattern = Pattern.compile(reg);
+		Matcher matcher = pattern.matcher(path);
+		while (matcher.find()) {
+			result.add(matcher.group());
+		}
+		for (int j = 1; j < result.size(); j++) {
+
+			result.set(j, getinc(result.get(j)));
+		}
+		return "//" + result.get(0) + "/" + result.get(1) + "/" + result.get(2) + "/" + result.get(3) + "/"
+				+ result.get(4);
+	}
+
+	private static String getinc(String source) {
+		CharSequence cs = ".";
+		if (source.contains(cs)) {
+			String reg4c = "[A-Za-z]+";
+			String reg4num = "[0-9]+";
+
+			Pattern pattern = Pattern.compile(reg4c);
+			Matcher matcher = pattern.matcher(source);
+			List<String> list = new ArrayList<>();
+			while (matcher.find()) {
+				list.add(matcher.group());
+			}
+			String c = list.get(0);
+
+			pattern = Pattern.compile(reg4num);
+			matcher = pattern.matcher(source);
+			list = new ArrayList<>();
+			while (matcher.find()) {
+				list.add(matcher.group());
+			}
+			Integer i = Integer.valueOf(list.get(0));
+			String num = (++i).toString();
+
+			return c + "[" + num + "]";
+		} else {
+			return source;
+		}
+
 	}
 }

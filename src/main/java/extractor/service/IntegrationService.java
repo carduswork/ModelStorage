@@ -1,13 +1,8 @@
 package extractor.service;
 
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.util.Map;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -26,20 +21,15 @@ import extractor.DAO.mapper._taskMapper;
 import extractor.DAO.mapper.communicationchannelMapper;
 import extractor.DAO.mapper.componentMapper;
 import extractor.DAO.mapper.linkpointMapper;
-import extractor.DAO.mapper.portmapMapper;
 import extractor.model._state;
 import extractor.model.communicationchannel;
 import extractor.model.component;
-import extractor.model.portmap;
-import extractor.model.rtos;
 import extractor.model.linkpoint;
-import extractor.model._exception;
 
 //获取各种映射
 @Service("Map")
 public class IntegrationService {
-	@Autowired
-	private portmapMapper pm;
+
 	@Autowired
 	private componentMapper cm;
 	@Autowired
@@ -123,6 +113,9 @@ public class IntegrationService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+	}
+//	按照映射表来搜索
+	private void filterbymap() {
+		
 	}
 }

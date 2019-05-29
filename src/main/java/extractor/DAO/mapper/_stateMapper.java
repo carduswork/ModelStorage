@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 import extractor.model._state;
-import extractor.model.linkpoint;
 
 @Mapper
 @Component
