@@ -244,6 +244,7 @@ public class SYSMLResolver {
 			Element element2 = (Element) n;
 			linkpoint ports1 = new linkpoint();
 			ports1.setName(element2.attributeValue("name"));
+			ports1.setModeltype("sysml");
 			Integer linkpointID = (int) GetID.getId();
 			ports1.setLinkpointid(linkpointID);
 			try {

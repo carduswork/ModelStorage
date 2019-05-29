@@ -55,7 +55,6 @@
       <ownedBusAccess name="bus_data" kind="requires" busFeatureClassifier="aadl2:BusType Composition.aadl#Composition.bus_1553B"/>
       <ownedDataPort name="cy_info" out="true">
         <ownedComment body="--1553B总线信号&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;"/>
-        <ownedComment body="--1553B总线信号&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;"/>
       </ownedDataPort>
       <ownedEventPort name="interrupt" in="true"/>
     </ownedClassifier>
@@ -77,7 +76,6 @@
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <ownedComment body="--将zdsc_hdxld过程绑定处理器LSP"/>
-        <ownedComment body="--将zdsc_hdxld过程绑定处理器LSP"/>
         <appliesTo>
           <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessSubcomponent.1"/>
         </appliesTo>
@@ -115,7 +113,6 @@
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Memory_Binding">
         <ownedComment body="--将zdsc_hdxld和数据缓冲区进行绑定"/>
-        <ownedComment body="--将zdsc_hdxld和数据缓冲区进行绑定"/>
         <appliesTo>
           <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessSubcomponent.1"/>
         </appliesTo>
@@ -140,40 +137,33 @@
         </ownedValue>
       </ownedPropertyAssociation>
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
-      <ownedMemorySubcomponent name="RAM" memorySubcomponentType="#//@ownedPublicSection/@ownedClassifier.19"/>
+      <ownedMemorySubcomponent name="RAM" memorySubcomponentType="#//@ownedPublicSection/@ownedClassifier.20"/>
       <ownedProcessSubcomponent name="zdsc_hdxld" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.4"/>
       <ownedProcessSubcomponent name="yz" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.10"/>
       <ownedProcessSubcomponent name="lz_judgement" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.16"/>
-      <ownedProcessorSubcomponent name="LSP" processorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.17"/>
+      <ownedProcessorSubcomponent name="LSP" processorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.18"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessType" name="zdsc_hdxld">
       <ownedComment body="--zdsc及hdxld过程--"/>
-      <ownedComment body="--zdsc及hdxld过程--"/>
       <ownedDataPort name="calculation_parameters" in="true"/>
       <ownedDataPort name="zg_data" in="true">
-        <ownedComment body="--计算参数"/>
         <ownedComment body="--计算参数"/>
       </ownedDataPort>
       <ownedDataPort name="jpt" out="true"/>
       <ownedDataPort name="self_alignment_angle" out="true"/>
       <ownedDataPort name="geography_monitoring_attitude" out="true">
         <ownedComment body="--自对准角度"/>
-        <ownedComment body="--自对准角度"/>
       </ownedDataPort>
       <ownedDataPort name="launching_speed" out="true">
-        <ownedComment body="--地理系监测姿态角"/>
         <ownedComment body="--地理系监测姿态角"/>
       </ownedDataPort>
       <ownedEventPort name="control_commands" in="true">
         <ownedComment body="--发射系速度"/>
-        <ownedComment body="--发射系速度"/>
       </ownedEventPort>
       <ownedEventPort name="test_state" in="true">
         <ownedComment body="--控制命令"/>
-        <ownedComment body="--控制命令"/>
       </ownedEventPort>
       <ownedEventPort name="zdsc_state" out="true">
-        <ownedComment body="--测试状态"/>
         <ownedComment body="--测试状态"/>
       </ownedEventPort>
     </ownedClassifier>
@@ -238,20 +228,16 @@
       <ownedDataPort name="calculation_parameters" in="true"/>
       <ownedDataPort name="zg_data" in="true">
         <ownedComment body="--计算参数"/>
-        <ownedComment body="--计算参数"/>
       </ownedDataPort>
       <ownedDataPort name="jpt" out="true"/>
       <ownedDataPort name="self_alignment_angle" out="true"/>
       <ownedEventPort name="control_commands" in="true">
         <ownedComment body="--自对准角度"/>
-        <ownedComment body="--自对准角度"/>
       </ownedEventPort>
       <ownedEventPort name="test_state" in="true">
         <ownedComment body="--控制命令"/>
-        <ownedComment body="--控制命令"/>
       </ownedEventPort>
       <ownedEventPort name="zdsc_state" out="true">
-        <ownedComment body="--测试状态"/>
         <ownedComment body="--测试状态"/>
       </ownedEventPort>
     </ownedClassifier>
@@ -262,19 +248,15 @@
       <ownedDataPort name="calculation_parameters" in="true"/>
       <ownedDataPort name="zg_data" in="true">
         <ownedComment body="--计算参数"/>
-        <ownedComment body="--计算参数"/>
       </ownedDataPort>
       <ownedDataPort name="geography_monitoring_attitude" out="true"/>
       <ownedDataPort name="launching_speed" out="true">
         <ownedComment body="--地理系监测姿态角"/>
-        <ownedComment body="--地理系监测姿态角"/>
       </ownedDataPort>
       <ownedEventPort name="control_commands" in="true">
         <ownedComment body="--发射系速度&#x9;    "/>
-        <ownedComment body="--发射系速度&#x9;    "/>
       </ownedEventPort>
       <ownedEventPort name="test_state" in="true">
-        <ownedComment body="--控制命令"/>
         <ownedComment body="--控制命令"/>
       </ownedEventPort>
     </ownedClassifier>
@@ -283,20 +265,16 @@
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessType" name="yz">
       <ownedComment body="--yz数据装订过程--"/>
-      <ownedComment body="--yz数据装订过程--"/>
       <ownedDataPort name="yz_data_in" in="true"/>
       <ownedDataPort name="yz_data_out" out="true"/>
       <ownedDataPort name="upload_data_accumulation_sum" out="true"/>
       <ownedEventPort name="test_task_code" in="true">
         <ownedComment body="--上传数据累加和"/>
-        <ownedComment body="--上传数据累加和"/>
       </ownedEventPort>
       <ownedEventPort name="task_parameters" in="true">
         <ownedComment body="--测试任务码"/>
-        <ownedComment body="--测试任务码"/>
       </ownedEventPort>
       <ownedEventPort name="error_code" out="true">
-        <ownedComment body="--任务参数"/>
         <ownedComment body="--任务参数"/>
       </ownedEventPort>
     </ownedClassifier>
@@ -346,14 +324,11 @@
       <ownedDataPort name="upload_data_accumulation_sum" out="true"/>
       <ownedEventPort name="test_task_code" in="true">
         <ownedComment body="--上传数据累加和"/>
-        <ownedComment body="--上传数据累加和"/>
       </ownedEventPort>
       <ownedEventPort name="task_parameters" in="true">
         <ownedComment body="--测试任务码"/>
-        <ownedComment body="--测试任务码"/>
       </ownedEventPort>
       <ownedEventPort name="error_code" out="true">
-        <ownedComment body="--任务参数"/>
         <ownedComment body="--任务参数"/>
       </ownedEventPort>
     </ownedClassifier>
@@ -362,15 +337,12 @@
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadType" name="yz_download">
       <ownedComment body="--错误码"/>
-      <ownedComment body="--错误码"/>
       <ownedDataPort name="yz_data_in" in="true"/>
       <ownedEventPort name="test_task_code" in="true"/>
       <ownedEventPort name="task_parameters" in="true">
         <ownedComment body="--测试任务码"/>
-        <ownedComment body="--测试任务码"/>
       </ownedEventPort>
       <ownedEventPort name="error_code" out="true">
-        <ownedComment body="--任务参数"/>
         <ownedComment body="--任务参数"/>
       </ownedEventPort>
     </ownedClassifier>
@@ -378,7 +350,6 @@
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.13"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessType" name="lz_judgement">
-      <ownedComment body="--lz信号判断过程--"/>
       <ownedComment body="--lz信号判断过程--"/>
       <ownedEventPort name="hdxld_state" in="true"/>
       <ownedEventPort name="switch_input" in="true"/>
@@ -390,7 +361,6 @@
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessorType" name="LSP">
       <ownedComment body="--kf系统中的处理器"/>
-      <ownedComment body="--kf系统中的处理器"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessorImplementation" name="lsp.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.17"/>
@@ -398,13 +368,11 @@
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:MemoryType" name="RAM">
       <ownedComment body="--kf系统中的存储器"/>
-      <ownedComment body="--kf系统中的存储器"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:MemoryImplementation" name="RAM.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.19"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:VirtualProcessorType" name="kfBefore">
-      <ownedComment body="--虚拟处理器"/>
       <ownedComment body="--虚拟处理器"/>
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Scheduling_Protocol">
         <ownedValue>

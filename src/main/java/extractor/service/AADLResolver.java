@@ -665,6 +665,7 @@ public class AADLResolver {
 			linkpoint ports1 = new linkpoint();
 			// 暂时只设置name这一个
 			ports1.setName(element2.attributeValue("name"));
+			ports1.setModeltype("aadl");
 			Integer linkpointID = (int) GetID.getId();
 			switch (portType) {
 			case "dataport":
@@ -721,8 +722,8 @@ public class AADLResolver {
 			linkpoint ports1 = new linkpoint();
 			// 暂时只设置name这一个
 			ports1.setName(element2.attributeValue("name"));
+			ports1.setModeltype("aadl");
 			Integer linkpointID = (int) GetID.getId();
-			// TODO taskschedule的创建入库
 			switch (portType) {
 			case "dataport":
 			case "eventport":
@@ -1045,28 +1046,43 @@ public class AADLResolver {
 			// 解析deploy关系
 			Element e = (Element) n;
 			// namedElement存储的是在impl里面声明的组件
-
+			if(e.attributeValue("property").contains("Actual_Processor_Binding")) {
+				
+			
 			String taskid = GetSubCompID(modelfilename,
 					e.element("appliesTo").element("path").attributeValue("namedElement"));
-			String getschedule = GetSubCompID(modelfilename, e.element("ownedValue").element("ownedValue")
-					.element("ownedListElement").element("path").attributeValue("namedElement"));
-			String schedulename = GetName(modelfilename, e.element("ownedValue").element("ownedValue")
-					.element("ownedListElement").element("path").attributeValue("namedElement"));
-			Integer i = (int) GetID.getId();
-			linkpoint l = new linkpoint();
-			l.setLinkpointid(i);
-			l.setName(schedulename);
-			portsMapper.insert(l);
-			// TODO
-			// linkpoint的加入存储,task绑定shcedule的id，这里的task已经有了id(前提是确保task在这之前解析了)，要写一个数据库操作获取
-			taskschedule t = new taskschedule();
-			t.setTaskscheduleid(i);
-			tscmapper.insert(t);
+
+
+			Element sb = (Element) document.selectSingleNode(GetXPath(e.element("ownedValue").element("ownedValue")
+					.element("ownedListElement").element("path").attributeValue("namedElement")));
+			try {
+				// TODO memory是没有虚拟组件的，自然就没有schedule 
+				Element sbimplElement=(Element)document.selectSingleNode(GetXPath42layer(sb.attributeValue("processorSubcomponentType")));
+				Element vt=(Element)document.selectSingleNode(GetXPath42layer(sbimplElement.element("ownedVirtualProcessorSubcomponent")
+						.attributeValue("virtualProcessorSubcomponentType")));
+				
+				String schedulename =vt.attributeValue("name");
+				Integer i = (int) GetID.getId();
+				linkpoint l = new linkpoint();
+				l.setLinkpointid(i);
+				l.setName(schedulename);
+				l.setModeltype("aadl");
+				portsMapper.insert(l);
+				taskschedule t = new taskschedule();
+				t.setTaskscheduleid(i);
+				tscmapper.insert(t);
+				
+				_task t2 = new _task();
+				t2.setTaskid(Integer.valueOf(taskid));
+				t2.setTaskscheduleid(i);
+				_tm.updateByPrimaryKeySelective(t2);
+			}catch(Exception e2) {
+				
+				System.out.print(sb.attributeValue("processorSubcomponentType"));
+			}
+			}
 			
-			_task t2 = new _task();
-			t2.setTaskid(Integer.valueOf(taskid));
-			t2.setTaskscheduleid(i);
-			_tm.updateByPrimaryKeySelective(t2);
+			// linkpoint的加入存储,task绑定shcedule的id，这里的task已经有了id(前提是确保task在这之前解析了)，要写一个数据库操作获取
 		}
 	}
 
@@ -1137,17 +1153,17 @@ public class AADLResolver {
 				s1 = e.attributeValue("processorSubcomponentType");
 			} else if (e.attributeValue("processSubcomponentType") != null) {
 				s1 = e.attributeValue("processSubcomponentType");
-			}else {
-				s1=e.attributeValue("memorySubcomponentType");
+			} else {
+				s1 = e.attributeValue("memorySubcomponentType");
 			}
 			Matcher matcher = pattern.matcher(s1);
 			while (matcher.find()) {
 				result.add(matcher.group());
 			}
 			for (int j = 1; j < result.size(); j++) {
-
 				result.set(j, getinc(result.get(j)));
 			}
+			// IMPL是没有id的
 			String name = ((Element) document.selectSingleNode("//" + result.get(0) + "/" + result.get(1)))
 					.attributeValue("name").split("\\.")[0];
 			return ((Element) document.selectSingleNode("//ownedClassifier[@name='" + name + "']"))
@@ -1173,7 +1189,20 @@ public class AADLResolver {
 		}
 		return "//" + result.get(0) + "/" + result.get(1) + "/" + result.get(2);
 	}
+	private static String GetXPath42layer(String path) {
+		String reg = "(?<=@).[A-Za-z0-9\\.]+";
+		ArrayList<String> result = new ArrayList<String>();
+		Pattern pattern = Pattern.compile(reg);
+		Matcher matcher = pattern.matcher(path);
+		while (matcher.find()) {
+			result.add(matcher.group());
+		}
+		for (int j = 1; j < result.size(); j++) {
 
+			result.set(j, getinc(result.get(j)));
+		}
+		return "//" + result.get(0) + "/" + result.get(1) ;
+	}
 	private static String GetXPath4State(String path) {
 		String reg = "(?<=@).[A-Za-z0-9\\.]+";
 		ArrayList<String> result = new ArrayList<String>();
