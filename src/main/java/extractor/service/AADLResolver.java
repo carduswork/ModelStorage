@@ -48,6 +48,7 @@ import extractor.model.bus;
 import extractor.model.communicationchannel;
 import extractor.model.component;
 import extractor.model.device;
+import extractor.model.elementmap;
 import extractor.model.linkpoint;
 import extractor.model.rtos;
 import extractor.model.shareddataaccess;
@@ -282,10 +283,7 @@ public class AADLResolver {
 			AADLResolver.dynamicfilename = s;
 			InnerSystem(dynamicfilename);
 		}
-
-		partitionlist.forEach((v) -> {
-			insert_partition(v);
-		});
+		
 		if (errlibfile != null) {
 			ExceptionResolver(dynamicfilename, "aadl");
 			exceptionlist.forEach((v) -> {
@@ -320,6 +318,10 @@ public class AADLResolver {
 			insert_task(v);
 		});
 		scheduleResolver(aadlFiles.get("系统内部结构"));
+		partitionResolver(aadlFiles.get("系统内部结构"));
+//		partitionlist.forEach((v) -> {
+//			insert_partition(v);
+//		});
 	}
 
 	/* 当前模型的全部组件与port、task */
@@ -997,27 +999,52 @@ public class AADLResolver {
 		return "";
 	}
 
+	// 解析partition，即处理器的分区
 	private void partitionResolver(String filepath) throws Exception {
 		Document document = ModelResolver(filepath);
-		String getpartitionString = "//ownedPropertyAssociation";
-		List<? extends Node> partitions = document.selectNodes(getpartitionString);
-		for (Node n : partitions) {
+		String getpartitionString = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedPropertyAssociation";
+		List<? extends Node> bindings = document.selectNodes(getpartitionString);
+		for (Node n : bindings) {
 			Element e = (Element) n;
-			_partition p = new _partition();
-			Integer pid = (int) GetID.getId();
-			p.setPartitionid(pid);
-			String taskid = GetElementID(filepath,
-					e.element("appliesTo").element("path").attributeValue("namedElement"));
-			String rtosid = GetElementID(filepath, n.getParent().getUniquePath());
-			// 部署了哪个rtos
-			p.setRtosid(Integer.valueOf(rtosid));
-			// TODO partition作为component，设置task的partitionID
-			_task t = new _task();
-			t.setTaskid(Integer.valueOf(taskid));
-			t.setPartitionid(pid);
-			_tm.updateByPrimaryKeySelective(t);
-			partitionlist.add(p);
+			Element p1 = e.element("ownedValue").element("ownedValue").element("ownedListElement").element("path");
+			// 有的binding是绑定在processor上的，有的是绑定在partition上的
+			// 只找部署在分区上的task，元模型中task是部署在partition上的不是processor上的
+			if (p1.hasContent()) {
+				p1=p1.element("path");
+				String taskpath = e.element("appliesTo").element("path").attributeValue("namedElement");
+				String partitionPath = p1.attributeValue("namedElement");
+				Integer pid = (int) GetID.getId();
+				AppendID.AppendID(filepath, GetXPath(partitionPath), pid.toString());
+
+				Element implElement = (Element) document.selectSingleNode(GetXPath(taskpath));
+
+				String decalrepath = "//ownedClassifier[@name='" + implElement.attributeValue("name").split("\\.")[0]
+						+ "']";
+				String taskid = ((Element) document.selectSingleNode(decalrepath)).attributeValue("id");
+//				String taskid = GetElementID(filepath,taskpath);
+
+				String rtosid = GetElementID(filepath, n.getParent().getUniquePath());
+
+				_partition p = new _partition();
+				p.setPartitionid(pid);
+				// 部署了哪个rtos
+				p.setRtosid(Integer.valueOf(rtosid));
+				component comp = new component();
+				comp.setComponentid(pid);
+				comp.setComponentype("partition");
+				comp.setModeltype("aadl");
+				comp.setName(((Element) document.selectSingleNode(GetXPath(partitionPath))).attributeValue("name"));
+				camArchMapper.insert(comp);
+				ptm.insert(p);
+//				partitionlist.add(p);
+				// TODO partition作为component，设置task的partitionID
+				_task t = new _task();
+				t.setTaskid(Integer.valueOf(taskid));
+				t.setPartitionid(pid);
+				_tm.updateByPrimaryKeySelective(t);
+			}
 		}
+
 	}
 
 	private static String GetSysname(String systemSubcomponentType) {
@@ -1046,42 +1073,42 @@ public class AADLResolver {
 			// 解析deploy关系
 			Element e = (Element) n;
 			// namedElement存储的是在impl里面声明的组件
-			if(e.attributeValue("property").contains("Actual_Processor_Binding")) {
-				
-			
-			String taskid = GetSubCompID(modelfilename,
-					e.element("appliesTo").element("path").attributeValue("namedElement"));
+			if (e.attributeValue("property").contains("Actual_Processor_Binding")) {
 
+				String taskid = GetSubCompID(modelfilename,
+						e.element("appliesTo").element("path").attributeValue("namedElement"));
 
-			Element sb = (Element) document.selectSingleNode(GetXPath(e.element("ownedValue").element("ownedValue")
-					.element("ownedListElement").element("path").attributeValue("namedElement")));
-			try {
-				// TODO memory是没有虚拟组件的，自然就没有schedule 
-				Element sbimplElement=(Element)document.selectSingleNode(GetXPath42layer(sb.attributeValue("processorSubcomponentType")));
-				Element vt=(Element)document.selectSingleNode(GetXPath42layer(sbimplElement.element("ownedVirtualProcessorSubcomponent")
-						.attributeValue("virtualProcessorSubcomponentType")));
-				
-				String schedulename =vt.attributeValue("name");
-				Integer i = (int) GetID.getId();
-				linkpoint l = new linkpoint();
-				l.setLinkpointid(i);
-				l.setName(schedulename);
-				l.setModeltype("aadl");
-				portsMapper.insert(l);
-				taskschedule t = new taskschedule();
-				t.setTaskscheduleid(i);
-				tscmapper.insert(t);
-				
-				_task t2 = new _task();
-				t2.setTaskid(Integer.valueOf(taskid));
-				t2.setTaskscheduleid(i);
-				_tm.updateByPrimaryKeySelective(t2);
-			}catch(Exception e2) {
-				
-				System.out.print(sb.attributeValue("processorSubcomponentType"));
+				Element sb = (Element) document.selectSingleNode(GetXPath(e.element("ownedValue").element("ownedValue")
+						.element("ownedListElement").element("path").attributeValue("namedElement")));
+				try {
+					// memory是没有虚拟组件的，自然就没有schedule
+					Element sbimplElement = (Element) document
+							.selectSingleNode(GetXPath42layer(sb.attributeValue("processorSubcomponentType")));
+					Element vt = (Element) document
+							.selectSingleNode(GetXPath42layer(sbimplElement.element("ownedVirtualProcessorSubcomponent")
+									.attributeValue("virtualProcessorSubcomponentType")));
+
+					String schedulename = vt.attributeValue("name");
+					Integer i = (int) GetID.getId();
+					linkpoint l = new linkpoint();
+					l.setLinkpointid(i);
+					l.setName(schedulename);
+					l.setModeltype("aadl");
+					portsMapper.insert(l);
+					taskschedule t = new taskschedule();
+					t.setTaskscheduleid(i);
+					tscmapper.insert(t);
+
+					_task t2 = new _task();
+					t2.setTaskid(Integer.valueOf(taskid));
+					t2.setTaskscheduleid(i);
+					_tm.updateByPrimaryKeySelective(t2);
+				} catch (Exception e2) {
+
+					System.out.print(sb.attributeValue("processorSubcomponentType"));
+				}
 			}
-			}
-			
+
 			// linkpoint的加入存储,task绑定shcedule的id，这里的task已经有了id(前提是确保task在这之前解析了)，要写一个数据库操作获取
 		}
 	}
@@ -1189,6 +1216,7 @@ public class AADLResolver {
 		}
 		return "//" + result.get(0) + "/" + result.get(1) + "/" + result.get(2);
 	}
+
 	private static String GetXPath42layer(String path) {
 		String reg = "(?<=@).[A-Za-z0-9\\.]+";
 		ArrayList<String> result = new ArrayList<String>();
@@ -1201,8 +1229,9 @@ public class AADLResolver {
 
 			result.set(j, getinc(result.get(j)));
 		}
-		return "//" + result.get(0) + "/" + result.get(1) ;
+		return "//" + result.get(0) + "/" + result.get(1);
 	}
+
 	private static String GetXPath4State(String path) {
 		String reg = "(?<=@).[A-Za-z0-9\\.]+";
 		ArrayList<String> result = new ArrayList<String>();

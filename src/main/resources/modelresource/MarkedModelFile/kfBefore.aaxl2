@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aadl2:Package xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:errorModel="http://www.aadl.info/EMV2" xmi:version="2.0" name="kfBefore" publicSection="#//@ownedPublicSection">
-  <ownedPublicSection importedUnit="aadl2:Package Composition.aadl#Composition">
+  <ownedPublicSection importedUnit="aadl2:Package Composition.aadl#Composition aadl2:PropertySet ../../Plugin_Resources/ARINC653.aadl#ARINC653">
     <ownedClassifier xsi:type="aadl2:SystemType" name="kf">
       <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**   use types ErrorLib;-- 定义接口的错误   use behavior ErrorLib::FailStopTransient;     error propagations   cy_info: out propagation {InvalidParameter,UnexceptedError};   interrupt:in propagation {Violation};   flows    -- 传播路径    NoFlightSystem: error source cy_info{InvalidParameter} when {HardwareFault};    ErraticFlightSystem: error source cy_info{UnexceptedError};    ErraticPilot: error path interrupt{Violation} -&gt; cy_info{InvalidParameter};   end propagations;   component error behavior    events      PowerFailure: error event;   transitions    FailureTransition2: Operational -[Failure]-&gt; FailStop;--发生了Failure事件就转换成Operational状态    end component;  **}">
         <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib" useBehavior="ErrorLib.aadl#emv2$ErrorLib.FailStopTransient">
@@ -41,7 +41,7 @@
               <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
             </targetToken>
           </flows>
-          <events xsi:type="errorModel:ErrorEvent" name="PowerFailure" id="997463943"/>
+          <events xsi:type="errorModel:ErrorEvent" name="PowerFailure" id="-767043576"/>
           <transitions name="FailureTransition2" source="ErrorLib.aadl#/0/@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0" target="ErrorLib.aadl#/0/@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.1">
             <condition xsi:type="errorModel:ConditionElement">
               <qualifiedErrorPropagationReference xsi:type="errorModel:QualifiedErrorEventOrPropagation">
@@ -52,16 +52,16 @@
         </parsedAnnexSubclause>
       </ownedAnnexSubclause>
       <ownedAbstractFeature name="ObservableFailure" out="true"/>
-      <ownedBusAccess name="bus_data" kind="requires" busFeatureClassifier="aadl2:BusType Composition.aadl#Composition.bus_1553B" id="1135743940"/>
-      <ownedDataPort name="cy_info" out="true" id="1018205664">
+      <ownedBusAccess name="bus_data" kind="requires" busFeatureClassifier="aadl2:BusType Composition.aadl#Composition.bus_1553B" id="633823492"/>
+      <ownedDataPort name="cy_info" out="true" id="1216349582">
         <ownedComment body="--1553B总线信号           "/>
       </ownedDataPort>
-      <ownedEventPort name="interrupt" in="true" id="-453962093"/>
+      <ownedEventPort name="interrupt" in="true" id="-1120084174"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="kf.tt" id="543740211">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="kf.tt" id="200113380">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="kf.before" id="1289654136">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="kf.before" id="-2088540380">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <appliesTo>
           <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessSubcomponent.0"/>
@@ -69,7 +69,9 @@
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
             <ownedListElement xsi:type="aadl2:ReferenceValue">
-              <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessorSubcomponent.0"/>
+              <path namedElement="#//@ownedPublicSection/@ownedClassifier.2/@ownedProcessorSubcomponent.0">
+                <path namedElement="#//@ownedPublicSection/@ownedClassifier.18/@ownedVirtualProcessorSubcomponent.0"/>
+              </path>
             </ownedListElement>
           </ownedValue>
         </ownedValue>
@@ -143,8 +145,20 @@
       <ownedProcessSubcomponent name="lz_judgement" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.16"/>
       <ownedProcessorSubcomponent name="LSP" processorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.18"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessType" name="zdsc_hdxld" id="-2085130562">
+    <ownedClassifier xsi:type="aadl2:ProcessType" name="zdsc_hdxld" id="-1807491184">
       <ownedComment body="--zdsc及hdxld过程--"/>
+      <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">
+        <ownedComment body="--wcet"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="11"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period">
+        <ownedComment body="--周期"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="10"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
       <ownedDataPort name="calculation_parameters" in="true"/>
       <ownedDataPort name="zg_data" in="true">
         <ownedComment body="--计算参数"/>
@@ -224,7 +238,7 @@
       <ownedThreadSubcomponent name="zdsc" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.5"/>
       <ownedThreadSubcomponent name="hdxld" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.7"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ThreadType" name="zdsc" id="1207784971">
+    <ownedClassifier xsi:type="aadl2:ThreadType" name="zdsc" id="1301274041">
       <ownedDataPort name="calculation_parameters" in="true"/>
       <ownedDataPort name="zg_data" in="true">
         <ownedComment body="--计算参数"/>
@@ -244,7 +258,7 @@
     <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="zdsc.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.5"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ThreadType" name="hdxld" id="-1657861092">
+    <ownedClassifier xsi:type="aadl2:ThreadType" name="hdxld" id="-1108984177">
       <ownedDataPort name="calculation_parameters" in="true"/>
       <ownedDataPort name="zg_data" in="true">
         <ownedComment body="--计算参数"/>
@@ -263,7 +277,7 @@
     <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="hdxld.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.7"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessType" name="yz" id="-854593600">
+    <ownedClassifier xsi:type="aadl2:ProcessType" name="yz" id="-1136745343">
       <ownedComment body="--yz数据装订过程--"/>
       <ownedDataPort name="yz_data_in" in="true"/>
       <ownedDataPort name="yz_data_out" out="true"/>
@@ -319,7 +333,7 @@
       <ownedThreadSubcomponent name="yz_upload" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.11"/>
       <ownedThreadSubcomponent name="yz_download" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.13"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ThreadType" name="yz_upload" id="460387560">
+    <ownedClassifier xsi:type="aadl2:ThreadType" name="yz_upload" id="-1925221557">
       <ownedDataPort name="yz_data_out" out="true"/>
       <ownedDataPort name="upload_data_accumulation_sum" out="true"/>
       <ownedEventPort name="test_task_code" in="true">
@@ -335,7 +349,7 @@
     <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="yz_upload.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.11"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ThreadType" name="yz_download" id="-459237405">
+    <ownedClassifier xsi:type="aadl2:ThreadType" name="yz_download" id="1693378004">
       <ownedComment body="--错误码"/>
       <ownedDataPort name="yz_data_in" in="true"/>
       <ownedEventPort name="test_task_code" in="true"/>
@@ -349,7 +363,7 @@
     <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="yz_download.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.13"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessType" name="lz_judgement" id="682159696">
+    <ownedClassifier xsi:type="aadl2:ProcessType" name="lz_judgement" id="-541078430">
       <ownedComment body="--lz信号判断过程--"/>
       <ownedEventPort name="hdxld_state" in="true"/>
       <ownedEventPort name="switch_input" in="true"/>
@@ -359,12 +373,15 @@
     <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="lz_judgement.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.15"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessorType" name="LSP" id="2120199650">
+    <ownedClassifier xsi:type="aadl2:ProcessorType" name="LSP" id="1488843739">
       <ownedComment body="--kf系统中的处理器"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessorImplementation" name="lsp.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.17"/>
-      <ownedVirtualProcessorSubcomponent name="kfBefore" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.22"/>
+      <ownedVirtualProcessorSubcomponent name="part1" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.22" id="-1122803713">
+        <ownedComment body="-- kfBefore: virtual processor kfBefore.impl;  "/>
+      </ownedVirtualProcessorSubcomponent>
+      <ownedVirtualProcessorSubcomponent name="part2" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.22"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:MemoryType" name="RAM">
       <ownedComment body="--kf系统中的存储器"/>
@@ -374,6 +391,12 @@
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:VirtualProcessorType" name="kfBefore">
       <ownedComment body="--虚拟处理器"/>
+      <ownedPropertyAssociation property="../../Plugin_Resources/ARINC653.aadl#ARINC653.Partition_Identifier">
+        <ownedComment body="--分区号为1"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" value="1"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Scheduling_Protocol">
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
