@@ -283,7 +283,7 @@ public class AADLResolver {
 			AADLResolver.dynamicfilename = s;
 			InnerSystem(dynamicfilename);
 		}
-		
+
 		if (errlibfile != null) {
 			ExceptionResolver(dynamicfilename, "aadl");
 			exceptionlist.forEach((v) -> {
@@ -798,7 +798,7 @@ public class AADLResolver {
 						.element("propagations");
 				Integer sourceid = 0, destid = 0;
 				// 没有direction或者
-				if (element.attributeValue("direction").equals("out")) {
+				if (element.attribute("direction")!=null&&element.attributeValue("direction").equals("out")) {
 					String getsourceportPath = element.element("featureorPPRef").attributeValue("featureorPP");
 					try {
 						sourceid = getPortIDByComponentName(compositename,
@@ -955,7 +955,6 @@ public class AADLResolver {
 	}
 
 	private static void TaskResolver(String modelfilename) throws Exception {
-		// Document document = ModelResolver(modelfilename);
 
 		for (Node n : components) {
 			// 解析component
@@ -977,7 +976,23 @@ public class AADLResolver {
 			_task t = new _task();
 			t.setName(component.getName());
 			t.setTaskid(idString);
-
+			List<? extends Node> prop = element.elements("ownedPropertyAssociation");
+			for (Node n2 : prop) {
+				Element e2=(Element)n2;
+				if (e2.attributeValue("property").contains("Deadline")) {				
+					String getdeadline = e2.element("ownedValue").element("ownedValue").attributeValue("value");
+					t.setDeadline(getdeadline+"ms");
+				}
+				if (e2.attributeValue("property").contains("Period")) {					
+					String getperiod = e2.element("ownedValue").element("ownedValue").attributeValue("value");
+					t.setPeriod(getperiod+"ms");
+				}
+				//这里暂时规定wcet就叫wcet
+				if(e2.attributeValue("property").contains("wcet")) {
+					String getwcet=e2.element("ownedValue").element("ownedValue").attributeValue("value");
+					t.setWcet(getwcet+"ms");
+				}
+			}
 			tasklist.add(t);
 			taskcomponentlist.put(element.attributeValue("name"), component);
 		}
@@ -1002,15 +1017,16 @@ public class AADLResolver {
 	// 解析partition，即处理器的分区
 	private void partitionResolver(String filepath) throws Exception {
 		Document document = ModelResolver(filepath);
-		String getpartitionString = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedPropertyAssociation";
+		String getpartitionString = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedPropertyAssociation[contains(@property,'Binding')]";
 		List<? extends Node> bindings = document.selectNodes(getpartitionString);
+		
 		for (Node n : bindings) {
 			Element e = (Element) n;
 			Element p1 = e.element("ownedValue").element("ownedValue").element("ownedListElement").element("path");
 			// 有的binding是绑定在processor上的，有的是绑定在partition上的
 			// 只找部署在分区上的task，元模型中task是部署在partition上的不是processor上的
-			if (p1.hasContent()) {
-				p1=p1.element("path");
+			if (p1!=null) {
+				//p1 = p1.element("path");
 				String taskpath = e.element("appliesTo").element("path").attributeValue("namedElement");
 				String partitionPath = p1.attributeValue("namedElement");
 				Integer pid = (int) GetID.getId();

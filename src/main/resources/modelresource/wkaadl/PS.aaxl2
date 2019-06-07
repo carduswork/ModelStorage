@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aadl2:PropertySet xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" name="PS">
+  <ownedProperty name="wcet" referencedPropertyType="aadl2:AadlInteger ../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#AADL_Project.Time">
+    <appliesTo xsi:type="aadl2:MetaclassReference">
+      <metaclassName>process</metaclassName>
+    </appliesTo>
+  </ownedProperty>
+  <ownedProperty name="wcet4thread" referencedPropertyType="aadl2:AadlInteger ../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#AADL_Project.Time">
+    <appliesTo xsi:type="aadl2:MetaclassReference">
+      <metaclassName>thread</metaclassName>
+    </appliesTo>
+  </ownedProperty>
+  <ownedProperty name="wcet4sys" referencedPropertyType="aadl2:AadlInteger ../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#AADL_Project.Time">
+    <appliesTo xsi:type="aadl2:MetaclassReference">
+      <metaclassName>system</metaclassName>
+    </appliesTo>
+  </ownedProperty>
+</aadl2:PropertySet>

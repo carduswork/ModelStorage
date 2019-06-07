@@ -63,16 +63,16 @@
         <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedSystemSubcomponent.0" connectionEnd="aadl2:EventPort kfBefore.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedEventPort.0"/>
         <source context="#//@ownedPublicSection/@ownedClassifier.1/@ownedDeviceSubcomponent.6" connectionEnd="aadl2:EventPort Composition.aadl#/0/@ownedPublicSection/@ownedClassifier.12/@ownedEventPort.0"/>
       </ownedPortConnection>
-      <ownedBusSubcomponent name="bus_1553B" busSubcomponentType="aadl2:BusImplementation Composition.aadl#Composition.bus_1553B.impl" id="-15638279"/>
-      <ownedDeviceSubcomponent name="kfc" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.kfc.impl" id="2017167562"/>
-      <ownedDeviceSubcomponent name="cy" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.cy.impl" id="1619432683"/>
-      <ownedDeviceSubcomponent name="zg" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.zg.impl" id="-193976785"/>
-      <ownedDeviceSubcomponent name="gjfs" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.gjfs.impl" id="52153537"/>
-      <ownedDeviceSubcomponent name="hdhz" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.hdhz.impl" id="-1957185620"/>
-      <ownedDeviceSubcomponent name="ICU" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.ICU.impl" id="966814452"/>
-      <ownedDeviceSubcomponent name="GNSS" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.GNSS.impl" id="-990421557"/>
-      <ownedSystemSubcomponent name="kf" systemSubcomponentType="aadl2:SystemImplementation kfBefore.aadl#kfBefore.kf.before" id="-2088540380"/>
-      <ownedSystemSubcomponent name="tt" systemSubcomponentType="aadl2:SystemImplementation kfBefore.aadl#kfBefore.kf.tt" id="200113380"/>
+      <ownedBusSubcomponent name="bus_1553B" busSubcomponentType="aadl2:BusImplementation Composition.aadl#Composition.bus_1553B.impl" id="1241135688"/>
+      <ownedDeviceSubcomponent name="kfc" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.kfc.impl" id="1560356480"/>
+      <ownedDeviceSubcomponent name="cy" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.cy.impl" id="-1713636212"/>
+      <ownedDeviceSubcomponent name="zg" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.zg.impl" id="-368560065"/>
+      <ownedDeviceSubcomponent name="gjfs" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.gjfs.impl" id="-1553601968"/>
+      <ownedDeviceSubcomponent name="hdhz" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.hdhz.impl" id="1294627625"/>
+      <ownedDeviceSubcomponent name="ICU" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.ICU.impl" id="773258364"/>
+      <ownedDeviceSubcomponent name="GNSS" deviceSubcomponentType="aadl2:DeviceImplementation Composition.aadl#Composition.GNSS.impl" id="-1078591330"/>
+      <ownedSystemSubcomponent name="kf" systemSubcomponentType="aadl2:SystemImplementation kfBefore.aadl#kfBefore.kf.before" id="-451856642"/>
+      <ownedSystemSubcomponent name="tt" systemSubcomponentType="aadl2:SystemImplementation kfBefore.aadl#kfBefore.kf.tt" id="723411169"/>
     </ownedClassifier>
   </ownedPublicSection>
 </aadl2:Package>

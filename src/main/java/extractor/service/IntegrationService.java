@@ -11,9 +11,11 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import extractor.DAO.mapper._exceptionMapper;
+import extractor.DAO.mapper._partitionMapper;
 import extractor.DAO.mapper._provideMapper;
 import extractor.DAO.mapper._requireMapper;
 import extractor.DAO.mapper._stateMapper;
@@ -21,10 +23,14 @@ import extractor.DAO.mapper._taskMapper;
 import extractor.DAO.mapper.communicationchannelMapper;
 import extractor.DAO.mapper.componentMapper;
 import extractor.DAO.mapper.linkpointMapper;
+import extractor.DAO.mapper.processorMapper;
+import extractor.model._partition;
 import extractor.model._state;
+import extractor.model._task;
 import extractor.model.communicationchannel;
 import extractor.model.component;
 import extractor.model.linkpoint;
+import extractor.model.processor;
 
 //获取各种映射
 @Service("Map")
@@ -40,6 +46,10 @@ public class IntegrationService {
 	private _taskMapper _tm;
 	@Autowired
 	private communicationchannelMapper cchannelMapper;
+	@Autowired
+	private processorMapper processorm;
+	@Autowired
+	private _partitionMapper ptnm;
 	@Autowired
 	private _exceptionMapper em;
 	@Autowired
@@ -89,11 +99,26 @@ public class IntegrationService {
 				states.forEach((v3) -> {
 					if (v3 != null) {
 						Element lp = comp.addElement("state");
-						lp.addAttribute("name", v3.getName());
+						lp.addAttribute("name", v3.getName()); 
 						lp.addAttribute("id", v3.getStateid().toString());
 					}
 				});
-				// 设置task
+				//设置processor即partition
+				List<_partition> processorlist=ptnm.selectByRTOS(v.getComponentid());
+				processorlist.forEach((v5)->{
+					Element psr=comp.addElement("partition");
+					psr.addAttribute("id",v5.getPartitionid().toString());
+					// 设置task
+					List<_task> tasklist=_tm.selectBypartition(v5.getPartitionid());
+					tasklist.forEach((v4)->{
+						Element tsk=psr.addElement("task");
+						tsk.addAttribute("Name", v4.getName());
+						tsk.addAttribute("id", v4.getTaskid().toString());
+						tsk.addAttribute("deadline", v4.getDeadline());
+						tsk.addAttribute("period", v4.getPeriod());
+						tsk.addAttribute("wcet", v4.getWcet());
+					});
+				});
 			});
 			// 设置cchannel
 			List<communicationchannel> channellist = cchannelMapper.getAll();

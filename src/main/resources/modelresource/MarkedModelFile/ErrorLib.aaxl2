@@ -7,7 +7,7 @@
 		--元模型中定义的错误类型
 		InvalidParameter: type;
 		Violation:type;
-		UnexceptedError:type;
+--		UnexceptedError:type;
 		HardwareFault:type;
 		end types;
 -- state machine for simple FailStop behavior
@@ -40,8 +40,9 @@ end behavior ;
           <ownedComment body="--元模型中定义的错误类型"/>
         </types>
         <types name="Violation"/>
-        <types name="UnexceptedError"/>
-        <types name="HardwareFault"/>
+        <types name="HardwareFault">
+          <ownedComment body="--		UnexceptedError:type;"/>
+        </types>
         <behaviors name="FailStopState">
           <ownedComment body="-- state machine for simple FailStop behavior"/>
           <states name="Operational" intial="true"/>
@@ -54,7 +55,7 @@ end behavior ;
           <states name="Incorrect"/>
         </behaviors>
         <behaviors name="FailStopTransient">
-          <events xsi:type="errorModel:ErrorEvent" name="Failure" id="-727650269"/>
+          <events xsi:type="errorModel:ErrorEvent" name="Failure" id="455055022"/>
           <states name="Operational" intial="true"/>
           <states name="FailStop"/>
           <transitions name="FailureTransition" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0">

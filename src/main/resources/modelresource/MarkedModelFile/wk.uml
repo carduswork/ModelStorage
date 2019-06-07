@@ -7,7 +7,7 @@
     <packageImport xmi:type="uml:PackageImport" xmi:id="_9qno0HEwEemIBosp0BA0Kw">
       <importedPackage xmi:type="uml:Package" href="pathmap://SysML14_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries"/>
     </packageImport>
-    <packagedElement xmi:type="uml:Class" xmi:id="_LVwc8HFOEemvqtqrECPzmw" name="婴儿温控需求" id4sysml="-192756636">
+    <packagedElement xmi:type="uml:Class" xmi:id="_LVwc8HFOEemvqtqrECPzmw" name="婴儿温控需求" id4sysml="1629357572">
       <nestedClassifier xmi:type="uml:Class" xmi:id="_NRFhMHFOEemvqtqrECPzmw" name="检测环境温度"/>
       <nestedClassifier xmi:type="uml:Class" xmi:id="_OsS68HFOEemvqtqrECPzmw" name="调节温度"/>
       <nestedClassifier xmi:type="uml:Class" xmi:id="_STedAHFOEemvqtqrECPzmw" name="控制热量产生"/>
@@ -25,7 +25,7 @@
     <packagedElement xmi:type="uml:Package" xmi:id="_roAm4HFPEemvqtqrECPzmw" name="温度自动调节器">
       <packagedElement xmi:type="uml:Abstraction" xmi:id="_wHSOkHFPEemvqtqrECPzmw" name=" " client="_roAm4HFPEemvqtqrECPzmw" supplier="_OsS68HFOEemvqtqrECPzmw"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_hLF9MHItEemhvL0pUmTt1w" name="Isolett" id4sysml="-1652530788">
+    <packagedElement xmi:type="uml:Class" xmi:id="_hLF9MHItEemhvL0pUmTt1w" name="Isolett" id4sysml="-1153326505">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_pGsFUHIuEemhvL0pUmTt1w" name="报警子系统" type="_6IPucHFVEemvqtqrECPzmw" aggregation="shared" association="_pGq3MHIuEemhvL0pUmTt1w">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pGsFUXIuEemhvL0pUmTt1w"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pGsFUnIuEemhvL0pUmTt1w" value="1"/>
@@ -47,48 +47,48 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Fwn6MHIvEemhvL0pUmTt1w" value="1"/>
       </ownedAttribute>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_6IPucHFVEemvqtqrECPzmw" name="alarm" id4sysml="1463299008">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_DJBLYHFWEemvqtqrECPzmw" name=" currentT_In" aggregation="composite" id4sysml="1710209442"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_B7uAoHbOEemFh5AkxkoBBw" name="alarmsignal" aggregation="composite" id4sysml="69933350"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_ASm-8HFWEemvqtqrECPzmw" name="发出示警信号" id4sysml="-179599095"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_6IPucHFVEemvqtqrECPzmw" name="alarm" id4sysml="860341470">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_DJBLYHFWEemvqtqrECPzmw" name=" currentT_In" aggregation="composite" id4sysml="1600295695"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_B7uAoHbOEemFh5AkxkoBBw" name="alarmsignal" aggregation="composite" id4sysml="-672241712"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ASm-8HFWEemvqtqrECPzmw" name="发出示警信号" id4sysml="-2003929776"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_On4DEHFQEemvqtqrECPzmw" name="temperature_sensor" id4sysml="-398602548">
+    <packagedElement xmi:type="uml:Class" xmi:id="_On4DEHFQEemvqtqrECPzmw" name="temperature_sensor" id4sysml="-1557706603">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_S5N8cHFQEemvqtqrECPzmw" name="currentTemperature" type="_q9dYkHFQEemvqtqrECPzmw"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_Y9g3wHItEemhvL0pUmTt1w" name="currentTemperature_Out" aggregation="composite" id4sysml="23081302"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_11vJsHFQEemvqtqrECPzmw" name="格式化存储" id4sysml="2088378126"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_Y9g3wHItEemhvL0pUmTt1w" name="currentTemperature_Out" aggregation="composite" id4sysml="-493255935"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_11vJsHFQEemvqtqrECPzmw" name="格式化存储" id4sysml="724531686"/>
       <nestedClassifier xmi:type="uml:Interface" xmi:id="_z_aPUHFSEemvqtqrECPzmw" name="温度"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_wS8PgHFQEemvqtqrECPzmw" name="operatorinterface" id4sysml="467099738">
+    <packagedElement xmi:type="uml:Class" xmi:id="_wS8PgHFQEemvqtqrECPzmw" name="operatorinterface" id4sysml="-1790618601">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_AEHpQHFREemvqtqrECPzmw" name="max_tem" type="_q9dYkHFQEemvqtqrECPzmw"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_D5CFUHFREemvqtqrECPzmw" name="min_tem" type="_q9dYkHFQEemvqtqrECPzmw"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_AXXYkHFVEemvqtqrECPzmw" name="operatorsettings_Out" visibility="public" aggregation="composite" id4sysml="898354428"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_ootBEHbJEemFh5AkxkoBBw" name="operatorsettings" aggregation="composite" id4sysml="1584633615"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_tyQC4HbLEemFh5AkxkoBBw" name="operatorFeedback" aggregation="composite" id4sysml="960248827"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_83FskHFQEemvqtqrECPzmw" name="设置温度范围" id4sysml="408886597"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_8e4rIHFUEemvqtqrECPzmw" name="显示control_tem" id4sysml="-1277915843"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_AXXYkHFVEemvqtqrECPzmw" name="operatorsettings_Out" visibility="public" aggregation="composite" id4sysml="449960669"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ootBEHbJEemFh5AkxkoBBw" name="operatorsettings" aggregation="composite" id4sysml="681796563"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_tyQC4HbLEemFh5AkxkoBBw" name="operatorFeedback" aggregation="composite" id4sysml="980773795"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_83FskHFQEemvqtqrECPzmw" name="设置温度范围" id4sysml="738377741"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_8e4rIHFUEemvqtqrECPzmw" name="显示control_tem" id4sysml="-925792122"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_yBe08HFQEemvqtqrECPzmw" name="thermostat" id4sysml="755023739">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_uvhNkHFTEemvqtqrECPzmw" name="currentTemperature_In" aggregation="composite" id4sysml="1710718236"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_Np9FcHFUEemvqtqrECPzmw" name="operatorsettings_In" aggregation="composite" id4sysml="-1121283833"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_yBe08HFQEemvqtqrECPzmw" name="thermostat" id4sysml="1502515366">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_uvhNkHFTEemvqtqrECPzmw" name="currentTemperature_In" aggregation="composite" id4sysml="-1984828293"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_Np9FcHFUEemvqtqrECPzmw" name="operatorsettings_In" aggregation="composite" id4sysml="721163386"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_W7OcgHFUEemvqtqrECPzmw" name="control_tem"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_sZ8T4HIwEemhvL0pUmTt1w" name="heatcontrol_Out" aggregation="composite" id4sysml="-1683899002"/>
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_wxOVcHbLEemFh5AkxkoBBw" name="operatorFeedback" aggregation="composite" id4sysml="826403767"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_S9k7MHFUEemvqtqrECPzmw" name="计算control_tem" id4sysml="-1641577904"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_36w_sHFUEemvqtqrECPzmw" name="返回control_tem" id4sysml="1608925434"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_sZ8T4HIwEemhvL0pUmTt1w" name="heatcontrol_Out" aggregation="composite" id4sysml="666074418"/>
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_wxOVcHbLEemFh5AkxkoBBw" name="operatorFeedback" aggregation="composite" id4sysml="1124401044"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_S9k7MHFUEemvqtqrECPzmw" name="计算control_tem" id4sysml="1898676001"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_36w_sHFUEemvqtqrECPzmw" name="返回control_tem" id4sysml="-2069464978"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_0BCR4HFQEemvqtqrECPzmw" name="heatsource" id4sysml="1250261658">
-      <ownedAttribute xmi:type="uml:Port" xmi:id="_O5flQHFVEemvqtqrECPzmw" name="heatcontrol_In" aggregation="composite" id4sysml="1376977416"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_V_sy8HFVEemvqtqrECPzmw" name="产生热量" id4sysml="-1456905063"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_0BCR4HFQEemvqtqrECPzmw" name="heatsource" id4sysml="1008730933">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_O5flQHFVEemvqtqrECPzmw" name="heatcontrol_In" aggregation="composite" id4sysml="844948697"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_V_sy8HFVEemvqtqrECPzmw" name="产生热量" id4sysml="2065583015"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_1ZRb0HIvEemhvL0pUmTt1w" name="temp_trans" id4sysml="605658505">
+    <packagedElement xmi:type="uml:Class" xmi:id="_1ZRb0HIvEemhvL0pUmTt1w" name="temp_trans" id4sysml="-1304157033">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_GBvC4HIwEemhvL0pUmTt1w" name="temp" type="_q9dYkHFQEemvqtqrECPzmw"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_8WjXAHIvEemhvL0pUmTt1w" name="getTem" id4sysml="1287599312"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_X5r74HIwEemhvL0pUmTt1w" name="sendTem" id4sysml="888677421"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_8WjXAHIvEemhvL0pUmTt1w" name="getTem" id4sysml="-558345061"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_X5r74HIwEemhvL0pUmTt1w" name="sendTem" id4sysml="647497246"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_z3XuwHIwEemhvL0pUmTt1w" name="instr_trans" id4sysml="1996056780">
+    <packagedElement xmi:type="uml:Class" xmi:id="_z3XuwHIwEemhvL0pUmTt1w" name="instr_trans" id4sysml="-31391737">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_5C6KEHIxEemhvL0pUmTt1w" name="instr"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_7-kp8HIxEemhvL0pUmTt1w" name="getInstr" id4sysml="-829022080"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_AuMawHIyEemhvL0pUmTt1w" name="getInstr" id4sysml="948464150"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_7-kp8HIxEemhvL0pUmTt1w" name="getInstr" id4sysml="-1762026005"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_AuMawHIyEemhvL0pUmTt1w" name="getInstr" id4sysml="627309778"/>
     </packagedElement>
     <packagedElement xmi:type="uml:DataType" xmi:id="_q9dYkHFQEemvqtqrECPzmw" name="摄氏度"/>
     <packagedElement xmi:type="uml:Association" xmi:id="_pGq3MHIuEemhvL0pUmTt1w" name="is_al" memberEnd="_pGsFUHIuEemhvL0pUmTt1w _pGsFU3IuEemhvL0pUmTt1w">
@@ -121,11 +121,11 @@
       </eAnnotations>
       <ownedEnd xmi:type="uml:Property" xmi:id="_Fwn6MXIvEemhvL0pUmTt1w" name="isolett" type="_hLF9MHItEemhvL0pUmTt1w" association="_FwmsEHIvEemhvL0pUmTt1w"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_1aVMYHa8EemPCZEs924qGQ" name="ct" informationSource="_Y9g3wHItEemhvL0pUmTt1w" informationTarget="_uvhNkHFTEemvqtqrECPzmw" id4sysml="-84623991"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_rx884Ha8EemPCZEs924qGQ" name="ct4a" informationSource="_Y9g3wHItEemhvL0pUmTt1w" informationTarget="_DJBLYHFWEemvqtqrECPzmw" id4sysml="-33934856"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="__Vnw0Ha8EemPCZEs924qGQ" name="hc" informationSource="_sZ8T4HIwEemhvL0pUmTt1w" informationTarget="_O5flQHFVEemvqtqrECPzmw" id4sysml="-891955289"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_YMsk0HbNEemFh5AkxkoBBw" name="ofb" informationSource="_wxOVcHbLEemFh5AkxkoBBw" informationTarget="_tyQC4HbLEemFh5AkxkoBBw" id4sysml="-2113172940"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_CUBlgHfXEemfCvECc9vXyg" name="os" informationSource="_Np9FcHFUEemvqtqrECPzmw" informationTarget="_AXXYkHFVEemvqtqrECPzmw" id4sysml="1514222228"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_1aVMYHa8EemPCZEs924qGQ" name="ct" informationSource="_Y9g3wHItEemhvL0pUmTt1w" informationTarget="_uvhNkHFTEemvqtqrECPzmw" id4sysml="864806703"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_rx884Ha8EemPCZEs924qGQ" name="ct4a" informationSource="_Y9g3wHItEemhvL0pUmTt1w" informationTarget="_DJBLYHFWEemvqtqrECPzmw" id4sysml="134485114"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="__Vnw0Ha8EemPCZEs924qGQ" name="hc" informationSource="_sZ8T4HIwEemhvL0pUmTt1w" informationTarget="_O5flQHFVEemvqtqrECPzmw" id4sysml="2135476018"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_YMsk0HbNEemFh5AkxkoBBw" name="ofb" informationSource="_wxOVcHbLEemFh5AkxkoBBw" informationTarget="_tyQC4HbLEemFh5AkxkoBBw" id4sysml="-657952394"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_CUBlgHfXEemfCvECc9vXyg" name="os" informationSource="_Np9FcHFUEemvqtqrECPzmw" informationTarget="_AXXYkHFVEemvqtqrECPzmw" id4sysml="2049126114"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_9p8TYHEwEemIBosp0BA0Kw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_9qEPMHEwEemIBosp0BA0Kw" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.4/SysML#/"/>

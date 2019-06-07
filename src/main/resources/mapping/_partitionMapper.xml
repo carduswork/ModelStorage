@@ -30,6 +30,9 @@
     from _partition
     where PartitionID = #{partitionid,jdbcType=INTEGER}
   </select>
+  <select id="selectByRTOS" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select * from _partition where rtosid=#{rtosid,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--
       WARNING - @mbg.generated

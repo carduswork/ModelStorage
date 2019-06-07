@@ -1,5 +1,7 @@
 package extractor.DAO.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -54,4 +56,5 @@ public interface _partitionMapper {
      * @mbg.generated Wed May 15 00:29:27 CST 2019
      */
     int updateByPrimaryKey(_partition record);
+    List<_partition> selectByRTOS(Integer rtosid);
 }

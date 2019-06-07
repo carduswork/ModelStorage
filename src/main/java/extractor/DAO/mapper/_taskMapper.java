@@ -1,5 +1,7 @@
 package extractor.DAO.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -56,5 +58,7 @@ public interface _taskMapper {
 	 */
 	int updateByPrimaryKey(_task record);
 
-	void setPartitionIDByTaskID(Integer taskid, Integer partitionid);
+	//void setPartitionIDByTaskID(Integer taskid, Integer partitionid);
+	
+	List<_task> selectBypartition(Integer partitionid);
 }
