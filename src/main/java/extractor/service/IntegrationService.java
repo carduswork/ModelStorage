@@ -117,17 +117,43 @@ public class IntegrationService {
 						tsk.addAttribute("deadline", v4.getDeadline());
 						tsk.addAttribute("period", v4.getPeriod());
 						tsk.addAttribute("wcet", v4.getWcet());
-						
-						List<_task> childlist = _tm.selectChild(v4.getTaskid());
-						childlist.forEach((v6)->{
-							Element child= tsk.addElement("task");
+
+						List<linkpoint> processports = lm.getPortUnderCMP(v4.getTaskid());
+						processports.forEach((v7) -> {
+							Element lp = tsk.addElement("port");
+							lp.addAttribute("name", v7.getName());
+							lp.addAttribute("id", v7.getLinkpointid().toString());
+							if (pvm.selectByportid(v7.getLinkpointid()) != null) {
+								lp.addAttribute("direction", "out");
+							}
+							if (rm.selectByportid(v7.getLinkpointid()) != null) {
+								lp.addAttribute("direction", "in");
+							}
+						});
+
+						List<_task> childtasklist = _tm.selectChild(v4.getTaskid());
+						childtasklist.forEach((v6) -> {
+							Element child = tsk.addElement("task");
 							child.addAttribute("Name", v6.getName());
 							child.addAttribute("id", v6.getTaskid().toString());
 							child.addAttribute("deadline", v6.getDeadline());
 							child.addAttribute("period", v6.getPeriod());
 							child.addAttribute("wcet", v6.getWcet());
+
+							List<linkpoint> threadports = lm.getPortUnderCMP(v6.getTaskid());
+							threadports.forEach((v8) -> {
+								Element lp = tsk.addElement("port");
+								lp.addAttribute("name", v8.getName());
+								lp.addAttribute("id", v8.getLinkpointid().toString());
+								if (pvm.selectByportid(v8.getLinkpointid()) != null) {
+									lp.addAttribute("direction", "out");
+								}
+								if (rm.selectByportid(v8.getLinkpointid()) != null) {
+									lp.addAttribute("direction", "in");
+								}
+							});
 						});
-						
+
 					});
 				});
 			});

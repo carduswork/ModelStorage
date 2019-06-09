@@ -247,9 +247,9 @@ public class AADLResolver {
 		AADLResolver.errlibfile = aadlFiles.get("错误库");
 		AADLResolver.hardmodelfile = aadlFiles.get("总体架构");
 		MatchComponents(hardmodelfile, "aadl", "总体架构");
-		AADLResolver.componentlist.forEach((k, v) -> {
-			insert_component(v);
-		});
+//		AADLResolver.componentlist.forEach((k, v) -> {
+//			insert_component(v);
+//		});
 		rtoslist.forEach((v) -> {
 			insert_rtos(v);
 		});
@@ -259,15 +259,15 @@ public class AADLResolver {
 		devicelist.forEach((v) -> {
 			insert_device(v);
 		});
-		portlist.forEach((v) -> {
-			insert_ports(v);
-		});
-		requirelist.forEach((v) -> {
-			insert_require(v);
-		});
-		providelist.forEach((v) -> {
-			insert_provide(v);
-		});
+//		portlist.forEach((v) -> {
+//			insert_ports(v);
+//		});
+//		requirelist.forEach((v) -> {
+//			insert_require(v);
+//		});
+//		providelist.forEach((v) -> {
+//			insert_provide(v);
+//		});
 		MatchCChannel(hardmodelfile, "aadl");
 		cclist.forEach((v) -> {
 			insert_cchannel(v);
@@ -311,12 +311,12 @@ public class AADLResolver {
 		ts_slist.forEach((v) -> {
 			insert_tss(v);
 		});
-		taskcomponentlist.forEach((k, v) -> {
-			insert_component(v);
-		});
-		tasklist.forEach((v) -> {
-			insert_task(v);
-		});
+//		taskcomponentlist.forEach((k, v) -> {
+//			insert_component(v);
+//		});
+//		tasklist.forEach((v) -> {
+//			insert_task(v);
+//		});
 		scheduleResolver(aadlFiles.get("系统内部结构"));
 		partitionResolver(aadlFiles.get("系统内部结构"));
 //		partitionlist.forEach((v) -> {
@@ -328,34 +328,18 @@ public class AADLResolver {
 	public void MatchComponents(String filepath, String modelType, String contenttype) throws Exception {
 		Document document = ModelResolver(filepath);
 
-		List<String> namelist = new ArrayList<>();
+		//List<String> namelist = new ArrayList<>();
 		if (modelType.equals("aadl")) {
 			// 对hardware层级设计的三种与组件元素的解析
 			String getbus = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedBusSubcomponent";
 			String getsys = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedSystemSubcomponent";
 			String getdevice = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedDeviceSubcomponent";
-			// Integer id1 = (int) GetID.getId();
 			components = document.selectNodes(getbus);
 			ResolveComponents(filepath, "bus");
-			// Integer id2 = (int) GetID.getId();
 			components = document.selectNodes(getsys);
 			ResolveComponents(filepath, "sys");
 			components = document.selectNodes(getdevice);
 			ResolveComponents(filepath, "device");
-
-		} else if (modelType.equals("sysml")) {
-			components = document
-					.selectNodes("//packagedElement[@name='kf']/ownedOperation[@xmi:type='uml:Operation']");
-			for (Node n : components) {
-				Element element = (Element) n;
-				namelist.add(element.attributeValue("name"));
-			}
-		} else {
-			components = document.selectNodes("//ModelInformation/Model/System/System/Block");
-			for (Node n : components) {
-				Element element = (Element) n;
-				namelist.add(element.attributeValue("name"));
-			}
 		}
 	}
 
@@ -576,7 +560,7 @@ public class AADLResolver {
 		}
 	}
 
-	private static void ResolveComponents(String filepath, String t) throws Exception {
+	private void ResolveComponents(String filepath, String t) throws Exception {
 		List<? extends Node> ports = null;
 		for (Node n : components) {
 			Element element = (Element) n;
@@ -591,6 +575,7 @@ public class AADLResolver {
 			switch (t) {
 			case "bus":
 				component.setType("bus");
+				camArchMapper.insert(component);
 				bus b = new bus();
 				b.setBusid(componentID);
 				buslist.add(b);
@@ -598,6 +583,7 @@ public class AADLResolver {
 			case "sys":
 				dynamicfilename = Getfilename(element.attributeValue("systemSubcomponentType"));
 				component.setType("rtos");
+				camArchMapper.insert(component);
 				rtos r = new rtos();
 				r.setRtosid(componentID);
 				// TODO 设置partitions的数量
@@ -608,21 +594,24 @@ public class AADLResolver {
 				break;
 			case "device":
 				component.setType("device");
+				camArchMapper.insert(component);
 				device d = new device();
 				d.setDeviceid(componentID);
 				devicelist.add(d);
 				// 名下的linkpoint
 				// String devicedef = modeldirectory +
 				// Getfilename(element.attributeValue("deviceSubcomponentType"));
+				
 				LinkpointResolver(compositelibfile, ports, componentID, t, element.attributeValue("name"));
 				break;
 			}
-			componentlist.put(element.attributeValue("name"), component);
+			
+			//componentlist.put(element.attributeValue("name"), component);
 		}
 	}
 
 //TODO dataobject
-	private static void LinkpointResolver(String linkpointfile, List<? extends Node> ports, Integer fatherid,
+	private void LinkpointResolver(String linkpointfile, List<? extends Node> ports, Integer fatherid,
 			String fathertype, String componetname) throws Exception {
 		switch (fathertype) {
 		case "bus":
@@ -657,7 +646,7 @@ public class AADLResolver {
 		}
 	}
 
-	private static void TraverseOwnedPorts4Sys(List<? extends Node> ports, Integer fatherid, String portType)
+	private void TraverseOwnedPorts4Sys(List<? extends Node> ports, Integer fatherid, String portType)
 			throws Exception {
 		for (Node n2 : ports) {
 			Element element2 = (Element) n2;
@@ -667,6 +656,8 @@ public class AADLResolver {
 			ports1.setName(element2.attributeValue("name"));
 			ports1.setModeltype("aadl");
 			Integer linkpointID = (int) GetID.getId();
+			ports1.setLinkpointid(linkpointID);
+			portsMapper.insert(ports1);
 			switch (portType) {
 			case "dataport":
 			case "eventport":
@@ -683,11 +674,13 @@ public class AADLResolver {
 					_require r = new _require();
 					r.setRequired(linkpointID);
 					r.setRequirer(fatherid);
+					rm.insert(r);
 					requirelist.add(r);
 				} else {
 					_provide p = new _provide();
 					p.setProvided(linkpointID);
 					p.setProvider(fatherid);
+					pM.insert(p);
 					providelist.add(p);
 				}
 				break;
@@ -700,21 +693,23 @@ public class AADLResolver {
 					_require r = new _require();
 					r.setRequired(linkpointID);
 					r.setRequirer(fatherid);
+					rm.insert(r);
 					requirelist.add(r);
 				} else {
 					_provide p = new _provide();
 					p.setProvided(linkpointID);
 					p.setProvider(fatherid);
+					pM.insert(p);
 					providelist.add(p);
 				}
 				break;
 			}
-			ports1.setLinkpointid(linkpointID);
+			
 			portlist.add(ports1);
 		}
 	}
 
-	private static void TraverseOwnedPorts(List<? extends Node> ports, Integer fatherid, String portType)
+	private void TraverseOwnedPorts(List<? extends Node> ports, Integer fatherid, String portType)
 			throws Exception {
 		for (Node n2 : ports) {
 			Element element2 = (Element) n2;
@@ -724,6 +719,8 @@ public class AADLResolver {
 			ports1.setName(element2.attributeValue("name"));
 			ports1.setModeltype("aadl");
 			Integer linkpointID = (int) GetID.getId();
+			ports1.setLinkpointid(linkpointID);
+			portsMapper.insert(ports1);
 			switch (portType) {
 			case "dataport":
 			case "eventport":
@@ -742,12 +739,14 @@ public class AADLResolver {
 					_require r = new _require();
 					r.setRequired(linkpointID);
 					r.setRequirer(fatherid);
-					requirelist.add(r);
+					rm.insert(r);
+//					requirelist.add(r);
 				} else {
 					_provide p = new _provide();
 					p.setProvided(linkpointID);
 					p.setProvider(fatherid);
-					providelist.add(p);
+					pM.insert(p);
+//					providelist.add(p);
 				}
 				break;
 			case "busaccess":
@@ -759,17 +758,19 @@ public class AADLResolver {
 					_require r = new _require();
 					r.setRequired(linkpointID);
 					r.setRequirer(fatherid);
-					requirelist.add(r);
+					rm.insert(r);
+//					requirelist.add(r);
 				} else {
 					_provide p = new _provide();
 					p.setProvided(linkpointID);
 					p.setProvider(fatherid);
-					providelist.add(p);
+					pM.insert(p);
+//					providelist.add(p);
 				}
 				break;
 			}
-			ports1.setLinkpointid(linkpointID);
-			portlist.add(ports1);
+			
+//			portlist.add(ports1);
 		}
 	}
 
@@ -951,7 +952,7 @@ public class AADLResolver {
 		return "";
 	}
 
-	private static void TaskResolver(String modelfilename) throws Exception {
+	private void TaskResolver(String modelfilename) throws Exception {
 		
 		for (Node n : components) {
 			// 解析component
@@ -966,13 +967,18 @@ public class AADLResolver {
 
 			component.setModeltype("aadl");
 			component.setName(element.attributeValue("name"));
-			component.setType("task");
-			
-			componentlist.put("", component);
+			component.setType("task");	
+			insert_component(component);
+//			camArchMapper.insert(component);
+			//componentlist.put("", component);
 			// 解析task
 			_task t = new _task();
 			t.setName(component.getName());
 			t.setTaskid(idString);
+			List<Element> ports=element.elements("ownedDataPort");
+			TraverseOwnedPorts(ports, idString, "dataport");
+			
+			
 			List<? extends Node> prop = element.elements("ownedPropertyAssociation");
 			for (Node n2 : prop) {
 				Element e2=(Element)n2;
@@ -987,22 +993,21 @@ public class AADLResolver {
 				//是process,这里暂时规定process的wcet就叫wcet
 				if(e2.attributeValue("property").contains("wcet")) {
 					String getwcet=e2.element("ownedValue").element("ownedValue").attributeValue("value");
-					t.setWcet(getwcet+"ms");
-					
-				}
+					t.setWcet(getwcet+"ms");					
+				}				
 			}
 			//要到impl里去找
 			Document document=ModelResolver(modelfilename);
 			String getimpl=element.getUniquePath()+"/following-sibling::ownedClassifier[@name='"+element.attributeValue("name")+".impl"+"']";
 			
 			threadResolver(idString,getimpl,modelfilename);
-			
-			tasklist.add(t);
-			taskcomponentlist.put(element.attributeValue("name"), component);
+			insert_task(t);
+//			tasklist.add(t);
+			//taskcomponentlist.put(element.attributeValue("name"), component);
 		}
 	}
 	
-	private static void threadResolver(Integer fatherid,String rawimplpath,String modelfilename) throws Exception {
+	private void threadResolver(Integer fatherid,String rawimplpath,String modelfilename) throws Exception {
 		Document d=ModelResolver(modelfilename);
 		Element e=(Element)d.selectSingleNode(rawimplpath);
 		
@@ -1011,10 +1016,11 @@ public class AADLResolver {
 			for(Element e2:thread) {
 				Element theadElement=(Element) d.selectSingleNode(GetXPath42layer(e2.attributeValue("threadSubcomponentType")));
 				
-				
 				//TODO 找到了process下面有哪些thread,寻找thread在哪里
 				component component= new component();
 				Integer idString = (int) GetID.getId();
+				List<Element> ports=e2.elements("ownedDataPort");
+				TraverseOwnedPorts(ports, idString, "dataport");
 
 				AppendID.AppendID(modelfilename, theadElement.getUniquePath(), idString.toString());
 
@@ -1023,15 +1029,16 @@ public class AADLResolver {
 				component.setModeltype("aadl");
 				component.setName(theadElement.attributeValue("name"));
 				component.setType("task");
-				
-				componentlist.put("", component);
+				insert_component(component);
+//				componentlist.put("", component);
 				_task t=new _task();
 				t.setName(theadElement.attributeValue("name"));
 				
 				t.setTaskid(idString);
 				t.setFatherid(fatherid);
-				tasklist.add(t);
-				taskcomponentlist.put(e2.attributeValue("name"), component);
+				insert_task(t);
+//				tasklist.add(t);
+//				taskcomponentlist.put(e2.attributeValue("name"), component);
 			}
 		}
 		
@@ -1091,7 +1098,6 @@ public class AADLResolver {
 				comp.setName(((Element) document.selectSingleNode(GetXPath(partitionPath))).attributeValue("name"));
 				camArchMapper.insert(comp);
 				ptm.insert(p);
-//				partitionlist.add(p);
 				// TODO partition作为component，设置task的partitionID
 				_task t = new _task();
 				t.setTaskid(Integer.valueOf(taskid));
@@ -1099,7 +1105,6 @@ public class AADLResolver {
 				_tm.updateByPrimaryKeySelective(t);
 			}
 		}
-
 	}
 
 	private static String GetSysname(String systemSubcomponentType) {

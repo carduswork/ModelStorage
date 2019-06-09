@@ -57,6 +57,7 @@ public interface linkpointMapper {
      * @mbg.generated Wed May 29 15:04:20 CST 2019
      */
     int updateByPrimaryKey(linkpoint record);
+    
 	List<linkpoint> getPortUnderCMP(Integer cmpid);
 
 }
