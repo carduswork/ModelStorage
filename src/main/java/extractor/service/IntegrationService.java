@@ -87,10 +87,10 @@ public class IntegrationService {
 					Element lp = comp.addElement("linkpoint");
 					lp.addAttribute("name", v2.getName());
 					lp.addAttribute("id", v2.getLinkpointid().toString());
-					if(pvm.selectByportid(v2.getLinkpointid())!=null) {
+					if (pvm.selectByportid(v2.getLinkpointid()) != null) {
 						lp.addAttribute("direction", "out");
 					}
-					if(rm.selectByportid(v2.getLinkpointid())!=null) {
+					if (rm.selectByportid(v2.getLinkpointid()) != null) {
 						lp.addAttribute("direction", "in");
 					}
 				});
@@ -99,24 +99,35 @@ public class IntegrationService {
 				states.forEach((v3) -> {
 					if (v3 != null) {
 						Element lp = comp.addElement("state");
-						lp.addAttribute("name", v3.getName()); 
+						lp.addAttribute("name", v3.getName());
 						lp.addAttribute("id", v3.getStateid().toString());
 					}
 				});
-				//设置processor即partition
-				List<_partition> processorlist=ptnm.selectByRTOS(v.getComponentid());
-				processorlist.forEach((v5)->{
-					Element psr=comp.addElement("partition");
-					psr.addAttribute("id",v5.getPartitionid().toString());
+				// 设置processor即partition
+				List<_partition> processorlist = ptnm.selectByRTOS(v.getComponentid());
+				processorlist.forEach((v5) -> {
+					Element psr = comp.addElement("partition");
+					psr.addAttribute("id", v5.getPartitionid().toString());
 					// 设置task
-					List<_task> tasklist=_tm.selectBypartition(v5.getPartitionid());
-					tasklist.forEach((v4)->{
-						Element tsk=psr.addElement("task");
+					List<_task> tasklist = _tm.selectBypartition(v5.getPartitionid());
+					tasklist.forEach((v4) -> {
+						Element tsk = psr.addElement("task");
 						tsk.addAttribute("Name", v4.getName());
 						tsk.addAttribute("id", v4.getTaskid().toString());
 						tsk.addAttribute("deadline", v4.getDeadline());
 						tsk.addAttribute("period", v4.getPeriod());
 						tsk.addAttribute("wcet", v4.getWcet());
+						
+						List<_task> childlist = _tm.selectChild(v4.getTaskid());
+						childlist.forEach((v6)->{
+							Element child= tsk.addElement("task");
+							child.addAttribute("Name", v6.getName());
+							child.addAttribute("id", v6.getTaskid().toString());
+							child.addAttribute("deadline", v6.getDeadline());
+							child.addAttribute("period", v6.getPeriod());
+							child.addAttribute("wcet", v6.getWcet());
+						});
+						
 					});
 				});
 			});
@@ -139,8 +150,9 @@ public class IntegrationService {
 			e.printStackTrace();
 		}
 	}
+
 //	按照映射表来搜索
 	private void filterbymap() {
-		
+
 	}
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aadl2:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:errorModel="http://www.aadl.info/EMV2" name="thermostat" publicSection="#//@ownedPublicSection">
+<aadl2:Package xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:errorModel="http://www.aadl.info/EMV2" xmi:version="2.0" name="thermostat" publicSection="#//@ownedPublicSection">
   <ownedPublicSection importedUnit="aadl2:Package ErrorLib.aadl#ErrorLib aadl2:PropertySet PS.aadl#PS">
     <ownedClassifier xsi:type="aadl2:SystemType" name="thermostat">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">
@@ -12,7 +12,7 @@
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="20"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;use types ErrorLib;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;use behavior ErrorLib::FailStopTransient;&#x9;&#x9;&#xD;&#xA;&#x9;&#x9;error propagations&#xD;&#xA;&#x9;&#x9;--输入数据格式错误，或长度错误或未接收到输入数据&#xD;&#xA;&#x9;&#x9;currentTemperature:in propagation {Violation};&#xD;&#xA;&#x9;&#x9;end propagations;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;**}">
+      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**     use types ErrorLib;     use behavior ErrorLib::FailStopTransient;     error propagations   --输入数据格式错误，或长度错误或未接收到输入数据   currentTemperature:in propagation {Violation};   end propagations;     **}">
         <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib" useBehavior="ErrorLib.aadl#emv2$ErrorLib.FailStopTransient">
           <propagations>
             <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.3">
@@ -30,7 +30,7 @@
       <ownedDataPort name="heating" out="true"/>
       <ownedDataPort name="currentTemperature" in="true"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="-128242031">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <appliesTo>
           <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.1"/>
@@ -46,6 +46,18 @@
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <appliesTo>
           <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.2"/>
+        </appliesTo>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:ListValue">
+            <ownedListElement xsi:type="aadl2:ReferenceValue">
+              <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessorSubcomponent.0"/>
+            </ownedListElement>
+          </ownedValue>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
+        <appliesTo>
+          <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.3"/>
         </appliesTo>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
@@ -179,7 +191,7 @@
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="5"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;use types ErrorLib;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;use behavior ErrorLib::FailStopTransient;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;error propagations&#xD;&#xA;&#x9;&#x9;&#x9;currT:in propagation {InvalidParameter};&#xD;&#xA;&#x9;&#x9;end propagations;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;**}">
+      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**     use types ErrorLib;     use behavior ErrorLib::FailStopTransient;     error propagations    currT:in propagation {InvalidParameter};   end propagations;     **}">
         <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib" useBehavior="ErrorLib.aadl#emv2$ErrorLib.FailStopTransient">
           <propagations>
             <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.0"/>

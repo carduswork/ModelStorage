@@ -518,12 +518,11 @@ public class AADLResolver {
 		Document document = ModelResolver(modelfilename);
 
 		// 从集成的角度看，先直接解析task，等以后有了shcedule再绑定上级
-		String gettask = "//ownedClassifier[@xsi:type='aadl2:ProcessType' or @xsi:type='aadl2:ThreadType']";
+		//String gettask = "//ownedClassifier[@xsi:type='aadl2:ProcessType' or @xsi:type='aadl2:ThreadType']";
+		String gettask = "//ownedClassifier[@xsi:type='aadl2:ProcessType']";
 		// 查找系统内部的组件
-		// String innerDevcvice = "//ownedClassifier[@xsi:type='aadl2:ProcessorType'or
-		// @xsi:type='aadl2:MemoryType']";
+
 		String innerDevcvice = "//ownedClassifier[@xsi:type='aadl2:ProcessorType']";
-		// Integer idString3 = (int) GetID.getId();
 		components = document.selectNodes(innerDevcvice);
 		resolverChild(modelfilename, "device");
 
@@ -532,7 +531,6 @@ public class AADLResolver {
 		TaskResolver(modelfilename);
 
 		// SystemType的错误附件影响到下级的实现
-		// String getfathersyString = "";
 
 		String getallsysimpl = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']";
 		List<? extends Node> nodes = document.selectNodes(getallsysimpl);
@@ -604,7 +602,7 @@ public class AADLResolver {
 				r.setRtosid(componentID);
 				// TODO 设置partitions的数量
 				rtoslist.add(r);
-
+				
 				String sysdef = modeldirectory + Getfilename(element.attributeValue("systemSubcomponentType"));
 				LinkpointResolver(sysdef, ports, componentID, t, element.attributeValue("name"));
 				break;
@@ -941,7 +939,6 @@ public class AADLResolver {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
 	// 获取Exception的类型
@@ -955,7 +952,7 @@ public class AADLResolver {
 	}
 
 	private static void TaskResolver(String modelfilename) throws Exception {
-
+		
 		for (Node n : components) {
 			// 解析component
 			Element element = (Element) n;
@@ -970,7 +967,7 @@ public class AADLResolver {
 			component.setModeltype("aadl");
 			component.setName(element.attributeValue("name"));
 			component.setType("task");
-			// TODO task作为component的二次 存入
+			
 			componentlist.put("", component);
 			// 解析task
 			_task t = new _task();
@@ -987,17 +984,60 @@ public class AADLResolver {
 					String getperiod = e2.element("ownedValue").element("ownedValue").attributeValue("value");
 					t.setPeriod(getperiod+"ms");
 				}
-				//这里暂时规定wcet就叫wcet
+				//是process,这里暂时规定process的wcet就叫wcet
 				if(e2.attributeValue("property").contains("wcet")) {
 					String getwcet=e2.element("ownedValue").element("ownedValue").attributeValue("value");
 					t.setWcet(getwcet+"ms");
+					
 				}
 			}
+			//要到impl里去找
+			Document document=ModelResolver(modelfilename);
+			String getimpl=element.getUniquePath()+"/following-sibling::ownedClassifier[@name='"+element.attributeValue("name")+".impl"+"']";
+			
+			threadResolver(idString,getimpl,modelfilename);
+			
 			tasklist.add(t);
 			taskcomponentlist.put(element.attributeValue("name"), component);
 		}
 	}
+	
+	private static void threadResolver(Integer fatherid,String rawimplpath,String modelfilename) throws Exception {
+		Document d=ModelResolver(modelfilename);
+		Element e=(Element)d.selectSingleNode(rawimplpath);
+		
+		List<Element> thread=e.elements("ownedThreadSubcomponent");
+		if(thread.size()>0) {
+			for(Element e2:thread) {
+				Element theadElement=(Element) d.selectSingleNode(GetXPath42layer(e2.attributeValue("threadSubcomponentType")));
+				
+				
+				//TODO 找到了process下面有哪些thread,寻找thread在哪里
+				component component= new component();
+				Integer idString = (int) GetID.getId();
 
+				AppendID.AppendID(modelfilename, theadElement.getUniquePath(), idString.toString());
+
+				component.setComponentid(idString);
+
+				component.setModeltype("aadl");
+				component.setName(theadElement.attributeValue("name"));
+				component.setType("task");
+				
+				componentlist.put("", component);
+				_task t=new _task();
+				t.setName(theadElement.attributeValue("name"));
+				
+				t.setTaskid(idString);
+				t.setFatherid(fatherid);
+				tasklist.add(t);
+				taskcomponentlist.put(e2.attributeValue("name"), component);
+			}
+		}
+		
+		//String getthreads="";
+	}
+	
 	private static String Getfilename(String systemSubcomponentType) {
 		if (systemSubcomponentType != null) {
 			String reg = "(?<=\\s)[A-Za-z0-9]+";
@@ -1037,7 +1077,6 @@ public class AADLResolver {
 				String decalrepath = "//ownedClassifier[@name='" + implElement.attributeValue("name").split("\\.")[0]
 						+ "']";
 				String taskid = ((Element) document.selectSingleNode(decalrepath)).attributeValue("id");
-//				String taskid = GetElementID(filepath,taskpath);
 
 				String rtosid = GetElementID(filepath, n.getParent().getUniquePath());
 
