@@ -40,7 +40,6 @@ import extractor.model._task;
 import extractor.model.bus;
 import extractor.model.communicationchannel;
 import extractor.model.component;
-import extractor.model.dataobject;
 import extractor.model.device;
 import extractor.model.linkpoint;
 import extractor.model.rtos;

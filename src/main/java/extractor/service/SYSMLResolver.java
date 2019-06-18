@@ -9,6 +9,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
+import org.dom4j.QName;
 import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -183,9 +184,9 @@ public class SYSMLResolver {
 	public void srvmatchmeta() throws Exception {
 		modeldirectory = "src/main/resources/modelresource/MarkedModelFile/";
 		MatchComponents(sysmlFiles.get("文件"), "块图");
-		componentlist.forEach((v) -> {
-			insert_component(v);
-		});
+//		componentlist.forEach((v) -> {
+//			insert_component(v);
+//		});
 		portlist.forEach((v) -> {
 			insert_ports(v);
 		});
@@ -210,7 +211,8 @@ public class SYSMLResolver {
 	public void MatchComponents(String filepath, String contenttype) throws Exception {
 		Document document = ModelResolver(filepath);
 
-		String getCompponents = "//packagedElement[@xmi:type='uml:Class']";
+		String getCompponents = "//packagedElement[@xmi:type='uml:Class']/nestedClassifier[@xmi:type='uml:Class' or @xmi:type='uml:Device']";
+//		String getdevice="//packagedElement[@xmi:type='uml:Class']/nestedClassifier[]";
 		List<? extends Node> com = document.selectNodes(getCompponents);
 		for (Node n : com) {
 			Element e = (Element) n;
@@ -222,8 +224,15 @@ public class SYSMLResolver {
 			c.setName(e.attributeValue("name"));
 			c.setModeltype("sysml");
 			// TODO sysml组件种类鉴别
-			c.setType("rtos");
-			componentlist.add(c);
+			Element root = document.getRootElement();
+			QName q = QName.get("type", root.getNamespaceForPrefix("xmi"));
+			if (e.attributeValue(q).equals("uml:Class")) {
+				c.setType("rtos");
+			} else {
+				c.setType("device");
+			}
+			insert_component(c);
+//			componentlist.add(c);
 			if (e.element("ownedRule[@xmi:type='uml:Constraint']") != null) {
 				Element e2 = e.element("ownedRule[@xmi:type='uml:Constraint']");
 				_exception ex = new _exception();
@@ -231,14 +240,15 @@ public class SYSMLResolver {
 				// ex.setCommunicationchannelid(communicationchannelid);
 				exceptionlist.add(ex);
 			}
-			LinkpointResolver(filepath, n.getUniquePath(), c);
+			LinkpointResolver(filepath, n.getUniquePath(), "rtos");
 			TaskResolver(filepath, n.getUniquePath(), c);
 		}
 	}
 
 //TODO provide,require
-	private static void LinkpointResolver(String linkpointfile, String fatherpath, component father) throws Exception {
+	private static void LinkpointResolver(String linkpointfile, String fatherpath, String fathertype) throws Exception {
 		Document document = ModelResolver(linkpointfile);
+
 		List<? extends Node> ports = document.selectNodes(fatherpath + "/ownedAttribute[@xmi:type='uml:Port']");
 		for (Node n : ports) {
 			Element element2 = (Element) n;
@@ -249,8 +259,18 @@ public class SYSMLResolver {
 			ports1.setLinkpointid(linkpointID);
 			try {
 				AppendID.AppendID4sysml(linkpointfile, element2.getUniquePath(), linkpointID.toString());
+				// type指向赋予id
+				QName qname1 = QName.get("type");
+				if (fathertype.equals("rtos")) {
+
+					String g = "//ownedAttribute[@xmi:id='" + element2.attributeValue(qname1) + "']";
+					AppendID.AppendID4sysml(linkpointfile, g, linkpointID.toString());
+				} else {
+					String g = "//nestedClassifier[@xmi:id='" + element2.attributeValue(qname1) + "']";
+					AppendID.AppendID4sysml(linkpointfile, g, linkpointID.toString());
+				}
 			} catch (Exception e) {
-				e.printStackTrace();
+//				System.out.println();
 			}
 			portlist.add(ports1);
 
@@ -267,41 +287,49 @@ public class SYSMLResolver {
 			communicationchannel cchannel = new communicationchannel();
 			Integer idString = (int) GetID.getId();
 			AppendID.AppendID4sysml(modelfilename, n.getUniquePath(), idString.toString());
-			//sysml没有分类一律按照sync处理
+			// sysml没有分类一律按照sync处理
 			cchannel.setType("sync");
 			cchannel.setName(element.attributeValue("name"));
 			cchannel.setCommunicationchannelid(idString);
 			cchannel.setSourceid(GetCMPIDByXMIID(modelfilename, element.attributeValue("informationSource")));
-			cchannel.setDestid(GetCMPIDByXMIID(modelfilename, element.attributeValue("informationTarget")));
+			try {
+
+				cchannel.setDestid(GetCMPIDByXMIID(modelfilename, element.attributeValue("informationTarget")));
+			} catch (Exception e) {
+				System.out.println(element.attributeValue("informationTarget"));
+				break;
+			}
 			cclist.add(cchannel);
 		}
 	}
 
-	private static void TaskResolver(String modelfilename, String fatherpath, component father) throws Exception {
+	private void TaskResolver(String modelfilename, String fatherpath, component father) throws Exception {
 		Document document = ModelResolver(modelfilename);
-		String gettask = fatherpath + "/ownedOperation[@xmi:type='uml:Operation']";
+//		String gettask = fatherpath + "/ownedOperation[@xmi:type='uml:Operation']";
+		String gettask = fatherpath + "/nestedClassifier";
 		List<? extends Node> namelist = document.selectNodes(gettask);
 		for (Node n : namelist) {
 			Element element2 = (Element) n;
-			component component = new component();
+			component linkpointcomponent = new component();
 			Integer idString = (int) GetID.getId();
-			component.setComponentid(idString);
+			linkpointcomponent.setComponentid(idString);
 
-			component.setModeltype("sysml");
-			component.setName(element2.attributeValue("name"));
-			component.setType("task");
-			componentlist.add(component);
+			linkpointcomponent.setModeltype("sysml");
+			linkpointcomponent.setName(element2.attributeValue("name"));
+			linkpointcomponent.setType("task");
+			insert_component(linkpointcomponent);
 			_task t = new _task();
 			t.setName(element2.attributeValue("name"));
 			t.setTaskid(idString);
+			t.setFatherid(father.getComponentid());
 			// TODO 块图的partition不存在
-			// t.setPartitionid(father.getComponentid());
 			try {
 				AppendID.AppendID4sysml(modelfilename, element2.getUniquePath(), t.getTaskid().toString());
+				LinkpointResolver(modelfilename, element2.getUniquePath(), "task");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			tasklist.add(t);
+			insert_task(t);
 			// operation即task有错误定义
 			if (element2.element("ownedRule") != null) {
 				// TODO 解析错误exception
@@ -311,6 +339,7 @@ public class SYSMLResolver {
 				ex.setName(e2.attributeValue("name"));
 				exceptionlist.add(ex);
 			}
+			
 		}
 
 	}

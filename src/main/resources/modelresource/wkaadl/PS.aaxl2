@@ -15,4 +15,20 @@
       <metaclassName>system</metaclassName>
     </appliesTo>
   </ownedProperty>
+  <ownedProperty name="wcet4dev" referencedPropertyType="aadl2:AadlInteger ../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#AADL_Project.Time">
+    <appliesTo xsi:type="aadl2:MetaclassReference">
+      <metaclassName>device</metaclassName>
+    </appliesTo>
+  </ownedProperty>
+  <ownedProperty name="period" referencedPropertyType="aadl2:AadlInteger ../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#AADL_Project.Time">
+    <appliesTo xsi:type="aadl2:MetaclassReference">
+      <metaclassName>data</metaclassName>
+    </appliesTo>
+  </ownedProperty>
+  <ownedProperty name="porttype">
+    <ownedPropertyType xsi:type="aadl2:AadlString"/>
+    <appliesTo xsi:type="aadl2:MetaclassReference">
+      <metaclassName>data</metaclassName>
+    </appliesTo>
+  </ownedProperty>
 </aadl2:PropertySet>

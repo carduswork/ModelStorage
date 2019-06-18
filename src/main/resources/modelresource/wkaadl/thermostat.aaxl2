@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aadl2:Package xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:errorModel="http://www.aadl.info/EMV2" xmi:version="2.0" name="thermostat" publicSection="#//@ownedPublicSection">
-  <ownedPublicSection importedUnit="aadl2:Package ErrorLib.aadl#ErrorLib aadl2:PropertySet PS.aadl#PS">
+  <ownedPublicSection importedUnit="aadl2:Package ErrorLib.aadl#ErrorLib aadl2:PropertySet PS.aadl#PS aadl2:Package composition.aadl#composition">
     <ownedClassifier xsi:type="aadl2:SystemType" name="thermostat">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">
         <ownedValue>
@@ -9,28 +9,27 @@
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="PS.aadl#PS.wcet4sys">
         <ownedValue>
-          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="20"/>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="3"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**     use types ErrorLib;     use behavior ErrorLib::FailStopTransient;     error propagations   --输入数据格式错误，或长度错误或未接收到输入数据   currentTemperature:in propagation {Violation};   end propagations;     **}">
+      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**     use types ErrorLib;     use behavior ErrorLib::FailStopTransient;     error propagations   --输入数据格式错误，或长度错误或未接收到输入数据   currentTemperature:in propagation {Violation,InvalidParameter}; --  heating:out propagation{InvalidParameter}; --  flows --   testpath:error path currentTemperature{Violation} when {HardwareFault};   end propagations;     **}">
         <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib" useBehavior="ErrorLib.aadl#emv2$ErrorLib.FailStopTransient">
           <propagations>
-            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.3">
-              <ownedComment body="--输入数据格式错误，或长度错误或未接收到输入数据"/>
-            </featureorPPRef>
+            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.3"/>
             <typeSet>
               <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.Violation"/>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
             </typeSet>
           </propagations>
         </parsedAnnexSubclause>
       </ownedAnnexSubclause>
       <ownedAbstractFeature name="ObservableFailure" out="true"/>
-      <ownedDataPort name="operatorFeedback" out="true"/>
-      <ownedDataPort name="operatorsettings" in="true"/>
-      <ownedDataPort name="heating" out="true"/>
-      <ownedDataPort name="currentTemperature" in="true"/>
+      <ownedDataPort name="operatorFeedback" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.ofb"/>
+      <ownedDataPort name="operatorsettings" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.os"/>
+      <ownedDataPort name="heating" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.heating1"/>
+      <ownedDataPort name="currentTemperature" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="-1710217169">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="-32218893">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <appliesTo>
           <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.1"/>
@@ -80,10 +79,6 @@
         <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.3" connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedDataPort.0"/>
         <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.3"/>
       </ownedPortConnection>
-      <ownedPortConnection name="new_connection4">
-        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.2"/>
-        <source context="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.3" connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedDataPort.1"/>
-      </ownedPortConnection>
       <ownedPortConnection name="new_connection5">
         <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.0"/>
         <source connectionEnd="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.1"/>
@@ -91,6 +86,14 @@
       <ownedPortConnection name="new_connection6">
         <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.0"/>
         <source context="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.4/@ownedDataPort.1"/>
+      </ownedPortConnection>
+      <ownedPortConnection name="new_connection4">
+        <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.2" connectionEnd="#//@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.1"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.3" connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedDataPort.1"/>
+      </ownedPortConnection>
+      <ownedPortConnection name="new_connection7">
+        <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.2"/>
+        <source context="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.2" connectionEnd="#//@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.2"/>
       </ownedPortConnection>
       <ownedProcessSubcomponent name="setTemrange" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.3"/>
       <ownedProcessSubcomponent name="feedback" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.5"/>
@@ -106,7 +109,7 @@
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="PS.aadl#PS.wcet">
         <ownedValue>
-          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="10"/>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
       <ownedDataPort name="insetting" in="true"/>
@@ -124,7 +127,7 @@
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="PS.aadl#PS.wcet">
         <ownedValue>
-          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="10"/>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
       <ownedDataPort name="setting" in="true"/>
@@ -141,10 +144,12 @@
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="PS.aadl#PS.wcet">
         <ownedValue>
-          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="10"/>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
       <ownedDataPort name="setting" in="true"/>
+      <ownedDataPort name="ct" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem"/>
+      <ownedDataPort name="heating" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.heating1"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="temadjust.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.6"/>
@@ -157,11 +162,11 @@
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="PS.aadl#PS.wcet">
         <ownedValue>
-          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="10"/>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="2"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedDataPort name="datain" in="true"/>
-      <ownedDataPort name="dataout" out="true"/>
+      <ownedDataPort name="datain" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem"/>
+      <ownedDataPort name="dataout" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="datadeal.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.8"/>
@@ -188,13 +193,13 @@
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="PS.aadl#PS.wcet4thread">
         <ownedValue>
-          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="5"/>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**     use types ErrorLib;     use behavior ErrorLib::FailStopTransient;     error propagations    currT:in propagation {InvalidParameter};   end propagations;     **}">
+      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**     use types ErrorLib;     use behavior ErrorLib::FailStopTransient;              error propagations    currT2:out propagation {InvalidParameter};   end propagations;          **}">
         <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib" useBehavior="ErrorLib.aadl#emv2$ErrorLib.FailStopTransient">
-          <propagations>
-            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.0"/>
+          <propagations direction="out">
+            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.1"/>
             <typeSet>
               <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
             </typeSet>
@@ -215,7 +220,7 @@
       </ownedPropertyAssociation>
       <ownedPropertyAssociation property="PS.aadl#PS.wcet4thread">
         <ownedValue>
-          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="5"/>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
       <ownedDataPort name="currT" in="true"/>
@@ -227,14 +232,11 @@
     <ownedClassifier xsi:type="aadl2:ProcessorType" name="LSP"/>
     <ownedClassifier xsi:type="aadl2:ProcessorImplementation" name="lsp.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.14"/>
-      <ownedVirtualProcessorSubcomponent name="part1" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.17">
-        <ownedComment body="-- kfBefore: virtual processor kfBefore.impl;  "/>
-      </ownedVirtualProcessorSubcomponent>
+      <ownedVirtualProcessorSubcomponent name="part1" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.17"/>
       <ownedVirtualProcessorSubcomponent name="part2" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.17"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:VirtualProcessorType" name="cpu">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Scheduling_Protocol">
-        <ownedComment body="--分区号为1"/>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
             <ownedListElement xsi:type="aadl2:NamedValue" namedValue="aadl2:EnumerationLiteral ../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.7/@ownedLiteral.5"/>

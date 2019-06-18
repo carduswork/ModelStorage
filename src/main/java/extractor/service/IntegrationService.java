@@ -12,7 +12,6 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import extractor.DAO.mapper._exceptionMapper;
@@ -31,7 +30,6 @@ import extractor.model._task;
 import extractor.model.communicationchannel;
 import extractor.model.component;
 import extractor.model.linkpoint;
-import extractor.model.processor;
 
 //获取各种映射
 @Service("Map")
@@ -64,7 +62,7 @@ public class IntegrationService {
 		return document;
 	}
 
-	public void GenerateIntegaraton(String filename,String modeltype) {
+	public void GenerateIntegaraton(String filename, String modeltype) {
 		String dir = "src/main/resources/INTEGRATIONMODEL/";
 		// 可配置
 		try {
@@ -72,22 +70,28 @@ public class IntegrationService {
 			// 设置系统名
 			Element e_comp = d2.addElement("ownedPublicSection");
 			e_comp.addAttribute("name", filename);
-			List<component> r=new ArrayList<component>();
+			List<component> r = new ArrayList<component>();
 			// 设置组件
-			switch(modeltype) {
-			case "aadl":r= cm.selectAll_aadl();break;
-			case "sysml":r= cm.selectAll_sysml();break;
-			case "simulink":r= cm.selectAll_slk();break;
+			switch (modeltype) {
+			case "aadl":
+				r = cm.selectAll_aadl();
+				break;
+			case "sysml":
+				r = cm.selectAll_sysml();
+				break;
+			case "simulink":
+				r = cm.selectAll_slk();
+				break;
 			}
-			 
-			r.forEach((v) -> {
+
+			r.forEach((compv) -> {
 				Element comp = e_comp.addElement("component");
-				comp.addAttribute("name", v.getName());
-				comp.addAttribute("id", v.getComponentid().toString());
-				comp.addAttribute("type", v.getType());
+				comp.addAttribute("name", compv.getName());
+				comp.addAttribute("id", compv.getComponentid().toString());
+				comp.addAttribute("type", compv.getType());
 
 				// 设置linkpoint,transition
-				List<linkpoint> linpoints = lm.getPortUnderCMP(v.getComponentid());
+				List<linkpoint> linpoints = lm.getPortUnderCMP(compv.getComponentid());
 				linpoints.forEach((v2) -> {
 					Element lp = comp.addElement("linkpoint");
 					lp.addAttribute("name", v2.getName());
@@ -100,7 +104,7 @@ public class IntegrationService {
 					}
 				});
 				// 设置state
-				List<_state> states = sm.getStateUnderCMP(v.getComponentid());
+				List<_state> states = sm.getStateUnderCMP(compv.getComponentid());
 				states.forEach((v3) -> {
 					if (v3 != null) {
 						Element lp = comp.addElement("state");
@@ -109,7 +113,7 @@ public class IntegrationService {
 					}
 				});
 				// 设置processor即partition
-				List<_partition> processorlist = ptnm.selectByRTOS(v.getComponentid());
+				List<_partition> processorlist = ptnm.selectByRTOS(compv.getComponentid());
 				processorlist.forEach((v5) -> {
 					Element psr = comp.addElement("partition");
 					psr.addAttribute("id", v5.getPartitionid().toString());
@@ -160,6 +164,16 @@ public class IntegrationService {
 						});
 
 					});
+				});
+				//设置不在partition上的task
+				List<_task> tasklist = _tm.selectChild(compv.getComponentid());
+				tasklist.forEach((taskv)->{
+					Element tsk = comp.addElement("task");
+					tsk.addAttribute("Name", taskv.getName());
+					tsk.addAttribute("id", taskv.getTaskid().toString());
+					tsk.addAttribute("deadline", taskv.getDeadline());
+					tsk.addAttribute("period", taskv.getPeriod());
+					tsk.addAttribute("wcet", taskv.getWcet());
 				});
 			});
 			// 设置cchannel

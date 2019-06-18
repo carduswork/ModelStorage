@@ -50,7 +50,6 @@ import extractor.model.communicationchannel;
 import extractor.model.component;
 import extractor.model.connections;
 import extractor.model.device;
-import extractor.model.elementmap;
 import extractor.model.linkpoint;
 import extractor.model.rtos;
 import extractor.model.shareddataaccess;
@@ -1156,7 +1155,7 @@ public class AADLResolver {
 				p.setRtosid(Integer.valueOf(rtosid));
 				component comp = new component();
 				comp.setComponentid(pid);
-				comp.setComponentype("partition");
+				comp.setType("partition");
 				comp.setModeltype("aadl");
 				comp.setName(((Element) document.selectSingleNode(GetXPath(partitionPath))).attributeValue("name"));
 				camArchMapper.insert(comp);

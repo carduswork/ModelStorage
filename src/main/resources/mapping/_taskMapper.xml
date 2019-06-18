@@ -46,6 +46,9 @@
  <select id="selectBypartition" parameterType="java.lang.Integer" resultMap="BaseResultMap">
   	select * from task where PartitionID=#{partitionid,jdbcType=INTEGER}
   </select>
+  <!-- <select id="selectByfather" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  	select * from task where fatherid=#{fatherid,jdbcType=INTEGER}
+  </select> -->
   <select id="selectChild" parameterType="java.lang.Integer" resultMap="BaseResultMap">
   	select * from task where fatherid=#{fatherid,jdbcType=INTEGER}
   </select>

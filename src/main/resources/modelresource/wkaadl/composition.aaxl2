@@ -1,19 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<aadl2:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" name="composition" publicSection="#//@ownedPublicSection">
-  <ownedPublicSection>
+<aadl2:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:errorModel="http://www.aadl.info/EMV2" name="composition" publicSection="#//@ownedPublicSection">
+  <ownedPublicSection importedUnit="aadl2:PropertySet PS.aadl#PS">
+    <ownedClassifier xsi:type="aadl2:DataType" name="currentTem">
+      <ownedPropertyAssociation property="PS.aadl#PS.period">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="3"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation property="PS.aadl#PS.porttype">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:StringLiteral" value="signal"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+    </ownedClassifier>
+    <ownedClassifier xsi:type="aadl2:DataType" name="heating1">
+      <ownedPropertyAssociation property="PS.aadl#PS.period">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="3"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation property="PS.aadl#PS.porttype">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:StringLiteral" value="signal"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+    </ownedClassifier>
+    <ownedClassifier xsi:type="aadl2:DataType" name="ofb">
+      <ownedPropertyAssociation property="PS.aadl#PS.period">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="3"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation property="PS.aadl#PS.porttype">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:StringLiteral" value="signal"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+    </ownedClassifier>
+    <ownedClassifier xsi:type="aadl2:DataType" name="os">
+      <ownedPropertyAssociation property="PS.aadl#PS.period">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="3"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation property="PS.aadl#PS.porttype">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:StringLiteral" value="signal"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+    </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceType" name="temperature_sensor">
+      <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Period">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="5"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedPropertyAssociation property="PS.aadl#PS.wcet4dev">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
+      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;use types ErrorLib;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;error propagations&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;currentTemperature:out propagation{InvalidParameter};&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;end propagations;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;**}">
+        <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib">
+          <propagations direction="out">
+            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.4/@ownedDataPort.0"/>
+            <typeSet>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
+            </typeSet>
+          </propagations>
+        </parsedAnnexSubclause>
+      </ownedAnnexSubclause>
       <ownedDataPort name="currentTemperature" out="true"/>
-      <ownedDataPort name="heat" in="true"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceImplementation" name="temperature_sensor.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.4"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceType" name="heatsource">
+      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;use types ErrorLib;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;error propagations&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;heatcontrol:in propagation{InvalidParameter};&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;end propagations;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;**}">
+        <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib">
+          <propagations>
+            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.0"/>
+            <typeSet>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
+            </typeSet>
+          </propagations>
+        </parsedAnnexSubclause>
+      </ownedAnnexSubclause>
       <ownedDataPort name="heatcontrol" in="true"/>
       <ownedDataPort name="heat" out="true"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceImplementation" name="heatsource.impl">
-      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.2"/>
+      <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.6"/>
     </ownedClassifier>
   </ownedPublicSection>
 </aadl2:Package>
