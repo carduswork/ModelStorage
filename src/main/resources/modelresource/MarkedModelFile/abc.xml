@@ -1,0 +1,2924 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ModelInformation Version="1.0">
+  <Model Name="infant0528">
+    <P Name="Version">8.6</P>
+    <P Name="MdlSubVersion">0</P>
+    <P Name="SavedCharacterEncoding">US-ASCII</P>
+    <GraphicalInterface>
+      <P Name="NumRootInports">0</P>
+      <P Name="NumRootOutports">0</P>
+      <P Name="ParameterArgumentNames"/>
+      <P Name="ComputedModelVersion">1.11</P>
+      <P Name="NumModelReferences">0</P>
+      <P Name="NumTestPointedSignals">0</P>
+    </GraphicalInterface>
+    <P Name="ScopeRefreshTime">0.035000</P>
+    <P Name="OverrideScopeRefreshTime">on</P>
+    <P Name="DisableAllScopes">off</P>
+    <P Name="DataTypeOverride">UseLocalSettings</P>
+    <P Name="DataTypeOverrideAppliesTo">AllNumericTypes</P>
+    <P Name="MinMaxOverflowLogging">UseLocalSettings</P>
+    <P Name="MinMaxOverflowArchiveMode">Overwrite</P>
+    <P Name="FPTRunName">Run 1</P>
+    <P Name="MaxMDLFileLineLength">120</P>
+    <Object PropName="BdWindowsInfo" ObjectID="1" ClassName="Simulink.BDWindowsInfo">
+      <Object PropName="WindowsInfo" ObjectID="2" ClassName="Simulink.WindowInfo">
+        <P Name="IsActive" Class="logical">1</P>
+        <P Name="Location" Class="double">[0.0, 0.0, 1680.0, 1050.0]</P>
+        <Object PropName="ModelBrowserInfo" ObjectID="3" ClassName="Simulink.ModelBrowserInfo">
+          <P Name="Visible" Class="logical">0</P>
+          <P Name="DockPosition" Class="char">Left</P>
+          <P Name="Width" Class="int32">50</P>
+          <P Name="Height" Class="int32">50</P>
+          <P Name="Filter" Class="int32">9</P>
+        </Object>
+        <Object PropName="ExplorerBarInfo" ObjectID="4" ClassName="Simulink.ExplorerBarInfo">
+          <P Name="Visible" Class="logical">1</P>
+        </Object>
+        <Object PropName="EditorsInfo" ObjectID="5" ClassName="Simulink.EditorInfo">
+          <P Name="IsActive" Class="logical">1</P>
+          <P Name="ViewObjType" Class="char">SimulinkTopLevel</P>
+          <P Name="LoadSaveID" Class="char">0</P>
+          <P Name="Extents" Class="double">[1646.0, 899.0]</P>
+          <P Name="ZoomFactor" Class="double">1.25</P>
+          <P Name="Offset" Class="double">[0.0, 25.465595722198486]</P>
+        </Object>
+      </Object>
+    </Object>
+    <ConfigManagerSettings>
+      <P Name="Created">Sun May 19 15:11:29 2019</P>
+      <P Name="Creator">kexinlan</P>
+      <P Name="UpdateHistory">UpdateHistoryNever</P>
+      <P Name="ModifiedByFormat">%&lt;Auto&gt;</P>
+      <P Name="LastModifiedBy">kexinlan</P>
+      <P Name="ModifiedDateFormat">%&lt;Auto&gt;</P>
+      <P Name="LastModifiedDate">Tue May 28 19:12:11 2019</P>
+      <P Name="RTWModifiedTimeStamp">480971454</P>
+      <P Name="ModelVersionFormat">1.%&lt;AutoIncrement:11&gt;</P>
+      <P Name="ConfigurationManager">none</P>
+    </ConfigManagerSettings>
+    <EditorSettings>
+      <P Name="SampleTimeColors">off</P>
+      <P Name="SampleTimeAnnotations">off</P>
+      <P Name="LibraryLinkDisplay">disabled</P>
+      <P Name="WideLines">off</P>
+      <P Name="ShowLineDimensions">off</P>
+      <P Name="ShowPortDataTypes">off</P>
+      <P Name="ShowDesignRanges">off</P>
+      <P Name="ShowLoopsOnError">on</P>
+      <P Name="IgnoreBidirectionalLines">off</P>
+      <P Name="ShowStorageClass">off</P>
+      <P Name="ShowTestPointIcons">on</P>
+      <P Name="ShowSignalResolutionIcons">on</P>
+      <P Name="ShowViewerIcons">on</P>
+      <P Name="SortedOrder">off</P>
+      <P Name="ExecutionContextIcon">off</P>
+      <P Name="ShowLinearizationAnnotations">on</P>
+      <P Name="ShowVisualizeInsertedRTB">on</P>
+      <P Name="ShowMarkup">on</P>
+      <P Name="BlockNameDataTip">off</P>
+      <P Name="BlockParametersDataTip">off</P>
+      <P Name="BlockDescriptionStringDataTip">off</P>
+      <P Name="ToolBar">on</P>
+      <P Name="StatusBar">on</P>
+      <P Name="BrowserShowLibraryLinks">off</P>
+      <P Name="BrowserLookUnderMasks">off</P>
+    </EditorSettings>
+    <SimulationSettings>
+      <P Name="SimulationMode">normal</P>
+      <P Name="PauseTimes">5</P>
+      <P Name="NumberOfSteps">1</P>
+      <P Name="SnapshotBufferSize">10</P>
+      <P Name="SnapshotInterval">10</P>
+      <P Name="NumberOfLastSnapshots">0</P>
+      <P Name="LinearizationMsg">none</P>
+      <P Name="Profile">off</P>
+      <P Name="ParamWorkspaceSource">MATLABWorkspace</P>
+      <P Name="AccelSystemTargetFile">accel.tlc</P>
+      <P Name="AccelTemplateMakefile">accel_default_tmf</P>
+      <P Name="AccelMakeCommand">make_rtw</P>
+      <P Name="TryForcingSFcnDF">off</P>
+      <Object PropName="DataLoggingOverride" ObjectID="6" ClassName="Simulink.SimulationData.ModelLoggingInfo">
+        <P Name="model_" Class="char">untitled</P>
+        <P Name="overrideMode_" Class="double">0.0</P>
+        <Array PropName="logAsSpecifiedByModels_" Type="Cell" Dimension="1*1">
+          <Cell Class="char">untitled</Cell>
+        </Array>
+        <Array PropName="logAsSpecifiedByModelsSSIDs_" Type="Cell" Dimension="1*1">
+          <Cell Class="double">[]</Cell>
+        </Array>
+      </Object>
+    </SimulationSettings>
+    <ExternalMode>
+      <P Name="ExtModeBatchMode">off</P>
+      <P Name="ExtModeEnableFloating">on</P>
+      <P Name="ExtModeTrigType">manual</P>
+      <P Name="ExtModeTrigMode">normal</P>
+      <P Name="ExtModeTrigPort">1</P>
+      <P Name="ExtModeTrigElement">any</P>
+      <P Name="ExtModeTrigDuration">1000</P>
+      <P Name="ExtModeTrigDurationFloating">auto</P>
+      <P Name="ExtModeTrigHoldOff">0</P>
+      <P Name="ExtModeTrigDelay">0</P>
+      <P Name="ExtModeTrigDirection">rising</P>
+      <P Name="ExtModeTrigLevel">0</P>
+      <P Name="ExtModeArchiveMode">off</P>
+      <P Name="ExtModeAutoIncOneShot">off</P>
+      <P Name="ExtModeIncDirWhenArm">off</P>
+      <P Name="ExtModeAddSuffixToVar">off</P>
+      <P Name="ExtModeWriteAllDataToWs">off</P>
+      <P Name="ExtModeArmWhenConnect">on</P>
+      <P Name="ExtModeSkipDownloadWhenConnect">off</P>
+      <P Name="ExtModeLogAll">on</P>
+      <P Name="ExtModeAutoUpdateStatusClock">on</P>
+    </ExternalMode>
+    <ModelReferenceSettings>
+      <P Name="ShowModelReferenceBlockVersion">off</P>
+      <P Name="ShowModelReferenceBlockIO">off</P>
+    </ModelReferenceSettings>
+    <ConfigurationSet>
+      <Array PropName="ConfigurationSets" Type="Handle" Dimension="1*1">
+        <Object ObjectID="7" Version="1.15.1" ClassName="Simulink.ConfigSet">
+          <Array PropName="Components" Type="Handle" Dimension="1*10">
+            <Object ObjectID="8" Version="1.15.1" ClassName="Simulink.SolverCC">
+              <P Name="StartTime">0.0</P>
+              <P Name="StopTime">10.0</P>
+              <P Name="AbsTol">auto</P>
+              <P Name="FixedStep">auto</P>
+              <P Name="InitialStep">auto</P>
+              <P Name="MaxNumMinSteps">-1</P>
+              <P Name="MaxOrder">5</P>
+              <P Name="ZcThreshold">auto</P>
+              <P Name="ConsecutiveZCsStepRelTol">10*128*eps</P>
+              <P Name="MaxConsecutiveZCs">1000</P>
+              <P Name="ExtrapolationOrder">4</P>
+              <P Name="NumberNewtonIterations">1</P>
+              <P Name="MaxStep">auto</P>
+              <P Name="MinStep">auto</P>
+              <P Name="MaxConsecutiveMinStep">1</P>
+              <P Name="RelTol">1e-3</P>
+              <P Name="SolverMode">Auto</P>
+              <P Name="EnableConcurrentExecution">off</P>
+              <P Name="ConcurrentTasks">off</P>
+              <P Name="Solver">VariableStepAuto</P>
+              <P Name="SolverName">VariableStepAuto</P>
+              <P Name="SolverJacobianMethodControl">auto</P>
+              <P Name="ShapePreserveControl">DisableAll</P>
+              <P Name="ZeroCrossControl">UseLocalSettings</P>
+              <P Name="ZeroCrossAlgorithm">Nonadaptive</P>
+              <P Name="AlgebraicLoopSolver">TrustRegion</P>
+              <P Name="SolverInfoToggleStatus">off</P>
+              <P Name="IsAutoAppliedInSIP">off</P>
+              <P Name="SolverResetMethod">Fast</P>
+              <P Name="PositivePriorityOrder">off</P>
+              <P Name="AutoInsertRateTranBlk">off</P>
+              <P Name="SampleTimeConstraint">Unconstrained</P>
+              <P Name="InsertRTBMode">Whenever possible</P>
+            </Object>
+            <Object ObjectID="9" Version="1.15.1" ClassName="Simulink.DataIOCC">
+              <P Name="Decimation">1</P>
+              <P Name="ExternalInput">[t, u]</P>
+              <P Name="FinalStateName">xFinal</P>
+              <P Name="InitialState">xInitial</P>
+              <P Name="LimitDataPoints">on</P>
+              <P Name="MaxDataPoints">1000</P>
+              <P Name="LoadExternalInput">off</P>
+              <P Name="LoadInitialState">off</P>
+              <P Name="SaveFinalState">off</P>
+              <P Name="SaveCompleteFinalSimState">off</P>
+              <P Name="SaveFormat">Dataset</P>
+              <P Name="SignalLoggingSaveFormat">Dataset</P>
+              <P Name="SaveOutput">on</P>
+              <P Name="SaveState">off</P>
+              <P Name="SignalLogging">on</P>
+              <P Name="DSMLogging">on</P>
+              <P Name="InspectSignalLogs">off</P>
+              <P Name="VisualizeSimOutput">on</P>
+              <P Name="StreamToWorkspace">off</P>
+              <P Name="StreamVariableName">streamout</P>
+              <P Name="SaveTime">on</P>
+              <P Name="ReturnWorkspaceOutputs">off</P>
+              <P Name="StateSaveName">xout</P>
+              <P Name="TimeSaveName">tout</P>
+              <P Name="OutputSaveName">yout</P>
+              <P Name="SignalLoggingName">logsout</P>
+              <P Name="DSMLoggingName">dsmout</P>
+              <P Name="OutputOption">RefineOutputTimes</P>
+              <P Name="OutputTimes">[]</P>
+              <P Name="ReturnWorkspaceOutputsName">out</P>
+              <P Name="Refine">1</P>
+              <P Name="LoggingIntervals">[-inf, inf]</P>
+            </Object>
+            <Object ObjectID="10" Version="1.15.1" ClassName="Simulink.OptimizationCC">
+              <Array PropName="DisabledProps" Type="Cell" Dimension="1*8">
+                <Cell Class="char">BooleansAsBitfields</Cell>
+                <Cell Class="char">PassReuseOutputArgsAs</Cell>
+                <Cell Class="char">PassReuseOutputArgsThreshold</Cell>
+                <Cell Class="char">ZeroExternalMemoryAtStartup</Cell>
+                <Cell Class="char">ZeroInternalMemoryAtStartup</Cell>
+                <Cell Class="char">OptimizeModelRefInitCode</Cell>
+                <Cell Class="char">NoFixptDivByZeroProtection</Cell>
+                <Cell Class="char">UseSpecifiedMinMax</Cell>
+              </Array>
+              <P Name="BlockReduction">on</P>
+              <P Name="BooleanDataType">on</P>
+              <P Name="ConditionallyExecuteInputs">on</P>
+              <P Name="DefaultParameterBehavior">Tunable</P>
+              <P Name="UseDivisionForNetSlopeComputation">off</P>
+              <P Name="UseFloatMulNetSlope">off</P>
+              <P Name="DefaultUnderspecifiedDataType">double</P>
+              <P Name="UseSpecifiedMinMax">off</P>
+              <P Name="InlineInvariantSignals">off</P>
+              <P Name="OptimizeBlockIOStorage">on</P>
+              <P Name="BufferReuse">on</P>
+              <P Name="EnhancedBackFolding">off</P>
+              <P Name="CachingGlobalReferences">off</P>
+              <P Name="GlobalBufferReuse">on</P>
+              <P Name="StrengthReduction">off</P>
+              <P Name="ExpressionFolding">on</P>
+              <P Name="BooleansAsBitfields">off</P>
+              <P Name="BitfieldContainerType">uint_T</P>
+              <P Name="EnableMemcpy">on</P>
+              <P Name="MemcpyThreshold">64</P>
+              <P Name="PassReuseOutputArgsAs">Structure reference</P>
+              <P Name="PassReuseOutputArgsThreshold">12</P>
+              <P Name="ExpressionDepthLimit">128</P>
+              <P Name="LocalBlockOutputs">on</P>
+              <P Name="RollThreshold">5</P>
+              <P Name="StateBitsets">off</P>
+              <P Name="DataBitsets">off</P>
+              <P Name="ActiveStateOutputEnumStorageType">Native Integer</P>
+              <P Name="ZeroExternalMemoryAtStartup">on</P>
+              <P Name="ZeroInternalMemoryAtStartup">on</P>
+              <P Name="InitFltsAndDblsToZero">off</P>
+              <P Name="NoFixptDivByZeroProtection">off</P>
+              <P Name="EfficientFloat2IntCast">off</P>
+              <P Name="EfficientMapNaN2IntZero">on</P>
+              <P Name="OptimizeModelRefInitCode">off</P>
+              <P Name="LifeSpan">inf</P>
+              <P Name="MaxStackSize">Inherit from target</P>
+              <P Name="BufferReusableBoundary">on</P>
+              <P Name="SimCompilerOptimization">off</P>
+              <P Name="AccelVerboseBuild">off</P>
+            </Object>
+            <Object ObjectID="11" Version="1.15.1" ClassName="Simulink.DebuggingCC">
+              <P Name="RTPrefix">error</P>
+              <P Name="ConsistencyChecking">none</P>
+              <P Name="ArrayBoundsChecking">none</P>
+              <P Name="SignalInfNanChecking">none</P>
+              <P Name="SignalRangeChecking">none</P>
+              <P Name="ReadBeforeWriteMsg">UseLocalSettings</P>
+              <P Name="WriteAfterWriteMsg">UseLocalSettings</P>
+              <P Name="WriteAfterReadMsg">UseLocalSettings</P>
+              <P Name="AlgebraicLoopMsg">warning</P>
+              <P Name="ArtificialAlgebraicLoopMsg">warning</P>
+              <P Name="SaveWithDisabledLinksMsg">warning</P>
+              <P Name="SaveWithParameterizedLinksMsg">warning</P>
+              <P Name="CheckSSInitialOutputMsg">on</P>
+              <P Name="UnderspecifiedInitializationDetection">Simplified</P>
+              <P Name="MergeDetectMultiDrivingBlocksExec">error</P>
+              <P Name="CheckExecutionContextPreStartOutputMsg">off</P>
+              <P Name="CheckExecutionContextRuntimeOutputMsg">off</P>
+              <P Name="SignalResolutionControl">UseLocalSettings</P>
+              <P Name="BlockPriorityViolationMsg">warning</P>
+              <P Name="MinStepSizeMsg">warning</P>
+              <P Name="TimeAdjustmentMsg">none</P>
+              <P Name="MaxConsecutiveZCsMsg">error</P>
+              <P Name="MaskedZcDiagnostic">warning</P>
+              <P Name="IgnoredZcDiagnostic">warning</P>
+              <P Name="SolverPrmCheckMsg">none</P>
+              <P Name="InheritedTsInSrcMsg">warning</P>
+              <P Name="MultiTaskDSMMsg">error</P>
+              <P Name="MultiTaskCondExecSysMsg">error</P>
+              <P Name="MultiTaskRateTransMsg">error</P>
+              <P Name="SingleTaskRateTransMsg">none</P>
+              <P Name="TasksWithSamePriorityMsg">warning</P>
+              <P Name="SigSpecEnsureSampleTimeMsg">warning</P>
+              <P Name="CheckMatrixSingularityMsg">none</P>
+              <P Name="IntegerOverflowMsg">warning</P>
+              <P Name="Int32ToFloatConvMsg">warning</P>
+              <P Name="ParameterDowncastMsg">error</P>
+              <P Name="ParameterOverflowMsg">error</P>
+              <P Name="ParameterUnderflowMsg">none</P>
+              <P Name="ParameterPrecisionLossMsg">warning</P>
+              <P Name="ParameterTunabilityLossMsg">warning</P>
+              <P Name="FixptConstUnderflowMsg">none</P>
+              <P Name="FixptConstOverflowMsg">none</P>
+              <P Name="FixptConstPrecisionLossMsg">none</P>
+              <P Name="UnderSpecifiedDataTypeMsg">none</P>
+              <P Name="UnnecessaryDatatypeConvMsg">none</P>
+              <P Name="VectorMatrixConversionMsg">none</P>
+              <P Name="InvalidFcnCallConnMsg">error</P>
+              <P Name="FcnCallInpInsideContextMsg">EnableAllAsError</P>
+              <P Name="SignalLabelMismatchMsg">none</P>
+              <P Name="UnconnectedInputMsg">warning</P>
+              <P Name="UnconnectedOutputMsg">warning</P>
+              <P Name="UnconnectedLineMsg">warning</P>
+              <P Name="SFcnCompatibilityMsg">none</P>
+              <P Name="FrameProcessingCompatibilityMsg">error</P>
+              <P Name="UniqueDataStoreMsg">none</P>
+              <P Name="BusObjectLabelMismatch">warning</P>
+              <P Name="RootOutportRequireBusObject">warning</P>
+              <P Name="AssertControl">UseLocalSettings</P>
+              <P Name="AllowSymbolicDim">off</P>
+              <P Name="ModelReferenceIOMsg">none</P>
+              <P Name="ModelReferenceMultiInstanceNormalModeStructChecksumCheck">error</P>
+              <P Name="ModelReferenceVersionMismatchMessage">none</P>
+              <P Name="ModelReferenceIOMismatchMessage">none</P>
+              <P Name="UnknownTsInhSupMsg">warning</P>
+              <P Name="ModelReferenceDataLoggingMessage">warning</P>
+              <P Name="ModelReferenceSymbolNameMessage">warning</P>
+              <P Name="ModelReferenceExtraNoncontSigs">error</P>
+              <P Name="StateNameClashWarn">none</P>
+              <P Name="SimStateInterfaceChecksumMismatchMsg">warning</P>
+              <P Name="SimStateOlderReleaseMsg">error</P>
+              <P Name="InitInArrayFormatMsg">warning</P>
+              <P Name="StrictBusMsg">ErrorLevel1</P>
+              <P Name="BusNameAdapt">WarnAndRepair</P>
+              <P Name="NonBusSignalsTreatedAsBus">none</P>
+              <P Name="SymbolicDimMinMaxWarning">warning</P>
+              <P Name="BlockIODiagnostic">none</P>
+              <P Name="SFUnusedDataAndEventsDiag">warning</P>
+              <P Name="SFUnexpectedBacktrackingDiag">warning</P>
+              <P Name="SFInvalidInputDataAccessInChartInitDiag">warning</P>
+              <P Name="SFNoUnconditionalDefaultTransitionDiag">warning</P>
+              <P Name="SFTransitionOutsideNaturalParentDiag">warning</P>
+              <P Name="SFUnconditionalTransitionShadowingDiag">warning</P>
+              <P Name="SFUndirectedBroadcastEventsDiag">warning</P>
+              <P Name="SFTransitionActionBeforeConditionDiag">warning</P>
+              <P Name="SFOutputUsedAsStateInMooreChartDiag">error</P>
+              <P Name="IntegerSaturationMsg">warning</P>
+            </Object>
+            <Object ObjectID="12" Version="1.15.1" ClassName="Simulink.HardwareCC">
+              <P Name="ProdBitPerChar">8</P>
+              <P Name="ProdBitPerShort">16</P>
+              <P Name="ProdBitPerInt">32</P>
+              <P Name="ProdBitPerLong">32</P>
+              <P Name="ProdBitPerLongLong">64</P>
+              <P Name="ProdBitPerFloat">32</P>
+              <P Name="ProdBitPerDouble">64</P>
+              <P Name="ProdBitPerPointer">64</P>
+              <P Name="ProdLargestAtomicInteger">Char</P>
+              <P Name="ProdLargestAtomicFloat">Float</P>
+              <P Name="ProdIntDivRoundTo">Zero</P>
+              <P Name="ProdEndianess">LittleEndian</P>
+              <P Name="ProdWordSize">64</P>
+              <P Name="ProdShiftRightIntArith">on</P>
+              <P Name="ProdLongLongMode">off</P>
+              <P Name="ProdHWDeviceType">Intel-&gt;x86-64 (Windows64)</P>
+              <P Name="TargetBitPerChar">8</P>
+              <P Name="TargetBitPerShort">16</P>
+              <P Name="TargetBitPerInt">32</P>
+              <P Name="TargetBitPerLong">32</P>
+              <P Name="TargetBitPerLongLong">64</P>
+              <P Name="TargetBitPerFloat">32</P>
+              <P Name="TargetBitPerDouble">64</P>
+              <P Name="TargetBitPerPointer">32</P>
+              <P Name="TargetLargestAtomicInteger">Char</P>
+              <P Name="TargetLargestAtomicFloat">None</P>
+              <P Name="TargetShiftRightIntArith">on</P>
+              <P Name="TargetLongLongMode">off</P>
+              <P Name="TargetIntDivRoundTo">Undefined</P>
+              <P Name="TargetEndianess">Unspecified</P>
+              <P Name="TargetWordSize">32</P>
+              <P Name="TargetPreprocMaxBitsSint">32</P>
+              <P Name="TargetPreprocMaxBitsUint">32</P>
+              <P Name="TargetHWDeviceType">Specified</P>
+              <P Name="TargetUnknown">off</P>
+              <P Name="ProdEqTarget">on</P>
+            </Object>
+            <Object ObjectID="13" Version="1.15.1" ClassName="Simulink.ModelReferenceCC">
+              <P Name="UpdateModelReferenceTargets">IfOutOfDateOrStructuralChange</P>
+              <P Name="EnableRefExpFcnMdlSchedulingChecks">on</P>
+              <P Name="CheckModelReferenceTargetMessage">error</P>
+              <P Name="EnableParallelModelReferenceBuilds">off</P>
+              <P Name="ParallelModelReferenceErrorOnInvalidPool">on</P>
+              <P Name="ParallelModelReferenceMATLABWorkerInit">None</P>
+              <P Name="ModelReferenceNumInstancesAllowed">Multi</P>
+              <P Name="PropagateVarSize">Infer from blocks in model</P>
+              <P Name="ModelReferencePassRootInputsByReference">on</P>
+              <P Name="ModelReferenceMinAlgLoopOccurrences">off</P>
+              <P Name="PropagateSignalLabelsOutOfModel">off</P>
+              <P Name="SupportModelReferenceSimTargetCustomCode">off</P>
+            </Object>
+            <Object ObjectID="14" Version="1.15.1" ClassName="Simulink.SFSimCC">
+              <P Name="SFSimEcho">on</P>
+              <P Name="SimCtrlC">on</P>
+              <P Name="SimIntegrity">on</P>
+              <P Name="SimUseLocalCustomCode">off</P>
+              <P Name="SimParseCustomCode">on</P>
+              <P Name="SimBuildMode">sf_incremental_build</P>
+              <P Name="SimGenImportedTypeDefs">off</P>
+            </Object>
+            <Object BackupClass="Simulink.RTWCC" ObjectID="15" Version="1.15.1" ClassName="Simulink.RTWCC">
+              <Array PropName="DisabledProps" Type="Cell" Dimension="1*13">
+                <Cell Class="char">IncludeHyperlinkInReport</Cell>
+                <Cell Class="char">GenerateTraceInfo</Cell>
+                <Cell Class="char">GenerateTraceReport</Cell>
+                <Cell Class="char">GenerateTraceReportSl</Cell>
+                <Cell Class="char">GenerateTraceReportSf</Cell>
+                <Cell Class="char">GenerateTraceReportEml</Cell>
+                <Cell Class="char">PortableWordSizes</Cell>
+                <Cell Class="char">GenerateWebview</Cell>
+                <Cell Class="char">GenerateCodeMetricsReport</Cell>
+                <Cell Class="char">GenerateCodeReplacementReport</Cell>
+                <Cell Class="char">GenerateMissedCodeReplacementReport</Cell>
+                <Cell Class="char">GenerateErtSFunction</Cell>
+                <Cell Class="char">CreateSILPILBlock</Cell>
+              </Array>
+              <P Name="SystemTargetFile">grt.tlc</P>
+              <P Name="TLCOptions"/>
+              <P Name="GenCodeOnly">off</P>
+              <P Name="MakeCommand">make_rtw</P>
+              <P Name="GenerateMakefile">on</P>
+              <P Name="PackageGeneratedCodeAndArtifacts">off</P>
+              <P Name="TemplateMakefile">grt_default_tmf</P>
+              <P Name="PostCodeGenCommand"/>
+              <P Name="Description"/>
+              <P Name="GenerateReport">off</P>
+              <P Name="SaveLog">off</P>
+              <P Name="RTWVerbose">on</P>
+              <P Name="RetainRTWFile">off</P>
+              <P Name="ProfileTLC">off</P>
+              <P Name="TLCDebug">off</P>
+              <P Name="TLCCoverage">off</P>
+              <P Name="TLCAssert">off</P>
+              <P Name="RTWUseLocalCustomCode">off</P>
+              <P Name="RTWUseSimCustomCode">off</P>
+              <P Name="Toolchain">Automatically locate an installed toolchain</P>
+              <P Name="BuildConfiguration">Faster Builds</P>
+              <P Name="IncludeHyperlinkInReport">off</P>
+              <P Name="LaunchReport">off</P>
+              <P Name="PortableWordSizes">off</P>
+              <P Name="CreateSILPILBlock">None</P>
+              <P Name="CodeExecutionProfiling">off</P>
+              <P Name="CodeExecutionProfileVariable">executionProfile</P>
+              <P Name="CodeProfilingSaveOptions">SummaryOnly</P>
+              <P Name="CodeProfilingInstrumentation">off</P>
+              <P Name="SILDebugging">off</P>
+              <P Name="TargetLang">C</P>
+              <P Name="IncludeBusHierarchyInRTWFileBlockHierarchyMap">off</P>
+              <P Name="GenerateTraceInfo">off</P>
+              <P Name="GenerateTraceReport">off</P>
+              <P Name="GenerateTraceReportSl">off</P>
+              <P Name="GenerateTraceReportSf">off</P>
+              <P Name="GenerateTraceReportEml">off</P>
+              <P Name="GenerateWebview">off</P>
+              <P Name="GenerateCodeMetricsReport">off</P>
+              <P Name="GenerateCodeReplacementReport">off</P>
+              <P Name="GenerateMissedCodeReplacementReport">off</P>
+              <P Name="RTWCompilerOptimization">off</P>
+              <P Name="RTWCustomCompilerOptimizations"/>
+              <P Name="CheckMdlBeforeBuild">Off</P>
+              <P Name="SharedConstantsCachingThreshold">1024</P>
+              <Array PropName="Components" Type="Handle" Dimension="1*2">
+                <Object ObjectID="16" Version="1.15.1" ClassName="Simulink.CodeAppCC">
+                  <Array PropName="DisabledProps" Type="Cell" Dimension="1*24">
+                    <Cell Class="char">IgnoreCustomStorageClasses</Cell>
+                    <Cell Class="char">ParameterTuningSideEffectCode</Cell>
+                    <Cell Class="char">IgnoreTestpoints</Cell>
+                    <Cell Class="char">InsertBlockDesc</Cell>
+                    <Cell Class="char">InsertPolySpaceComments</Cell>
+                    <Cell Class="char">SFDataObjDesc</Cell>
+                    <Cell Class="char">MATLABFcnDesc</Cell>
+                    <Cell Class="char">SimulinkDataObjDesc</Cell>
+                    <Cell Class="char">DefineNamingRule</Cell>
+                    <Cell Class="char">SignalNamingRule</Cell>
+                    <Cell Class="char">ParamNamingRule</Cell>
+                    <Cell Class="char">InternalIdentifier</Cell>
+                    <Cell Class="char">InlinedPrmAccess</Cell>
+                    <Cell Class="char">CustomSymbolStr</Cell>
+                    <Cell Class="char">CustomSymbolStrGlobalVar</Cell>
+                    <Cell Class="char">CustomSymbolStrType</Cell>
+                    <Cell Class="char">CustomSymbolStrField</Cell>
+                    <Cell Class="char">CustomSymbolStrFcn</Cell>
+                    <Cell Class="char">CustomSymbolStrFcnArg</Cell>
+                    <Cell Class="char">CustomSymbolStrBlkIO</Cell>
+                    <Cell Class="char">CustomSymbolStrTmpVar</Cell>
+                    <Cell Class="char">CustomSymbolStrMacro</Cell>
+                    <Cell Class="char">CustomSymbolStrUtil</Cell>
+                    <Cell Class="char">ReqsInCode</Cell>
+                  </Array>
+                  <P Name="ForceParamTrailComments">off</P>
+                  <P Name="GenerateComments">on</P>
+                  <P Name="CommentStyle">Auto</P>
+                  <P Name="IgnoreCustomStorageClasses">on</P>
+                  <P Name="IgnoreTestpoints">off</P>
+                  <P Name="IncHierarchyInIds">off</P>
+                  <P Name="MaxIdLength">31</P>
+                  <P Name="PreserveName">off</P>
+                  <P Name="PreserveNameWithParent">off</P>
+                  <P Name="ShowEliminatedStatement">off</P>
+                  <P Name="OperatorAnnotations">off</P>
+                  <P Name="IncAutoGenComments">off</P>
+                  <P Name="SimulinkDataObjDesc">off</P>
+                  <P Name="SFDataObjDesc">off</P>
+                  <P Name="MATLABFcnDesc">off</P>
+                  <P Name="IncDataTypeInIds">off</P>
+                  <P Name="MangleLength">1</P>
+                  <P Name="CustomSymbolStrGlobalVar">$R$N$M</P>
+                  <P Name="CustomSymbolStrType">$N$R$M_T</P>
+                  <P Name="CustomSymbolStrField">$N$M</P>
+                  <P Name="CustomSymbolStrFcn">$R$N$M$F</P>
+                  <P Name="CustomSymbolStrFcnArg">rt$I$N$M</P>
+                  <P Name="CustomSymbolStrBlkIO">rtb_$N$M</P>
+                  <P Name="CustomSymbolStrTmpVar">$N$M</P>
+                  <P Name="CustomSymbolStrMacro">$R$N$M</P>
+                  <P Name="CustomSymbolStrUtil">$N$C</P>
+                  <P Name="DefineNamingRule">None</P>
+                  <P Name="ParamNamingRule">None</P>
+                  <P Name="SignalNamingRule">None</P>
+                  <P Name="InsertBlockDesc">off</P>
+                  <P Name="InsertPolySpaceComments">off</P>
+                  <P Name="SimulinkBlockComments">on</P>
+                  <P Name="MATLABSourceComments">off</P>
+                  <P Name="EnableCustomComments">off</P>
+                  <P Name="InternalIdentifier">Shortened</P>
+                  <P Name="InlinedPrmAccess">Literals</P>
+                  <P Name="ReqsInCode">off</P>
+                  <P Name="UseSimReservedNames">off</P>
+                </Object>
+                <Object BackupClass="Simulink.TargetCC" ObjectID="17" Version="1.15.1" ClassName="Simulink.GRTTargetCC">
+                  <Array PropName="DisabledProps" Type="Cell" Dimension="1*12">
+                    <Cell Class="char">IncludeMdlTerminateFcn</Cell>
+                    <Cell Class="char">SuppressErrorStatus</Cell>
+                    <Cell Class="char">ERTCustomFileBanners</Cell>
+                    <Cell Class="char">GenerateSampleERTMain</Cell>
+                    <Cell Class="char">GenerateTestInterfaces</Cell>
+                    <Cell Class="char">ModelStepFunctionPrototypeControlCompliant</Cell>
+                    <Cell Class="char">GenerateAllocFcn</Cell>
+                    <Cell Class="char">PurelyIntegerCode</Cell>
+                    <Cell Class="char">SupportComplex</Cell>
+                    <Cell Class="char">SupportAbsoluteTime</Cell>
+                    <Cell Class="char">SupportContinuousTime</Cell>
+                    <Cell Class="char">SupportNonInlinedSFcns</Cell>
+                  </Array>
+                  <P Name="TargetFcnLib">ansi_tfl_table_tmw.mat</P>
+                  <P Name="TargetLibSuffix"/>
+                  <P Name="TargetPreCompLibLocation"/>
+                  <P Name="GenFloatMathFcnCalls">NOT IN USE</P>
+                  <P Name="TargetLangStandard">C89/C90 (ANSI)</P>
+                  <P Name="CodeReplacementLibrary">None</P>
+                  <P Name="UtilityFuncGeneration">Auto</P>
+                  <P Name="ERTMultiwordTypeDef">System defined</P>
+                  <P Name="ERTMultiwordLength">256</P>
+                  <P Name="MultiwordLength">2048</P>
+                  <P Name="GenerateFullHeader">on</P>
+                  <P Name="InferredTypesCompatibility">off</P>
+                  <P Name="GenerateSampleERTMain">off</P>
+                  <P Name="GenerateTestInterfaces">off</P>
+                  <P Name="ModelReferenceCompliant">on</P>
+                  <P Name="ParMdlRefBuildCompliant">on</P>
+                  <P Name="CompOptLevelCompliant">on</P>
+                  <P Name="ConcurrentExecutionCompliant">on</P>
+                  <P Name="IncludeMdlTerminateFcn">on</P>
+                  <P Name="GeneratePreprocessorConditionals">Use local settings</P>
+                  <P Name="CombineOutputUpdateFcns">on</P>
+                  <P Name="CombineSignalStateStructs">off</P>
+                  <P Name="SuppressErrorStatus">off</P>
+                  <P Name="ERTFirstTimeCompliant">off</P>
+                  <P Name="IncludeFileDelimiter">Auto</P>
+                  <P Name="ERTCustomFileBanners">off</P>
+                  <P Name="SupportAbsoluteTime">on</P>
+                  <P Name="LogVarNameModifier">rt_</P>
+                  <P Name="MatFileLogging">on</P>
+                  <P Name="MultiInstanceERTCode">off</P>
+                  <P Name="CodeInterfacePackaging">Nonreusable function</P>
+                  <P Name="SupportNonFinite">on</P>
+                  <P Name="SupportComplex">on</P>
+                  <P Name="PurelyIntegerCode">off</P>
+                  <P Name="SupportContinuousTime">on</P>
+                  <P Name="SupportNonInlinedSFcns">on</P>
+                  <P Name="SupportVariableSizeSignals">off</P>
+                  <P Name="ParenthesesLevel">Nominal</P>
+                  <P Name="CastingMode">Nominal</P>
+                  <P Name="MATLABClassNameForMDSCustomization">Simulink.SoftwareTarget.GRTCustomization</P>
+                  <P Name="ModelStepFunctionPrototypeControlCompliant">off</P>
+                  <P Name="CPPClassGenCompliant">on</P>
+                  <P Name="AutosarCompliant">off</P>
+                  <P Name="GRTInterface">off</P>
+                  <P Name="GenerateAllocFcn">off</P>
+                  <P Name="UseToolchainInfoCompliant">on</P>
+                  <P Name="GenerateSharedConstants">on</P>
+                  <P Name="UseMalloc">off</P>
+                  <P Name="ExtMode">off</P>
+                  <P Name="ExtModeStaticAlloc">off</P>
+                  <P Name="ExtModeTesting">off</P>
+                  <P Name="ExtModeStaticAllocSize">1000000</P>
+                  <P Name="ExtModeTransport">0</P>
+                  <P Name="ExtModeMexFile">ext_comm</P>
+                  <P Name="ExtModeIntrfLevel">Level1</P>
+                  <P Name="RTWCAPISignals">off</P>
+                  <P Name="RTWCAPIParams">off</P>
+                  <P Name="RTWCAPIStates">off</P>
+                  <P Name="RTWCAPIRootIO">off</P>
+                  <P Name="GenerateASAP2">off</P>
+                  <P Name="MultiInstanceErrorCode">Error</P>
+                </Object>
+              </Array>
+            </Object>
+            <Object ObjectID="18" Version="1.15.1" ClassName="SlCovCC.ConfigComp">
+              <P Name="Description">Simulink Coverage Configuration Component</P>
+              <P Name="Name">Simulink Coverage</P>
+              <P Name="RecordCoverage">off</P>
+              <P Name="CovPath">/</P>
+              <P Name="CovSaveName">covdata</P>
+              <P Name="CovMetricSettings">dw</P>
+              <P Name="CovNameIncrementing">off</P>
+              <P Name="CovHtmlReporting">on</P>
+              <P Name="CovForceBlockReductionOff">on</P>
+              <P Name="CovEnableCumulative">on</P>
+              <P Name="CovSaveCumulativeToWorkspaceVar">on</P>
+              <P Name="CovSaveSingleToWorkspaceVar">on</P>
+              <P Name="CovCumulativeVarName">covCumulativeData</P>
+              <P Name="CovCumulativeReport">off</P>
+              <P Name="CovReportOnPause">on</P>
+              <P Name="CovModelRefEnable">off</P>
+              <P Name="CovExternalEMLEnable">off</P>
+              <P Name="CovSFcnEnable">on</P>
+              <P Name="CovBoundaryAbsTol">1e-05</P>
+              <P Name="CovBoundaryRelTol">0.01</P>
+              <P Name="CovUseTimeInterval">off</P>
+              <P Name="CovStartTime">0</P>
+              <P Name="CovStopTime">0</P>
+            </Object>
+            <Object ObjectID="19" Version="1.15.1" ClassName="hdlcoderui.hdlcc">
+              <P Name="Description">HDL Coder custom configuration component</P>
+              <P Name="Name">HDL Coder</P>
+              <Array PropName="HDLConfigFile" Type="Cell" Dimension="1*1">
+                <Cell Class="char"> </Cell>
+              </Array>
+              <P Name="HDLCActiveTab">0</P>
+            </Object>
+          </Array>
+          <P Name="Name">Configuration</P>
+          <P Name="CurrentDlgPage">Solver</P>
+          <P Name="ConfigPrmDlgPosition"> [ 300, 205, 1380, 845 ] </P>
+        </Object>
+      </Array>
+      <Object Reference="true" PropName="ActiveConfigurationSet" ObjectID="7" ClassName="Simulink.ConfigSet">
+      </Object>
+    </ConfigurationSet>
+    <ConcurrentExecutionSettings>
+      <Object PropName="DataTransfer" ObjectID="20" ClassName="Simulink.GlobalDataTransfer">
+        <P Name="DefaultTransitionBetweenSyncTasks" Class="char">Ensure deterministic transfer (maximum delay)</P>
+        <P Name="DefaultTransitionBetweenAsyncTasks" Class="char">Ensure data integrity only</P>
+        <P Name="DefaultTransitionBetweenContTasks" Class="char">Ensure deterministic transfer (minimum delay)</P>
+        <P Name="DefaultExtrapolationMethodBetweenContTasks" Class="char">None</P>
+        <P Name="AutoInsertRateTranBlk" Class="logical">0</P>
+      </Object>
+      <P Name="ExplicitPartitioning">off</P>
+    </ConcurrentExecutionSettings>
+    <SystemDefaults>
+      <P Name="PaperOrientation">landscape</P>
+      <P Name="PaperPositionMode">auto</P>
+      <P Name="PaperType">usletter</P>
+      <P Name="PaperUnits">inches</P>
+      <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
+      <P Name="TiledPageScale">1</P>
+      <P Name="ShowPageBoundaries">off</P>
+      <P Name="ModelBrowserVisibility">off</P>
+      <P Name="ModelBrowserWidth">200</P>
+      <P Name="ScreenColor">white</P>
+    </SystemDefaults>
+    <BlockDefaults>
+      <P Name="ForegroundColor">black</P>
+      <P Name="BackgroundColor">white</P>
+      <P Name="DropShadow">off</P>
+      <P Name="NamePlacement">normal</P>
+      <P Name="FontName">Helvetica</P>
+      <P Name="FontSize">10</P>
+      <P Name="FontWeight">normal</P>
+      <P Name="FontAngle">normal</P>
+      <P Name="ShowName">on</P>
+      <P Name="BlockRotation">0</P>
+      <P Name="BlockMirror">off</P>
+    </BlockDefaults>
+    <AnnotationDefaults>
+      <P Name="HorizontalAlignment">center</P>
+      <P Name="VerticalAlignment">middle</P>
+      <P Name="ForegroundColor">black</P>
+      <P Name="BackgroundColor">white</P>
+      <P Name="DropShadow">off</P>
+      <P Name="FontName">Helvetica</P>
+      <P Name="FontSize">10</P>
+      <P Name="FontWeight">normal</P>
+      <P Name="FontAngle">normal</P>
+      <P Name="UseDisplayTextAsClickCallback">off</P>
+    </AnnotationDefaults>
+    <LineDefaults>
+      <P Name="FontName">Helvetica</P>
+      <P Name="FontSize">9</P>
+      <P Name="FontWeight">normal</P>
+      <P Name="FontAngle">normal</P>
+    </LineDefaults>
+    <MaskDefaults>
+      <P Name="SelfModifiable">off</P>
+      <P Name="IconFrame">on</P>
+      <P Name="IconOpaque">on</P>
+      <P Name="RunInitForIconRedraw">off</P>
+      <P Name="IconRotate">none</P>
+      <P Name="PortRotate">default</P>
+      <P Name="IconUnits">autoscale</P>
+    </MaskDefaults>
+    <MaskParameterDefaults>
+      <P Name="Evaluate">on</P>
+      <P Name="Tunable">on</P>
+      <P Name="NeverSave">off</P>
+      <P Name="Internal">off</P>
+      <P Name="ReadOnly">off</P>
+      <P Name="Enabled">on</P>
+      <P Name="Visible">on</P>
+      <P Name="ToolTip">on</P>
+    </MaskParameterDefaults>
+    <BlockParameterDefaults>
+      <Block BlockType="Demux">
+        <P Name="Outputs">4</P>
+        <P Name="DisplayOption">none</P>
+        <P Name="BusSelectionMode">off</P>
+      </Block>
+      <Block BlockType="Inport">
+        <P Name="Port">1</P>
+        <P Name="OutputFunctionCall">off</P>
+        <P Name="OutMin">[]</P>
+        <P Name="OutMax">[]</P>
+        <P Name="OutDataTypeStr">Inherit: auto</P>
+        <P Name="LockScale">off</P>
+        <P Name="BusOutputAsStruct">off</P>
+        <P Name="PortDimensions">-1</P>
+        <P Name="VarSizeSig">Inherit</P>
+        <P Name="SampleTime">-1</P>
+        <P Name="SignalType">auto</P>
+        <P Name="SamplingMode">auto</P>
+        <P Name="LatchByDelayingOutsideSignal">off</P>
+        <P Name="LatchInputForFeedbackSignals">off</P>
+        <P Name="Interpolate">on</P>
+      </Block>
+      <Block BlockType="Outport">
+        <P Name="Port">1</P>
+        <P Name="OutMin">[]</P>
+        <P Name="OutMax">[]</P>
+        <P Name="OutDataTypeStr">Inherit: auto</P>
+        <P Name="LockScale">off</P>
+        <P Name="BusOutputAsStruct">off</P>
+        <P Name="PortDimensions">-1</P>
+        <P Name="VarSizeSig">Inherit</P>
+        <P Name="SampleTime">-1</P>
+        <P Name="SignalType">auto</P>
+        <P Name="SamplingMode">auto</P>
+        <P Name="SourceOfInitialOutputValue">Dialog</P>
+        <P Name="OutputWhenDisabled">held</P>
+        <P Name="InitialOutput">[]</P>
+      </Block>
+      <Block BlockType="S-Function">
+        <P Name="FunctionName">system</P>
+        <P Name="SFunctionModules">''</P>
+        <P Name="PortCounts">[]</P>
+      </Block>
+      <Block BlockType="SubSystem">
+        <P Name="ShowPortLabels">FromPortIcon</P>
+        <P Name="Permissions">ReadWrite</P>
+        <P Name="PermitHierarchicalResolution">All</P>
+        <P Name="TreatAsAtomicUnit">off</P>
+        <P Name="MinAlgLoopOccurrences">off</P>
+        <P Name="PropExecContextOutsideSubsystem">off</P>
+        <P Name="CheckFcnCallInpInsideContextMsg">off</P>
+        <P Name="SystemSampleTime">-1</P>
+        <P Name="RTWSystemCode">Auto</P>
+        <P Name="RTWFcnNameOpts">Auto</P>
+        <P Name="RTWFileNameOpts">Auto</P>
+        <P Name="FunctionInterfaceSpec">void_void</P>
+        <P Name="FunctionWithSeparateData">off</P>
+        <P Name="RTWMemSecFuncInitTerm">Inherit from model</P>
+        <P Name="RTWMemSecFuncExecute">Inherit from model</P>
+        <P Name="RTWMemSecDataConstants">Inherit from model</P>
+        <P Name="RTWMemSecDataInternal">Inherit from model</P>
+        <P Name="RTWMemSecDataParameters">Inherit from model</P>
+        <P Name="SimViewingDevice">off</P>
+        <P Name="DataTypeOverride">UseLocalSettings</P>
+        <P Name="DataTypeOverrideAppliesTo">AllNumericTypes</P>
+        <P Name="MinMaxOverflowLogging">UseLocalSettings</P>
+        <P Name="Opaque">off</P>
+        <P Name="MaskHideContents">off</P>
+        <P Name="SFBlockType">NONE</P>
+        <P Name="GeneratePreprocessorConditionals">off</P>
+        <P Name="ContentPreviewEnabled">off</P>
+        <P Name="IsWebBlock">off</P>
+      </Block>
+      <Block BlockType="Terminator">
+      </Block>
+    </BlockParameterDefaults>
+    <System>
+      <P Name="Location">[0, 0, 1680, 1050]</P>
+      <P Name="Open">on</P>
+      <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
+      <P Name="ZoomFactor">125</P>
+      <P Name="ReportName">simulink-default.rpt</P>
+      <P Name="SIDHighWatermark">11</P>
+      <Block BlockType="SubSystem" Name="Air " SID="7" id="1623659401">
+        <P Name="Ports">[1, 1]</P>
+        <P Name="Position">[515, 501, 705, 579]</P>
+        <P Name="ZOrder">6</P>
+        <P Name="LibraryVersion">1.267</P>
+        <P Name="ErrorFcn">Stateflow.Translate.translate</P>
+        <P Name="PermitHierarchicalResolution">ExplicitOnly</P>
+        <P Name="TreatAsAtomicUnit">on</P>
+        <P Name="RequestExecContextInheritance">off</P>
+        <P Name="SFBlockType">Chart</P>
+        <P Name="Variant">off</P>
+        <System>
+          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Open">off</P>
+          <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
+          <P Name="ZoomFactor">100</P>
+          <P Name="SIDHighWatermark">79</P>
+          <Block BlockType="Inport" Name="Heat" SID="7::78" id="741691458">
+            <P Name="Position">[20, 101, 40, 119]</P>
+            <P Name="ZOrder">58</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Block BlockType="Demux" Name=" Demux " SID="7::74">
+            <P Name="Ports">[1, 1]</P>
+            <P Name="Position">[270, 230, 320, 270]</P>
+            <P Name="ZOrder">54</P>
+            <P Name="Outputs">1</P>
+          </Block>
+          <Block BlockType="S-Function" Name=" SFunction " SID="7::73">
+            <P Name="Tag">Stateflow S-Function infant0528 5</P>
+            <P Name="Ports">[1, 2]</P>
+            <P Name="Position">[180, 100, 230, 160]</P>
+            <P Name="ZOrder">53</P>
+            <P Name="FunctionName">sf_sfun</P>
+            <P Name="PortCounts">[1 2]</P>
+            <P Name="SFunctionDeploymentMode">off</P>
+            <P Name="EnableBusSupport">off</P>
+            <Port>
+              <P Name="PortNumber">2</P>
+              <P Name="Name">Heat1</P>
+              <P Name="RTWStorageClass">Auto</P>
+              <P Name="DataLoggingNameMode">SignalName</P>
+            </Port>
+          </Block>
+          <Block BlockType="Terminator" Name=" Terminator " SID="7::75">
+            <P Name="Position">[460, 241, 480, 259]</P>
+            <P Name="ZOrder">55</P>
+          </Block>
+          <Block BlockType="Outport" Name="Heat1" SID="7::77" id="-1512938865">
+            <P Name="Position">[460, 101, 480, 119]</P>
+            <P Name="ZOrder">57</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Line>
+            <P Name="ZOrder">6</P>
+            <P Name="SrcBlock">Heat</P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> SFunction </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="Name">Heat1</P>
+            <P Name="ZOrder">7</P>
+            <P Name="Labels">[0, 0]</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">2</P>
+            <P Name="DstBlock">Heat1</P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">8</P>
+            <P Name="SrcBlock"> Demux </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Terminator </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">9</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Demux </P>
+            <P Name="DstPort">1</P>
+          </Line>
+        </System>
+      </Block>
+      <Block BlockType="SubSystem" Name="Alarm " SID="9" id="1684966956">
+        <P Name="Description">wcet = 1ms
+period = 10ms</P>
+        <P Name="Ports">[1, 1]</P>
+        <P Name="Position">[240, 222, 435, 298]</P>
+        <P Name="ZOrder">8</P>
+        <P Name="LibraryVersion">1.267</P>
+        <P Name="ErrorFcn">Stateflow.Translate.translate</P>
+        <P Name="PermitHierarchicalResolution">ExplicitOnly</P>
+        <P Name="TreatAsAtomicUnit">on</P>
+        <P Name="RequestExecContextInheritance">off</P>
+        <P Name="SFBlockType">Chart</P>
+        <P Name="Variant">off</P>
+        <System>
+          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Open">off</P>
+          <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
+          <P Name="ZoomFactor">100</P>
+          <P Name="SIDHighWatermark">80</P>
+          <Block BlockType="Inport" Name="Current_Temperature" SID="9::79" id="554545009">
+            <P Name="Position">[20, 101, 40, 119]</P>
+            <P Name="ZOrder">59</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Block BlockType="Demux" Name=" Demux " SID="9::74">
+            <P Name="Ports">[1, 1]</P>
+            <P Name="Position">[270, 230, 320, 270]</P>
+            <P Name="ZOrder">54</P>
+            <P Name="Outputs">1</P>
+          </Block>
+          <Block BlockType="S-Function" Name=" SFunction " SID="9::73">
+            <P Name="Tag">Stateflow S-Function infant0528 6</P>
+            <P Name="Ports">[1, 2]</P>
+            <P Name="Position">[180, 100, 230, 160]</P>
+            <P Name="ZOrder">53</P>
+            <P Name="FunctionName">sf_sfun</P>
+            <P Name="PortCounts">[1 2]</P>
+            <P Name="SFunctionDeploymentMode">off</P>
+            <P Name="EnableBusSupport">off</P>
+            <Port>
+              <P Name="PortNumber">2</P>
+              <P Name="Name">Send_Out_Alarm</P>
+              <P Name="RTWStorageClass">Auto</P>
+              <P Name="DataLoggingNameMode">SignalName</P>
+            </Port>
+          </Block>
+          <Block BlockType="Terminator" Name=" Terminator " SID="9::75">
+            <P Name="Position">[460, 241, 480, 259]</P>
+            <P Name="ZOrder">55</P>
+          </Block>
+          <Block BlockType="Outport" Name="Send_Out_Alarm" SID="9::80" id="631054253">
+            <P Name="Position">[460, 101, 480, 119]</P>
+            <P Name="ZOrder">60</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Line>
+            <P Name="ZOrder">13</P>
+            <P Name="SrcBlock">Current_Temperature</P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> SFunction </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="Name">Send_Out_Alarm</P>
+            <P Name="ZOrder">14</P>
+            <P Name="Labels">[0, 0]</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">2</P>
+            <P Name="DstBlock">Send_Out_Alarm</P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">15</P>
+            <P Name="SrcBlock"> Demux </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Terminator </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">16</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Demux </P>
+            <P Name="DstPort">1</P>
+          </Line>
+        </System>
+      </Block>
+      <Block BlockType="SubSystem" Name="Heat Source " SID="6" id="1044919147">
+        <P Name="Ports">[1, 1]</P>
+        <P Name="Position">[785, 354, 940, 426]</P>
+        <P Name="ZOrder">5</P>
+        <P Name="LibraryVersion">1.267</P>
+        <P Name="ErrorFcn">Stateflow.Translate.translate</P>
+        <P Name="PermitHierarchicalResolution">ExplicitOnly</P>
+        <P Name="TreatAsAtomicUnit">on</P>
+        <P Name="RequestExecContextInheritance">off</P>
+        <P Name="SFBlockType">Chart</P>
+        <P Name="Variant">off</P>
+        <System>
+          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Open">off</P>
+          <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
+          <P Name="ZoomFactor">100</P>
+          <P Name="SIDHighWatermark">78</P>
+          <Block BlockType="Inport" Name="Heat_Control" SID="6::77" id="1427939895">
+            <P Name="Position">[20, 101, 40, 119]</P>
+            <P Name="ZOrder">57</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Block BlockType="Demux" Name=" Demux " SID="6::74">
+            <P Name="Ports">[1, 1]</P>
+            <P Name="Position">[270, 230, 320, 270]</P>
+            <P Name="ZOrder">54</P>
+            <P Name="Outputs">1</P>
+          </Block>
+          <Block BlockType="S-Function" Name=" SFunction " SID="6::73">
+            <P Name="Tag">Stateflow S-Function infant0528 4</P>
+            <P Name="Ports">[1, 2]</P>
+            <P Name="Position">[180, 100, 230, 160]</P>
+            <P Name="ZOrder">53</P>
+            <P Name="FunctionName">sf_sfun</P>
+            <P Name="PortCounts">[1 2]</P>
+            <P Name="SFunctionDeploymentMode">off</P>
+            <P Name="EnableBusSupport">off</P>
+            <Port>
+              <P Name="PortNumber">2</P>
+              <P Name="Name">Heat</P>
+              <P Name="RTWStorageClass">Auto</P>
+              <P Name="DataLoggingNameMode">SignalName</P>
+            </Port>
+          </Block>
+          <Block BlockType="Terminator" Name=" Terminator " SID="6::75">
+            <P Name="Position">[460, 241, 480, 259]</P>
+            <P Name="ZOrder">55</P>
+          </Block>
+          <Block BlockType="Outport" Name="Heat" SID="6::78" id="2121612742">
+            <P Name="Position">[460, 101, 480, 119]</P>
+            <P Name="ZOrder">58</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Line>
+            <P Name="ZOrder">7</P>
+            <P Name="SrcBlock">Heat_Control</P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> SFunction </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="Name">Heat</P>
+            <P Name="ZOrder">8</P>
+            <P Name="Labels">[0, 0]</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">2</P>
+            <P Name="DstBlock">Heat</P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">9</P>
+            <P Name="SrcBlock"> Demux </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Terminator </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">10</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Demux </P>
+            <P Name="DstPort">1</P>
+          </Line>
+        </System>
+      </Block>
+      <Block BlockType="SubSystem" Name="Operator Interface" SID="5" id="-2112902266">
+        <P Name="Description">wcet = 1ms</P>
+        <P Name="Ports">[2, 1]</P>
+        <P Name="Position">[520, 136, 710, 214]</P>
+        <P Name="ZOrder">4</P>
+        <P Name="LibraryVersion">1.267</P>
+        <P Name="ErrorFcn">Stateflow.Translate.translate</P>
+        <P Name="PermitHierarchicalResolution">ExplicitOnly</P>
+        <P Name="TreatAsAtomicUnit">on</P>
+        <P Name="RequestExecContextInheritance">off</P>
+        <P Name="SFBlockType">Chart</P>
+        <P Name="Variant">off</P>
+        <System>
+          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Open">off</P>
+          <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
+          <P Name="ZoomFactor">100</P>
+          <P Name="SIDHighWatermark">79</P>
+          <Block BlockType="Inport" Name="Operator_Feedback" SID="5::78" id="-981071389">
+            <P Name="Position">[20, 101, 40, 119]</P>
+            <P Name="ZOrder">58</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Block BlockType="Inport" Name="Inter_Act_Input" SID="5::79" id="1066042586">
+            <P Name="Position">[20, 136, 40, 154]</P>
+            <P Name="ZOrder">59</P>
+            <P Name="Port">2</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Block BlockType="Demux" Name=" Demux " SID="5::74">
+            <P Name="Ports">[1, 1]</P>
+            <P Name="Position">[270, 230, 320, 270]</P>
+            <P Name="ZOrder">54</P>
+            <P Name="Outputs">1</P>
+          </Block>
+          <Block BlockType="S-Function" Name=" SFunction " SID="5::73">
+            <P Name="Tag">Stateflow S-Function infant0528 2</P>
+            <P Name="Ports">[2, 2]</P>
+            <P Name="Position">[180, 100, 230, 160]</P>
+            <P Name="ZOrder">53</P>
+            <P Name="FunctionName">sf_sfun</P>
+            <P Name="PortCounts">[2 2]</P>
+            <P Name="SFunctionDeploymentMode">off</P>
+            <P Name="EnableBusSupport">off</P>
+            <Port>
+              <P Name="PortNumber">2</P>
+              <P Name="Name">Operator_Settings</P>
+              <P Name="RTWStorageClass">Auto</P>
+              <P Name="DataLoggingNameMode">SignalName</P>
+            </Port>
+          </Block>
+          <Block BlockType="Terminator" Name=" Terminator " SID="5::75">
+            <P Name="Position">[460, 241, 480, 259]</P>
+            <P Name="ZOrder">55</P>
+          </Block>
+          <Block BlockType="Outport" Name="Operator_Settings" SID="5::77" id="1985435212">
+            <P Name="Position">[460, 101, 480, 119]</P>
+            <P Name="ZOrder">57</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Line>
+            <P Name="ZOrder">12</P>
+            <P Name="SrcBlock">Operator_Feedback</P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> SFunction </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">13</P>
+            <P Name="SrcBlock">Inter_Act_Input</P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> SFunction </P>
+            <P Name="DstPort">2</P>
+          </Line>
+          <Line>
+            <P Name="Name">Operator_Settings</P>
+            <P Name="ZOrder">14</P>
+            <P Name="Labels">[0, 0]</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">2</P>
+            <P Name="DstBlock">Operator_Settings</P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">15</P>
+            <P Name="SrcBlock"> Demux </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Terminator </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">16</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Demux </P>
+            <P Name="DstPort">1</P>
+          </Line>
+        </System>
+      </Block>
+      <Block BlockType="SubSystem" Name="Temperature Sensor" SID="1" id="-162746462">
+        <P Name="Description">wcet = 0.1ms
+period = 5ms</P>
+        <P Name="Ports">[1, 1]</P>
+        <P Name="Position">[240, 353, 435, 427]</P>
+        <P Name="ZOrder">2</P>
+        <P Name="LibraryVersion">1.267</P>
+        <P Name="ErrorFcn">Stateflow.Translate.translate</P>
+        <P Name="PermitHierarchicalResolution">ExplicitOnly</P>
+        <P Name="TreatAsAtomicUnit">on</P>
+        <P Name="RequestExecContextInheritance">off</P>
+        <P Name="SFBlockType">Chart</P>
+        <P Name="Variant">off</P>
+        <System>
+          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Open">off</P>
+          <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
+          <P Name="ZoomFactor">100</P>
+          <P Name="SIDHighWatermark">78</P>
+          <Block BlockType="Inport" Name="Heat1" SID="1::78" id="-590452585">
+            <P Name="Position">[20, 101, 40, 119]</P>
+            <P Name="ZOrder">58</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Block BlockType="Demux" Name=" Demux " SID="1::74">
+            <P Name="Ports">[1, 1]</P>
+            <P Name="Position">[270, 230, 320, 270]</P>
+            <P Name="ZOrder">54</P>
+            <P Name="Outputs">1</P>
+          </Block>
+          <Block BlockType="S-Function" Name=" SFunction " SID="1::73">
+            <P Name="Tag">Stateflow S-Function infant0528 3</P>
+            <P Name="Ports">[1, 2]</P>
+            <P Name="Position">[180, 100, 230, 160]</P>
+            <P Name="ZOrder">53</P>
+            <P Name="FunctionName">sf_sfun</P>
+            <P Name="PortCounts">[1 2]</P>
+            <P Name="SFunctionDeploymentMode">off</P>
+            <P Name="EnableBusSupport">off</P>
+            <Port>
+              <P Name="PortNumber">2</P>
+              <P Name="Name">Current_Temperature</P>
+              <P Name="RTWStorageClass">Auto</P>
+              <P Name="DataLoggingNameMode">SignalName</P>
+            </Port>
+          </Block>
+          <Block BlockType="Terminator" Name=" Terminator " SID="1::75">
+            <P Name="Position">[460, 241, 480, 259]</P>
+            <P Name="ZOrder">55</P>
+          </Block>
+          <Block BlockType="Outport" Name="Current_Temperature" SID="1::77" id="1676080607">
+            <P Name="Position">[460, 101, 480, 119]</P>
+            <P Name="ZOrder">57</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Line>
+            <P Name="ZOrder">11</P>
+            <P Name="SrcBlock">Heat1</P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> SFunction </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="Name">Current_Temperature</P>
+            <P Name="ZOrder">12</P>
+            <P Name="Labels">[0, 0]</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">2</P>
+            <P Name="DstBlock">Current_Temperature</P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">13</P>
+            <P Name="SrcBlock"> Demux </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Terminator </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">14</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Demux </P>
+            <P Name="DstPort">1</P>
+          </Line>
+        </System>
+      </Block>
+      <Block BlockType="SubSystem" Name="Thermostat" SID="4" id="1719035613">
+        <P Name="Description">wcet = 1ms</P>
+        <P Name="Ports">[2, 2]</P>
+        <P Name="Position">[520, 321, 705, 414]</P>
+        <P Name="ZOrder">3</P>
+        <P Name="LibraryVersion">1.267</P>
+        <P Name="ErrorFcn">Stateflow.Translate.translate</P>
+        <P Name="PermitHierarchicalResolution">ExplicitOnly</P>
+        <P Name="TreatAsAtomicUnit">on</P>
+        <P Name="RequestExecContextInheritance">off</P>
+        <P Name="SFBlockType">Chart</P>
+        <P Name="Variant">off</P>
+        <System>
+          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Open">off</P>
+          <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
+          <P Name="ZoomFactor">100</P>
+          <P Name="SIDHighWatermark">80</P>
+          <Block BlockType="Inport" Name="Operator_Settings" SID="4::77" id="494910701">
+            <P Name="Position">[20, 101, 40, 119]</P>
+            <P Name="ZOrder">57</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Block BlockType="Inport" Name="Current_Temperature" SID="4::80" id="110177556">
+            <P Name="Position">[20, 136, 40, 154]</P>
+            <P Name="ZOrder">60</P>
+            <P Name="Port">2</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Block BlockType="Demux" Name=" Demux " SID="4::74">
+            <P Name="Ports">[1, 1]</P>
+            <P Name="Position">[270, 230, 320, 270]</P>
+            <P Name="ZOrder">54</P>
+            <P Name="Outputs">1</P>
+          </Block>
+          <Block BlockType="S-Function" Name=" SFunction " SID="4::73">
+            <P Name="Tag">Stateflow S-Function infant0528 1</P>
+            <P Name="Ports">[2, 3]</P>
+            <P Name="Position">[180, 100, 230, 180]</P>
+            <P Name="ZOrder">53</P>
+            <P Name="FunctionName">sf_sfun</P>
+            <P Name="PortCounts">[2 3]</P>
+            <P Name="SFunctionDeploymentMode">off</P>
+            <P Name="EnableBusSupport">off</P>
+            <Port>
+              <P Name="PortNumber">2</P>
+              <P Name="Name">Operator_Feedback</P>
+              <P Name="RTWStorageClass">Auto</P>
+              <P Name="DataLoggingNameMode">SignalName</P>
+            </Port>
+            <Port>
+              <P Name="PortNumber">3</P>
+              <P Name="Name">Heat_Control</P>
+              <P Name="RTWStorageClass">Auto</P>
+              <P Name="DataLoggingNameMode">SignalName</P>
+            </Port>
+          </Block>
+          <Block BlockType="Terminator" Name=" Terminator " SID="4::75">
+            <P Name="Position">[460, 241, 480, 259]</P>
+            <P Name="ZOrder">55</P>
+          </Block>
+          <Block BlockType="Outport" Name="Operator_Feedback" SID="4::78" id="-265486192">
+            <P Name="Position">[460, 101, 480, 119]</P>
+            <P Name="ZOrder">58</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Block BlockType="Outport" Name="Heat_Control" SID="4::79" id="1969718140">
+            <P Name="Position">[460, 136, 480, 154]</P>
+            <P Name="ZOrder">59</P>
+            <P Name="Port">2</P>
+            <P Name="IconDisplay">Port number</P>
+          </Block>
+          <Line>
+            <P Name="ZOrder">16</P>
+            <P Name="SrcBlock">Operator_Settings</P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> SFunction </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">17</P>
+            <P Name="SrcBlock">Current_Temperature</P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> SFunction </P>
+            <P Name="DstPort">2</P>
+          </Line>
+          <Line>
+            <P Name="Name">Operator_Feedback</P>
+            <P Name="ZOrder">18</P>
+            <P Name="Labels">[0, 0]</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">2</P>
+            <P Name="DstBlock">Operator_Feedback</P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="Name">Heat_Control</P>
+            <P Name="ZOrder">19</P>
+            <P Name="Labels">[0, 0]</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">3</P>
+            <P Name="DstBlock">Heat_Control</P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">20</P>
+            <P Name="SrcBlock"> Demux </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Terminator </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">21</P>
+            <P Name="SrcBlock"> SFunction </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> Demux </P>
+            <P Name="DstPort">1</P>
+          </Line>
+        </System>
+      </Block>
+      <Line id="-235313879">
+        <P Name="ZOrder">1</P>
+        <P Name="SrcBlock">Temperature
+Sensor</P>
+        <P Name="SrcPort">1</P>
+        <P Name="Points">[44, 0]</P>
+        <Branch id="-433768511">
+          <P Name="ZOrder">8</P>
+          <P Name="Points">[0, -66; -264, 0; 0, -64]</P>
+          <P Name="DstBlock">Alarm
+</P>
+          <P Name="DstPort">1</P>
+        </Branch>
+        <Branch id="-1455423954">
+          <P Name="ZOrder">7</P>
+          <P Name="DstBlock">Thermostat</P>
+          <P Name="DstPort">2</P>
+        </Branch>
+      </Line>
+      <Line id="880578653">
+        <P Name="ZOrder">2</P>
+        <P Name="SrcBlock">Thermostat</P>
+        <P Name="SrcPort">2</P>
+        <P Name="DstBlock">Heat Source </P>
+        <P Name="DstPort">1</P>
+      </Line>
+      <Line id="947210782">
+        <P Name="ZOrder">3</P>
+        <P Name="SrcBlock">Thermostat</P>
+        <P Name="SrcPort">1</P>
+        <P Name="Points">[9, 0; 0, -106; -213, 0; 0, -84]</P>
+        <P Name="DstBlock">Operator Interface</P>
+        <P Name="DstPort">1</P>
+      </Line>
+      <Line id="-681323443">
+        <P Name="ZOrder">4</P>
+        <P Name="SrcBlock">Operator Interface</P>
+        <P Name="SrcPort">1</P>
+        <P Name="Points">[9, 0; 0, -59; -234, 0; 0, 186; 15, 0]</P>
+        <P Name="DstBlock">Thermostat</P>
+        <P Name="DstPort">1</P>
+      </Line>
+      <Line id="-1347756448">
+        <P Name="ZOrder">5</P>
+        <P Name="SrcBlock">Heat Source </P>
+        <P Name="SrcPort">1</P>
+        <P Name="Points">[9, 0; 0, 213; -453, 0; 0, -63]</P>
+        <P Name="DstBlock">Air </P>
+        <P Name="DstPort">1</P>
+      </Line>
+      <Line id="-328562763">
+        <P Name="ZOrder">6</P>
+        <P Name="SrcBlock">Air </P>
+        <P Name="SrcPort">1</P>
+        <P Name="Points">[9, 0; 0, -60; -495, 0; 0, -90]</P>
+        <P Name="DstBlock">Temperature
+Sensor</P>
+        <P Name="DstPort">1</P>
+      </Line>
+    </System>
+  </Model>
+  <Stateflow>
+    <machine id="31">
+      <P Name="created">19-May-2019 15:11:29</P>
+      <P Name="isLibrary">0</P>
+      <P Name="sfVersion">80000006</P>
+      <Children>
+        <target id="120" name="sfun">
+          <P Name="description">Default Simulink S-Function Target.</P>
+        </target>
+        <chart id="32">
+          <P Name="name">Thermostat</P>
+          <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
+          <P Name="viewLimits">[0 1646 0 899]</P>
+          <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
+          <P Name="chartColor">[1 0.9882352941176471 0.9254901960784314]</P>
+          <P Name="screen">[1 1 3200 1200 1.25]</P>
+          <P Name="viewObj">32</P>
+          <P Name="ssIdHighWaterMark">30</P>
+          <P Name="decomposition">CLUSTER_CHART</P>
+          <P Name="chartFileNumber">1</P>
+          <P Name="saturateOnIntegerOverflow">1</P>
+          <P Name="userSpecifiedStateTransitionExecutionOrder">1</P>
+          <P Name="disableImplicitCasting">1</P>
+          <P Name="actionLanguage">2</P>
+          <Children>
+            <state SSID="5">
+              <P Name="labelString">Idle</P>
+              <P Name="position">[389 195 90 60]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">32</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <state SSID="11">
+              <P Name="description">wcet = 0.5ms</P>
+              <P Name="labelString">Setting
+entry: set the
+ temperature
+ limits</P>
+              <P Name="position">[646 195 90 60]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">32</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <state SSID="20">
+              <P Name="description">wcet = 1ms</P>
+              <P Name="labelString">Data_Process
+</P>
+              <P Name="position">[375.5 323 117 67]</P>
+              <P Name="fontSize">12</P>
+              <P Name="superState">SUBCHART</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">32</P>
+              <subviewS>
+                <P Name="panLimits">[-24 417 -24 349]</P>
+                <P Name="x1">20</P>
+                <P Name="y1">20</P>
+                <P Name="pos">[40 40 659 461]</P>
+              </subviewS>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+              <Children>
+                <state SSID="27">
+                  <P Name="labelString">Idle</P>
+                  <P Name="position">[159 117 90 60]</P>
+                  <P Name="fontSize">12</P>
+                  <P Name="visible">0</P>
+                  <P Name="subviewer">20</P>
+                  <P Name="type">OR_STATE</P>
+                  <P Name="decomposition">CLUSTER_STATE</P>
+                </state>
+                <state SSID="23">
+                  <P Name="description">wcet = 0.5ms</P>
+                  <P Name="labelString">Format
+entry: format the
+ current temperature
+ data
+exit: send data</P>
+                  <P Name="position">[450 250 120 69]</P>
+                  <P Name="fontSize">12</P>
+                  <P Name="visible">0</P>
+                  <P Name="subviewer">20</P>
+                  <P Name="type">OR_STATE</P>
+                  <P Name="decomposition">CLUSTER_STATE</P>
+                </state>
+                <state SSID="22">
+                  <P Name="description">wcet = 0.5ms</P>
+                  <P Name="labelString">Data Validate
+entry: validate the
+data
+</P>
+                  <P Name="position">[152 252.5 104 64]</P>
+                  <P Name="fontSize">12</P>
+                  <P Name="visible">0</P>
+                  <P Name="subviewer">20</P>
+                  <P Name="type">OR_STATE</P>
+                  <P Name="decomposition">CLUSTER_STATE</P>
+                </state>
+                <state SSID="25">
+                  <P Name="description">wcet = 0.5ms</P>
+                  <P Name="labelString">Fault_Invalid Data
+entry: report this fault</P>
+                  <P Name="position">[135.5 380 137 62]</P>
+                  <P Name="fontSize">12</P>
+                  <P Name="visible">0</P>
+                  <P Name="subviewer">20</P>
+                  <P Name="type">OR_STATE</P>
+                  <P Name="decomposition">CLUSTER_STATE</P>
+                </state>
+                <transition SSID="30">
+                  <P Name="labelString"/>
+                  <P Name="labelPosition">[419.116 143.384 0 0]</P>
+                  <P Name="fontSize">12</P>
+                  <src>
+                    <P Name="SSID">23</P>
+                    <P Name="intersection">[1 0 -1 0.5167 512 250 0 0]</P>
+                  </src>
+                  <dst>
+                    <P Name="SSID">27</P>
+                    <P Name="intersection">[2 1 0 0.4167 249 142 0 0]</P>
+                  </dst>
+                  <P Name="midPoint">[419.116 161.384]</P>
+                  <P Name="dataLimits">[249 512 139.6 250]</P>
+                  <P Name="subviewer">20</P>
+                  <P Name="drawStyle">SMART</P>
+                  <slide>
+                    <P Name="sticky">BOTH_STICK</P>
+                  </slide>
+                  <P Name="executionOrder">1</P>
+                </transition>
+                <transition SSID="29">
+                  <P Name="labelString"/>
+                  <P Name="labelPosition">[83.313 250.623 0 0]</P>
+                  <P Name="fontSize">12</P>
+                  <src>
+                    <P Name="SSID">25</P>
+                    <P Name="intersection">[4 -1 0 0.867 135.5 388.246 0 0]</P>
+                  </src>
+                  <dst>
+                    <P Name="SSID">27</P>
+                    <P Name="intersection">[4 -1 0 0.4667 159 149 0 0]</P>
+                  </dst>
+                  <P Name="midPoint">[83.3131 268.623]</P>
+                  <P Name="dataLimits">[82.825 159 146.6 388.246]</P>
+                  <P Name="subviewer">20</P>
+                  <P Name="drawStyle">SMART</P>
+                  <slide>
+                    <P Name="sticky">BOTH_STICK</P>
+                  </slide>
+                  <P Name="executionOrder">1</P>
+                </transition>
+                <transition SSID="28">
+                  <P Name="labelString">[receive data]</P>
+                  <P Name="labelPosition">[216 210.87 73.984 14]</P>
+                  <P Name="fontSize">12</P>
+                  <src>
+                    <P Name="SSID">27</P>
+                    <P Name="intersection">[3 0 1 0.5 204 177 0 0]</P>
+                  </src>
+                  <dst>
+                    <P Name="SSID">22</P>
+                    <P Name="intersection">[1 -0 -1 0.5 204 252.5 0 0]</P>
+                  </dst>
+                  <P Name="midPoint">[204 210.75]</P>
+                  <P Name="dataLimits">[201.6 206.4 177 252.5]</P>
+                  <P Name="subviewer">20</P>
+                  <P Name="drawStyle">SMART</P>
+                  <slide>
+                    <P Name="sticky">BOTH_STICK</P>
+                  </slide>
+                  <P Name="executionOrder">1</P>
+                </transition>
+                <transition SSID="24">
+                  <P Name="labelString">[data is valid]</P>
+                  <P Name="labelPosition">[319.111 264.557 71.969 14]</P>
+                  <P Name="fontSize">12</P>
+                  <src>
+                    <P Name="SSID">22</P>
+                    <P Name="intersection">[2 1 0 0.5078 256 285 0 0]</P>
+                  </src>
+                  <dst>
+                    <P Name="SSID">23</P>
+                    <P Name="intersection">[4 -1 -0 0.4928 450 285 0 0]</P>
+                  </dst>
+                  <P Name="midPoint">[349 285]</P>
+                  <P Name="dataLimits">[256 450 282.6 287.4]</P>
+                  <P Name="subviewer">20</P>
+                  <P Name="drawStyle">SMART</P>
+                  <slide>
+                    <P Name="sticky">BOTH_STICK</P>
+                  </slide>
+                  <P Name="executionOrder">1</P>
+                </transition>
+                <transition SSID="26">
+                  <P Name="labelString">[data is invalid]</P>
+                  <P Name="labelPosition">[216 333 81.297 14]</P>
+                  <P Name="fontSize">12</P>
+                  <src>
+                    <P Name="SSID">22</P>
+                    <P Name="intersection">[3 0 1 0.5192 202 316.5 0 0]</P>
+                  </src>
+                  <dst>
+                    <P Name="SSID">25</P>
+                    <P Name="intersection">[1 -0 -1 0.4854 202 380 0 0]</P>
+                  </dst>
+                  <P Name="midPoint">[202 344.25]</P>
+                  <P Name="dataLimits">[199.6 204.4 316.5 380]</P>
+                  <P Name="subviewer">20</P>
+                  <P Name="drawStyle">SMART</P>
+                  <slide>
+                    <P Name="sticky">BOTH_STICK</P>
+                  </slide>
+                  <P Name="executionOrder">2</P>
+                </transition>
+              </Children>
+            </state>
+            <state SSID="9">
+              <P Name="description">wcet = 0.5ms</P>
+              <P Name="labelString">Checking
+entry: compare
+ current temperature
+ to limits</P>
+              <P Name="position">[371 442 118 64]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">32</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <state SSID="8">
+              <P Name="description">wcet = 0.5ms</P>
+              <P Name="labelString">Control
+entry: send heat
+ control command</P>
+              <P Name="position">[112 443.5 116 61]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">32</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <state SSID="7">
+              <P Name="description">wcet = 0.5ms</P>
+              <P Name="labelString">Feedback</P>
+              <P Name="position">[642 444 90 60]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">32</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <data SSID="1" name="Operator_Settings">
+              <P Name="scope">INPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_INHERITED</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <data SSID="2" name="Operator_Feedback">
+              <P Name="scope">OUTPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_NO</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <data SSID="3" name="Heat_Control">
+              <P Name="scope">OUTPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_NO</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <data SSID="4" name="Current_Temperature">
+              <P Name="scope">INPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_INHERITED</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <transition SSID="6">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[434 162 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="intersection">[0 -0 1 0 434 165 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[1 0 -1 0.5 434 195 0 0]</P>
+              </dst>
+              <P Name="midPoint">[434 180]</P>
+              <P Name="dataLimits">[431.6 436.4 165 195]</P>
+              <P Name="subviewer">32</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="19">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[161.494 376.908 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">8</P>
+                <P Name="intersection">[1 0 -1 0.4828 168 443.5 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[4 -1 0 0.6667 389 215 0 0]</P>
+              </dst>
+              <P Name="midPoint">[161.4944 394.9077]</P>
+              <P Name="dataLimits">[161.472 389 212.6 443.5]</P>
+              <P Name="subviewer">32</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="12">
+              <P Name="labelString">receive operator
+setting</P>
+              <P Name="labelPosition">[523.913 192 88.641 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[2 1 0 0.5333 479 227 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">11</P>
+                <P Name="intersection">[4 -1 -0 0.4667 646 227 0 0]</P>
+              </dst>
+              <P Name="midPoint">[558.5 227]</P>
+              <P Name="dataLimits">[479 646 224.6 229.4]</P>
+              <P Name="subviewer">32</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="18">
+              <P Name="labelString">[current temperature
+below limits]</P>
+              <P Name="labelPosition">[215.698 328.341 110.609 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">9</P>
+                <P Name="intersection">[4 -1 0 0.7969 371 455 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[4 -1 0 0.2833 389 238 0 0]</P>
+              </dst>
+              <P Name="midPoint">[331.0842 305.5024]</P>
+              <P Name="dataLimits">[324.911 389 235.6 455]</P>
+              <P Name="subviewer">32</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">2</P>
+            </transition>
+            <transition SSID="16">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[595.629 313.733 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">7</P>
+                <P Name="intersection">[1 0 -1 0.2444 664 444 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[2 1 0 0.8333 479 245 0 0]</P>
+              </dst>
+              <P Name="midPoint">[595.6288 331.7326]</P>
+              <P Name="dataLimits">[479 664 242.6 444]</P>
+              <P Name="subviewer">32</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">2</P>
+            </transition>
+            <transition SSID="14">
+              <P Name="labelString">receive current
+temperature</P>
+              <P Name="labelPosition">[442 286.456 81.297 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[3 0 1 0.5111 433 255 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">20</P>
+                <P Name="intersection">[1 -0 -1 0.4915 433 323 0 0]</P>
+              </dst>
+              <P Name="midPoint">[433 285]</P>
+              <P Name="dataLimits">[430.6 435.4 255 323]</P>
+              <P Name="subviewer">32</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">2</P>
+            </transition>
+            <transition SSID="13">
+              <P Name="labelString">send operator
+feedback</P>
+              <P Name="labelPosition">[700.611 328.54 76 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">11</P>
+                <P Name="intersection">[3 0 1 0.5444 687 255 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">7</P>
+                <P Name="intersection">[1 -0 -1 0.5 687 444 0 0]</P>
+              </dst>
+              <P Name="midPoint">[687 345.5]</P>
+              <P Name="dataLimits">[684.6 689.4 255 444]</P>
+              <P Name="subviewer">32</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="21">
+              <P Name="labelString">[valid data]</P>
+              <P Name="labelPosition">[444 408 59.984 14]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">20</P>
+                <P Name="intersection">[3 0 1 0.5085 433 390 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">9</P>
+                <P Name="intersection">[1 -0 -1 0.5254 433 442 0 0]</P>
+              </dst>
+              <P Name="midPoint">[433 412]</P>
+              <P Name="dataLimits">[430.6 435.4 390 442]</P>
+              <P Name="subviewer">32</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="17">
+              <P Name="labelString"> [current temperature
+ exceed set limits]</P>
+              <P Name="labelPosition">[238.533 485.331 113.938 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">9</P>
+                <P Name="intersection">[4 -1 0 0.5329 371 471.8966 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">8</P>
+                <P Name="intersection">[2 1 0 0.4655 228 471.8966 0 0]</P>
+              </dst>
+              <P Name="midPoint">[303.5 471.8966]</P>
+              <P Name="dataLimits">[228 371 469.497 474.297]</P>
+              <P Name="subviewer">32</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="15">
+              <P Name="labelString">receive current
+temperature</P>
+              <P Name="labelPosition">[529.696 490 81.297 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">7</P>
+                <P Name="intersection">[4 -1 0 0.45 642 477 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">9</P>
+                <P Name="intersection">[2 1 -0 0.5469 489 477 0 0]</P>
+              </dst>
+              <P Name="midPoint">[569.5 477]</P>
+              <P Name="dataLimits">[489 642 474.6 479.4]</P>
+              <P Name="subviewer">32</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+          </Children>
+        </chart>
+        <chart id="63">
+          <P Name="name">Operator Interface</P>
+          <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
+          <P Name="viewLimits">[0 1646 0 899]</P>
+          <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
+          <P Name="chartColor">[1 0.9882352941176471 0.9254901960784314]</P>
+          <P Name="screen">[1 1 3200 1200 1.25]</P>
+          <P Name="viewObj">63</P>
+          <P Name="ssIdHighWaterMark">13</P>
+          <P Name="decomposition">CLUSTER_CHART</P>
+          <P Name="chartFileNumber">2</P>
+          <P Name="saturateOnIntegerOverflow">1</P>
+          <P Name="userSpecifiedStateTransitionExecutionOrder">1</P>
+          <P Name="disableImplicitCasting">1</P>
+          <P Name="actionLanguage">2</P>
+          <Children>
+            <state SSID="7">
+              <P Name="description">wcet = 0.5ms</P>
+              <P Name="labelString">Send
+entry: send operator
+ settings to Thermostat</P>
+              <P Name="position">[453 147.5 132 67]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">63</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <state SSID="5">
+              <P Name="labelString">Idle</P>
+              <P Name="position">[185 151 90 60]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">63</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <state SSID="10">
+              <P Name="description">wcet = 0.5ms</P>
+              <P Name="labelString">Show 
+entry: show operator
+ feedback</P>
+              <P Name="position">[172.5 327 115 56]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">63</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <data SSID="1" name="Operator_Settings">
+              <P Name="scope">OUTPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_NO</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <data SSID="2" name="Operator_Feedback">
+              <P Name="scope">INPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_INHERITED</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <data SSID="4" name="Inter_Act_Input">
+              <P Name="scope">INPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_INHERITED</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <transition SSID="6">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[228 114.5 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="intersection">[0 -0 1 0 228 122 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[1 0 -1 0.4778 228 151 0 0]</P>
+              </dst>
+              <P Name="midPoint">[228 132.5]</P>
+              <P Name="dataLimits">[225.6 230.4 122 151]</P>
+              <P Name="subviewer">63</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="8">
+              <P Name="labelString">[Nurse Input]
+</P>
+              <P Name="labelPosition">[335.348 154.903 70.641 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[2 1 0 0.4667 275 179 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">7</P>
+                <P Name="intersection">[4 -1 -0 0.5299 453 179 0 0]</P>
+              </dst>
+              <P Name="midPoint">[360 179]</P>
+              <P Name="dataLimits">[275 453 176.6 181.4]</P>
+              <P Name="subviewer">63</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="12">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[101 244 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">10</P>
+                <P Name="intersection">[4 -1 0 0.7768 172.5 339.5 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[4 -1 0 0.4167 185 186 0 0]</P>
+              </dst>
+              <P Name="midPoint">[101 262]</P>
+              <P Name="dataLimits">[101.067 185 183.6 339.5]</P>
+              <P Name="subviewer">63</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="11">
+              <P Name="labelString">receive operator
+feedback</P>
+              <P Name="labelPosition">[119.5 255 88.641 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[3 0 1 0.5 230 211 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">10</P>
+                <P Name="intersection">[1 -0 -1 0.5087 231 327 0 0]</P>
+              </dst>
+              <P Name="midPoint">[230.5 265]</P>
+              <P Name="dataLimits">[228.6 233.4 211 327]</P>
+              <P Name="subviewer">63</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">2</P>
+            </transition>
+            <transition SSID="9">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[362.25 251.887 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">7</P>
+                <P Name="intersection">[3 0 1 0.8826 468.5 214.5 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[3 0 1 0.2111 256 211 0 0]</P>
+              </dst>
+              <P Name="midPoint">[362.25 269.8869]</P>
+              <P Name="dataLimits">[253.6 468.5 211 269.953]</P>
+              <P Name="subviewer">63</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+          </Children>
+        </chart>
+        <chart id="76">
+          <P Name="name">Temperature
+Sensor</P>
+          <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
+          <P Name="viewLimits">[0 1646 0 899]</P>
+          <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
+          <P Name="chartColor">[1 0.9882352941176471 0.9254901960784314]</P>
+          <P Name="screen">[1 1 3200 1200 1.25]</P>
+          <P Name="viewObj">76</P>
+          <P Name="ssIdHighWaterMark">8</P>
+          <P Name="decomposition">CLUSTER_CHART</P>
+          <P Name="chartFileNumber">3</P>
+          <P Name="saturateOnIntegerOverflow">1</P>
+          <P Name="userSpecifiedStateTransitionExecutionOrder">1</P>
+          <P Name="disableImplicitCasting">1</P>
+          <P Name="actionLanguage">2</P>
+          <Children>
+            <state SSID="6">
+              <P Name="labelString">Send data
+entry: send data 
+to Alarm and 
+Thermostat </P>
+              <P Name="position">[358 121.5 99 61]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">76</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <state SSID="3">
+              <P Name="labelString">Collect Data</P>
+              <P Name="position">[139 122 90 60]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">76</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <data SSID="1" name="Current_Temperature">
+              <P Name="scope">OUTPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_NO</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <data SSID="2" name="Heat1">
+              <P Name="scope">INPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_INHERITED</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <transition SSID="4">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[183 107 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="intersection">[0 -0 1 0 183 92 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">3</P>
+                <P Name="intersection">[1 0 -1 0.4889 183 122 0 0]</P>
+              </dst>
+              <P Name="midPoint">[183 107]</P>
+              <P Name="dataLimits">[180.6 185.4 92 122]</P>
+              <P Name="subviewer">76</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="7">
+              <P Name="labelString">Timer</P>
+              <P Name="labelPosition">[278 120 32.188 14]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">3</P>
+                <P Name="intersection">[2 1 0 0.3333 229 142 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">6</P>
+                <P Name="intersection">[4 -1 -0 0.6639 358 142 0 0]</P>
+              </dst>
+              <P Name="midPoint">[289.5 142]</P>
+              <P Name="dataLimits">[229 358 139.6 144.4]</P>
+              <P Name="subviewer">76</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="8">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[297.5 144.5 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">6</P>
+                <P Name="intersection">[4 -1 0 0.3197 358 163 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">3</P>
+                <P Name="intersection">[2 1 -0 0.6667 229 162 0 0]</P>
+              </dst>
+              <P Name="midPoint">[297.5 162.5]</P>
+              <P Name="dataLimits">[229 358 159.6 164.4]</P>
+              <P Name="subviewer">76</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+          </Children>
+        </chart>
+        <chart id="85">
+          <P Name="name">Heat Source </P>
+          <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
+          <P Name="viewLimits">[0 1646 0 899]</P>
+          <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
+          <P Name="chartColor">[1 0.9882352941176471 0.9254901960784314]</P>
+          <P Name="screen">[1 1 3200 1200 1.25]</P>
+          <P Name="viewObj">85</P>
+          <P Name="ssIdHighWaterMark">8</P>
+          <P Name="decomposition">CLUSTER_CHART</P>
+          <P Name="chartFileNumber">4</P>
+          <P Name="saturateOnIntegerOverflow">1</P>
+          <P Name="userSpecifiedStateTransitionExecutionOrder">1</P>
+          <P Name="disableImplicitCasting">1</P>
+          <P Name="actionLanguage">2</P>
+          <Children>
+            <state SSID="3">
+              <P Name="labelString">Idle</P>
+              <P Name="position">[99 116 90 60]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">85</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <state SSID="5">
+              <P Name="labelString">Heating
+entry: produce
+ heat</P>
+              <P Name="position">[377 116 90 60]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">85</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <data SSID="1" name="Heat_Control">
+              <P Name="scope">INPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_INHERITED</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <data SSID="2" name="Heat">
+              <P Name="scope">OUTPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_NO</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <transition SSID="4">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[143 101 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="intersection">[0 -0 1 0 143 86 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">3</P>
+                <P Name="intersection">[1 0 -1 0.4889 143 116 0 0]</P>
+              </dst>
+              <P Name="midPoint">[143 101]</P>
+              <P Name="dataLimits">[140.6 145.4 86 116]</P>
+              <P Name="subviewer">85</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="6">
+              <P Name="labelString">[receive Heat Control]
+</P>
+              <P Name="labelPosition">[229.522 122 117.938 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">3</P>
+                <P Name="intersection">[2 1 0 0.4667 189 144 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[4 -1 -0 0.5333 377 144 0 0]</P>
+              </dst>
+              <P Name="midPoint">[279 144]</P>
+              <P Name="dataLimits">[189 377 141.6 146.4]</P>
+              <P Name="subviewer">85</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="8">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[283 226.531 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[3 0 1 0.6111 412 176 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">3</P>
+                <P Name="intersection">[3 0 1 0.3889 154 176 0 0]</P>
+              </dst>
+              <P Name="midPoint">[283 244.531]</P>
+              <P Name="dataLimits">[151.6 412 176 244.67]</P>
+              <P Name="subviewer">85</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+          </Children>
+        </chart>
+        <chart id="94">
+          <P Name="name">Air </P>
+          <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
+          <P Name="viewLimits">[0 1646 0 899]</P>
+          <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
+          <P Name="chartColor">[1 0.9882352941176471 0.9254901960784314]</P>
+          <P Name="screen">[1 1 3200 1200 1.25]</P>
+          <P Name="viewObj">94</P>
+          <P Name="ssIdHighWaterMark">4</P>
+          <P Name="decomposition">CLUSTER_CHART</P>
+          <P Name="chartFileNumber">5</P>
+          <P Name="saturateOnIntegerOverflow">1</P>
+          <P Name="userSpecifiedStateTransitionExecutionOrder">1</P>
+          <P Name="disableImplicitCasting">1</P>
+          <P Name="actionLanguage">2</P>
+          <Children>
+            <data SSID="1" name="Heat1">
+              <P Name="scope">OUTPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_NO</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <data SSID="2" name="Heat">
+              <P Name="scope">INPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_INHERITED</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+          </Children>
+        </chart>
+        <chart id="98">
+          <P Name="name">Alarm
+</P>
+          <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
+          <P Name="viewLimits">[0 1646 0 899]</P>
+          <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
+          <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
+          <P Name="chartColor">[1 0.9882352941176471 0.9254901960784314]</P>
+          <P Name="screen">[1 1 3200 1200 1.25]</P>
+          <P Name="viewObj">98</P>
+          <P Name="ssIdHighWaterMark">21</P>
+          <P Name="decomposition">CLUSTER_CHART</P>
+          <P Name="chartFileNumber">6</P>
+          <P Name="saturateOnIntegerOverflow">1</P>
+          <P Name="userSpecifiedStateTransitionExecutionOrder">1</P>
+          <P Name="disableImplicitCasting">1</P>
+          <P Name="actionLanguage">2</P>
+          <Children>
+            <state SSID="12">
+              <P Name="description">wcet = 1ms</P>
+              <P Name="labelString">Data_Process
+</P>
+              <P Name="position">[357.5 137.5 117 67]</P>
+              <P Name="fontSize">12</P>
+              <P Name="superState">SUBCHART</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">98</P>
+              <subviewS>
+                <P Name="panLimits">[-24 417 -24 349]</P>
+                <P Name="x1">20</P>
+                <P Name="y1">20</P>
+                <P Name="pos">[40 40 659 461]</P>
+              </subviewS>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+              <Children>
+                <state SSID="18">
+                  <P Name="labelString">Idle</P>
+                  <P Name="position">[159 117 90 60]</P>
+                  <P Name="fontSize">12</P>
+                  <P Name="visible">0</P>
+                  <P Name="subviewer">12</P>
+                  <P Name="type">OR_STATE</P>
+                  <P Name="decomposition">CLUSTER_STATE</P>
+                </state>
+                <state SSID="19">
+                  <P Name="description">wcet = 0.5ms</P>
+                  <P Name="labelString">Format
+entry: format the
+ current temperature
+ data
+exit: send data</P>
+                  <P Name="position">[450 250 120 69]</P>
+                  <P Name="fontSize">12</P>
+                  <P Name="visible">0</P>
+                  <P Name="subviewer">12</P>
+                  <P Name="type">OR_STATE</P>
+                  <P Name="decomposition">CLUSTER_STATE</P>
+                </state>
+                <state SSID="20">
+                  <P Name="description">wcet = 0.5ms</P>
+                  <P Name="labelString">Data Validate
+entry: validate the
+data
+</P>
+                  <P Name="position">[152 252.5 104 64]</P>
+                  <P Name="fontSize">12</P>
+                  <P Name="visible">0</P>
+                  <P Name="subviewer">12</P>
+                  <P Name="type">OR_STATE</P>
+                  <P Name="decomposition">CLUSTER_STATE</P>
+                </state>
+                <state SSID="21">
+                  <P Name="description">wcet = 0.5ms</P>
+                  <P Name="labelString">Fault_Invalid Data
+entry: report this fault</P>
+                  <P Name="position">[135.5 380 137 62]</P>
+                  <P Name="fontSize">12</P>
+                  <P Name="visible">0</P>
+                  <P Name="subviewer">12</P>
+                  <P Name="type">OR_STATE</P>
+                  <P Name="decomposition">CLUSTER_STATE</P>
+                </state>
+                <transition SSID="13">
+                  <P Name="labelString"/>
+                  <P Name="labelPosition">[419.116 143.384 0 0]</P>
+                  <P Name="fontSize">12</P>
+                  <src>
+                    <P Name="SSID">19</P>
+                    <P Name="intersection">[1 0 -1 0.5167 512 250 0 0]</P>
+                  </src>
+                  <dst>
+                    <P Name="SSID">18</P>
+                    <P Name="intersection">[2 1 0 0.4167 249 142 0 0]</P>
+                  </dst>
+                  <P Name="midPoint">[419.116 161.384]</P>
+                  <P Name="visible">0</P>
+                  <P Name="dataLimits">[249 512 139.6 250]</P>
+                  <P Name="subviewer">12</P>
+                  <P Name="drawStyle">SMART</P>
+                  <slide>
+                    <P Name="sticky">BOTH_STICK</P>
+                  </slide>
+                  <P Name="executionOrder">1</P>
+                </transition>
+                <transition SSID="14">
+                  <P Name="labelString"/>
+                  <P Name="labelPosition">[83.313 250.623 0 0]</P>
+                  <P Name="fontSize">12</P>
+                  <src>
+                    <P Name="SSID">21</P>
+                    <P Name="intersection">[4 -1 0 0.867 135.5 388.246 0 0]</P>
+                  </src>
+                  <dst>
+                    <P Name="SSID">18</P>
+                    <P Name="intersection">[4 -1 0 0.4667 159 149 0 0]</P>
+                  </dst>
+                  <P Name="midPoint">[83.3131 268.623]</P>
+                  <P Name="visible">0</P>
+                  <P Name="dataLimits">[82.825 159 146.6 388.246]</P>
+                  <P Name="subviewer">12</P>
+                  <P Name="drawStyle">SMART</P>
+                  <slide>
+                    <P Name="sticky">BOTH_STICK</P>
+                  </slide>
+                  <P Name="executionOrder">1</P>
+                </transition>
+                <transition SSID="15">
+                  <P Name="labelString">[receive data]</P>
+                  <P Name="labelPosition">[216 210.87 73.984 14]</P>
+                  <P Name="fontSize">12</P>
+                  <src>
+                    <P Name="SSID">18</P>
+                    <P Name="intersection">[3 0 1 0.5 204 177 0 0]</P>
+                  </src>
+                  <dst>
+                    <P Name="SSID">20</P>
+                    <P Name="intersection">[1 -0 -1 0.5 204 252.5 0 0]</P>
+                  </dst>
+                  <P Name="midPoint">[204 210.75]</P>
+                  <P Name="visible">0</P>
+                  <P Name="dataLimits">[201.6 206.4 177 252.5]</P>
+                  <P Name="subviewer">12</P>
+                  <P Name="drawStyle">SMART</P>
+                  <slide>
+                    <P Name="sticky">BOTH_STICK</P>
+                  </slide>
+                  <P Name="executionOrder">1</P>
+                </transition>
+                <transition SSID="16">
+                  <P Name="labelString">[data is valid]</P>
+                  <P Name="labelPosition">[319.111 264.557 71.969 14]</P>
+                  <P Name="fontSize">12</P>
+                  <src>
+                    <P Name="SSID">20</P>
+                    <P Name="intersection">[2 1 0 0.5078 256 285 0 0]</P>
+                  </src>
+                  <dst>
+                    <P Name="SSID">19</P>
+                    <P Name="intersection">[4 -1 -0 0.4928 450 285 0 0]</P>
+                  </dst>
+                  <P Name="midPoint">[349 285]</P>
+                  <P Name="visible">0</P>
+                  <P Name="dataLimits">[256 450 282.6 287.4]</P>
+                  <P Name="subviewer">12</P>
+                  <P Name="drawStyle">SMART</P>
+                  <slide>
+                    <P Name="sticky">BOTH_STICK</P>
+                  </slide>
+                  <P Name="executionOrder">1</P>
+                </transition>
+                <transition SSID="17">
+                  <P Name="labelString">[data is invalid]</P>
+                  <P Name="labelPosition">[216 333 81.297 14]</P>
+                  <P Name="fontSize">12</P>
+                  <src>
+                    <P Name="SSID">20</P>
+                    <P Name="intersection">[3 0 1 0.5192 202 316.5 0 0]</P>
+                  </src>
+                  <dst>
+                    <P Name="SSID">21</P>
+                    <P Name="intersection">[1 -0 -1 0.4854 202 380 0 0]</P>
+                  </dst>
+                  <P Name="midPoint">[202 344.25]</P>
+                  <P Name="visible">0</P>
+                  <P Name="dataLimits">[199.6 204.4 316.5 380]</P>
+                  <P Name="subviewer">12</P>
+                  <P Name="drawStyle">SMART</P>
+                  <slide>
+                    <P Name="sticky">BOTH_STICK</P>
+                  </slide>
+                  <P Name="executionOrder">2</P>
+                </transition>
+              </Children>
+            </state>
+            <state SSID="3">
+              <P Name="labelString">Idle</P>
+              <P Name="position">[114 141 90 60]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">98</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <state SSID="5">
+              <P Name="description">wcet = 0.5ms</P>
+              <P Name="labelString">Checking</P>
+              <P Name="position">[371 321 90 60]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">98</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <state SSID="6">
+              <P Name="description">wcet = 0.5ms</P>
+              <P Name="labelString">Alarming</P>
+              <P Name="position">[630 321 90 60]</P>
+              <P Name="fontSize">12</P>
+              <P Name="visible">0</P>
+              <P Name="subviewer">98</P>
+              <P Name="type">OR_STATE</P>
+              <P Name="decomposition">CLUSTER_STATE</P>
+            </state>
+            <data SSID="1" name="Current_Temperature">
+              <P Name="scope">INPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_NO</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <data SSID="2" name="Send_Out_Alarm">
+              <P Name="scope">OUTPUT_DATA</P>
+              <props>
+                <array>
+                  <P Name="size">-1</P>
+                </array>
+                <type>
+                  <P Name="method">SF_INHERITED_TYPE</P>
+                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="isSigned">1</P>
+                  <P Name="wordLength">16</P>
+                </type>
+                <P Name="complexity">SF_COMPLEX_INHERITED</P>
+                <P Name="frame">SF_FRAME_NO</P>
+              </props>
+              <P Name="dataType">Inherit: Same as Simulink</P>
+            </data>
+            <transition SSID="4">
+              <P Name="labelString"/>
+              <P Name="labelPosition">[158 104.5 0 0]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="intersection">[0 -0 1 0 158 112 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">3</P>
+                <P Name="intersection">[1 0 -1 0.4889 158 141 0 0]</P>
+              </dst>
+              <P Name="midPoint">[158 122.5]</P>
+              <P Name="dataLimits">[155.6 160.4 112 141]</P>
+              <P Name="subviewer">98</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="7">
+              <P Name="labelString">[receive current 
+temperature]</P>
+              <P Name="labelPosition">[235.437 141.685 87.953 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">3</P>
+                <P Name="intersection">[2 1 0 0.6333 204 179 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">12</P>
+                <P Name="intersection">[4 -1 0 0.3806 357.5 179 0 0]</P>
+              </dst>
+              <P Name="midPoint">[276.75 179]</P>
+              <P Name="dataLimits">[204 357.5 176.6 181.4]</P>
+              <P Name="subviewer">98</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="9">
+              <P Name="labelString">[not dangerous]</P>
+              <P Name="labelPosition">[177.518 322.056 85.344 14]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[4 -1 0 0.4667 371 353 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">3</P>
+                <P Name="intersection">[3 0 1 0.5556 154 201 0 0]</P>
+              </dst>
+              <P Name="midPoint">[229.946 313.554]</P>
+              <P Name="dataLimits">[151.6 371 201 353]</P>
+              <P Name="subviewer">98</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">2</P>
+            </transition>
+            <transition SSID="11">
+              <P Name="labelString">[valid data]</P>
+              <P Name="labelPosition">[430 256 59.984 14]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">12</P>
+                <P Name="intersection">[3 0 1 0.5085 415 204.5 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[1 -0 -1 0.4889 415 321 0 0]</P>
+              </dst>
+              <P Name="midPoint">[415 258.75]</P>
+              <P Name="dataLimits">[412.6 417.4 204.5 321]</P>
+              <P Name="subviewer">98</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+            <transition SSID="8">
+              <P Name="labelString">[exceed dangerous
+temperature]</P>
+              <P Name="labelPosition">[505.152 310.84 104.031 26]</P>
+              <P Name="fontSize">12</P>
+              <src>
+                <P Name="SSID">5</P>
+                <P Name="intersection">[2 1 0 0.4833 461 350 0 0]</P>
+              </src>
+              <dst>
+                <P Name="SSID">6</P>
+                <P Name="intersection">[4 -1 -0 0.5167 630 350 0 0]</P>
+              </dst>
+              <P Name="midPoint">[541.5 350]</P>
+              <P Name="dataLimits">[461 630 347.6 352.4]</P>
+              <P Name="subviewer">98</P>
+              <P Name="drawStyle">SMART</P>
+              <slide>
+                <P Name="sticky">BOTH_STICK</P>
+              </slide>
+              <P Name="executionOrder">1</P>
+            </transition>
+          </Children>
+        </chart>
+      </Children>
+    </machine>
+    <instance id="62">
+      <P Name="name">Thermostat</P>
+      <P Name="machine">31</P>
+      <P Name="chart">32</P>
+    </instance>
+    <instance id="75">
+      <P Name="name">Operator Interface</P>
+      <P Name="machine">31</P>
+      <P Name="chart">63</P>
+    </instance>
+    <instance id="84">
+      <P Name="name">Temperature
+Sensor</P>
+      <P Name="machine">31</P>
+      <P Name="chart">76</P>
+    </instance>
+    <instance id="93">
+      <P Name="name">Heat Source </P>
+      <P Name="machine">31</P>
+      <P Name="chart">85</P>
+    </instance>
+    <instance id="97">
+      <P Name="name">Air </P>
+      <P Name="machine">31</P>
+      <P Name="chart">94</P>
+    </instance>
+    <instance id="119">
+      <P Name="name">Alarm
+</P>
+      <P Name="machine">31</P>
+      <P Name="chart">98</P>
+    </instance>
+  </Stateflow>
+</ModelInformation>

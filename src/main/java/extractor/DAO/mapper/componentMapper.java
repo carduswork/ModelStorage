@@ -25,5 +25,7 @@ public interface componentMapper {
 
 	component getIDbyName(String name);
 	
-	List<component> selectAll();
+	List<component> selectAll_aadl();
+	List<component> selectAll_sysml();
+	List<component> selectAll_slk();
 }

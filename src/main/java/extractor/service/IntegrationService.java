@@ -2,6 +2,7 @@ package extractor.service;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.dom4j.Document;
@@ -63,7 +64,7 @@ public class IntegrationService {
 		return document;
 	}
 
-	public void GenerateIntegaraton(String filename) {
+	public void GenerateIntegaraton(String filename,String modeltype) {
 		String dir = "src/main/resources/INTEGRATIONMODEL/";
 		// 可配置
 		try {
@@ -71,16 +72,20 @@ public class IntegrationService {
 			// 设置系统名
 			Element e_comp = d2.addElement("ownedPublicSection");
 			e_comp.addAttribute("name", filename);
-
+			List<component> r=new ArrayList<component>();
 			// 设置组件
-			List<component> r = cm.selectAll();
+			switch(modeltype) {
+			case "aadl":r= cm.selectAll_aadl();break;
+			case "sysml":r= cm.selectAll_sysml();break;
+			case "simulink":r= cm.selectAll_slk();break;
+			}
+			 
 			r.forEach((v) -> {
 				Element comp = e_comp.addElement("component");
 				comp.addAttribute("name", v.getName());
 				comp.addAttribute("id", v.getComponentid().toString());
 				comp.addAttribute("type", v.getType());
 
-				// TODO in out的表示
 				// 设置linkpoint,transition
 				List<linkpoint> linpoints = lm.getPortUnderCMP(v.getComponentid());
 				linpoints.forEach((v2) -> {
@@ -142,7 +147,7 @@ public class IntegrationService {
 
 							List<linkpoint> threadports = lm.getPortUnderCMP(v6.getTaskid());
 							threadports.forEach((v8) -> {
-								Element lp = tsk.addElement("port");
+								Element lp = child.addElement("port");
 								lp.addAttribute("name", v8.getName());
 								lp.addAttribute("id", v8.getLinkpointid().toString());
 								if (pvm.selectByportid(v8.getLinkpointid()) != null) {
