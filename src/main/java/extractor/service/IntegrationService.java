@@ -14,6 +14,8 @@ import org.dom4j.io.XMLWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import antlr.debug.Event;
+import extractor.DAO.mapper._eventMapper;
 import extractor.DAO.mapper._exceptionMapper;
 import extractor.DAO.mapper._partitionMapper;
 import extractor.DAO.mapper._provideMapper;
@@ -22,14 +24,21 @@ import extractor.DAO.mapper._stateMapper;
 import extractor.DAO.mapper._taskMapper;
 import extractor.DAO.mapper.communicationchannelMapper;
 import extractor.DAO.mapper.componentMapper;
+import extractor.DAO.mapper.componenttransitionMapper;
 import extractor.DAO.mapper.linkpointMapper;
 import extractor.DAO.mapper.processorMapper;
+import extractor.DAO.mapper.transitionMapper;
+import extractor.DAO.mapper.transitionstateMapper;
+import extractor.model._event;
 import extractor.model._partition;
 import extractor.model._state;
 import extractor.model._task;
 import extractor.model.communicationchannel;
 import extractor.model.component;
+import extractor.model.componenttransition;
 import extractor.model.linkpoint;
+import extractor.model.transition;
+import extractor.model.transitionstate;
 
 //获取各种映射
 @Service("Map")
@@ -41,6 +50,10 @@ public class IntegrationService {
 	private linkpointMapper lm;
 	@Autowired
 	private _stateMapper sm;
+	@Autowired
+	private transitionMapper tsm;
+	@Autowired
+	private transitionstateMapper tssm;
 	@Autowired
 	private _taskMapper _tm;
 	@Autowired
@@ -55,6 +68,10 @@ public class IntegrationService {
 	private _provideMapper pvm;
 	@Autowired
 	private _requireMapper rm;
+	@Autowired
+	private _eventMapper evtm;
+	@Autowired
+	private componenttransitionMapper cttm;
 
 	public static Document ModelResolver(String url) throws DocumentException {
 		SAXReader reader = new SAXReader();
@@ -96,6 +113,7 @@ public class IntegrationService {
 					Element lp = comp.addElement("linkpoint");
 					lp.addAttribute("name", v2.getName());
 					lp.addAttribute("id", v2.getLinkpointid().toString());
+					lp.addAttribute("period", v2.getPeriod());
 					if (pvm.selectByportid(v2.getLinkpointid()) != null) {
 						lp.addAttribute("direction", "out");
 					}
@@ -103,14 +121,33 @@ public class IntegrationService {
 						lp.addAttribute("direction", "in");
 					}
 				});
-				// 设置state
-				List<_state> states = sm.getStateUnderCMP(compv.getComponentid());
-				states.forEach((v3) -> {
-					if (v3 != null) {
-						Element lp = comp.addElement("state");
-						lp.addAttribute("name", v3.getName());
-						lp.addAttribute("id", v3.getStateid().toString());
-					}
+				// 绑定component
+				List<componenttransition> ct = cttm.selectByComponent(compv.getComponentid());
+				ct.forEach((ctv) -> {
+
+					List<transitionstate> tsslist = tssm.selectbytransition(Integer.valueOf(ctv.getTransitionid()));
+					tsslist.forEach((vtss) -> {
+						// 设置transition
+						transition ts = tsm.selectByPrimaryKey(vtss.getTransitionid());
+						Element transitionElement = comp.addElement("transition");
+						transitionElement.addAttribute("id", ts.getTransitionid().toString());
+						// 设置event
+						_event event = evtm.selectByPrimaryKey(ts.getTriggerid());
+						Element eventElement = transitionElement.addElement("triggerevent");
+						eventElement.addAttribute("name", event.getName());
+						eventElement.addAttribute("id", event.getEventid().toString());
+
+						// 设置 source state
+						_state s=sm.selectByPrimaryKey(vtss.getSourceid());
+						Element ss = transitionElement.addElement("sourcestate");
+						ss.addAttribute("name", s.getName());
+						ss.addAttribute("id", s.getStateid().toString());
+						//设置dest state
+						_state d=sm.selectByPrimaryKey(vtss.getOutid());
+						Element ds = transitionElement.addElement("deststate");
+						ds.addAttribute("name", d.getName());
+						ds.addAttribute("id", d.getStateid().toString());
+					});
 				});
 				// 设置processor即partition
 				List<_partition> processorlist = ptnm.selectByRTOS(compv.getComponentid());
@@ -165,9 +202,9 @@ public class IntegrationService {
 
 					});
 				});
-				//设置不在partition上的task
+				// 设置不在partition上的task
 				List<_task> tasklist = _tm.selectChild(compv.getComponentid());
-				tasklist.forEach((taskv)->{
+				tasklist.forEach((taskv) -> {
 					Element tsk = comp.addElement("task");
 					tsk.addAttribute("Name", taskv.getName());
 					tsk.addAttribute("id", taskv.getTaskid().toString());
@@ -177,7 +214,7 @@ public class IntegrationService {
 				});
 			});
 			// 设置cchannel
-			List<communicationchannel> channellist = cchannelMapper.getAll();
+			List<communicationchannel> channellist = cchannelMapper.getAll(modeltype);
 			channellist.forEach((v) -> {
 				Element e = e_comp.addElement("communicationchannel");
 				e.addAttribute("name", v.getName());

@@ -40,6 +40,7 @@ import extractor.model._task;
 import extractor.model.bus;
 import extractor.model.communicationchannel;
 import extractor.model.component;
+import extractor.model.dataobject;
 import extractor.model.device;
 import extractor.model.linkpoint;
 import extractor.model.rtos;
@@ -237,15 +238,20 @@ public class SLKResolver {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			//端口的数据
-			Element portdata = (Element) document.selectSingleNode(
-					"//chart/Children/data[@name='" + element2.attributeValue("Name") + "']");
-			//TODO 等那俩二百五更新xml文件后调试一下
-//			String period=document.selectSingleNode(portdata.getUniquePath()+"/P[@Name='description']").getText();
-//			ports1.setPeriod(period);
+			// 端口的数据
+			Element portdata = (Element) document
+					.selectSingleNode("//chart/Children/data[@name='" + element2.attributeValue("Name") + "']");
+			// TODO 等那俩更新xml文件后调试一下
+			Element portdatadescription = (Element) document
+					.selectSingleNode(portdata.getUniquePath() + "/P[@Name='description']");
 //			dataobject d=new dataobject();
-			
-			
+//			d.setFrom(linkpointID);
+
+			if (portdatadescription != null) {
+				String[] att = portdatadescription.getText().split("=");
+				ports1.setPeriod(att[1] + "ms");
+			}
+
 			insert_ports(ports1);
 			_provide pvd = new _provide();
 			pvd.setProvider(father.getComponentid());
@@ -264,6 +270,17 @@ public class SLKResolver {
 				AppendID.AppendID(linkpointfile, element2.getUniquePath(), linkpointID.toString());
 			} catch (Exception e) {
 				e.printStackTrace();
+			}
+			Element portdata = (Element) document
+					.selectSingleNode("//chart/Children/data[@name='" + element2.attributeValue("Name") + "']");
+			Element portdatadescription = (Element) document
+					.selectSingleNode(portdata.getUniquePath() + "/P[@Name='description']");
+//			dataobject d=new dataobject();
+//			d.setFrom(linkpointID);
+
+			if (portdatadescription != null) {
+				String[] att = portdatadescription.getText().split("=");
+				ports1.setPeriod(att[1] + "ms");
 			}
 			insert_ports(ports1);
 
@@ -315,7 +332,7 @@ public class SLKResolver {
 			communicationchannel cchannel = new communicationchannel();
 			Integer idString = (int) GetID.getId();
 			AppendID.AppendID(modelfilename, n.getUniquePath(), idString.toString());
-
+			cchannel.setModeltype("simulink");
 			cchannel.setType("sync");
 			cchannel.setName("linkinslk");
 			cchannel.setCommunicationchannelid(idString);
@@ -355,7 +372,6 @@ public class SLKResolver {
 				}
 
 			} else {
-
 				Element sb = (Element) document.selectSingleNode(element.getUniquePath() + "/P[@Name='SrcBlock']");
 				Element db = (Element) document.selectSingleNode(element.getUniquePath() + "/P[@Name='DstBlock']");
 				String blockname = sb.getText();
@@ -386,7 +402,7 @@ public class SLKResolver {
 		if (port.equals("1")) {
 			for (Node n2 : portList) {
 				Element portelem = (Element) document.selectSingleNode(n2.getUniquePath() + "/P[@Name='Port']");
-				if (portelem == null) {					
+				if (portelem == null) {
 					if (portType.equals("source")) {
 						cchannel.setSourceid(Integer.valueOf(((Element) n2).attributeValue("id")));
 					} else {
@@ -398,7 +414,7 @@ public class SLKResolver {
 			for (Node n2 : portList) {
 				Element portelem = (Element) document.selectSingleNode(n2.getUniquePath() + "/P[@Name='Port']");
 				if (portelem != null && portelem.getText().equals(port)) {
-					//端口的数据
+					// 端口的数据
 //					Element portdata = (Element) document.selectSingleNode(
 //							"//chart/Children/data[@name='" + ((Element) n2).attributeValue("Name") + "']");
 					if (portType.equals("source")) {

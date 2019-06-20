@@ -8,6 +8,9 @@
       <importedPackage xmi:type="uml:Package" href="pathmap://SysML14_LIBRARIES/SysML-Standard-Library.uml#SysML.package_packagedElement_Libraries"/>
     </packageImport>
     <packagedElement xmi:type="uml:Class" xmi:id="_kWf7gIghEem7TYMKJXdmUw" name="isolett">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_5O-rMJABEemhxvj2t8aK_g" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
+        <defaultValue xmi:type="uml:LiteralReal" xmi:id="_7yw2kJABEemhxvj2t8aK_g" value="15.0"/>
+      </ownedAttribute>
       <nestedClassifier xmi:type="uml:Device" xmi:id="_lEMdEIgjEem7TYMKJXdmUw" name="temperatorsensor">
         <ownedComment xmi:type="uml:Comment" xmi:id="_mdGGsIhEEem7TYMKJXdmUw" annotatedElement="_lEMdEIgjEem7TYMKJXdmUw">
           <body>硬件故障、输出数据格式错误，或长度错误或未输出数据</body>
@@ -16,7 +19,7 @@
         <ownedAttribute xmi:type="uml:Property" xmi:id="_Y9V9AIhEEem7TYMKJXdmUw" name="period" visibility="public" type="_tGpwQIgmEem7TYMKJXdmUw">
           <defaultValue xmi:type="uml:LiteralReal" xmi:id="_dX-8UIhEEem7TYMKJXdmUw" value="5.0"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_fdfQQIhEEem7TYMKJXdmUw" name="wcet" visibility="public" type="_tGpwQIgmEem7TYMKJXdmUw">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_fdfQQIhEEem7TYMKJXdmUw" name="delay" visibility="public" type="_tGpwQIgmEem7TYMKJXdmUw">
           <defaultValue xmi:type="uml:LiteralReal" xmi:id="_iVUZAIhEEem7TYMKJXdmUw" value="1.0"/>
         </ownedAttribute>
         <ownedOperation xmi:type="uml:Operation" xmi:id="__20PAIpoEeme7vRJotGOoA" name="容错处理"/>
@@ -28,7 +31,11 @@
         </nestedClassifier>
       </nestedClassifier>
       <nestedClassifier xmi:type="uml:Device" xmi:id="_p1trUIgjEem7TYMKJXdmUw" name="heatsource">
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_PvZNcIhJEem7TYMKJXdmUw" name="heating_in" type="_tKXIkIhHEem7TYMKJXdmUw" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_PvZNcIhJEem7TYMKJXdmUw" name="heating_in" type="_tKXIkIhHEem7TYMKJXdmUw" aggregation="composite">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_phy8cJAIEemhxvj2t8aK_g">
+            <body>in=true</body>
+          </ownedComment>
+        </ownedAttribute>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_FJj7AIppEeme7vRJotGOoA" name="容错处理"/>
       </nestedClassifier>
       <nestedClassifier xmi:type="uml:Class" xmi:id="_zgpDEIgkEem7TYMKJXdmUw" name="alarm">
@@ -36,35 +43,35 @@
         <ownedAttribute xmi:type="uml:Property" xmi:id="_9qnR0IgmEem7TYMKJXdmUw" name="period" type="_tGpwQIgmEem7TYMKJXdmUw">
           <defaultValue xmi:type="uml:LiteralReal" xmi:id="_KIQLUIg0Eem7TYMKJXdmUw" value="10.0"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_BpqhUIgnEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_BpqhUIgnEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
           <defaultValue xmi:type="uml:LiteralReal" xmi:id="_RnXoQIg0Eem7TYMKJXdmUw" value="4.0"/>
         </ownedAttribute>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_HVzCsIphEeme7vRJotGOoA" name="componentType"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_OLBw8IpoEeme7vRJotGOoA" name="容错处理"/>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_icwO0IglEem7TYMKJXdmUw" name="数据处理">
-          <ownedAttribute xmi:type="uml:Property" xmi:id="_1w-TsIg0Eem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_1w-TsIg0Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_57RJ4Ig0Eem7TYMKJXdmUw" value="2.0"/>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Port" xmi:id="_kdpCUIhCEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite"/>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_0Tv_YIhCEem7TYMKJXdmUw" name="curr_tem_out" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_0Tv_YIhCEem7TYMKJXdmUw" name="curr_tem_out" visibility="public" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_vP82sIg0Eem7TYMKJXdmUw" name="数据验证">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_DQaUUIg1Eem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw" direction="inout">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="_DQaUUIg1Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw" direction="inout">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_DQaUUYg1Eem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_xR4SMIg0Eem7TYMKJXdmUw" name="数据故障处理">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_lPaWIIhFEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="_lPaWIIhFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_lPaWIYhFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_ymbqUIg0Eem7TYMKJXdmUw" name="数据格式化">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_SDaOkIg1Eem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="_SDaOkIg1Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_SDaOkYg1Eem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
         </nestedClassifier>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_kyJ_8IglEem7TYMKJXdmUw" name="温度检测">
-          <ownedAttribute xmi:type="uml:Property" xmi:id="_VxJroIg1Eem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_VxJroIg1Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_dHIasIg1Eem7TYMKJXdmUw" value="2.0"/>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_fDPiEIg1Eem7TYMKJXdmUw" name="componentType" type="_Dqu0QIpjEeme7vRJotGOoA"/>
@@ -73,7 +80,7 @@
           <nestedClassifier xmi:type="uml:Signal" xmi:id="_Zf-lcIhDEem7TYMKJXdmUw" name="signal_ringring"/>
         </nestedClassifier>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_lzHtsIglEem7TYMKJXdmUw" name="发出警报">
-          <ownedAttribute xmi:type="uml:Property" xmi:id="_yRwlYIg1Eem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_yRwlYIg1Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_13FGQIg1Eem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Port" xmi:id="_PpUpYIhDEem7TYMKJXdmUw" name="curr_tem_in" aggregation="composite"/>
@@ -81,8 +88,8 @@
       </nestedClassifier>
       <nestedClassifier xmi:type="uml:Class" xmi:id="_19lmoIgkEem7TYMKJXdmUw" name="operator interface">
         <ownedAttribute xmi:type="uml:Port" xmi:id="_DShLIIhLEem7TYMKJXdmUw" name="设置接口_out" type="_4NWuAIqOEeme7vRJotGOoA" aggregation="composite"/>
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_Fyt3AIhLEem7TYMKJXdmUw" name="feedback接口_in" aggregation="composite"/>
-        <ownedAttribute xmi:type="uml:Property" xmi:id="_KdkAEIhMEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_Fyt3AIhLEem7TYMKJXdmUw" name="feedback接口_in" type="_-r6qcJAAEemhxvj2t8aK_g" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Property" xmi:id="_KdkAEIhMEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
           <defaultValue xmi:type="uml:LiteralReal" xmi:id="_ND2F0IhMEem7TYMKJXdmUw" value="2.0"/>
         </ownedAttribute>
         <ownedAttribute xmi:type="uml:Port" xmi:id="_Z5sW4IhMEem7TYMKJXdmUw" name="输入接口_in" type="_Vz4FIIhZEem7TYMKJXdmUw" aggregation="composite"/>
@@ -90,12 +97,12 @@
         <ownedAttribute xmi:type="uml:Property" xmi:id="_Epl7IIphEeme7vRJotGOoA" name="componentType" type="_YdLP0IpgEeme7vRJotGOoA"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_W6gCgIpoEeme7vRJotGOoA" name="容错处理"/>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_FUhpsIhMEem7TYMKJXdmUw" name="显示" visibility="package">
-          <ownedAttribute xmi:type="uml:Property" xmi:id="_U69MAIhMEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_U69MAIhMEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_U69MAYhMEem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
         </nestedClassifier>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_GoZsYIhMEem7TYMKJXdmUw" name="输入设置">
-          <ownedAttribute xmi:type="uml:Property" xmi:id="_PTM5UIhMEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_PTM5UIhMEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_RfubQIhMEem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
         </nestedClassifier>
@@ -104,17 +111,29 @@
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_d3IJ4IhZEem7TYMKJXdmUw" value="3.0"/>
           </ownedAttribute>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:DataType" xmi:id="_4NWuAIqOEeme7vRJotGOoA" name="operator_setting"/>
+        <nestedClassifier xmi:type="uml:DataType" xmi:id="_4NWuAIqOEeme7vRJotGOoA" name="operator_setting">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_ZTyWYJAAEemhxvj2t8aK_g" name="period" visibility="public" type="_tGpwQIgmEem7TYMKJXdmUw">
+            <defaultValue xmi:type="uml:LiteralReal" xmi:id="_g53-AJAAEemhxvj2t8aK_g" value="3.0"/>
+          </ownedAttribute>
+        </nestedClassifier>
       </nestedClassifier>
       <nestedClassifier xmi:type="uml:Class" xmi:id="_5-Sb8IgkEem7TYMKJXdmUw" name="thermostat">
         <ownedAttribute xmi:type="uml:Port" xmi:id="_KybWcIhEEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite"/>
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_iJg_YIhJEem7TYMKJXdmUw" name="heating_out" type="_tKXIkIhHEem7TYMKJXdmUw" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_iJg_YIhJEem7TYMKJXdmUw" name="heating_out" type="_tKXIkIhHEem7TYMKJXdmUw" aggregation="composite">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_r0sMIJAIEemhxvj2t8aK_g">
+            <body>in=true&#xD;
+</body>
+          </ownedComment>
+          <ownedComment xmi:type="uml:Comment" xmi:id="_uo7OUJAIEemhxvj2t8aK_g">
+            <body>out=true</body>
+          </ownedComment>
+        </ownedAttribute>
         <ownedAttribute xmi:type="uml:Port" xmi:id="_EzNXQIhKEem7TYMKJXdmUw" name="设置接口_in" type="_4NWuAIqOEeme7vRJotGOoA" aggregation="composite"/>
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_FrZjgIhKEem7TYMKJXdmUw" name="feedback接口_out" aggregation="composite"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_FrZjgIhKEem7TYMKJXdmUw" name="feedback接口_out" type="_-r6qcJAAEemhxvj2t8aK_g" aggregation="composite"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_W39a8IpfEeme7vRJotGOoA" name="componentType" type="_YdLP0IpgEeme7vRJotGOoA"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_VSx2wIpoEeme7vRJotGOoA" name="容错处理"/>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_DMKTMIhFEem7TYMKJXdmUw" name="温度调节">
-          <ownedAttribute xmi:type="uml:Property" xmi:id="___vvoIhGEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="___vvoIhGEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_CpYEUIhHEem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Port" xmi:id="_QT23UIhHEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite"/>
@@ -126,14 +145,14 @@
           </nestedClassifier>
         </nestedClassifier>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_GHkUYIhFEem7TYMKJXdmUw" name="设置温度范围">
-          <ownedAttribute xmi:type="uml:Property" xmi:id="_D_zrwIhHEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_D_zrwIhHEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_Hm_04IhHEem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Port" xmi:id="_Y6MlkIhIEem7TYMKJXdmUw" name="Port3" aggregation="composite"/>
           <ownedAttribute xmi:type="uml:Port" xmi:id="_ZVcXIIhIEem7TYMKJXdmUw" name="Port4" aggregation="composite"/>
         </nestedClassifier>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_ITgAcIhFEem7TYMKJXdmUw" name="feedback">
-          <ownedAttribute xmi:type="uml:Property" xmi:id="_I3FjwIhHEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_I3FjwIhHEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_MTojIIhHEem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Port" xmi:id="_-4MxYIhJEem7TYMKJXdmUw" name="Port2" aggregation="composite"/>
@@ -141,26 +160,36 @@
         </nestedClassifier>
         <nestedClassifier xmi:type="uml:Device" xmi:id="_PkKKoIhFEem7TYMKJXdmUw" name="处理器"/>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_TNlvcIhFEem7TYMKJXdmUw" name="数据处理">
-          <ownedAttribute xmi:type="uml:Property" xmi:id="_TNlvcYhFEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_TNlvcYhFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_TNlvcohFEem7TYMKJXdmUw" value="2.0"/>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Port" xmi:id="_uZAicIhGEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite"/>
           <ownedAttribute xmi:type="uml:Port" xmi:id="_uvV-0IhGEem7TYMKJXdmUw" name="curr_tem_out" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite"/>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_TNlvdYhFEem7TYMKJXdmUw" name="数据验证">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_TNlvdohFEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw" direction="inout">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="_TNlvdohFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw" direction="inout">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_TNlvd4hFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_TNlveIhFEem7TYMKJXdmUw" name="数据故障处理">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_pu-RsIhFEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="_pu-RsIhFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_pu-RsYhFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
           <ownedOperation xmi:type="uml:Operation" xmi:id="_TNlveYhFEem7TYMKJXdmUw" name="数据格式化">
-            <ownedParameter xmi:type="uml:Parameter" xmi:id="_TNlveohFEem7TYMKJXdmUw" name="wcet" type="_tGpwQIgmEem7TYMKJXdmUw">
+            <ownedParameter xmi:type="uml:Parameter" xmi:id="_TNlveohFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_TNlve4hFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
+        </nestedClassifier>
+        <nestedClassifier xmi:type="uml:DataType" xmi:id="_uU2K0I__Eemhxvj2t8aK_g" name="operator_feedback">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_omXIkJAAEemhxvj2t8aK_g" name="period" visibility="public" type="_tGpwQIgmEem7TYMKJXdmUw">
+            <defaultValue xmi:type="uml:LiteralReal" xmi:id="_r53gsJAAEemhxvj2t8aK_g" value="3.0"/>
+          </ownedAttribute>
+        </nestedClassifier>
+        <nestedClassifier xmi:type="uml:Signal" xmi:id="_-r6qcJAAEemhxvj2t8aK_g" name="operator_feedback">
+          <ownedAttribute xmi:type="uml:Property" xmi:id="_FG2GgJABEemhxvj2t8aK_g" name="period" type="_tGpwQIgmEem7TYMKJXdmUw">
+            <defaultValue xmi:type="uml:LiteralReal" xmi:id="_FG2GgZABEemhxvj2t8aK_g" value="3.0"/>
+          </ownedAttribute>
         </nestedClassifier>
       </nestedClassifier>
       <nestedClassifier xmi:type="uml:Class" xmi:id="_pGTgQIgmEem7TYMKJXdmUw" name="Real"/>
@@ -186,9 +215,9 @@
     <packagedElement xmi:type="uml:Dependency" xmi:id="_ueKLYIhKEem7TYMKJXdmUw" name="获取温度范围" client="_DMKTMIhFEem7TYMKJXdmUw" supplier="_GHkUYIhFEem7TYMKJXdmUw"/>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_2rgnUIhKEem7TYMKJXdmUw" name="获取温度范围" client="_ITgAcIhFEem7TYMKJXdmUw" supplier="_GHkUYIhFEem7TYMKJXdmUw"/>
     <packagedElement xmi:type="uml:InformationFlow" xmi:id="_MR0ocIhLEem7TYMKJXdmUw" name="ItemFlow27" informationSource="_DShLIIhLEem7TYMKJXdmUw" informationTarget="_EzNXQIhKEem7TYMKJXdmUw"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_NbqlYIhLEem7TYMKJXdmUw" name="ItemFlow28" informationSource="_Fyt3AIhLEem7TYMKJXdmUw _t3mjgIgPEem7TYMKJXdmUw" informationTarget="_FrZjgIhKEem7TYMKJXdmUw"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_NbqlYIhLEem7TYMKJXdmUw" name="ItemFlow28" informationSource="_Fyt3AIhLEem7TYMKJXdmUw" informationTarget="_FrZjgIhKEem7TYMKJXdmUw"/>
     <packagedElement xmi:type="uml:DataType" xmi:id="_O4IoMIpgEeme7vRJotGOoA" name="ComponentType"/>
-    <packagedElement xmi:type="uml:DataType" xmi:id="_YdLP0IpgEeme7vRJotGOoA" name="system">
+    <packagedElement xmi:type="uml:DataType" xmi:id="_YdLP0IpgEeme7vRJotGOoA" name="SubSystem">
       <generalization xmi:type="uml:Generalization" xmi:id="_rbmosIpgEeme7vRJotGOoA" general="_O4IoMIpgEeme7vRJotGOoA"/>
     </packagedElement>
     <packagedElement xmi:type="uml:DataType" xmi:id="_eKR8kIpgEeme7vRJotGOoA" name="software">
@@ -327,6 +356,7 @@
       <node xmi:type="uml:OpaqueAction" xmi:id="_H_JQEI3iEemBe6s4BI75Ig" name="调节温度"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Signal" xmi:id="_OKEWsI3hEemBe6s4BI75Ig" name="Signal72"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_N9GbsI_kEemhxvj2t8aK_g" name="ItemFlow74" informationSource="_KybWcIhEEem7TYMKJXdmUw" informationTarget="_uZAicIhGEem7TYMKJXdmUw"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_t6lmEIgPEem7TYMKJXdmUw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_t6pQcIgPEem7TYMKJXdmUw" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.4/SysML#/"/>
@@ -387,6 +417,12 @@
       </eAnnotations>
       <appliedProfile xmi:type="uml:Profile" href="pathmap://UML_PROFILES/Standard.profile.uml#_0"/>
     </profileApplication>
+    <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_xDa0cJAAEemhxvj2t8aK_g">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_xECfgJAAEemhxvj2t8aK_g" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#_Kv8EIKFXEeS_KNX0nfvIVQ"/>
+      </eAnnotations>
+      <appliedProfile xmi:type="uml:Profile" href="pathmap://PAPYRUS_ACTIONLANGUAGE_PROFILE/ActionLanguage-Profile.profile.uml#ActionLanguage"/>
+    </profileApplication>
   </uml:Model>
   <Blocks:Block xmi:id="_kWulAIghEem7TYMKJXdmUw" base_Class="_kWf7gIghEem7TYMKJXdmUw"/>
   <Blocks:Block xmi:id="_zgrfUIgkEem7TYMKJXdmUw" base_Class="_zgpDEIgkEem7TYMKJXdmUw"/>
@@ -421,11 +457,11 @@
   <Blocks:ValueType xmi:id="_eKUY0IpgEeme7vRJotGOoA" base_DataType="_eKR8kIpgEeme7vRJotGOoA"/>
   <Blocks:ValueType xmi:id="_DqxQgIpjEeme7vRJotGOoA" base_DataType="_Dqu0QIpjEeme7vRJotGOoA"/>
   <Requirements:Requirement xmi:id="_P2lbMIplEeme7vRJotGOoA" base_Class="_P2hw0IplEeme7vRJotGOoA" text="调节温度并及时获取反馈信息"/>
-  <Requirements:Requirement xmi:id="_TSux8IplEeme7vRJotGOoA" base_Class="_TSsVsIplEeme7vRJotGOoA" text="每5ms检测一次温度、容错处理"/>
-  <Requirements:Requirement xmi:id="_Z5wwUIplEeme7vRJotGOoA" base_Class="_Z5u7IIplEeme7vRJotGOoA" text="获取当前温度、容错处理"/>
-  <Requirements:Requirement xmi:id="_c16YYIplEeme7vRJotGOoA" base_Class="_c14jMIplEeme7vRJotGOoA" text="发热、容错处理"/>
-  <Requirements:Requirement xmi:id="_fY7uwIplEeme7vRJotGOoA" base_Class="_fY55kIplEeme7vRJotGOoA" text="设定温度范围并显示相关信息、容错处理"/>
-  <Requirements:Requirement xmi:id="_iziNYIplEeme7vRJotGOoA" base_Class="_izgYMIplEeme7vRJotGOoA" text="如果有异常，发出警报、容错处理"/>
+  <Requirements:Requirement xmi:id="_TSux8IplEeme7vRJotGOoA" base_Class="_TSsVsIplEeme7vRJotGOoA" text="每5ms检测一次温度、容错处理。输出接口为curr_tem_out"/>
+  <Requirements:Requirement xmi:id="_Z5wwUIplEeme7vRJotGOoA" base_Class="_Z5u7IIplEeme7vRJotGOoA" text="获取当前温度、容错处理、输入接口为curr_tem_in、数据类型是信号，周期是3ms。输出接口为heating_out，数据类型是信号，周期为3ms"/>
+  <Requirements:Requirement xmi:id="_c16YYIplEeme7vRJotGOoA" base_Class="_c14jMIplEeme7vRJotGOoA" text="发热、容错处理。输入接口为heating_in，数据类型为信号。"/>
+  <Requirements:Requirement xmi:id="_fY7uwIplEeme7vRJotGOoA" base_Class="_fY55kIplEeme7vRJotGOoA" text="设定温度范围并显示相关信息、容错处理。有输出接口operator_setting,数据类型为data，周期为3ms；有显示接口，类型为signal，周期为3ms；设置接口，类型为data，周期为3ms；feedback接口，类型为signal，周期为3ms"/>
+  <Requirements:Requirement xmi:id="_iziNYIplEeme7vRJotGOoA" base_Class="_izgYMIplEeme7vRJotGOoA" text="如果有异常，发出警报、容错处理，输入为curr_tem_in，类型为signal，周期为3ms。"/>
   <Requirements:Requirement xmi:id="_KRatAIpmEeme7vRJotGOoA" base_Class="_KRY30IpmEeme7vRJotGOoA" text="InvalidParameter、Violation、UnexceptedError、HandwareFault、"/>
   <Requirements:DeriveReqt xmi:id="_kjYvgIpnEeme7vRJotGOoA" base_DirectedRelationship="_kjW6UIpnEeme7vRJotGOoA" base_Abstraction="_kjW6UIpnEeme7vRJotGOoA"/>
   <Requirements:DeriveReqt xmi:id="_pMlIMIpnEeme7vRJotGOoA" base_DirectedRelationship="_pMiE4IpnEeme7vRJotGOoA" base_Abstraction="_pMiE4IpnEeme7vRJotGOoA"/>
@@ -435,10 +471,10 @@
   <PortsAndFlows:ItemFlow xmi:id="_uCIP8IppEeme7vRJotGOoA" base_InformationFlow="_uCGawIppEeme7vRJotGOoA"/>
   <PortsAndFlows:ItemFlow xmi:id="_vmsaAIppEeme7vRJotGOoA" base_InformationFlow="_vmrL4IppEeme7vRJotGOoA"/>
   <Requirements:Requirement xmi:id="_h2EGQIpqEeme7vRJotGOoA" base_Class="_h2C4IIpqEeme7vRJotGOoA" text="数据处理、获取温度范围、反馈、温度调节、容错处理"/>
-  <Requirements:Requirement xmi:id="_qsBaUIpqEeme7vRJotGOoA" base_Class="_qr-XAIpqEeme7vRJotGOoA" text="数据处理wcet：2ms；数据验证wcet：1ms；数据格式化wcet:1ms；数据无效故障处理wcet:1ms"/>
-  <Requirements:Requirement xmi:id="_udYMEIpqEeme7vRJotGOoA" base_Class="_udWW4IpqEeme7vRJotGOoA" text="wcet:1ms。通过获取设置的温度范围和当前温度，计算需要调节的温度"/>
-  <Requirements:Requirement xmi:id="_vyBq0IpqEeme7vRJotGOoA" base_Class="_vyAcsIpqEeme7vRJotGOoA" text="wcet:1ms 获取设置的温度范围"/>
-  <Requirements:Requirement xmi:id="_wvqXwIpqEeme7vRJotGOoA" base_Class="_wvoikIpqEeme7vRJotGOoA" text="wcet:1ms 获取反馈信息并发送给operator interface&#xD;&#xA;"/>
+  <Requirements:Requirement xmi:id="_qsBaUIpqEeme7vRJotGOoA" base_Class="_qr-XAIpqEeme7vRJotGOoA" text="数据处理delay：2ms；数据验证delay：1ms；数据格式化delay1ms；数据无效故障处理delay:1ms"/>
+  <Requirements:Requirement xmi:id="_udYMEIpqEeme7vRJotGOoA" base_Class="_udWW4IpqEeme7vRJotGOoA" text="delay:1ms。通过获取设置的温度范围和当前温度，计算需要调节的温度"/>
+  <Requirements:Requirement xmi:id="_vyBq0IpqEeme7vRJotGOoA" base_Class="_vyAcsIpqEeme7vRJotGOoA" text="delay:1ms 获取设置的温度范围"/>
+  <Requirements:Requirement xmi:id="_wvqXwIpqEeme7vRJotGOoA" base_Class="_wvoikIpqEeme7vRJotGOoA" text="delay:1ms 获取反馈信息并发送给operator interface&#xD;&#xA;"/>
   <Blocks:Block xmi:id="_EO-BkIqWEeme7vRJotGOoA" base_Class="_EO6-QIqWEeme7vRJotGOoA"/>
   <Blocks:Block xmi:id="_GWr8AIqWEeme7vRJotGOoA" base_Class="_GWqG0IqWEeme7vRJotGOoA"/>
   <Blocks:Block xmi:id="_IZsVkIqWEeme7vRJotGOoA" base_Class="_IZpSQIqWEeme7vRJotGOoA"/>
@@ -457,4 +493,5 @@
   <Requirements:Satisfy xmi:id="_FxUvsIqXEeme7vRJotGOoA" base_DirectedRelationship="_FxS6gIqXEeme7vRJotGOoA" base_Abstraction="_FxS6gIqXEeme7vRJotGOoA"/>
   <Requirements:Satisfy xmi:id="_GgneoIqXEeme7vRJotGOoA" base_DirectedRelationship="_GglCYIqXEeme7vRJotGOoA" base_Abstraction="_GglCYIqXEeme7vRJotGOoA"/>
   <Requirements:Satisfy xmi:id="_HFMLUIqXEeme7vRJotGOoA" base_DirectedRelationship="_HFKWIIqXEeme7vRJotGOoA" base_Abstraction="_HFKWIIqXEeme7vRJotGOoA"/>
+  <PortsAndFlows:ItemFlow xmi:id="_N9QMsI_kEemhxvj2t8aK_g" base_InformationFlow="_N9GbsI_kEemhxvj2t8aK_g"/>
 </xmi:XMI>

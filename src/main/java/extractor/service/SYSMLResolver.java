@@ -166,7 +166,7 @@ public class SYSMLResolver {
 	}
 
 	public Integer getCChannelBysd(Integer sid, Integer did) {
-		return cchannelMapper.getgetCChannelBysd(sid, did);
+		return cchannelMapper.getCChannelBysd(sid, did);
 	}
 
 	public Integer getEventID(String eventname) {
@@ -187,9 +187,9 @@ public class SYSMLResolver {
 //		componentlist.forEach((v) -> {
 //			insert_component(v);
 //		});
-		portlist.forEach((v) -> {
-			insert_ports(v);
-		});
+//		portlist.forEach((v) -> {
+//			insert_ports(v);
+//		});
 		tasklist.forEach((v) -> {
 			insert_task(v);
 		});
@@ -197,9 +197,9 @@ public class SYSMLResolver {
 			insert_exception(v);
 		});
 		MatchCChannel(sysmlFiles.get("文件"), "块图");
-		cclist.forEach((v) -> {
-			insert_cchannel(v);
-		});
+//		cclist.forEach((v) -> {
+//			insert_cchannel(v);
+//		});
 	}
 
 	public static Document ModelResolver(String url) throws DocumentException {
@@ -246,7 +246,7 @@ public class SYSMLResolver {
 	}
 
 //TODO provide,require
-	private static void LinkpointResolver(String linkpointfile, String fatherpath, String fathertype) throws Exception {
+	private void LinkpointResolver(String linkpointfile, String fatherpath, String fathertype) throws Exception {
 		Document document = ModelResolver(linkpointfile);
 
 		List<? extends Node> ports = document.selectNodes(fatherpath + "/ownedAttribute[@xmi:type='uml:Port']");
@@ -272,7 +272,8 @@ public class SYSMLResolver {
 			} catch (Exception e) {
 //				System.out.println();
 			}
-			portlist.add(ports1);
+			insert_ports(ports1);
+			// portlist.add(ports1);
 
 		}
 	}
@@ -288,18 +289,25 @@ public class SYSMLResolver {
 			Integer idString = (int) GetID.getId();
 			AppendID.AppendID4sysml(modelfilename, n.getUniquePath(), idString.toString());
 			// sysml没有分类一律按照sync处理
-			cchannel.setType("sync");
-			cchannel.setName(element.attributeValue("name"));
-			cchannel.setCommunicationchannelid(idString);
-			cchannel.setSourceid(GetCMPIDByXMIID(modelfilename, element.attributeValue("informationSource")));
-			try {
+			if (element.attributeValue("informationSource") != null) {
+				cchannel.setModeltype("sysml");
+				cchannel.setType("sync");
+				cchannel.setName(element.attributeValue("name"));
+				cchannel.setCommunicationchannelid(idString);
+				Integer portid = GetCMPIDByXMIID(modelfilename, element.attributeValue("informationSource"));
+				cchannel.setSourceid(portid);
+
+				Updateportinfo(modelfilename, element.attributeValue("informationSource"), "out");
+			}
+
+			if (element.attributeValue("informationTarget") != null) {
 
 				cchannel.setDestid(GetCMPIDByXMIID(modelfilename, element.attributeValue("informationTarget")));
-			} catch (Exception e) {
-				System.out.println(element.attributeValue("informationTarget"));
-				break;
+				Updateportinfo(modelfilename, element.attributeValue("informationTarget"), "in");
+				insert_cchannel(cchannel);
+
 			}
-			cclist.add(cchannel);
+
 		}
 	}
 
@@ -339,7 +347,7 @@ public class SYSMLResolver {
 				ex.setName(e2.attributeValue("name"));
 				exceptionlist.add(ex);
 			}
-			
+
 		}
 
 	}
@@ -352,6 +360,29 @@ public class SYSMLResolver {
 
 			return Integer.valueOf(element.attributeValue("id4sysml"));
 		}
-		return 000;
+		return 0;
+	}
+
+	private void Updateportinfo(String modelfilename, String portid, String direction) throws Exception {
+		Document document = ModelResolver(modelfilename);
+		Element portElement = (Element) document.selectSingleNode("//ownedAttribute[@xmi:id='" + portid + "']");
+		// 存在连到block的情况
+		if (portElement != null) {
+
+			Element parentcompElement = portElement.getParent();
+			if (direction.equals("in")) {
+				_require r = new _require();
+				r.setRequired(Integer.valueOf(portElement.attributeValue("id4sysml")));
+				r.setRequirer(Integer.valueOf(parentcompElement.attributeValue("id4sysml")));
+				insert_require(r);
+			} else {
+				_provide p = new _provide();
+				p.setProvided(Integer.valueOf(portElement.attributeValue("id4sysml")));
+				p.setProvider(Integer.valueOf(parentcompElement.attributeValue("id4sysml")));
+				insert_provide(p);
+			}
+		}
+
+//		portsMapper.selectByPrimaryKey(portid);
 	}
 }
