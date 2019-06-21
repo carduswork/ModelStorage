@@ -1,3 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ownedPublicSection name="simulink.xml"><component name="Operator Interface" id="-1300506225" type="rtos"><linkpoint name="Inter_Act_Input" id="-1900839539" direction="in"/><linkpoint name="Operator_Settings" id="136529433" direction="out"/><linkpoint name="Operator_Feedback" id="469850883" direction="in"/></component><component name="Alarm" id="-1059902859" type="rtos"><linkpoint name="Send_Out_Alarm" id="-175439954" direction="out"/><linkpoint name="Current_Temperature" id="243112967" period="3ms" direction="in"/></component><component name="Temperature
-Sensor" id="475999222" type="rtos"><linkpoint name="Heat1" id="1155199171" direction="in"/><linkpoint name="Current_Temperature" id="1995745848" period="3ms" direction="out"/></component><component name="Thermostat" id="799266622" type="rtos"><linkpoint name="Current_Temperature" id="-1381208749" period="3ms" direction="in"/><linkpoint name="Heat_Control" id="763704058" direction="out"/><linkpoint name="Operator_Settings" id="1406225943" direction="in"/><linkpoint name="Operator_Feedback" id="1726158566" direction="out"/></component><component name="Heat Source" id="989007778" type="rtos"><linkpoint name="Heat_Control" id="-1839385230" direction="in"/><linkpoint name="Heat" id="-265133449" direction="out"/></component><component name="Air" id="1257729025" type="rtos"><linkpoint name="Heat2" id="-1876503692" direction="out"/><linkpoint name="Heat" id="-805950490" direction="in"/></component><communicationchannel name="linkinslk" id="-77155122" type="sync" source="136529433" dest="136529433"/><communicationchannel name="linkinslk" id="85009377" type="sync" source="-265133449" dest="-265133449"/><communicationchannel name="linkinslk" id="141283743" type="sync" source="1995745848" dest="1995745848"/><communicationchannel name="linkinslk" id="151915273" type="sync" source="-1876503692" dest="-1876503692"/><communicationchannel name="linkinslk" id="894393765" type="sync" source="763704058" dest="1726158566"/><communicationchannel name="linkinslk" id="981874988" type="sync" source="1995745848" dest="1995745848"/><communicationchannel name="linkinslk" id="1803949929" type="sync" source="1726158566" dest="1726158566"/></ownedPublicSection>
+<ownedPublicSection name="simulink.xml">
+	<component id="-1866741585" name="Alarm" type="rtos">
+		<linkpoint direction="out" id="-1434957279" name="Send_Out_Alarm"/>
+		<linkpoint direction="in" id="-83628843" name="Current_Temperature" period="3ms"/>
+	</component>
+	<component id="-1842435081" name="Operator Interface" type="rtos">
+		<linkpoint direction="in" id="-1329572119" name="Inter_Act_Input"/>
+		<linkpoint direction="in" id="-1092748706" name="Operator_Feedback"/>
+		<linkpoint direction="out" id="-802059706" name="Operator_Settings"/>
+	</component>
+	<component id="-1587689712" name="Air" type="rtos">
+		<linkpoint direction="in" id="-1757604420" name="Heat"/>
+		<linkpoint direction="out" id="406262631" name="Heat2"/>
+	</component>
+	<component id="615820839" name="Temperature Sensor" type="rtos">
+		<linkpoint direction="out" id="-544888107" name="Current_Temperature" period="3ms"/>
+		<linkpoint direction="in" id="525912527" name="Heat1"/>
+	</component>
+	<component id="934139845" name="Thermostat" type="rtos">
+		<linkpoint direction="out" id="-421503770" name="Heat_Control"/>
+		<linkpoint direction="in" id="586287748" name="Operator_Settings"/>
+		<linkpoint direction="in" id="1272515410" name="Current_Temperature" period="3ms"/>
+		<linkpoint direction="out" id="1395122355" name="Operator_Feedback"/>
+	</component>
+	<component id="2033806682" name="Heat Source" type="rtos">
+		<linkpoint direction="in" id="572109702" name="Heat_Control"/>
+		<linkpoint direction="out" id="662053972" name="Heat"/>
+	</component>
+	<communicationchannel dest="1395122355" id="-1494833152" name="linkinslk" source="1395122355" type="sync"/>
+	<communicationchannel dest="-802059706" id="-1053132801" name="linkinslk" source="-802059706" type="sync"/>
+	<communicationchannel dest="-544888107" id="180055727" name="linkinslk" source="-544888107" type="sync"/>
+	<communicationchannel dest="406262631" id="212304378" name="linkinslk" source="406262631" type="sync"/>
+	<communicationchannel dest="1395122355" id="585172588" name="linkinslk" source="-421503770" type="sync"/>
+	<communicationchannel dest="-544888107" id="1665432639" name="linkinslk" source="-544888107" type="sync"/>
+	<communicationchannel dest="662053972" id="1737441455" name="linkinslk" source="662053972" type="sync"/>
+</ownedPublicSection>

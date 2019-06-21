@@ -184,12 +184,7 @@ public class SYSMLResolver {
 	public void srvmatchmeta() throws Exception {
 		modeldirectory = "src/main/resources/modelresource/MarkedModelFile/";
 		MatchComponents(sysmlFiles.get("文件"), "块图");
-//		componentlist.forEach((v) -> {
-//			insert_component(v);
-//		});
-//		portlist.forEach((v) -> {
-//			insert_ports(v);
-//		});
+
 		tasklist.forEach((v) -> {
 			insert_task(v);
 		});
@@ -197,9 +192,7 @@ public class SYSMLResolver {
 			insert_exception(v);
 		});
 		MatchCChannel(sysmlFiles.get("文件"), "块图");
-//		cclist.forEach((v) -> {
-//			insert_cchannel(v);
-//		});
+
 	}
 
 	public static Document ModelResolver(String url) throws DocumentException {
@@ -212,7 +205,6 @@ public class SYSMLResolver {
 		Document document = ModelResolver(filepath);
 
 		String getCompponents = "//packagedElement[@xmi:type='uml:Class']/nestedClassifier[@xmi:type='uml:Class' or @xmi:type='uml:Device']";
-//		String getdevice="//packagedElement[@xmi:type='uml:Class']/nestedClassifier[]";
 		List<? extends Node> com = document.selectNodes(getCompponents);
 		for (Node n : com) {
 			Element e = (Element) n;
@@ -232,13 +224,28 @@ public class SYSMLResolver {
 				c.setType("device");
 			}
 			insert_component(c);
-//			componentlist.add(c);
 			if (e.element("ownedRule[@xmi:type='uml:Constraint']") != null) {
 				Element e2 = e.element("ownedRule[@xmi:type='uml:Constraint']");
 				_exception ex = new _exception();
 				ex.setName(e2.attributeValue("name"));
-				// ex.setCommunicationchannelid(communicationchannelid);
 				exceptionlist.add(ex);
+			}
+			// component的operation是错误处理的
+			if (e.element("ownedOperation") != null) {
+				String e2 = e.element("ownedOperation").attributeValue("name");
+				String exceptionlistid = ((Element) document.selectSingleNode("//packagedElement[@name='" + e2 + "']"))
+						.attributeValue("id");
+				String[] exceptionlist = ((Element) document
+						.selectSingleNode("//Requirements:Requirement[@base_Class='" + exceptionlistid + "']"))
+								.attributeValue("text").split("、");
+				for(String s:exceptionlist) {			
+					_exception ex = new _exception();
+					ex.setType("sysmlexception");
+					
+					ex.setName(s);
+					ex.setComponentid(Integer.valueOf(idString));
+					insert_exception(ex);
+				}
 			}
 			LinkpointResolver(filepath, n.getUniquePath(), "rtos");
 			TaskResolver(filepath, n.getUniquePath(), c);
@@ -317,39 +324,87 @@ public class SYSMLResolver {
 		String gettask = fatherpath + "/nestedClassifier";
 		List<? extends Node> namelist = document.selectNodes(gettask);
 		for (Node n : namelist) {
-			Element element2 = (Element) n;
+			Element taskElement = (Element) n;
 			component linkpointcomponent = new component();
 			Integer idString = (int) GetID.getId();
 			linkpointcomponent.setComponentid(idString);
 
 			linkpointcomponent.setModeltype("sysml");
-			linkpointcomponent.setName(element2.attributeValue("name"));
+			linkpointcomponent.setName(taskElement.attributeValue("name"));
 			linkpointcomponent.setType("task");
 			insert_component(linkpointcomponent);
 			_task t = new _task();
-			t.setName(element2.attributeValue("name"));
+			t.setName(taskElement.attributeValue("name"));
 			t.setTaskid(idString);
 			t.setFatherid(father.getComponentid());
+			Element wcetElement = (Element) document
+					.selectSingleNode(taskElement.getUniquePath() + "/ownedAttribute[@name='delay']");
+			if (wcetElement != null) {
+
+				t.setWcet(wcetElement.element("defaultValue").attributeValue("value") + "ms");
+			}
+			Element periodElement = (Element) document
+					.selectSingleNode(taskElement.getUniquePath() + "/ownedAttribute[@name='period']");
+			if (periodElement != null) {
+
+				t.setPeriod(periodElement.element("defaultValue").attributeValue("value") + "ms");
+			}
 			// TODO 块图的partition不存在
 			try {
-				AppendID.AppendID4sysml(modelfilename, element2.getUniquePath(), t.getTaskid().toString());
-				LinkpointResolver(modelfilename, element2.getUniquePath(), "task");
+				AppendID.AppendID4sysml(modelfilename, taskElement.getUniquePath(), t.getTaskid().toString());
+				LinkpointResolver(modelfilename, taskElement.getUniquePath(), "task");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			insert_task(t);
+			threadResolver(modelfilename, n.getUniquePath(), t);
 			// operation即task有错误定义
-			if (element2.element("ownedRule") != null) {
+			if (taskElement.element("ownedRule") != null) {
 				// TODO 解析错误exception
 				// Element e2 = element2.element("ownedRule[@xmi:type='uml:Constraint']");
-				Element e2 = element2.element("ownedRule");
+				Element e2 = taskElement.element("ownedRule");
 				_exception ex = new _exception();
 				ex.setName(e2.attributeValue("name"));
 				exceptionlist.add(ex);
 			}
-
 		}
 
+	}
+
+	private void threadResolver(String modelfilename, String fatherpath, _task father) throws Exception {
+		Document document = ModelResolver(modelfilename);
+		List<Node> threadnodes = document.selectNodes(fatherpath + "/ownedOperation");
+		for (Node n : threadnodes) {
+			Element threadElement = (Element) n;
+			component threadcomponent = new component();
+			Integer idString = (int) GetID.getId();
+			threadcomponent.setComponentid(idString);
+
+			threadcomponent.setModeltype("sysml");
+			threadcomponent.setName(threadElement.attributeValue("name"));
+			threadcomponent.setType("task");
+			insert_component(threadcomponent);
+
+			AppendID.AppendID(modelfilename, n.getUniquePath(), idString.toString());
+
+			_task task = new _task();
+			task.setName(threadElement.attributeValue("name"));
+			task.setTaskid(idString);
+			task.setFatherid(father.getTaskid());
+			Element wcetElement = (Element) document
+					.selectSingleNode(threadElement.getUniquePath() + "/ownedParameter[@name='delay']");
+			if (wcetElement != null) {
+
+				task.setWcet(wcetElement.element("defaultValue").attributeValue("value") + "ms");
+			}
+			Element periodElement = (Element) document
+					.selectSingleNode(threadElement.getUniquePath() + "/ownedParameter[@name='period']");
+			if (periodElement != null) {
+
+				task.setPeriod(periodElement.element("defaultValue").attributeValue("value") + "ms");
+			}
+			insert_task(task);
+		}
 	}
 
 	private Integer GetCMPIDByXMIID(String filepath, String id) throws Exception {

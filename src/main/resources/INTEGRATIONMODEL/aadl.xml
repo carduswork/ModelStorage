@@ -1,2 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ownedPublicSection name="aadl.xml"><component name="alarm" id="-1454358485" type="rtos"/><component name="operatorinterface" id="-1061517441" type="rtos"><linkpoint name="inoperatorFeedback" id="-1772036255" period="3ms" direction="in"/><linkpoint name="outoperatorFeedback" id="325244968" period="3ms" direction="out"/><linkpoint name="inoperatorsettings" id="600633418" period="3ms" direction="in"/><linkpoint name="outoperatorsettings" id="2125089175" period="3ms" direction="out"/></component><component name="temperature_sensor" id="-811439021" type="device"/><component name="heatsource" id="1415055074" type="device"><linkpoint name="heatcontrol" id="-1298767849" direction="in"/><linkpoint name="heat" id="-245927605" direction="out"/></component><component name="thermostat" id="1651696354" type="rtos"><linkpoint name="heating" id="-432416267" period="3ms" direction="out"/><linkpoint name="operatorFeedback" id="-183396434" period="3ms" direction="out"/><linkpoint name="currentTemperature" id="-91403659" period="3ms" direction="in"/><linkpoint name="operatorsettings" id="403649836" period="3ms" direction="in"/><transition id="-1215121843"><triggerevent name="Recoverevent" id="-541541815"/><sourcestate name="FailStop" id="984829094"/><deststate name="Operational" id="-761003927"/></transition><partition id="-2063907483"><task Name="datadeal" id="-881557207" deadline="1ms" wcet="2ms"><port name="datain" id="-1701862709" direction="in"/><port name="dataout" id="1251909510" direction="out"/><task Name="format.impl" id="477666113"><port name="dataout" id="-1402290602" direction="out"/><port name="datain" id="40039999" direction="in"/></task><task Name="verify.impl" id="1786203270"><port name="datain" id="-1807462137" direction="in"/><port name="dataout" id="1192022746" direction="out"/></task></task></partition><partition id="-998171607"><task Name="feedback" id="1250248518" deadline="1ms" wcet="1ms"><port name="feedback" id="1254708957" direction="out"/><port name="setting" id="1851936385" direction="in"/></task></partition><partition id="-375218696"><task Name="temadjust" id="1441460132" deadline="1ms" wcet="1ms"><port name="heating" id="-1732921614" direction="out"/><port name="setting" id="477870873" direction="in"/><port name="ct" id="1408300907" direction="in"/></task></partition></component><communicationchannel name="new_connection2" id="-1854715504" type="sync" source="2125089175" dest="403649836"/><communicationchannel name="new_connection3" id="-1260545791" type="sync" source="2081256196" dest="-91403659"/><communicationchannel name="ct4a" id="-366300175" type="sync" source="2081256196" dest="1147154884"/><communicationchannel name="new_connection4" id="1448700493" type="sync" source="-183396434" dest="-1772036255"/><communicationchannel name="new_connection" id="1982090994" type="sync" source="-432416267" dest="-1298767849"/></ownedPublicSection>
+<ownedPublicSection name="aadl.xml">
+	<component id="-1574621472" name="temperature_sensor" type="device"/>
+	<component id="-824224213" name="heatsource" type="device">
+		<linkpoint direction="out" id="-355703179" name="heat"/>
+		<linkpoint direction="in" id="-19850289" name="heatcontrol"/>
+	</component>
+	<component id="-801322573" name="operatorinterface" type="rtos">
+		<linkpoint direction="in" id="-2128239642" name="inoperatorsettings" period="3ms"/>
+		<linkpoint direction="out" id="128023033" name="outoperatorsettings" period="3ms"/>
+		<linkpoint direction="out" id="987569281" name="outoperatorFeedback" period="3ms"/>
+		<linkpoint direction="in" id="1162117571" name="inoperatorFeedback" period="3ms"/>
+	</component>
+	<component id="-636794113" name="thermostat" type="rtos">
+		<linkpoint direction="out" id="-1720528792" name="operatorFeedback" period="3ms"/>
+		<linkpoint direction="out" id="606354856" name="heating" period="3ms"/>
+		<linkpoint direction="in" id="749145448" name="currentTemperature" period="3ms"/>
+		<linkpoint direction="in" id="869726907" name="operatorsettings" period="3ms"/>
+		<transition id="-2039444139">
+			<triggerevent id="90266161" name="Recoverevent"/>
+			<sourcestate id="256313000" name="FailStop"/>
+			<deststate id="375964980" name="Operational"/>
+		</transition>
+		<partition id="-926727045">
+			<task Name="feedback" deadline="1ms" id="-1161267475" wcet="1ms">
+				<port direction="out" id="-2108795733" name="feedback"/>
+				<port direction="in" id="-244494219" name="setting"/>
+			</task>
+		</partition>
+		<partition id="1433331957">
+			<task Name="datadeal" deadline="1ms" id="275736951" wcet="2ms">
+				<port direction="in" id="-656112518" name="datain"/>
+				<port direction="out" id="322410022" name="dataout"/>
+				<task Name="verify.impl" id="-1355557526">
+					<port direction="out" id="-834246246" name="dataout"/>
+					<port direction="in" id="-759522916" name="datain"/>
+				</task>
+				<task Name="format.impl" id="-146825249">
+					<port direction="in" id="-959058215" name="datain"/>
+					<port direction="out" id="1174131383" name="dataout"/>
+				</task>
+			</task>
+		</partition>
+		<partition id="1520516650">
+			<task Name="temadjust" deadline="1ms" id="1842902438" wcet="1ms">
+				<port direction="out" id="-1590135416" name="heating"/>
+				<port direction="in" id="-580534828" name="ct"/>
+				<port direction="in" id="1169557046" name="setting"/>
+			</task>
+		</partition>
+	</component>
+	<component id="1358207790" name="alarm" type="rtos"/>
+	<communicationchannel dest="1162117571" id="-2101661117" name="new_connection4" source="-1720528792" type="sync"/>
+	<communicationchannel dest="-19850289" id="-574949151" name="new_connection" source="606354856" type="sync"/>
+	<communicationchannel dest="749145448" id="-237922794" name="new_connection3" source="772323907" type="sync"/>
+	<communicationchannel dest="-1893217424" id="378469780" name="ct4a" source="772323907" type="sync"/>
+	<communicationchannel dest="869726907" id="621084813" name="new_connection2" source="128023033" type="sync"/>
+</ownedPublicSection>

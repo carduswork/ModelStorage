@@ -30,6 +30,7 @@ import extractor.DAO.mapper.processorMapper;
 import extractor.DAO.mapper.transitionMapper;
 import extractor.DAO.mapper.transitionstateMapper;
 import extractor.model._event;
+import extractor.model._exception;
 import extractor.model._partition;
 import extractor.model._state;
 import extractor.model._task;
@@ -121,7 +122,13 @@ public class IntegrationService {
 						lp.addAttribute("direction", "in");
 					}
 				});
-				// 绑定component
+				List<_exception> ecplist=em.selectByComp(compv.getComponentid());
+				ecplist.forEach((ecpv)->{
+					Element ecpelement=comp.addElement("exception");
+					ecpelement.addAttribute("name", ecpv.getName());
+					
+				});
+				// transition绑定component
 				List<componenttransition> ct = cttm.selectByComponent(compv.getComponentid());
 				ct.forEach((ctv) -> {
 
@@ -211,6 +218,29 @@ public class IntegrationService {
 					tsk.addAttribute("deadline", taskv.getDeadline());
 					tsk.addAttribute("period", taskv.getPeriod());
 					tsk.addAttribute("wcet", taskv.getWcet());
+					
+					List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
+					childtasklist.forEach((v6) -> {
+						Element child = tsk.addElement("task");
+						child.addAttribute("Name", v6.getName());
+						child.addAttribute("id", v6.getTaskid().toString());
+						child.addAttribute("deadline", v6.getDeadline());
+						child.addAttribute("period", v6.getPeriod());
+						child.addAttribute("wcet", v6.getWcet());
+
+						List<linkpoint> threadports = lm.getPortUnderCMP(v6.getTaskid());
+						threadports.forEach((v8) -> {
+							Element lp = child.addElement("port");
+							lp.addAttribute("name", v8.getName());
+							lp.addAttribute("id", v8.getLinkpointid().toString());
+							if (pvm.selectByportid(v8.getLinkpointid()) != null) {
+								lp.addAttribute("direction", "out");
+							}
+							if (rm.selectByportid(v8.getLinkpointid()) != null) {
+								lp.addAttribute("direction", "in");
+							}
+						});
+					});
 				});
 			});
 			// 设置cchannel

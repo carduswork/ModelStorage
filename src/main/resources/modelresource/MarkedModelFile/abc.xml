@@ -815,7 +815,7 @@
       <P Name="ZoomFactor">200</P>
       <P Name="ReportName">simulink-default.rpt</P>
       <P Name="SIDHighWatermark">11</P>
-      <Block BlockType="SubSystem" Name="Air " SID="7" id="1257729025">
+      <Block BlockType="SubSystem" Name="Air " SID="7" id="-1587689712">
         <P Name="Ports">[1, 1]</P>
         <P Name="Position">[515, 501, 705, 579]</P>
         <P Name="ZOrder">6</P>
@@ -839,7 +839,7 @@
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">79</P>
-          <Block BlockType="Inport" Name="Heat" SID="7::78" id="-805950490">
+          <Block BlockType="Inport" Name="Heat" SID="7::78" id="-1757604420">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">58</P>
             <P Name="IconDisplay">Port number</P>
@@ -870,7 +870,7 @@
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">55</P>
           </Block>
-          <Block BlockType="Outport" Name="Heat2" SID="7::77" id="-1876503692">
+          <Block BlockType="Outport" Name="Heat2" SID="7::77" id="406262631">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">57</P>
             <P Name="IconDisplay">Port number</P>
@@ -907,7 +907,7 @@
           </Line>
         </System>
       </Block>
-      <Block BlockType="SubSystem" Name="Alarm" SID="9" id="-1059902859">
+      <Block BlockType="SubSystem" Name="Alarm" SID="9" id="-1866741585">
         <P Name="Description">wcet = 1ms
 period = 10ms</P>
         <P Name="Ports">[1, 1]</P>
@@ -926,7 +926,7 @@ period = 10ms</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">80</P>
-          <Block BlockType="Inport" Name="Current_Temperature" SID="9::79" id="243112967">
+          <Block BlockType="Inport" Name="Current_Temperature" SID="9::79" id="-83628843">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">59</P>
             <P Name="IconDisplay">Port number</P>
@@ -957,7 +957,7 @@ period = 10ms</P>
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">55</P>
           </Block>
-          <Block BlockType="Outport" Name="Send_Out_Alarm" SID="9::80" id="-175439954">
+          <Block BlockType="Outport" Name="Send_Out_Alarm" SID="9::80" id="-1434957279">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">60</P>
             <P Name="IconDisplay">Port number</P>
@@ -994,7 +994,7 @@ period = 10ms</P>
           </Line>
         </System>
       </Block>
-      <Block BlockType="SubSystem" Name="Heat Source " SID="6" id="989007778">
+      <Block BlockType="SubSystem" Name="Heat Source " SID="6" id="2033806682">
         <P Name="Ports">[1, 1]</P>
         <P Name="Position">[785, 354, 940, 426]</P>
         <P Name="ZOrder">5</P>
@@ -1011,7 +1011,7 @@ period = 10ms</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">78</P>
-          <Block BlockType="Inport" Name="Heat_Control" SID="6::77" id="-1839385230">
+          <Block BlockType="Inport" Name="Heat_Control" SID="6::77" id="572109702">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">57</P>
             <P Name="IconDisplay">Port number</P>
@@ -1042,7 +1042,7 @@ period = 10ms</P>
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">55</P>
           </Block>
-          <Block BlockType="Outport" Name="Heat" SID="6::78" id="-265133449">
+          <Block BlockType="Outport" Name="Heat" SID="6::78" id="662053972">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">58</P>
             <P Name="IconDisplay">Port number</P>
@@ -1079,7 +1079,7 @@ period = 10ms</P>
           </Line>
         </System>
       </Block>
-      <Block BlockType="SubSystem" Name="Operator Interface" SID="5" id="-1300506225">
+      <Block BlockType="SubSystem" Name="Operator Interface" SID="5" id="-1842435081">
         <P Name="Description">wcet = 1ms</P>
         <P Name="Ports">[2, 1]</P>
         <P Name="Position">[520, 136, 710, 214]</P>
@@ -1097,12 +1097,12 @@ period = 10ms</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">82</P>
-          <Block BlockType="Inport" Name="Operator_Feedback" SID="5::78" id="469850883">
+          <Block BlockType="Inport" Name="Operator_Feedback" SID="5::78" id="-1092748706">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">58</P>
             <P Name="IconDisplay">Port number</P>
           </Block>
-          <Block BlockType="Inport" Name="Inter_Act_Input" SID="5::79" id="-1900839539">
+          <Block BlockType="Inport" Name="Inter_Act_Input" SID="5::79" id="-1329572119">
             <P Name="Position">[20, 136, 40, 154]</P>
             <P Name="ZOrder">59</P>
             <P Name="Port">2</P>
@@ -1134,7 +1134,7 @@ period = 10ms</P>
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">61</P>
           </Block>
-          <Block BlockType="Outport" Name="Operator_Settings" SID="5::77" id="136529433">
+          <Block BlockType="Outport" Name="Operator_Settings" SID="5::77" id="-802059706">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">57</P>
             <P Name="IconDisplay">Port number</P>
@@ -1178,7 +1178,7 @@ period = 10ms</P>
           </Line>
         </System>
       </Block>
-      <Block BlockType="SubSystem" Name="Temperature Sensor" SID="1" id="475999222">
+      <Block BlockType="SubSystem" Name="Temperature Sensor" SID="1" id="615820839">
         <P Name="Description">wcet = 0.1ms
 period = 5ms</P>
         <P Name="Ports">[1, 1]</P>
@@ -1197,7 +1197,7 @@ period = 5ms</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">78</P>
-          <Block BlockType="Inport" Name="Heat1" SID="1::78" id="1155199171">
+          <Block BlockType="Inport" Name="Heat1" SID="1::78" id="525912527">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">58</P>
             <P Name="IconDisplay">Port number</P>
@@ -1228,7 +1228,7 @@ period = 5ms</P>
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">55</P>
           </Block>
-          <Block BlockType="Outport" Name="Current_Temperature" SID="1::77" id="1995745848">
+          <Block BlockType="Outport" Name="Current_Temperature" SID="1::77" id="-544888107">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">57</P>
             <P Name="IconDisplay">Port number</P>
@@ -1265,7 +1265,7 @@ period = 5ms</P>
           </Line>
         </System>
       </Block>
-      <Block BlockType="SubSystem" Name="Thermostat" SID="4" id="799266622">
+      <Block BlockType="SubSystem" Name="Thermostat" SID="4" id="934139845">
         <P Name="Description">wcet = 1ms</P>
         <P Name="Ports">[2, 2]</P>
         <P Name="Position">[520, 321, 705, 414]</P>
@@ -1283,12 +1283,12 @@ period = 5ms</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">80</P>
-          <Block BlockType="Inport" Name="Operator_Settings" SID="4::77" id="1406225943">
+          <Block BlockType="Inport" Name="Operator_Settings" SID="4::77" id="586287748">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">57</P>
             <P Name="IconDisplay">Port number</P>
           </Block>
-          <Block BlockType="Inport" Name="Current_Temperature" SID="4::80" id="-1381208749">
+          <Block BlockType="Inport" Name="Current_Temperature" SID="4::80" id="1272515410">
             <P Name="Position">[20, 136, 40, 154]</P>
             <P Name="ZOrder">60</P>
             <P Name="Port">2</P>
@@ -1326,12 +1326,12 @@ period = 5ms</P>
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">55</P>
           </Block>
-          <Block BlockType="Outport" Name="Operator_Feedback" SID="4::78" id="1726158566">
+          <Block BlockType="Outport" Name="Operator_Feedback" SID="4::78" id="1395122355">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">58</P>
             <P Name="IconDisplay">Port number</P>
           </Block>
-          <Block BlockType="Outport" Name="Heat_Control" SID="4::79" id="763704058">
+          <Block BlockType="Outport" Name="Heat_Control" SID="4::79" id="-421503770">
             <P Name="Position">[460, 136, 480, 154]</P>
             <P Name="ZOrder">59</P>
             <P Name="Port">2</P>
@@ -1385,32 +1385,32 @@ period = 5ms</P>
           </Line>
         </System>
       </Block>
-      <Line id="1307783446">
+      <Line id="1822211336">
         <P Name="ZOrder">1</P>
         <P Name="SrcBlock">Temperature
 Sensor</P>
         <P Name="SrcPort">1</P>
         <P Name="Points">[44, 0]</P>
-        <Branch id="141283743">
+        <Branch id="1665432639">
           <P Name="ZOrder">8</P>
           <P Name="Points">[0, -66; -264, 0; 0, -64]</P>
           <P Name="DstBlock">Alarm</P>
           <P Name="DstPort">1</P>
         </Branch>
-        <Branch id="981874988">
+        <Branch id="180055727">
           <P Name="ZOrder">7</P>
           <P Name="DstBlock">Thermostat</P>
           <P Name="DstPort">2</P>
         </Branch>
       </Line>
-      <Line id="894393765">
+      <Line id="585172588">
         <P Name="ZOrder">2</P>
         <P Name="SrcBlock">Thermostat</P>
         <P Name="SrcPort">2</P>
         <P Name="DstBlock">Heat Source </P>
         <P Name="DstPort">1</P>
       </Line>
-      <Line id="1803949929">
+      <Line id="-1494833152">
         <P Name="ZOrder">3</P>
         <P Name="SrcBlock">Thermostat</P>
         <P Name="SrcPort">1</P>
@@ -1418,7 +1418,7 @@ Sensor</P>
         <P Name="DstBlock">Operator Interface</P>
         <P Name="DstPort">1</P>
       </Line>
-      <Line id="-77155122">
+      <Line id="-1053132801">
         <P Name="ZOrder">4</P>
         <P Name="SrcBlock">Operator Interface</P>
         <P Name="SrcPort">1</P>
@@ -1426,7 +1426,7 @@ Sensor</P>
         <P Name="DstBlock">Thermostat</P>
         <P Name="DstPort">1</P>
       </Line>
-      <Line id="85009377">
+      <Line id="1737441455">
         <P Name="ZOrder">5</P>
         <P Name="SrcBlock">Heat Source </P>
         <P Name="SrcPort">1</P>
@@ -1434,7 +1434,7 @@ Sensor</P>
         <P Name="DstBlock">Air </P>
         <P Name="DstPort">1</P>
       </Line>
-      <Line id="151915273">
+      <Line id="212304378">
         <P Name="Name">hello_lankx</P>
         <P Name="ZOrder">6</P>
         <P Name="Labels">[3, 1]</P>
