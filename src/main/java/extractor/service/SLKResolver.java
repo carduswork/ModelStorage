@@ -256,8 +256,7 @@ public class SLKResolver {
 				ports1.setPeriod(att[1] + "ms");
 			}
 
-			Element typElement = (Element) document
-					.selectSingleNode(portdata.getUniquePath() + "/P[@Name='dataType']");
+			Element typElement = (Element) document.selectSingleNode(portdata.getUniquePath() + "/P[@Name='dataType']");
 			if (typElement != null) {
 				dataobject d = new dataobject();
 				d.setFrom(linkpointID);
@@ -308,7 +307,8 @@ public class SLKResolver {
 
 	private void StateResolver(String modelfilename, component father) throws Exception {
 		Document document = ModelResolver(modelfilename);
-		String gettask = "//Stateflow/machine/Children/chart/P[contains(text(),'" + father.getName() + "')]/following-sibling::Children/state";
+		String gettask = "//Stateflow/machine/Children/chart/P[contains(text(),'" + father.getName()
+				+ "')]/following-sibling::Children/state";
 		List<? extends Node> namelist = document.selectNodes(gettask);
 		for (Node n : namelist) {
 			Element element2 = (Element) n;
@@ -321,17 +321,29 @@ public class SLKResolver {
 			String[] ps = ls.getText().split("\n");
 
 			component.setName(ps[0]);
-			Element dElement = (Element) document
-					.selectSingleNode(element2.getUniquePath() + "/P[@Name='description']");
-			if(dElement!=null) {
-				
-				component.setWcet(dElement.getText().split(" ")[2]);
-			}
 
 			component.setType("task");
-			insert_component(component);
 
 			_task t = new _task();
+			Element dElement = (Element) document
+					.selectSingleNode(element2.getUniquePath() + "/P[@Name='description']");
+			if (dElement != null) {
+				String[] props = dElement.getText().split("\n");
+				for (String s : props) {
+					if (s.contains("faultType")) {
+						_exception e = new _exception();
+						Element namElement = (Element) document
+								.selectSingleNode(element2.getUniquePath() + "/P[@Name='labelString']");
+						e.setName(namElement.getText());
+						e.setType(s.split("=")[1]);
+						e.setComponentid(idString);
+						_em.insert(e);
+					}
+				}
+				t.setWcet(dElement.getText().split(" ")[2]);
+				component.setWcet(dElement.getText().split(" ")[2]);
+			}
+			insert_component(component);
 			t.setName(ps[0]);
 			t.setTaskid(idString);
 			t.setFatherid(father.getComponentid());
@@ -341,48 +353,62 @@ public class SLKResolver {
 				e.printStackTrace();
 			}
 			insert_task(t);
-			Element childElement=element2.element("Children");
-			//有thread
-			if(childElement!=null) {
+			Element childElement = element2.element("Children");
+			// 有thread
+			if (childElement != null) {
 				Document doc = ModelResolver(modelfilename);
 //				String getthread = "//Stateflow/machine/Children/chart/P[contains(text(),'" + father.getName() + "')]/following-sibling::Children/state";
-				List<? extends Node> threalist = doc.selectNodes(childElement.getUniquePath()+"/state");
+				List<? extends Node> threalist = doc.selectNodes(childElement.getUniquePath() + "/state");
 				for (Node n2 : threalist) {
 					Element threadElement = (Element) n2;
 					component threadcomp = new component();
 					Integer id2 = (int) GetID.getId();
 					threadcomp.setComponentid(id2);
 					threadcomp.setModeltype("simulink");
-					Element namElement = (Element) doc.selectSingleNode(threadElement.getUniquePath() + "/P[@Name='labelString']");
+					Element namElement = (Element) doc
+							.selectSingleNode(threadElement.getUniquePath() + "/P[@Name='labelString']");
 
 					String[] threadprop = namElement.getText().split("\n");
 
 					threadcomp.setName(threadprop[0]);
 					Element descElement = (Element) doc
 							.selectSingleNode(threadElement.getUniquePath() + "/P[@Name='description']");
-					if(descElement!=null) {
-						
-						threadcomp.setWcet(descElement.getText().split(" ")[2]);
+					_task threadTask = new _task();
+					if (descElement != null) {
+						String[] props = descElement.getText().split("\n");
+						for (String s : props) {
+							if (s.contains("faultType")) {
+								_exception e2 = new _exception();
+								Element threadnamElement = (Element) document
+										.selectSingleNode(element2.getUniquePath() + "/P[@Name='labelString']");
+								e2.setName(threadnamElement.getText());
+								e2.setType(s.split("=")[1]);
+								e2.setComponentid(id2);
+								_em.insert(e2);
+							}
+						}
+						component.setWcet(descElement.getText().split(" ")[2]);
+						threadTask.setWcet(descElement.getText().split(" ")[2]);
 					}
 
 					threadcomp.setType("task");
 					insert_component(threadcomp);
 
-					_task threadTask = new _task();
 					threadTask.setName(threadprop[0]);
 					threadTask.setTaskid(id2);
 					threadTask.setFatherid(idString);
 					try {
-						AppendID.AppendID(modelfilename, threadElement.getUniquePath(), threadTask.getTaskid().toString());
+						AppendID.AppendID(modelfilename, threadElement.getUniquePath(),
+								threadTask.getTaskid().toString());
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 					insert_task(threadTask);
-				transitionResolver(modelfilename, threadcomp);
+					transitionResolver(modelfilename, threadcomp);
 				}
-			}}
+			}
 		}
-	
+	}
 
 	private void transitionResolver(String modelfilename, component father) throws Exception {
 		Document document = ModelResolver(modelfilename);
@@ -418,7 +444,7 @@ public class SLKResolver {
 				Map<String, String> r2 = getstateinfo(modelfilename, transitionElement, idElement2.getText());
 				ts.setOutid(Integer.valueOf(r2.get("id")));
 				insert_tss(ts);
-				componenttransition ctt=new componenttransition();
+				componenttransition ctt = new componenttransition();
 				ctt.setComponentid(father.getComponentid().toString());
 				ctt.setTransitionid(idString.toString());
 				cttm.insert(ctt);

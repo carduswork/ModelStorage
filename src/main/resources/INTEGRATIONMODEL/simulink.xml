@@ -1,3 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<system name="isolette" wcet="15ms"><component name="Temperature
-Sensor" id="-1293287638" type="rtos" wcet="0.1ms"><linkpoint name="Current_Temperature" id="-1291623641" period="3ms" direction="out" datatype="Inherit: Same as Simulink"/><state Name="Collect Data" id="-1872887599"/><state Name="Send data" id="910485995"/><transition id="-1465812590" source="-1872887599" dest="910485995"/><transition id="-551935669" event="send data" source="910485995" dest="-1872887599"/></component><component name="Heat Source" id="-648950360" type="rtos"><linkpoint name="Heat_Control" id="-156428486" direction="in"/><state Name="Heating" id="-1765191236"/><state Name="Idle" id="1708681756"/><transition id="-571688492" source="1708681756" dest="-1765191236"/><transition id="1281764620" event="produce" source="-1765191236" dest="1708681756"/></component><component name="Alarm" id="1744696874" type="rtos" wcet="1ms"><linkpoint name="Current_Temperature" id="488870615" period="3ms" direction="in"/><linkpoint name="Send_Out_Alarm" id="1515364889" direction="out" datatype="Inherit: Same as Simulink"/><state Name="Data_Process" id="-1779087676"><state Name="Data Validate" id="-1923480503"/><state Name="Fault_Invalid Data" id="-1218441075"/><state Name="Idle" id="-943881239"/><state Name="Format" id="66224215"/></state><state Name="Alarming" id="-856247500"/><state Name="Idle" id="697287757"/><state Name="Checking" id="729242282"/><transition id="-1656236467" source="697287757" dest="-1779087676"/><transition id="-2104964980" source="729242282" dest="697287757"/><transition id="1266479615" source="-1779087676" dest="729242282"/><transition id="-1490762937" source="729242282" dest="-856247500"/></component><component name="Operator Interface" id="1986597004" type="rtos" wcet="1ms"><linkpoint name="Inter_Act_Input" id="-1608557744" direction="in"/><linkpoint name="Operator_Settings" id="-647438721" direction="out" datatype="Inherit: Same as Simulink"/><linkpoint name="Operator_Feedback" id="687599233" direction="in"/><state Name="Idle" id="-633779664"/><state Name="Show" id="-498625793"/><state Name="Send" id="-490296315"/><transition id="-727044237" source="-633779664" dest="-490296315"/><transition id="712807924" event="show operator" source="-498625793" dest="-633779664"/><transition id="-1035072891" source="-633779664" dest="-498625793"/><transition id="-1992453169" event="send operator" source="-490296315" dest="-633779664"/></component><component name="Thermostat" id="2115894671" type="rtos" wcet="1ms"><linkpoint name="Heat_Control" id="185442190" direction="out" datatype="Inherit: Same as Simulink"/><linkpoint name="Operator_Feedback" id="740248108" direction="out" datatype="Inherit: Same as Simulink"/><linkpoint name="Current_Temperature" id="1089404195" period="3ms" direction="in"/><linkpoint name="Operator_Settings" id="1210686811" direction="in"/><state Name="Feedback" id="-2093634948"/><state Name="Control" id="-621090801"/><state Name="Setting" id="-529471924"/><state Name="Checking" id="433559259"/><state Name="Data_Process" id="1064818499"><state Name="Idle" id="-1890286435"/><state Name="Fault_Invalid Data" id="27598354"/><state Name="Data Validate" id="783284286"/><state Name="Format" id="884774673"/></state><state Name="Idle" id="1343735327"/><transition id="-992184696" event="send heat" source="-621090801" dest="1343735327"/><transition id="2056129061" source="1343735327" dest="-529471924"/><transition id="-361920894" event="compare" source="433559259" dest="1343735327"/><transition id="-1249367682" source="-2093634948" dest="1343735327"/><transition id="1285099391" source="1343735327" dest="1064818499"/><transition id="-1890574419" event="set the" source="-529471924" dest="-2093634948"/><transition id="-1090418914" source="1064818499" dest="433559259"/><transition id="-1633171699" event="compare" source="433559259" dest="-621090801"/><transition id="323441471" source="-2093634948" dest="433559259"/></component><communicationchannel name="linkinslk" id="-1164978265" type="sync" source="-1291623641" dest="-1291623641"/><communicationchannel name="linkinslk" id="64884133" type="sync" source="-647438721" dest="-647438721"/><communicationchannel name="linkinslk" id="279583201" type="sync" source="-1291623641" dest="-1291623641"/><communicationchannel name="linkinslk" id="643345129" type="sync" source="740248108" dest="740248108"/><communicationchannel name="linkinslk" id="2015579967" type="sync" source="185442190" dest="740248108"/></system>
+<system name="isolette" wcet="15ms">
+	<component id="-525044953" name="Thermostat" type="rtos" wcet="1ms">
+		<linkpoint direction="in" id="-1901135281" name="Operator_Settings"/>
+		<linkpoint datatype="Inherit: Same as Simulink" direction="out" id="-19064842" name="Heat_Control"/>
+		<linkpoint direction="in" id="144994029" name="Current_Temperature" period="3ms"/>
+		<linkpoint datatype="Inherit: Same as Simulink" direction="out" id="393672814" name="Operator_Feedback"/>
+		<state Name="Checking" id="-1717555404" wcet="0.5ms"/>
+		<state Name="Control" id="-1383724531" wcet="0.5ms"/>
+		<state Name="Idle" id="-948073403"/>
+		<state Name="Data_Process" id="-896101859" wcet="1ms">
+			<state Name="Data Validate" id="-1913171933" wcet="0.5ms"/>
+			<state Name="Format" id="-1415280469" wcet="0.5ms"/>
+			<state Name="Fault_Invalid Data" id="-1102445994" wcet="0.5ms faultType"/>
+			<state Name="Idle" id="281534546"/>
+		</state>
+		<state Name="Setting" id="496983857" wcet="0.5ms"/>
+		<state Name="Feedback" id="720842211" wcet="0.5ms"/>
+		<transition dest="-948073403" event="send heat" id="-320014615" source="-1383724531"/>
+		<transition dest="496983857" id="288071607" source="-948073403"/>
+		<transition dest="-948073403" event="compare" id="929972331" source="-1717555404"/>
+		<transition dest="-948073403" id="1254011552" source="720842211"/>
+		<transition dest="-896101859" id="-357423127" source="-948073403"/>
+		<transition dest="720842211" event="set the" id="1983282591" source="496983857"/>
+		<transition dest="-1717555404" id="-1462356497" source="-896101859"/>
+		<transition dest="-1383724531" event="compare" id="853931761" source="-1717555404"/>
+		<transition dest="-1717555404" id="1532772785" source="720842211"/>
+	</component>
+	<component id="523998562" name="Temperature Sensor" type="rtos" wcet="0.1ms">
+		<linkpoint datatype="Inherit: Same as Simulink" direction="out" id="1146094342" name="Current_Temperature" period="3ms"/>
+		<state Name="Collect Data" id="-1798656495"/>
+		<state Name="Send data" id="23054406"/>
+		<transition dest="23054406" id="200154442" source="-1798656495"/>
+		<transition dest="-1798656495" event="send data" id="-1540853396" source="23054406"/>
+	</component>
+	<component id="580228926" name="Heat Source" type="rtos">
+		<linkpoint direction="in" id="128434186" name="Heat_Control"/>
+		<state Name="Heating" id="-632715443"/>
+		<state Name="Idle" id="601918634"/>
+		<transition dest="-632715443" id="-52261119" source="601918634"/>
+		<transition dest="601918634" event="produce" id="1088428848" source="-632715443"/>
+	</component>
+	<component id="1493570460" name="Operator Interface" type="rtos" wcet="1ms">
+		<linkpoint datatype="Inherit: Same as Simulink" direction="out" id="709923412" name="Operator_Settings"/>
+		<linkpoint direction="in" id="830685774" name="Inter_Act_Input"/>
+		<linkpoint direction="in" id="1974013163" name="Operator_Feedback"/>
+		<state Name="Send" id="-142983187" wcet="0.5ms"/>
+		<state Name="Show" id="1306448656" wcet="0.5ms"/>
+		<state Name="Idle" id="1327953821"/>
+		<transition dest="-142983187" id="-1609213232" source="1327953821"/>
+		<transition dest="1327953821" event="show operator" id="-1298061371" source="1306448656"/>
+		<transition dest="1306448656" id="733416183" source="1327953821"/>
+		<transition dest="1327953821" event="send operator" id="-825289535" source="-142983187"/>
+	</component>
+	<component id="1569008402" name="Alarm" type="rtos" wcet="1ms">
+		<linkpoint datatype="Inherit: Same as Simulink" direction="out" id="-567194109" name="Send_Out_Alarm"/>
+		<linkpoint direction="in" id="-236792183" name="Current_Temperature" period="3ms"/>
+		<state Name="Checking" id="-1354622928" wcet="0.5ms"/>
+		<state Name="Idle" id="-159009672"/>
+		<state Name="Alarming" id="1128311666" wcet="0.5ms"/>
+		<state Name="Data_Process" id="1468822586" wcet="1ms">
+			<state Name="Format" id="723114458" wcet="0.5ms"/>
+			<state Name="Fault_Invalid Data" id="1640425241" wcet="0.5ms faultType"/>
+			<state Name="Data Validate" id="1777046410" wcet="0.5ms"/>
+			<state Name="Idle" id="1808534836"/>
+		</state>
+		<transition dest="1468822586" id="678326037" source="-159009672"/>
+		<transition dest="-159009672" id="-1100646727" source="-1354622928"/>
+		<transition dest="-1354622928" id="-227107029" source="1468822586"/>
+		<transition dest="1128311666" id="338631128" source="-1354622928"/>
+	</component>
+	<communicationchannel dest="709923412" id="-1388060323" name="linkinslk" source="709923412" type="sync"/>
+	<communicationchannel dest="1146094342" id="-372962840" name="linkinslk" source="1146094342" type="sync"/>
+	<communicationchannel dest="393672814" id="-334613539" name="linkinslk" source="-19064842" type="sync"/>
+	<communicationchannel dest="393672814" id="726073489" name="linkinslk" source="393672814" type="sync"/>
+	<communicationchannel dest="1146094342" id="1564097469" name="linkinslk" source="1146094342" type="sync"/>
+</system>
