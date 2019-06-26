@@ -24,6 +24,7 @@ public interface componentMapper {
 	Integer getPortIDByComponentName(String cmpname, String portname);
 
 	component getIDbyName(String name);
+	component getByType(String Type);
 	
 	List<component> selectAll_aadl();
 	List<component> selectAll_sysml();

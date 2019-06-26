@@ -1,37 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ownedPublicSection name="simulink.xml">
-	<component id="-1866741585" name="Alarm" type="rtos">
-		<linkpoint direction="out" id="-1434957279" name="Send_Out_Alarm"/>
-		<linkpoint direction="in" id="-83628843" name="Current_Temperature" period="3ms"/>
+<system name="isolette" wcet="15ms">
+	<component id="-1697326652" name="Alarm" type="rtos" wcet="1ms">
+		<linkpoint direction="out" id="-1848116981" name="Send_Out_Alarm"/>
+		<linkpoint direction="in" id="1890222165" name="Current_Temperature" period="3ms"/>
+		<state Name="Idle" id="-2117021566"/>
+		<state Name="Alarming" id="-1746278747"/>
+		<state Name="Data_Process" id="-827124590"/>
+		<state Name="Checking" id="-351635844"/>
+		<transition dest="-827124590" id="1276611001" source="-2117021566"/>
+		<transition dest="-2117021566" id="19956451" source="-351635844"/>
+		<transition dest="-351635844" id="652640644" source="-827124590"/>
+		<transition dest="-1746278747" id="1451796265" source="-351635844"/>
 	</component>
-	<component id="-1842435081" name="Operator Interface" type="rtos">
-		<linkpoint direction="in" id="-1329572119" name="Inter_Act_Input"/>
-		<linkpoint direction="in" id="-1092748706" name="Operator_Feedback"/>
-		<linkpoint direction="out" id="-802059706" name="Operator_Settings"/>
+	<component id="-1197125386" name="Temperature Sensor" type="rtos" wcet="0.1ms">
+		<linkpoint direction="out" id="224564080" name="Current_Temperature" period="3ms"/>
+		<state Name="Collect Data" id="-1802077964"/>
+		<state Name="Send data" id="710239350"/>
+		<transition dest="710239350" id="-721307618" source="-1802077964"/>
+		<transition dest="-1802077964" event="send data" id="-121505161" source="710239350"/>
 	</component>
-	<component id="-1587689712" name="Air" type="rtos">
-		<linkpoint direction="in" id="-1757604420" name="Heat"/>
-		<linkpoint direction="out" id="406262631" name="Heat2"/>
+	<component id="-624167506" name="Operator Interface" type="rtos" wcet="1ms">
+		<linkpoint direction="in" id="-789278773" name="Inter_Act_Input"/>
+		<linkpoint direction="out" id="-764162018" name="Operator_Settings"/>
+		<linkpoint direction="in" id="1629618459" name="Operator_Feedback"/>
+		<state Name="Send" id="-732875068"/>
+		<state Name="Idle" id="1267547950"/>
+		<state Name="Show" id="1330376643"/>
+		<transition dest="-732875068" id="34991852" source="1267547950"/>
+		<transition dest="1267547950" event="show operator" id="-2023244901" source="1330376643"/>
+		<transition dest="1330376643" id="-926569915" source="1267547950"/>
+		<transition dest="1267547950" event="send operator" id="933850084" source="-732875068"/>
 	</component>
-	<component id="615820839" name="Temperature Sensor" type="rtos">
-		<linkpoint direction="out" id="-544888107" name="Current_Temperature" period="3ms"/>
-		<linkpoint direction="in" id="525912527" name="Heat1"/>
+	<component id="83924509" name="Heat Source" type="rtos">
+		<linkpoint direction="in" id="226496705" name="Heat_Control"/>
+		<state Name="Heating" id="237398007"/>
+		<state Name="Idle" id="1772817556"/>
+		<transition dest="237398007" id="-739611733" source="1772817556"/>
+		<transition dest="1772817556" event="produce" id="-1271615477" source="237398007"/>
 	</component>
-	<component id="934139845" name="Thermostat" type="rtos">
-		<linkpoint direction="out" id="-421503770" name="Heat_Control"/>
-		<linkpoint direction="in" id="586287748" name="Operator_Settings"/>
-		<linkpoint direction="in" id="1272515410" name="Current_Temperature" period="3ms"/>
-		<linkpoint direction="out" id="1395122355" name="Operator_Feedback"/>
+	<component id="348152961" name="Thermostat" type="rtos" wcet="1ms">
+		<linkpoint direction="out" id="-2070722316" name="Operator_Feedback"/>
+		<linkpoint direction="in" id="-996217592" name="Current_Temperature" period="3ms"/>
+		<linkpoint direction="in" id="246778942" name="Operator_Settings"/>
+		<linkpoint direction="out" id="786024806" name="Heat_Control"/>
+		<state Name="Data_Process" id="-947376887"/>
+		<state Name="Checking" id="683196041"/>
+		<state Name="Idle" id="1394395265"/>
+		<state Name="Control" id="1400530991"/>
+		<state Name="Feedback" id="1469177441"/>
+		<state Name="Setting" id="1782185659"/>
+		<transition dest="1394395265" event="send heat" id="-2097703624" source="1400530991"/>
+		<transition dest="1782185659" id="-1196398052" source="1394395265"/>
+		<transition dest="1394395265" event="compare" id="-427431125" source="683196041"/>
+		<transition dest="1394395265" id="1308836125" source="1469177441"/>
+		<transition dest="-947376887" id="575962427" source="1394395265"/>
+		<transition dest="1469177441" event="set the" id="1061149126" source="1782185659"/>
+		<transition dest="683196041" id="178249647" source="-947376887"/>
+		<transition dest="1400530991" event="compare" id="-1989869651" source="683196041"/>
+		<transition dest="683196041" id="383150939" source="1469177441"/>
 	</component>
-	<component id="2033806682" name="Heat Source" type="rtos">
-		<linkpoint direction="in" id="572109702" name="Heat_Control"/>
-		<linkpoint direction="out" id="662053972" name="Heat"/>
-	</component>
-	<communicationchannel dest="1395122355" id="-1494833152" name="linkinslk" source="1395122355" type="sync"/>
-	<communicationchannel dest="-802059706" id="-1053132801" name="linkinslk" source="-802059706" type="sync"/>
-	<communicationchannel dest="-544888107" id="180055727" name="linkinslk" source="-544888107" type="sync"/>
-	<communicationchannel dest="406262631" id="212304378" name="linkinslk" source="406262631" type="sync"/>
-	<communicationchannel dest="1395122355" id="585172588" name="linkinslk" source="-421503770" type="sync"/>
-	<communicationchannel dest="-544888107" id="1665432639" name="linkinslk" source="-544888107" type="sync"/>
-	<communicationchannel dest="662053972" id="1737441455" name="linkinslk" source="662053972" type="sync"/>
-</ownedPublicSection>
+	<communicationchannel dest="-764162018" id="420312746" name="linkinslk" source="-764162018" type="sync"/>
+	<communicationchannel dest="-2070722316" id="834291520" name="linkinslk" source="786024806" type="sync"/>
+	<communicationchannel dest="224564080" id="1347328452" name="linkinslk" source="224564080" type="sync"/>
+	<communicationchannel dest="224564080" id="1591542649" name="linkinslk" source="224564080" type="sync"/>
+	<communicationchannel dest="-2070722316" id="2041971555" name="linkinslk" source="-2070722316" type="sync"/>
+</system>

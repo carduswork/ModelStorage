@@ -201,7 +201,7 @@ public class SYSMLResolver {
 		return document;
 	}
 
-	public void MatchComponents(String filepath, String contenttype) throws Exception {
+	public void MatchComponents(String filepath, String contenttype) throws Exception {          
 		Document document = ModelResolver(filepath);
 
 		String getCompponents = "//packagedElement[@xmi:type='uml:Class']/nestedClassifier[@xmi:type='uml:Class' or @xmi:type='uml:Device']";
@@ -222,6 +222,10 @@ public class SYSMLResolver {
 				c.setType("rtos");
 			} else {
 				c.setType("device");
+			}
+			Element wcetElement=(Element)document.selectSingleNode(e.getUniquePath()+"/ownedAttribute[@name='delay']");
+			if(wcetElement!=null) {
+				c.setWcet(wcetElement.element("defaultValue").attributeValue("value")+"ms");
 			}
 			insert_component(c);
 			if (e.element("ownedRule[@xmi:type='uml:Constraint']") != null) {

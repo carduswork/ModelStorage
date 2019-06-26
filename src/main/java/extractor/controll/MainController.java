@@ -49,7 +49,7 @@ public class MainController {
 	public void startIntegration() {
 		is.GenerateIntegaraton("aadl.xml","aadl");
 		is.GenerateIntegaraton("sysml.xml","sysml");
-		is.GenerateIntegaraton("simulink.xml","simulink");
+		is.GenerateIntegaraton4SLK("simulink.xml","simulink");
 	}
 
 	public void restore() throws Exception {

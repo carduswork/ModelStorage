@@ -14,8 +14,13 @@
       </ownedPropertyAssociation>
       <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**     use types ErrorLib;     use behavior ErrorLib::FailStopTransient;     error propagations   --输入数据格式错误，或长度错误或未接收到输入数据   currentTemperature:in propagation {Violation,InvalidParameter}; --  heating:out propagation{InvalidParameter}; --  flows --   testpath:error path currentTemperature{Violation} when {HardwareFault};   end propagations;     **}">
         <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib" useBehavior="ErrorLib.aadl#emv2$ErrorLib.FailStopTransient">
+          <ownedComment body="--  heating:out propagation{InvalidParameter};"/>
+          <ownedComment body="--  flows"/>
+          <ownedComment body="--   testpath:error path currentTemperature{Violation} when {HardwareFault};"/>
           <propagations>
-            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.3"/>
+            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.3">
+              <ownedComment body="--输入数据格式错误，或长度错误或未接收到输入数据"/>
+            </featureorPPRef>
             <typeSet>
               <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.Violation"/>
               <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
@@ -29,7 +34,7 @@
       <ownedDataPort name="heating" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.heating1"/>
       <ownedDataPort name="currentTemperature" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="340481723">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="-988426893">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <appliesTo>
           <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.1"/>
@@ -232,11 +237,14 @@
     <ownedClassifier xsi:type="aadl2:ProcessorType" name="LSP"/>
     <ownedClassifier xsi:type="aadl2:ProcessorImplementation" name="lsp.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.14"/>
-      <ownedVirtualProcessorSubcomponent name="part1" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.17"/>
+      <ownedVirtualProcessorSubcomponent name="part1" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.17">
+        <ownedComment body="-- kfBefore: virtual processor kfBefore.impl;  "/>
+      </ownedVirtualProcessorSubcomponent>
       <ownedVirtualProcessorSubcomponent name="part2" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.17"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:VirtualProcessorType" name="cpu">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Scheduling_Protocol">
+        <ownedComment body="--分区号为1"/>
         <ownedValue>
           <ownedValue xsi:type="aadl2:ListValue">
             <ownedListElement xsi:type="aadl2:NamedValue" namedValue="aadl2:EnumerationLiteral ../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.7/@ownedLiteral.5"/>

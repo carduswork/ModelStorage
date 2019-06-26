@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aadl2:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aadl2="http://aadl.info/AADL/2.0" xmlns:errorModel="http://www.aadl.info/EMV2" name="ErrorLib" publicSection="#//@ownedPublicSection">
   <ownedPublicSection>
-    <ownedAnnexLibrary xsi:type="aadl2:DefaultAnnexLibrary" name="EMV2" sourceText="{**&#xD;&#xA;&#x9;&#x9;error types&#xD;&#xA;&#x9;&#x9;use types ErrorLibrary;&#xD;&#xA;&#x9;&#x9;--元模型中定义的错误类型&#xD;&#xA;&#x9;&#x9;InvalidParameter: type;&#xD;&#xA;&#x9;&#x9;Violation:type;&#xD;&#xA;--&#x9;&#x9;UnexceptedError:type;&#xD;&#xA;&#x9;&#x9;HardwareFault:type;&#xD;&#xA;&#x9;&#x9;end types;&#xD;&#xA;-- state machine for simple FailStop behavior&#xD;&#xA;error behavior FailStopState&#xD;&#xA;states&#xD;&#xA;&#x9;Operational : initial state ;&#xD;&#xA;&#x9;FailStop : state ;&#xD;&#xA;end behavior ;&#xD;&#xA;error behavior GPSProcessingFailed&#xD;&#xA;states&#xD;&#xA;&#x9;Operational : initial state ;&#xD;&#xA;&#x9;NoService : state ;&#xD;&#xA;&#x9;LowPrecision : state ;&#xD;&#xA;&#x9;Incorrect : state ;&#xD;&#xA;end behavior ;&#xD;&#xA;&#xD;&#xA;error behavior FailStopTransient&#xD;&#xA;events&#xD;&#xA;&#x9;Failure: error event;&#xD;&#xA;&#x9;Recoverevent:error event;&#xD;&#xA;states&#xD;&#xA;&#x9;Operational : initial state ;&#xD;&#xA;&#x9;FailStop: state ;&#xD;&#xA;&#x9;transitions&#xD;&#xA;&#x9;-- sensor failure may be transient. We assume a 20% persistent sesnor failure rate.&#xD;&#xA;&#x9;&#x9;FailureTransition: Operational -[Failure]-> (FailStop with 0.2, Operational with 0.8);&#xD;&#xA;&#x9;&#x9;RecoverTransitiom: FailStop-[Recoverevent]->Operational;&#xD;&#xA;end behavior ;&#xD;&#xA;&#x9;**}">
+    <ownedAnnexLibrary xsi:type="aadl2:DefaultAnnexLibrary" name="EMV2" sourceText="{**&#xD;&#xA;&#x9;&#x9;error types&#xD;&#xA;&#x9;&#x9;use types ErrorLibrary;&#xD;&#xA;&#x9;&#x9;--元模型中定义的错误类型&#xD;&#xA;&#x9;&#x9;InvalidParameter: type;&#xD;&#xA;&#x9;&#x9;Violation:type;&#xD;&#xA;--&#x9;&#x9;UnexceptedError:type;&#xD;&#xA;&#x9;&#x9;HardwareFault:type;&#xD;&#xA;&#x9;&#x9;end types;&#xD;&#xA;-- state machine for simple FailStop behavior&#xD;&#xA;error behavior FailStopState&#xD;&#xA;states&#xD;&#xA;&#x9;Operational : initial state ;&#xD;&#xA;&#x9;FailStop : state ;&#xD;&#xA;end behavior ;&#xD;&#xA;error behavior GPSProcessingFailed&#xD;&#xA;states&#xD;&#xA;&#x9;Operational : initial state ;&#xD;&#xA;&#x9;NoService : state ;&#xD;&#xA;&#x9;LowPrecision : state ;&#xD;&#xA;&#x9;Incorrect : state ;&#xD;&#xA;end behavior ;&#xD;&#xA;&#xD;&#xA;error behavior FailStopTransient&#xD;&#xA;events&#xD;&#xA;&#x9;Failure: error event;&#xD;&#xA;&#x9;Recoverevent:error event;&#xD;&#xA;states&#xD;&#xA;&#x9;Operational : initial state ;&#xD;&#xA;&#x9;FailStop: state ;&#xD;&#xA;&#x9;transitions&#xD;&#xA;&#x9;-- sensor failure may be transient. We assume a 20% persistent sesnor failure rate.&#xD;&#xA;&#x9;    FailureTransition: Operational -[Failure]-> FailStop;&#xD;&#xA;&#x9;&#x9;--FailureTransition: Operational -[Failure]-> (FailStop with 0.2, Operational with 0.8);&#xD;&#xA;&#x9;&#x9;RecoverTransitiom: FailStop-[Recoverevent]->Operational;&#xD;&#xA;end behavior ;&#xD;&#xA;&#x9;**}">
       <parsedAnnexLibrary xsi:type="errorModel:ErrorModelLibrary" name="EMV2" useTypes="../../Plugin_Resources/ErrorLibrary.aadl#emv2$ErrorLibrary">
         <types name="InvalidParameter">
           <ownedComment body="--元模型中定义的错误类型"/>
@@ -26,21 +26,16 @@
           <events xsi:type="errorModel:ErrorEvent" name="Recoverevent"/>
           <states name="Operational" intial="true"/>
           <states name="FailStop"/>
-          <transitions name="FailureTransition" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0">
+          <transitions name="FailureTransition" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0" target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.1">
             <ownedComment body="-- sensor failure may be transient. We assume a 20% persistent sesnor failure rate."/>
             <condition xsi:type="errorModel:ConditionElement">
               <qualifiedErrorPropagationReference xsi:type="errorModel:QualifiedErrorEventOrPropagation">
                 <emv2Target namedElement="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@events.0"/>
               </qualifiedErrorPropagationReference>
             </condition>
-            <destinationBranches target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.1">
-              <value realvalue="0.2"/>
-            </destinationBranches>
-            <destinationBranches target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0">
-              <value realvalue="0.8"/>
-            </destinationBranches>
           </transitions>
           <transitions name="RecoverTransitiom" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.1" target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0">
+            <ownedComment body="--FailureTransition: Operational -[Failure]-> (FailStop with 0.2, Operational with 0.8);"/>
             <condition xsi:type="errorModel:ConditionElement">
               <qualifiedErrorPropagationReference xsi:type="errorModel:QualifiedErrorEventOrPropagation">
                 <emv2Target namedElement="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@events.1"/>

@@ -145,8 +145,9 @@ public class AADLResolver {
 	private _taskMapper _tm;
 	@Autowired
 	private _partitionMapper ptm;
-@Autowired
-private componenttransitionMapper cttm;
+	@Autowired
+	private componenttransitionMapper cttm;
+
 	private int insert_partition(_partition p) {
 		return ptm.insert(p);
 	}
@@ -252,10 +253,7 @@ private componenttransitionMapper cttm;
 		AADLResolver.compositelibfile = aadlFiles.get("组件库");
 		AADLResolver.errlibfile = aadlFiles.get("错误库");
 		AADLResolver.hardmodelfile = aadlFiles.get("总体架构");
-		MatchComponents(hardmodelfile, "aadl", "总体架构");
-//		AADLResolver.componentlist.forEach((k, v) -> {
-//			insert_component(v);
-//		});
+		MatchComponents(hardmodelfile, "总体架构");
 		rtoslist.forEach((v) -> {
 			insert_rtos(v);
 		});
@@ -290,12 +288,12 @@ private componenttransitionMapper cttm;
 //		statelist.forEach((v) -> {
 //			insert_state(v);
 //		});
-		if (errlibfile != null) {
-			ExceptionResolver(dynamicfilename, "aadl");
-			exceptionlist.forEach((v) -> {
-				insert_exception(v);
-			});
-		}
+		// if (errlibfile != null) {
+		ExceptionResolver(dynamicfilename, "aadl");
+		exceptionlist.forEach((v) -> {
+			insert_exception(v);
+		});
+		// }
 		if (errlibfile != null) {
 			// eventResolver(aadlFiles.get("系统内部结构"), "aadl");
 		}
@@ -323,22 +321,31 @@ private componenttransitionMapper cttm;
 	}
 
 	/* 当前模型的全部组件与port、task */
-	public void MatchComponents(String filepath, String modelType, String contenttype) throws Exception {
+	public void MatchComponents(String filepath, String contenttype) throws Exception {
 		Document document = ModelResolver(filepath);
-
-		// List<String> namelist = new ArrayList<>();
-		if (modelType.equals("aadl")) {
-			// 对hardware层级设计的三种与组件元素的解析
-			String getbus = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedBusSubcomponent";
-			String getsys = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedSystemSubcomponent";
-			String getdevice = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedDeviceSubcomponent";
-			components = document.selectNodes(getbus);
-			ResolveComponents(filepath, "bus");
-			components = document.selectNodes(getsys);
-			ResolveComponents(filepath, "sys");
-			components = document.selectNodes(getdevice);
-			ResolveComponents(filepath, "device");
+		if (contenttype.equals("总体架构")) {
+			Element systemElement = (Element) document.selectSingleNode("//ownedClassifier[@name='isolette']");
+			component system = new component();
+			system.setName(systemElement.attributeValue("name"));
+			system.setModeltype("aadl");
+			system.setType("uniquesystem");
+			// 暂时只有这一个属性
+			system.setWcet(systemElement.element("ownedPropertyAssociation").element("ownedValue").element("ownedValue")
+					.attributeValue("value") + "ms");
+			Integer id = (int) GetID.getId();
+			system.setComponentid(id);
+			insert_component(system);
 		}
+		// 对hardware层级设计的三种与组件元素的解析
+		String getbus = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedBusSubcomponent";
+		String getsys = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedSystemSubcomponent";
+		String getdevice = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedDeviceSubcomponent";
+		components = document.selectNodes(getbus);
+		ResolveComponents(filepath, "bus");
+		components = document.selectNodes(getsys);
+		ResolveComponents(filepath, "sys");
+		components = document.selectNodes(getdevice);
+		ResolveComponents(filepath, "device");
 	}
 
 	// filename参数是hardwareArchitecture
@@ -609,6 +616,7 @@ private componenttransitionMapper cttm;
 				break;
 			case "sys":
 				dynamicfilename = Getfilename(element.attributeValue("systemSubcomponentType"));
+
 				component.setType("rtos");
 				camArchMapper.insert(component);
 				rtos r = new rtos();
@@ -622,6 +630,15 @@ private componenttransitionMapper cttm;
 				break;
 			case "device":
 				component.setType("device");
+				String getwcet = "//ownedPublicSection/ownedClassifier[@name='" + component.getName()
+						+ "']/ownedPropertyAssociation[contains(@property,'wcet4dev')]";
+				Document document = ModelResolver(compositelibfile);
+				Element devicElement = (Element) document.selectSingleNode(getwcet);
+				if (devicElement != null) {
+
+					component.setWcet(
+							devicElement.element("ownedValue").element("ownedValue").attributeValue("value") + "ms");
+				}
 				camArchMapper.insert(component);
 				device d = new device();
 				d.setDeviceid(componentID);
@@ -884,16 +901,26 @@ private componenttransitionMapper cttm;
 			nodelist.forEach((v) -> {
 
 				Element systemElement = (Element) v;
+
 				try {
-					String[] behaviorcontent = systemElement.element("ownedAnnexSubclause").element("parsedAnnexSubclause")
-							.attributeValue("useBehavior").split("\\.");
+					String[] behaviorcontent = systemElement.element("ownedAnnexSubclause")
+							.element("parsedAnnexSubclause").attributeValue("useBehavior").split("\\.");
 					String behaviorname = behaviorcontent[2];
 					eventResolver(modelfilename, "aadl");
-					
+
 					String getimpl = systemElement.getUniquePath() + "/following-sibling::ownedClassifier[@name='"
 							+ systemElement.attributeValue("name") + ".impl" + "']";
-					
-					TransitionResolver(behaviorname,((Element)document.selectSingleNode(getimpl)).attributeValue("id"));
+					Element implElement = (Element) document.selectSingleNode(getimpl);
+					// 因为解析路径有些相似就顺手放在这里了
+					String getwcet = systemElement.getUniquePath()
+							+ "/ownedPropertyAssociation[contains(@property,'wcet4sys')]/ownedValue/ownedValue";
+					Element wcetElement = (Element) document.selectSingleNode(getwcet);
+					component c = new component();
+					c.setComponentid(Integer.valueOf(implElement.attributeValue("id")));
+					c.setWcet(wcetElement.attributeValue("value") + "ms");
+					camArchMapper.updateByPrimaryKeySelective(c);
+
+					TransitionResolver(behaviorname, implElement.attributeValue("id"));
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
@@ -901,30 +928,39 @@ private componenttransitionMapper cttm;
 
 				_exception e = new _exception();
 				e.setName(systemElement.element("ownedAbstractFeature").attributeValue("name"));
-				String exceptionTypeString = getType(
-						systemElement.element("ownedAnnexSubclause").element("parsedAnnexSubclause").element("propagations")
-								.element("typeSet").element("typeTokens").attributeValue("type"));
+				String exceptionTypeString = getType(systemElement.element("ownedAnnexSubclause")
+						.element("parsedAnnexSubclause").element("propagations").element("typeSet")
+						.element("typeTokens").attributeValue("type"));
 				e.setType(exceptionTypeString);
 				systemElement = systemElement.element("ownedAnnexSubclause").element("parsedAnnexSubclause")
 						.element("propagations");
 				Integer sourceid = 0, destid = 0;
 				// 没有direction或者
-				if (systemElement.attribute("direction") != null && systemElement.attributeValue("direction").equals("out")) {
+				if (systemElement.attribute("direction") != null
+						&& systemElement.attributeValue("direction").equals("out")) {
 					String getsourceportPath = systemElement.element("featureorPPRef").attributeValue("featureorPP");
 					try {
-						sourceid = getPortIDByComponentName(compositename,
-								GetName(modelfilename, GetXPath(getsourceportPath)));
+						Element portElement = (Element) document.selectSingleNode(GetXPath(getsourceportPath));
+						sourceid = Integer.valueOf(portElement.attributeValue("id"));
+//						sourceid = getPortIDByComponentName(compositename,
+//								GetName(modelfilename, GetXPath(getsourceportPath)));
+						e.setLinkpointid(sourceid);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
 				} else {
+
 					String getsourceportPath = systemElement.element("featureorPPRef").attributeValue("featureorPP");
 					try {
-						destid = getPortIDByComponentName(compositename,
-								GetName(modelfilename, GetXPath(getsourceportPath)));
+//						destid = getPortIDByComponentName(compositename,
+//								GetName(modelfilename, GetXPath(getsourceportPath)));
+						Element portElement = (Element) document.selectSingleNode(GetXPath(getsourceportPath));
+						// TODO 设置propagation linkpoint
+						destid = Integer.valueOf(portElement.attributeValue("id"));
+						e.setLinkpointid(destid);
 					} catch (Exception e1) {
 						e1.printStackTrace();
-						System.out.println(compositename+getsourceportPath);
+						System.out.println(compositename + getsourceportPath);
 					}
 
 				}
@@ -937,7 +973,7 @@ private componenttransitionMapper cttm;
 	}
 
 	// 需要的文件是系统内部结构，而且要先解析错误库中的event
-	public void TransitionResolver(String behaviorname,String cmpid) throws Exception {
+	public void TransitionResolver(String behaviorname, String cmpid) throws Exception {
 		Document document = ModelResolver(errlibfile);
 		List<? extends Node> transNodes = document
 				.selectNodes("//parsedAnnexLibrary/behaviors[@name='" + behaviorname + "']/transitions");
@@ -962,19 +998,20 @@ private componenttransitionMapper cttm;
 				insert_transition(t);
 				transitionstate tsTransitionstate = new transitionstate();
 
-				//	这里需要先解析到state
+				// 这里需要先解析到state
 				Element stateelement = (Element) document
 						.selectSingleNode(GetXPath4State(element.attributeValue("source")));
 				tsTransitionstate.setSourceid(Integer.valueOf(stateelement.attributeValue("id")));
-				if(element.attributeValue("target")!=null) {
-					
-					stateelement = (Element) document.selectSingleNode(GetXPath4State(element.attributeValue("target")));
+				if (element.attributeValue("target") != null) {
+
+					stateelement = (Element) document
+							.selectSingleNode(GetXPath4State(element.attributeValue("target")));
 					tsTransitionstate.setOutid(Integer.valueOf(stateelement.attributeValue("id")));
-					
+
 					tsTransitionstate.setTransitionid(t.getTransitionid());
 					insert_tss(tsTransitionstate);
-					
-					componenttransition cmpts=new componenttransition();
+
+					componenttransition cmpts = new componenttransition();
 					cmpts.setComponentid(cmpid);
 					cmpts.setTransitionid(t.getTransitionid().toString());
 					cttm.insert(cmpts);

@@ -1,93 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ownedPublicSection name="sysml.xml">
-	<component id="-1706058794" name="数据处理" type="rtos"/>
-	<component id="-1704265094" name="设置温度范围" type="rtos"/>
-	<component id="-1635134654" name="数据处理子组件" type="rtos"/>
-	<component id="-1559646900" name="thermostat" type="rtos">
-		<linkpoint direction="in" id="-203152068" name="curr_tem_in"/>
-		<linkpoint direction="in" id="-196936670" name="feedback接口_out"/>
-		<linkpoint direction="in" id="920161652" name="heating_out"/>
-		<linkpoint direction="in" id="1513625583" name="设置接口_in"/>
+<system name="isolette" wcet="15ms">
+	<component id="-2018448719" name="热源" type="rtos"/>
+	<component id="-1964185799" name="feedback" type="rtos"/>
+	<component id="-1667670766" name="温度调节" type="rtos"/>
+	<component id="-1460055338" name="Real" type="rtos"/>
+	<component id="-1045844343" name="alarm" type="rtos"/>
+	<component id="-926221031" name="温度自动调节器" type="rtos"/>
+	<component id="-217564537" name="温度调节子组件" type="rtos"/>
+	<component id="-43882212" name="温度传感器" type="rtos"/>
+	<component id="110139348" name="thermostat" type="rtos">
+		<linkpoint direction="in" id="-1097544609" name="设置接口_in"/>
+		<linkpoint direction="in" id="126856810" name="feedback接口_out"/>
+		<linkpoint direction="out" id="1967084486" name="curr_tem_in"/>
 		<exception name="InvalidParameter"/>
 		<exception name="Violation"/>
 		<exception name="UnexceptedError"/>
 		<exception name="HandwareFault"/>
-		<task Name="温度调节" id="-2133590822" wcet="1.0ms"/>
-		<task Name="operator_feedback" id="-1513312872" period="3.0ms"/>
-		<task Name="设置温度范围" id="9941311" wcet="1.0ms"/>
-		<task Name="operator_feedback" id="187825592" period="3.0ms"/>
-		<task Name="数据处理" id="382240382" wcet="2.0ms">
-			<task Name="数据验证" id="-1729285139" wcet="1.0ms"/>
-			<task Name="数据格式化" id="-1179394464" wcet="1.0ms"/>
-			<task Name="数据故障处理" id="101234579" wcet="1.0ms"/>
+		<task Name="处理器" id="-1783088731"/>
+		<task Name="feedback" id="-482158986" wcet="1.0ms"/>
+		<task Name="设置温度范围" id="-123993314" wcet="1.0ms"/>
+		<task Name="operator_feedback" id="188510016" period="3.0ms"/>
+		<task Name="温度调节" id="369260752" wcet="1.0ms"/>
+		<task Name="operator_feedback" id="587849268" period="3.0ms"/>
+		<task Name="数据处理" id="1924497810" wcet="2.0ms">
+			<task Name="数据验证" id="-1704871720" wcet="1.0ms"/>
+			<task Name="数据格式化" id="-583640643" wcet="1.0ms"/>
+			<task Name="数据故障处理" id="318416636" wcet="1.0ms"/>
 		</task>
-		<task Name="处理器" id="487156417"/>
-		<task Name="feedback" id="1013796215" wcet="1.0ms"/>
 	</component>
-	<component id="-1437758147" name="alarm" type="rtos"/>
-	<component id="-1252289785" name="temperatorsensor" type="device">
+	<component id="301563297" name="设置温度范围子组件" type="rtos"/>
+	<component id="313556010" name="数据处理子组件" type="rtos"/>
+	<component id="364020001" name="控制热量产生" type="rtos"/>
+	<component id="372700701" name="数据处理" type="rtos"/>
+	<component id="517413937" name="operator interface" type="rtos" wcet="2.0ms">
+		<linkpoint direction="out" id="-401059648" name="设置接口_out"/>
+		<linkpoint direction="out" id="259089412" name="feedback接口_in"/>
 		<exception name="InvalidParameter"/>
 		<exception name="Violation"/>
 		<exception name="UnexceptedError"/>
 		<exception name="HandwareFault"/>
-		<task Name="signal_curr_tem" id="-1831873991" period="3.0ms"/>
+		<task Name="输入设置" id="-1531616499" wcet="1.0ms"/>
+		<task Name="operator_setting" id="-1460526993" period="3.0ms"/>
+		<task Name="operator_setting" id="-16491456" period="3.0ms"/>
+		<task Name="显示" id="339779021" wcet="1.0ms"/>
 	</component>
-	<component id="-1066440576" name="热源" type="rtos"/>
-	<component id="-886773412" name="设定温度范围" type="rtos"/>
-	<component id="-836845462" name="Real" type="rtos"/>
-	<component id="-829131448" name="operator interface" type="rtos">
+	<component id="766427500" name="feedback子组件" type="rtos"/>
+	<component id="1049931777" name="alarm" type="rtos" wcet="4.0ms">
+		<linkpoint direction="in" id="-1705863718" name="curr_tem_in"/>
 		<exception name="InvalidParameter"/>
 		<exception name="Violation"/>
 		<exception name="UnexceptedError"/>
 		<exception name="HandwareFault"/>
-		<task Name="显示" id="-387632723" wcet="1.0ms"/>
-		<task Name="operator_setting" id="-146248396" period="3.0ms"/>
-		<task Name="输入设置" id="-84178211" wcet="1.0ms"/>
-		<task Name="operator_setting" id="514477091" period="3.0ms"/>
-	</component>
-	<component id="-805609764" name="报警" type="rtos"/>
-	<component id="-555600191" name="调节温度" type="rtos"/>
-	<component id="-204379937" name="设置温度范围子组件" type="rtos"/>
-	<component id="-197719451" name="检测环境温度" type="rtos"/>
-	<component id="3077265" name="heatsource" type="device">
-		<exception name="InvalidParameter"/>
-		<exception name="Violation"/>
-		<exception name="UnexceptedError"/>
-		<exception name="HandwareFault"/>
-	</component>
-	<component id="177689618" name="控制热量产生" type="rtos"/>
-	<component id="1211908043" name="温度自动调节器" type="rtos"/>
-	<component id="1436221267" name="温度调节" type="rtos"/>
-	<component id="1486231186" name="alarm" type="rtos">
-		<linkpoint direction="in" id="-409638319" name="curr_tem_in"/>
-		<exception name="InvalidParameter"/>
-		<exception name="Violation"/>
-		<exception name="UnexceptedError"/>
-		<exception name="HandwareFault"/>
-		<task Name="数据处理" id="-436142179" wcet="2.0ms">
-			<task Name="数据格式化" id="-1730584811" wcet="1.0ms"/>
-			<task Name="数据故障处理" id="-686876101" wcet="1.0ms"/>
-			<task Name="数据验证" id="587944014" wcet="1.0ms"/>
+		<task Name="signal_ringring" id="-2109359741"/>
+		<task Name="数据处理" id="-866404042" wcet="2.0ms">
+			<task Name="数据格式化" id="-1051256541" wcet="1.0ms"/>
+			<task Name="数据验证" id="-822375948" wcet="1.0ms"/>
+			<task Name="数据故障处理" id="-651803609" wcet="1.0ms"/>
 		</task>
-		<task Name="温度检测" id="871925659" wcet="2.0ms"/>
-		<task Name="发出警报" id="889822071" wcet="1.0ms"/>
+		<task Name="发出警报" id="-627978646" wcet="1.0ms"/>
+		<task Name="温度检测" id="1566023549" wcet="2.0ms"/>
 	</component>
-	<component id="1499611637" name="操作接口" type="rtos"/>
-	<component id="1560336097" name="温度传感器" type="rtos"/>
-	<component id="1763503024" name="feedback" type="rtos"/>
-	<component id="1840112715" name="温度调节子组件" type="rtos"/>
-	<component id="1900186318" name="feedback子组件" type="rtos"/>
-	<communicationchannel dest="1513625583" id="-1870253429" name="ItemFlow27" source="738117362" type="sync"/>
-	<communicationchannel dest="920161652" id="-1196645854" name="ItemFlow24" source="1381358713" type="sync"/>
-	<communicationchannel dest="-1251339759" id="-494074466" name="ItemFlow16" source="763088702" type="sync"/>
-	<communicationchannel dest="-19281314" id="-244595233" name="ItemFlow15" source="815694851" type="sync"/>
-	<communicationchannel dest="0" id="-91282339" name="operator_setting" source="0" type="sync"/>
-	<communicationchannel dest="-409638319" id="67643082" name="ItemFlow17" source="-1630766333" type="sync"/>
-	<communicationchannel dest="-1547902290" id="748044392" name="ItemFlow19" source="1313839924" type="sync"/>
-	<communicationchannel dest="-1193277484" id="841111967" name="ItemFlow14" source="-409638319" type="sync"/>
-	<communicationchannel dest="63438411" id="882427797" name="ItemFlow23" source="1381358713" type="sync"/>
-	<communicationchannel dest="0" id="1028438074" name="feedback" source="0" type="sync"/>
-	<communicationchannel dest="-196936670" id="1261099188" name="ItemFlow28" source="-412683619" type="sync"/>
-	<communicationchannel dest="-1591845232" id="1550443803" name="ItemFlow74" source="-203152068" type="sync"/>
-	<communicationchannel dest="-203152068" id="1867376815" name="ItemFlow18" source="-1630766333" type="sync"/>
-</ownedPublicSection>
+	<component id="1148791855" name="heatsource" type="device">
+		<linkpoint direction="in" id="-1950916940" name="heating_in"/>
+		<exception name="InvalidParameter"/>
+		<exception name="Violation"/>
+		<exception name="UnexceptedError"/>
+		<exception name="HandwareFault"/>
+	</component>
+	<component id="1524765523" name="设置温度范围" type="rtos"/>
+	<component id="1771577983" name="设定温度范围" type="rtos"/>
+	<component id="1808269197" name="操作接口" type="rtos"/>
+	<component id="1850044842" name="调节温度" type="rtos"/>
+	<component id="1923896126" name="temperatorsensor" type="device" wcet="1.0ms">
+		<linkpoint direction="out" id="-203471250" name="curr_tem_out"/>
+		<exception name="InvalidParameter"/>
+		<exception name="Violation"/>
+		<exception name="UnexceptedError"/>
+		<exception name="HandwareFault"/>
+		<task Name="signal_curr_tem" id="-802406748" period="3.0ms"/>
+	</component>
+	<component id="2023040465" name="检测环境温度" type="rtos"/>
+	<component id="2074976768" name="报警" type="rtos"/>
+	<communicationchannel dest="1388111877" id="-1092772774" name="ItemFlow74" source="1967084486" type="sync"/>
+	<communicationchannel dest="0" id="-908036025" name="ItemFlow19" source="0" type="sync"/>
+	<communicationchannel dest="0" id="-773701747" name="feedback" source="0" type="sync"/>
+	<communicationchannel dest="-1950916940" id="-667496506" name="ItemFlow23" source="-845702415" type="sync"/>
+	<communicationchannel dest="126856810" id="-267534284" name="ItemFlow28" source="259089412" type="sync"/>
+	<communicationchannel dest="0" id="-123775076" name="operator_setting" source="0" type="sync"/>
+	<communicationchannel dest="-1705863718" id="122889619" name="ItemFlow17" source="0" type="sync"/>
+	<communicationchannel dest="0" id="417843760" name="ItemFlow24" source="0" type="sync"/>
+	<communicationchannel dest="1763262646" id="716837309" name="ItemFlow14" source="0" type="sync"/>
+	<communicationchannel dest="0" id="1164712227" name="ItemFlow16" source="996128053" type="sync"/>
+	<communicationchannel dest="0" id="1334676841" name="ItemFlow18" source="-203471250" type="sync"/>
+	<communicationchannel dest="0" id="1387414976" name="ItemFlow15" source="1976106443" type="sync"/>
+	<communicationchannel dest="-1097544609" id="1486114278" name="ItemFlow27" source="-401059648" type="sync"/>
+</system>

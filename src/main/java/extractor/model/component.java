@@ -9,7 +9,7 @@ public class component {
 
     private String modeltype;
 
-    private String componentype;
+    private String wcet;
 
     public Integer getComponentid() {
         return componentid;
@@ -43,11 +43,11 @@ public class component {
         this.modeltype = modeltype == null ? null : modeltype.trim();
     }
 
-    public String getComponentype() {
-        return componentype;
+    public String getWcet() {
+        return wcet;
     }
 
-    public void setComponentype(String componentype) {
-        this.componentype = componentype == null ? null : componentype.trim();
+    public void setWcet(String wcet) {
+        this.wcet = wcet == null ? null : wcet.trim();
     }
 }

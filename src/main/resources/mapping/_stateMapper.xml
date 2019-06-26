@@ -30,8 +30,8 @@
 		where StateID = #{stateid,jdbcType=INTEGER}
 	</select>
 	<select id="getStateUnderCMP" parameterType="java.lang.Integer"
-		resultMap="stateinView">
-		select stateid,statename from getdistinctport where ComponentID=#{cmpid} group by stateid,statename
+		resultMap="BaseResultMap">
+		select * from state where ComponentID=#{cmpid}
 	</select>
 	<select id="getStateID" parameterType="java.lang.String"
 		resultMap="BaseResultMap">

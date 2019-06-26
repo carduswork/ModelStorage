@@ -86,8 +86,9 @@ public class IntegrationService {
 		try {
 			Document d2 = DocumentHelper.createDocument();
 			// 设置系统名
-			Element e_comp = d2.addElement("ownedPublicSection");
-			e_comp.addAttribute("name", filename);
+			Element e_comp = d2.addElement("system");
+			e_comp.addAttribute("name", cm.getByType("uniquesystem").getName());
+			e_comp.addAttribute("wcet", cm.getByType("uniquesystem").getWcet());
 			List<component> r = new ArrayList<component>();
 			// 设置组件
 			switch (modeltype) {
@@ -107,7 +108,7 @@ public class IntegrationService {
 				comp.addAttribute("name", compv.getName());
 				comp.addAttribute("id", compv.getComponentid().toString());
 				comp.addAttribute("type", compv.getType());
-
+				comp.addAttribute("wcet", compv.getWcet());
 				// 设置linkpoint,transition
 				List<linkpoint> linpoints = lm.getPortUnderCMP(compv.getComponentid());
 				linpoints.forEach((v2) -> {
@@ -122,12 +123,18 @@ public class IntegrationService {
 						lp.addAttribute("direction", "in");
 					}
 				});
-				List<_exception> ecplist=em.selectByComp(compv.getComponentid());
-				ecplist.forEach((ecpv)->{
-					Element ecpelement=comp.addElement("exception");
+				List<_exception> ecplist = em.selectByComp(compv.getComponentid());
+				ecplist.forEach((ecpv) -> {
+					Element ecpelement = comp.addElement("exception");
 					ecpelement.addAttribute("name", ecpv.getName());
-					
+
 				});
+				List<_state> sList=sm.getStateUnderCMP(compv.getComponentid());
+				for(_state state:sList){
+					Element stateElement = comp.addElement("state");
+					stateElement.addAttribute("id", state.getStateid().toString());
+					stateElement.addAttribute("name", state.getName());
+				}
 				// transition绑定component
 				List<componenttransition> ct = cttm.selectByComponent(compv.getComponentid());
 				ct.forEach((ctv) -> {
@@ -138,22 +145,15 @@ public class IntegrationService {
 						transition ts = tsm.selectByPrimaryKey(vtss.getTransitionid());
 						Element transitionElement = comp.addElement("transition");
 						transitionElement.addAttribute("id", ts.getTransitionid().toString());
-						// 设置event
-						_event event = evtm.selectByPrimaryKey(ts.getTriggerid());
-						Element eventElement = transitionElement.addElement("triggerevent");
-						eventElement.addAttribute("name", event.getName());
-						eventElement.addAttribute("id", event.getEventid().toString());
 
-						// 设置 source state
-						_state s=sm.selectByPrimaryKey(vtss.getSourceid());
-						Element ss = transitionElement.addElement("sourcestate");
-						ss.addAttribute("name", s.getName());
-						ss.addAttribute("id", s.getStateid().toString());
-						//设置dest state
-						_state d=sm.selectByPrimaryKey(vtss.getOutid());
-						Element ds = transitionElement.addElement("deststate");
-						ds.addAttribute("name", d.getName());
-						ds.addAttribute("id", d.getStateid().toString());
+						_state d = sm.selectByPrimaryKey(vtss.getOutid());
+						transitionElement.addAttribute("dest", d.getStateid().toString());
+						_event event = evtm.selectByPrimaryKey(ts.getTriggerid());
+
+						transitionElement.addAttribute("event", event.getName());
+
+						_state s = sm.selectByPrimaryKey(vtss.getSourceid());
+						transitionElement.addAttribute("source", s.getStateid().toString());
 					});
 				});
 				// 设置processor即partition
@@ -210,6 +210,7 @@ public class IntegrationService {
 					});
 				});
 				// 设置不在partition上的task
+				// 新增对于simulink的支持
 				List<_task> tasklist = _tm.selectChild(compv.getComponentid());
 				tasklist.forEach((taskv) -> {
 					Element tsk = comp.addElement("task");
@@ -218,7 +219,7 @@ public class IntegrationService {
 					tsk.addAttribute("deadline", taskv.getDeadline());
 					tsk.addAttribute("period", taskv.getPeriod());
 					tsk.addAttribute("wcet", taskv.getWcet());
-					
+
 					List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
 					childtasklist.forEach((v6) -> {
 						Element child = tsk.addElement("task");
@@ -263,8 +264,132 @@ public class IntegrationService {
 		}
 	}
 
-//	按照映射表来搜索
-	private void filterbymap() {
+	public void GenerateIntegaraton4SLK(String filename, String modeltype) {
+		String dir = "src/main/resources/INTEGRATIONMODEL/";
+		// 可配置
+		try {
+			Document d2 = DocumentHelper.createDocument();
+			// 设置系统名
+			Element e_comp = d2.addElement("system");
+			e_comp.addAttribute("name", cm.getByType("uniquesystem").getName());
+			e_comp.addAttribute("wcet", cm.getByType("uniquesystem").getWcet());
+			List<component> r = new ArrayList<component>();
+			// 设置组件
+			switch (modeltype) {
+			case "aadl":
+				r = cm.selectAll_aadl();
+				break;
+			case "sysml":
+				r = cm.selectAll_sysml();
+				break;
+			case "simulink":
+				r = cm.selectAll_slk();
+				break;
+			}
 
+			r.forEach((compv) -> {
+				Element comp = e_comp.addElement("component");
+				comp.addAttribute("name", compv.getName());
+				comp.addAttribute("id", compv.getComponentid().toString());
+				comp.addAttribute("type", compv.getType());
+				comp.addAttribute("wcet", compv.getWcet());
+				// 设置linkpoint,transition
+				List<linkpoint> linpoints = lm.getPortUnderCMP(compv.getComponentid());
+				linpoints.forEach((v2) -> {
+					Element lp = comp.addElement("linkpoint");
+					lp.addAttribute("name", v2.getName());
+					lp.addAttribute("id", v2.getLinkpointid().toString());
+					lp.addAttribute("period", v2.getPeriod());
+					if (pvm.selectByportid(v2.getLinkpointid()) != null) {
+						lp.addAttribute("direction", "out");
+					}
+					if (rm.selectByportid(v2.getLinkpointid()) != null) {
+						lp.addAttribute("direction", "in");
+					}
+				});
+				List<_exception> ecplist = em.selectByComp(compv.getComponentid());
+				ecplist.forEach((ecpv) -> {
+					Element ecpelement = comp.addElement("exception");
+					ecpelement.addAttribute("name", ecpv.getName());
+
+				});
+				// 新增对于simulink的支持
+				List<_task> tasklist = _tm.selectChild(compv.getComponentid());
+				tasklist.forEach((taskv) -> {
+					Element tsk = comp.addElement("state");
+					tsk.addAttribute("Name", taskv.getName());
+					tsk.addAttribute("id", taskv.getTaskid().toString());
+					tsk.addAttribute("deadline", taskv.getDeadline());
+					tsk.addAttribute("period", taskv.getPeriod());
+					tsk.addAttribute("wcet", taskv.getWcet());
+
+					List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
+					childtasklist.forEach((v6) -> {
+						Element child = tsk.addElement("state");
+						child.addAttribute("Name", v6.getName());
+						child.addAttribute("id", v6.getTaskid().toString());
+						child.addAttribute("deadline", v6.getDeadline());
+						child.addAttribute("period", v6.getPeriod());
+						child.addAttribute("wcet", v6.getWcet());
+
+						List<linkpoint> threadports = lm.getPortUnderCMP(v6.getTaskid());
+						threadports.forEach((v8) -> {
+							Element lp = child.addElement("port");
+							lp.addAttribute("name", v8.getName());
+							lp.addAttribute("id", v8.getLinkpointid().toString());
+							if (pvm.selectByportid(v8.getLinkpointid()) != null) {
+								lp.addAttribute("direction", "out");
+							}
+							if (rm.selectByportid(v8.getLinkpointid()) != null) {
+								lp.addAttribute("direction", "in");
+							}
+						});
+					});
+				});
+				// transition绑定component
+				List<componenttransition> ct = cttm.selectByComponent(compv.getComponentid());
+				ct.forEach((ctv) -> {
+
+					List<transitionstate> tsslist = tssm.selectbytransition(Integer.valueOf(ctv.getTransitionid()));
+					tsslist.forEach((vtss) -> {
+						// 设置transition
+						transition ts = tsm.selectByPrimaryKey(vtss.getTransitionid());
+						Element transitionElement = comp.addElement("transition");
+						transitionElement.addAttribute("id", ts.getTransitionid().toString());
+						// 设置event
+						_event event = evtm.selectByPrimaryKey(ts.getTriggerid());
+						transitionElement.addAttribute("event", event.getName());
+
+						// 设置 source state
+						_task s = _tm.selectByPrimaryKey(vtss.getSourceid());
+						transitionElement.addAttribute("source", s.getTaskid().toString());
+
+						// 设置dest state
+						_task d = _tm.selectByPrimaryKey(vtss.getOutid());
+						transitionElement.addAttribute("dest", d.getTaskid().toString());
+
+					});
+				});
+
+			});
+			// 设置cchannel
+			List<communicationchannel> channellist = cchannelMapper.getAll(modeltype);
+			channellist.forEach((v) -> {
+				Element e = e_comp.addElement("communicationchannel");
+				e.addAttribute("name", v.getName());
+				e.addAttribute("id", v.getCommunicationchannelid().toString());
+				e.addAttribute("type", v.getType());
+				e.addAttribute("source", String.valueOf(v.getSourceid()));
+				e.addAttribute("dest", String.valueOf(v.getDestid()));
+			});
+
+			OutputStream outStream = new FileOutputStream(dir + filename);
+			XMLWriter w = new XMLWriter(outStream);
+			w.write(d2);
+			w.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
 }

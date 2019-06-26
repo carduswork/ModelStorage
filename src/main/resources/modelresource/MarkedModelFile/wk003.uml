@@ -11,11 +11,11 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_5O-rMJABEemhxvj2t8aK_g" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
         <defaultValue xmi:type="uml:LiteralReal" xmi:id="_7yw2kJABEemhxvj2t8aK_g" value="15.0"/>
       </ownedAttribute>
-      <nestedClassifier xmi:type="uml:Device" xmi:id="_lEMdEIgjEem7TYMKJXdmUw" name="temperatorsensor" id4sysml="-1252289785">
+      <nestedClassifier xmi:type="uml:Device" xmi:id="_lEMdEIgjEem7TYMKJXdmUw" name="temperatorsensor" id4sysml="1923896126">
         <ownedComment xmi:type="uml:Comment" xmi:id="_mdGGsIhEEem7TYMKJXdmUw" annotatedElement="_lEMdEIgjEem7TYMKJXdmUw">
           <body>硬件故障、输出数据格式错误，或长度错误或未输出数据</body>
         </ownedComment>
-        <ownedAttribute xmi:type="uml:Port" xmi:id="__yNxUIhDEem7TYMKJXdmUw" name="curr_tem_out" aggregation="composite" id4sysml="-1630766333"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="__yNxUIhDEem7TYMKJXdmUw" name="curr_tem_out" aggregation="composite" id4sysml="-203471250"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_Y9V9AIhEEem7TYMKJXdmUw" name="period" visibility="public" type="_tGpwQIgmEem7TYMKJXdmUw">
           <defaultValue xmi:type="uml:LiteralReal" xmi:id="_dX-8UIhEEem7TYMKJXdmUw" value="5.0"/>
         </ownedAttribute>
@@ -23,23 +23,23 @@
           <defaultValue xmi:type="uml:LiteralReal" xmi:id="_iVUZAIhEEem7TYMKJXdmUw" value="1.0"/>
         </ownedAttribute>
         <ownedOperation xmi:type="uml:Operation" xmi:id="__20PAIpoEeme7vRJotGOoA" name="容错处理"/>
-        <nestedClassifier xmi:type="uml:Signal" xmi:id="_m8XIgIg3Eem7TYMKJXdmUw" name="signal_curr_tem" id4sysml="1313839924">
+        <nestedClassifier xmi:type="uml:Signal" xmi:id="_m8XIgIg3Eem7TYMKJXdmUw" name="signal_curr_tem" id4sysml="-1820793008">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_B1lNsIg4Eem7TYMKJXdmUw" name="period" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_B1lNsYg4Eem7TYMKJXdmUw" value="3.0"/>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_d0MNoIg4Eem7TYMKJXdmUw" name="curr_tem" visibility="public" type="_qZ1ksIgmEem7TYMKJXdmUw"/>
         </nestedClassifier>
       </nestedClassifier>
-      <nestedClassifier xmi:type="uml:Device" xmi:id="_p1trUIgjEem7TYMKJXdmUw" name="heatsource" id4sysml="3077265">
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_PvZNcIhJEem7TYMKJXdmUw" name="heating_in" type="_tKXIkIhHEem7TYMKJXdmUw" aggregation="composite" id4sysml="63438411">
+      <nestedClassifier xmi:type="uml:Device" xmi:id="_p1trUIgjEem7TYMKJXdmUw" name="heatsource" id4sysml="1148791855">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_PvZNcIhJEem7TYMKJXdmUw" name="heating_in" type="_tKXIkIhHEem7TYMKJXdmUw" aggregation="composite" id4sysml="-1950916940">
           <ownedComment xmi:type="uml:Comment" xmi:id="_phy8cJAIEemhxvj2t8aK_g">
             <body>in=true</body>
           </ownedComment>
         </ownedAttribute>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_FJj7AIppEeme7vRJotGOoA" name="容错处理"/>
       </nestedClassifier>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_zgpDEIgkEem7TYMKJXdmUw" name="alarm" id4sysml="1486231186">
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_HnL_8Ig4Eem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="-409638319"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_zgpDEIgkEem7TYMKJXdmUw" name="alarm" id4sysml="1049931777">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_HnL_8Ig4Eem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="-1705863718"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_9qnR0IgmEem7TYMKJXdmUw" name="period" type="_tGpwQIgmEem7TYMKJXdmUw">
           <defaultValue xmi:type="uml:LiteralReal" xmi:id="_KIQLUIg0Eem7TYMKJXdmUw" value="10.0"/>
         </ownedAttribute>
@@ -48,78 +48,86 @@
         </ownedAttribute>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_HVzCsIphEeme7vRJotGOoA" name="componentType"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_OLBw8IpoEeme7vRJotGOoA" name="容错处理"/>
-        <nestedClassifier xmi:type="uml:Class" xmi:id="_icwO0IglEem7TYMKJXdmUw" name="数据处理" id4sysml="-436142179">
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_icwO0IglEem7TYMKJXdmUw" name="数据处理" id4sysml="-866404042">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_1w-TsIg0Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_57RJ4Ig0Eem7TYMKJXdmUw" value="2.0"/>
           </ownedAttribute>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_kdpCUIhCEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="-1193277484"/>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_0Tv_YIhCEem7TYMKJXdmUw" name="curr_tem_out" visibility="public" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="815694851"/>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="587944014" name="数据验证">
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_kdpCUIhCEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="1763262646"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_0Tv_YIhCEem7TYMKJXdmUw" name="curr_tem_out" visibility="public" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="1976106443"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="-822375948" name="数据验证">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_DQaUUIg1Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw" direction="inout">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_DQaUUYg1Eem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="-686876101" name="数据故障处理">
+          <ownedOperation xmi:type="uml:Operation" xmi:id="-651803609" name="数据故障处理">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_lPaWIIhFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_lPaWIYhFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="-1730584811" name="数据格式化">
+          <ownedOperation xmi:type="uml:Operation" xmi:id="-1051256541" name="数据格式化">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_SDaOkIg1Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_SDaOkYg1Eem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:Class" xmi:id="_kyJ_8IglEem7TYMKJXdmUw" name="温度检测" id4sysml="871925659">
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_kyJ_8IglEem7TYMKJXdmUw" name="温度检测" id4sysml="1566023549">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_VxJroIg1Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_dHIasIg1Eem7TYMKJXdmUw" value="2.0"/>
           </ownedAttribute>
           <ownedAttribute xmi:type="uml:Property" xmi:id="_fDPiEIg1Eem7TYMKJXdmUw" name="componentType" type="_Dqu0QIpjEeme7vRJotGOoA"/>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_ECqIQIhDEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="-19281314"/>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_RY4igIhDEem7TYMKJXdmUw" name="ringring_out" type="_Zf-lcIhDEem7TYMKJXdmUw" aggregation="composite" id4sysml="763088702"/>
-          <nestedClassifier xmi:type="uml:Signal" xmi:id="_Zf-lcIhDEem7TYMKJXdmUw" name="signal_ringring" id4sysml="763088702"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_ECqIQIhDEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="1684414374"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_RY4igIhDEem7TYMKJXdmUw" name="ringring_out" type="_Zf-lcIhDEem7TYMKJXdmUw" aggregation="composite" id4sysml="996128053"/>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:Class" xmi:id="_lzHtsIglEem7TYMKJXdmUw" name="发出警报" id4sysml="889822071">
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_lzHtsIglEem7TYMKJXdmUw" name="发出警报" id4sysml="-627978646">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_yRwlYIg1Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_13FGQIg1Eem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_PpUpYIhDEem7TYMKJXdmUw" name="curr_tem_in" aggregation="composite" id4sysml="-1251339759"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_PpUpYIhDEem7TYMKJXdmUw" name="curr_tem_in" aggregation="composite" id4sysml="737316934"/>
         </nestedClassifier>
+        <nestedClassifier xmi:type="uml:Signal" xmi:id="_Zf-lcIhDEem7TYMKJXdmUw" name="signal_ringring" id4sysml="-2109359741"/>
       </nestedClassifier>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_19lmoIgkEem7TYMKJXdmUw" name="operator interface" id4sysml="-829131448">
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_DShLIIhLEem7TYMKJXdmUw" name="设置接口_out" type="_4NWuAIqOEeme7vRJotGOoA" aggregation="composite" id4sysml="738117362"/>
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_Fyt3AIhLEem7TYMKJXdmUw" name="feedback接口_in" type="_-r6qcJAAEemhxvj2t8aK_g" aggregation="composite" id4sysml="-412683619"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_19lmoIgkEem7TYMKJXdmUw" name="operator interface" id4sysml="517413937">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_DShLIIhLEem7TYMKJXdmUw" name="设置接口_out" type="_4NWuAIqOEeme7vRJotGOoA" aggregation="composite" id4sysml="-401059648">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_uN_2sJNGEemBYur9mO1SNg">
+            <body>out=true</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_Fyt3AIhLEem7TYMKJXdmUw" name="feedback接口_in" type="_-r6qcJAAEemhxvj2t8aK_g" aggregation="composite" id4sysml="259089412">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_kRcuAJNGEemBYur9mO1SNg">
+            <body>in=true</body>
+          </ownedComment>
+        </ownedAttribute>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_KdkAEIhMEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
           <defaultValue xmi:type="uml:LiteralReal" xmi:id="_ND2F0IhMEem7TYMKJXdmUw" value="2.0"/>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_Z5sW4IhMEem7TYMKJXdmUw" name="输入接口_in" type="_Vz4FIIhZEem7TYMKJXdmUw" aggregation="composite" id4sysml="1980616927"/>
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_dJmBYIhMEem7TYMKJXdmUw" name="显示接口_in" type="_Vz4FIIhZEem7TYMKJXdmUw" aggregation="composite" id4sysml="-660263696"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_Z5sW4IhMEem7TYMKJXdmUw" name="输入接口_in" type="_Vz4FIIhZEem7TYMKJXdmUw" aggregation="composite" id4sysml="1849487117"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_dJmBYIhMEem7TYMKJXdmUw" name="显示接口_in" type="_Vz4FIIhZEem7TYMKJXdmUw" aggregation="composite" id4sysml="1375143426"/>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_Epl7IIphEeme7vRJotGOoA" name="componentType" type="_YdLP0IpgEeme7vRJotGOoA"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_W6gCgIpoEeme7vRJotGOoA" name="容错处理"/>
-        <nestedClassifier xmi:type="uml:Class" xmi:id="_FUhpsIhMEem7TYMKJXdmUw" name="显示" visibility="package" id4sysml="-387632723">
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_FUhpsIhMEem7TYMKJXdmUw" name="显示" visibility="package" id4sysml="339779021">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_U69MAIhMEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_U69MAYhMEem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:Class" xmi:id="_GoZsYIhMEem7TYMKJXdmUw" name="输入设置" id4sysml="-84178211">
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_GoZsYIhMEem7TYMKJXdmUw" name="输入设置" id4sysml="-1531616499">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_PTM5UIhMEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_RfubQIhMEem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:Signal" xmi:id="_Vz4FIIhZEem7TYMKJXdmUw" name="operator_setting" id4sysml="-146248396">
+        <nestedClassifier xmi:type="uml:Signal" xmi:id="_Vz4FIIhZEem7TYMKJXdmUw" name="operator_setting" id4sysml="-16491456">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_Y1cYsIhZEem7TYMKJXdmUw" name="period" visibility="public" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_d3IJ4IhZEem7TYMKJXdmUw" value="3.0"/>
           </ownedAttribute>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:DataType" xmi:id="_4NWuAIqOEeme7vRJotGOoA" name="operator_setting" id4sysml="514477091">
+        <nestedClassifier xmi:type="uml:DataType" xmi:id="_4NWuAIqOEeme7vRJotGOoA" name="operator_setting" id4sysml="-1460526993">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_ZTyWYJAAEemhxvj2t8aK_g" name="period" visibility="public" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_g53-AJAAEemhxvj2t8aK_g" value="3.0"/>
           </ownedAttribute>
         </nestedClassifier>
       </nestedClassifier>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_5-Sb8IgkEem7TYMKJXdmUw" name="thermostat" id4sysml="-1559646900">
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_KybWcIhEEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="-203152068"/>
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_iJg_YIhJEem7TYMKJXdmUw" name="heating_out" type="_tKXIkIhHEem7TYMKJXdmUw" aggregation="composite" id4sysml="920161652">
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_5-Sb8IgkEem7TYMKJXdmUw" name="thermostat" id4sysml="110139348">
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_KybWcIhEEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="1967084486"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_iJg_YIhJEem7TYMKJXdmUw" name="heating_out" type="_tKXIkIhHEem7TYMKJXdmUw" aggregation="composite" id4sysml="-123569942">
           <ownedComment xmi:type="uml:Comment" xmi:id="_r0sMIJAIEemhxvj2t8aK_g">
             <body>in=true
 </body>
@@ -128,71 +136,79 @@
             <body>out=true</body>
           </ownedComment>
         </ownedAttribute>
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_EzNXQIhKEem7TYMKJXdmUw" name="设置接口_in" type="_4NWuAIqOEeme7vRJotGOoA" aggregation="composite" id4sysml="1513625583"/>
-        <ownedAttribute xmi:type="uml:Port" xmi:id="_FrZjgIhKEem7TYMKJXdmUw" name="feedback接口_out" type="_-r6qcJAAEemhxvj2t8aK_g" aggregation="composite" id4sysml="-196936670"/>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_EzNXQIhKEem7TYMKJXdmUw" name="设置接口_in" type="_4NWuAIqOEeme7vRJotGOoA" aggregation="composite" id4sysml="-1097544609">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_vrkn8JNGEemBYur9mO1SNg">
+            <body>in=true</body>
+          </ownedComment>
+        </ownedAttribute>
+        <ownedAttribute xmi:type="uml:Port" xmi:id="_FrZjgIhKEem7TYMKJXdmUw" name="feedback接口_out" type="_-r6qcJAAEemhxvj2t8aK_g" aggregation="composite" id4sysml="126856810">
+          <ownedComment xmi:type="uml:Comment" xmi:id="_nAwM4JNGEemBYur9mO1SNg">
+            <body>out=true</body>
+          </ownedComment>
+        </ownedAttribute>
         <ownedAttribute xmi:type="uml:Property" xmi:id="_W39a8IpfEeme7vRJotGOoA" name="componentType" type="_YdLP0IpgEeme7vRJotGOoA"/>
         <ownedOperation xmi:type="uml:Operation" xmi:id="_VSx2wIpoEeme7vRJotGOoA" name="容错处理"/>
-        <nestedClassifier xmi:type="uml:Class" xmi:id="_DMKTMIhFEem7TYMKJXdmUw" name="温度调节" id4sysml="-2133590822">
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_DMKTMIhFEem7TYMKJXdmUw" name="温度调节" id4sysml="369260752">
           <ownedAttribute xmi:type="uml:Property" xmi:id="___vvoIhGEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_CpYEUIhHEem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_QT23UIhHEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="-1547902290"/>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_TObyEIhHEem7TYMKJXdmUw" name="heating_out" type="_tKXIkIhHEem7TYMKJXdmUw" aggregation="composite" id4sysml="1381358713"/>
-          <nestedClassifier xmi:type="uml:Signal" xmi:id="_tKXIkIhHEem7TYMKJXdmUw" name="signal_heating" id4sysml="1381358713">
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_QT23UIhHEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="-1446666339"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_TObyEIhHEem7TYMKJXdmUw" name="heating_out" type="_tKXIkIhHEem7TYMKJXdmUw" aggregation="composite" id4sysml="-845702415"/>
+          <nestedClassifier xmi:type="uml:Signal" xmi:id="_tKXIkIhHEem7TYMKJXdmUw" name="signal_heating" id4sysml="-845702415">
             <ownedAttribute xmi:type="uml:Property" xmi:id="_tKXIkYhHEem7TYMKJXdmUw" name="period" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_tKXIkohHEem7TYMKJXdmUw" value="3.0"/>
             </ownedAttribute>
           </nestedClassifier>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:Class" xmi:id="_GHkUYIhFEem7TYMKJXdmUw" name="设置温度范围" id4sysml="9941311">
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_GHkUYIhFEem7TYMKJXdmUw" name="设置温度范围" id4sysml="-123993314">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_D_zrwIhHEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_Hm_04IhHEem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_Y6MlkIhIEem7TYMKJXdmUw" name="Port3" aggregation="composite" id4sysml="1346751790"/>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_ZVcXIIhIEem7TYMKJXdmUw" name="Port4" aggregation="composite" id4sysml="450102013"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_Y6MlkIhIEem7TYMKJXdmUw" name="Port3" aggregation="composite" id4sysml="-302266726"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_ZVcXIIhIEem7TYMKJXdmUw" name="Port4" aggregation="composite" id4sysml="746849010"/>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:Class" xmi:id="_ITgAcIhFEem7TYMKJXdmUw" name="feedback" id4sysml="1013796215">
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_ITgAcIhFEem7TYMKJXdmUw" name="feedback" id4sysml="-482158986">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_I3FjwIhHEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_MTojIIhHEem7TYMKJXdmUw" value="1.0"/>
           </ownedAttribute>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_-4MxYIhJEem7TYMKJXdmUw" name="Port2" aggregation="composite" id4sysml="270154801"/>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="__m9U0IhJEem7TYMKJXdmUw" name="Port3" aggregation="composite" id4sysml="293481897"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_-4MxYIhJEem7TYMKJXdmUw" name="Port2" aggregation="composite" id4sysml="-1816900182"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="__m9U0IhJEem7TYMKJXdmUw" name="Port3" aggregation="composite" id4sysml="65384787"/>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:Device" xmi:id="_PkKKoIhFEem7TYMKJXdmUw" name="处理器" id4sysml="487156417"/>
-        <nestedClassifier xmi:type="uml:Class" xmi:id="_TNlvcIhFEem7TYMKJXdmUw" name="数据处理" id4sysml="382240382">
+        <nestedClassifier xmi:type="uml:Device" xmi:id="_PkKKoIhFEem7TYMKJXdmUw" name="处理器" id4sysml="-1783088731"/>
+        <nestedClassifier xmi:type="uml:Class" xmi:id="_TNlvcIhFEem7TYMKJXdmUw" name="数据处理" id4sysml="1924497810">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_TNlvcYhFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_TNlvcohFEem7TYMKJXdmUw" value="2.0"/>
           </ownedAttribute>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_uZAicIhGEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="-1591845232"/>
-          <ownedAttribute xmi:type="uml:Port" xmi:id="_uvV-0IhGEem7TYMKJXdmUw" name="curr_tem_out" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="1313839924"/>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="-1729285139" name="数据验证">
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_uZAicIhGEem7TYMKJXdmUw" name="curr_tem_in" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="1388111877"/>
+          <ownedAttribute xmi:type="uml:Port" xmi:id="_uvV-0IhGEem7TYMKJXdmUw" name="curr_tem_out" type="_m8XIgIg3Eem7TYMKJXdmUw" aggregation="composite" id4sysml="-1820793008"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="-1704871720" name="数据验证">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_TNlvdohFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw" direction="inout">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_TNlvd4hFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="101234579" name="数据故障处理">
+          <ownedOperation xmi:type="uml:Operation" xmi:id="318416636" name="数据故障处理">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_pu-RsIhFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_pu-RsYhFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="-1179394464" name="数据格式化">
+          <ownedOperation xmi:type="uml:Operation" xmi:id="-583640643" name="数据格式化">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_TNlveohFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_TNlve4hFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:DataType" xmi:id="_uU2K0I__Eemhxvj2t8aK_g" name="operator_feedback" id4sysml="-1513312872">
+        <nestedClassifier xmi:type="uml:DataType" xmi:id="_uU2K0I__Eemhxvj2t8aK_g" name="operator_feedback" id4sysml="587849268">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_omXIkJAAEemhxvj2t8aK_g" name="period" visibility="public" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_r53gsJAAEemhxvj2t8aK_g" value="3.0"/>
           </ownedAttribute>
         </nestedClassifier>
-        <nestedClassifier xmi:type="uml:Signal" xmi:id="_-r6qcJAAEemhxvj2t8aK_g" name="operator_feedback" id4sysml="187825592">
+        <nestedClassifier xmi:type="uml:Signal" xmi:id="_-r6qcJAAEemhxvj2t8aK_g" name="operator_feedback" id4sysml="188510016">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_FG2GgJABEemhxvj2t8aK_g" name="period" type="_tGpwQIgmEem7TYMKJXdmUw">
             <defaultValue xmi:type="uml:LiteralReal" xmi:id="_FG2GgZABEemhxvj2t8aK_g" value="3.0"/>
           </ownedAttribute>
         </nestedClassifier>
       </nestedClassifier>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_pGTgQIgmEem7TYMKJXdmUw" name="Real" id4sysml="-836845462"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_pGTgQIgmEem7TYMKJXdmUw" name="Real" id4sysml="-1460055338"/>
       <nestedClassifier xmi:type="uml:DataType" xmi:id="_qZ1ksIgmEem7TYMKJXdmUw" name="摄氏度">
         <generalization xmi:type="uml:Generalization" xmi:id="_zKoE4IgmEem7TYMKJXdmUw" general="_pGTgQIgmEem7TYMKJXdmUw"/>
       </nestedClassifier>
@@ -201,21 +217,21 @@
       </nestedClassifier>
       <nestedClassifier xmi:type="uml:DataType" xmi:id="_m4sbYIg1Eem7TYMKJXdmUw" name="String"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_Al2qMIhDEem7TYMKJXdmUw" name="ItemFlow14" informationSource="_HnL_8Ig4Eem7TYMKJXdmUw" informationTarget="_kdpCUIhCEem7TYMKJXdmUw" id4sysml="841111967"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_HGynoIhDEem7TYMKJXdmUw" name="ItemFlow15" informationSource="_0Tv_YIhCEem7TYMKJXdmUw" informationTarget="_ECqIQIhDEem7TYMKJXdmUw" id4sysml="-244595233"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_U5lpIIhDEem7TYMKJXdmUw" name="ItemFlow16" informationSource="_RY4igIhDEem7TYMKJXdmUw" informationTarget="_PpUpYIhDEem7TYMKJXdmUw" id4sysml="-494074466"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_DW9DYIhEEem7TYMKJXdmUw" name="ItemFlow17" informationSource="__yNxUIhDEem7TYMKJXdmUw" informationTarget="_HnL_8Ig4Eem7TYMKJXdmUw" id4sysml="67643082"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_NFT_EIhEEem7TYMKJXdmUw" name="ItemFlow18" informationSource="__yNxUIhDEem7TYMKJXdmUw" informationTarget="_KybWcIhEEem7TYMKJXdmUw" id4sysml="1867376815"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_c5MnMIhHEem7TYMKJXdmUw" name="ItemFlow19" informationSource="_uvV-0IhGEem7TYMKJXdmUw" informationTarget="_QT23UIhHEem7TYMKJXdmUw" id4sysml="748044392"/>
-    <packagedElement xmi:type="uml:Dependency" xmi:id="_Mrxg4IhIEem7TYMKJXdmUw" name="binding" client="_DMKTMIhFEem7TYMKJXdmUw" supplier="_PkKKoIhFEem7TYMKJXdmUw"/>
-    <packagedElement xmi:type="uml:Dependency" xmi:id="_Fk024IhJEem7TYMKJXdmUw" name="binding" client="_ITgAcIhFEem7TYMKJXdmUw" supplier="_PkKKoIhFEem7TYMKJXdmUw"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_N9SWoIhJEem7TYMKJXdmUw" name="ItemFlow22" id4sysml="-244723231"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_dYjKwIhJEem7TYMKJXdmUw" name="ItemFlow23" informationSource="_TObyEIhHEem7TYMKJXdmUw" informationTarget="_PvZNcIhJEem7TYMKJXdmUw" id4sysml="882427797"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_mxblsIhJEem7TYMKJXdmUw" name="ItemFlow24" informationSource="_TObyEIhHEem7TYMKJXdmUw" informationTarget="_iJg_YIhJEem7TYMKJXdmUw" id4sysml="-1196645854"/>
-    <packagedElement xmi:type="uml:Dependency" xmi:id="_ueKLYIhKEem7TYMKJXdmUw" name="获取温度范围" client="_DMKTMIhFEem7TYMKJXdmUw" supplier="_GHkUYIhFEem7TYMKJXdmUw"/>
-    <packagedElement xmi:type="uml:Dependency" xmi:id="_2rgnUIhKEem7TYMKJXdmUw" name="获取温度范围" client="_ITgAcIhFEem7TYMKJXdmUw" supplier="_GHkUYIhFEem7TYMKJXdmUw"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_MR0ocIhLEem7TYMKJXdmUw" name="ItemFlow27" informationSource="_DShLIIhLEem7TYMKJXdmUw" informationTarget="_EzNXQIhKEem7TYMKJXdmUw" id4sysml="-1870253429"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_NbqlYIhLEem7TYMKJXdmUw" name="ItemFlow28" informationSource="_Fyt3AIhLEem7TYMKJXdmUw" informationTarget="_FrZjgIhKEem7TYMKJXdmUw" id4sysml="1261099188"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_Al2qMIhDEem7TYMKJXdmUw" name="ItemFlow14" informationSource="_HnL_8Ig4Eem7TYMKJXdmUw _icwO0IglEem7TYMKJXdmUw" informationTarget="_kdpCUIhCEem7TYMKJXdmUw" id4sysml="716837309"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_HGynoIhDEem7TYMKJXdmUw" name="ItemFlow15" informationSource="_0Tv_YIhCEem7TYMKJXdmUw" informationTarget="_ECqIQIhDEem7TYMKJXdmUw _kyJ_8IglEem7TYMKJXdmUw" id4sysml="1387414976"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_U5lpIIhDEem7TYMKJXdmUw" name="ItemFlow16" informationSource="_RY4igIhDEem7TYMKJXdmUw" informationTarget="_PpUpYIhDEem7TYMKJXdmUw _icwO0IglEem7TYMKJXdmUw" id4sysml="1164712227"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_DW9DYIhEEem7TYMKJXdmUw" name="ItemFlow17" informationSource="__yNxUIhDEem7TYMKJXdmUw _lEMdEIgjEem7TYMKJXdmUw _t3mjgIgPEem7TYMKJXdmUw" informationTarget="_HnL_8Ig4Eem7TYMKJXdmUw" id4sysml="122889619"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_NFT_EIhEEem7TYMKJXdmUw" name="ItemFlow18" informationSource="__yNxUIhDEem7TYMKJXdmUw" informationTarget="_KybWcIhEEem7TYMKJXdmUw _TNlvcIhFEem7TYMKJXdmUw" id4sysml="1334676841"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_c5MnMIhHEem7TYMKJXdmUw" name="ItemFlow19" informationSource="_uvV-0IhGEem7TYMKJXdmUw _GHkUYIhFEem7TYMKJXdmUw" informationTarget="_QT23UIhHEem7TYMKJXdmUw _t3mjgIgPEem7TYMKJXdmUw _5-Sb8IgkEem7TYMKJXdmUw _GHkUYIhFEem7TYMKJXdmUw" id4sysml="-908036025"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_Mrxg4IhIEem7TYMKJXdmUw" name="binding" client="_PkKKoIhFEem7TYMKJXdmUw" supplier="_DMKTMIhFEem7TYMKJXdmUw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_Fk024IhJEem7TYMKJXdmUw" name="binding" client="_PkKKoIhFEem7TYMKJXdmUw" supplier="_ITgAcIhFEem7TYMKJXdmUw"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_N9SWoIhJEem7TYMKJXdmUw" name="ItemFlow22" id4sysml="2025534465"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_dYjKwIhJEem7TYMKJXdmUw" name="ItemFlow23" informationSource="_TObyEIhHEem7TYMKJXdmUw" informationTarget="_PvZNcIhJEem7TYMKJXdmUw" id4sysml="-667496506"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_mxblsIhJEem7TYMKJXdmUw" name="ItemFlow24" informationSource="_TObyEIhHEem7TYMKJXdmUw _5-Sb8IgkEem7TYMKJXdmUw" informationTarget="_iJg_YIhJEem7TYMKJXdmUw _t3mjgIgPEem7TYMKJXdmUw" id4sysml="417843760"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_ueKLYIhKEem7TYMKJXdmUw" name="获取温度范围" client="_GHkUYIhFEem7TYMKJXdmUw" supplier="_DMKTMIhFEem7TYMKJXdmUw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_2rgnUIhKEem7TYMKJXdmUw" name="获取温度范围" client="_t3mjgIgPEem7TYMKJXdmUw _GHkUYIhFEem7TYMKJXdmUw" supplier="_uU2K0I__Eemhxvj2t8aK_g"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_MR0ocIhLEem7TYMKJXdmUw" name="ItemFlow27" informationSource="_DShLIIhLEem7TYMKJXdmUw" informationTarget="_EzNXQIhKEem7TYMKJXdmUw" id4sysml="1486114278"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_NbqlYIhLEem7TYMKJXdmUw" name="ItemFlow28" informationSource="_Fyt3AIhLEem7TYMKJXdmUw" informationTarget="_FrZjgIhKEem7TYMKJXdmUw" id4sysml="-267534284"/>
     <packagedElement xmi:type="uml:DataType" xmi:id="_O4IoMIpgEeme7vRJotGOoA" name="ComponentType"/>
     <packagedElement xmi:type="uml:DataType" xmi:id="_YdLP0IpgEeme7vRJotGOoA" name="SubSystem">
       <generalization xmi:type="uml:Generalization" xmi:id="_rbmosIpgEeme7vRJotGOoA" general="_O4IoMIpgEeme7vRJotGOoA"/>
@@ -227,16 +243,16 @@
       <generalization xmi:type="uml:Generalization" xmi:id="_GCXaAIpjEeme7vRJotGOoA" general="_O4IoMIpgEeme7vRJotGOoA"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_P2hw0IplEeme7vRJotGOoA" name="婴儿温控需求">
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_Z5u7IIplEeme7vRJotGOoA" name="调节温度" id4sysml="-555600191"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_fY55kIplEeme7vRJotGOoA" name="设定温度范围" id4sysml="-886773412"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_c14jMIplEeme7vRJotGOoA" name="控制热量产生" id4sysml="177689618"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_izgYMIplEeme7vRJotGOoA" name="报警" id4sysml="-805609764"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_TSsVsIplEeme7vRJotGOoA" name="检测环境温度" id4sysml="-197719451"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_EO6-QIqWEeme7vRJotGOoA" name="温度传感器" id4sysml="1560336097"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_GWqG0IqWEeme7vRJotGOoA" name="温度自动调节器" id4sysml="1211908043"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_IZpSQIqWEeme7vRJotGOoA" name="热源" id4sysml="-1066440576"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_KlmzgIqWEeme7vRJotGOoA" name="操作接口" id4sysml="1499611637"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_MjdAQIqWEeme7vRJotGOoA" name="alarm" id4sysml="-1437758147"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_Z5u7IIplEeme7vRJotGOoA" name="调节温度" id4sysml="1850044842"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_fY55kIplEeme7vRJotGOoA" name="设定温度范围" id4sysml="1771577983"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_c14jMIplEeme7vRJotGOoA" name="控制热量产生" id4sysml="364020001"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_izgYMIplEeme7vRJotGOoA" name="报警" id4sysml="2074976768"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_TSsVsIplEeme7vRJotGOoA" name="检测环境温度" id4sysml="2023040465"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_EO6-QIqWEeme7vRJotGOoA" name="温度传感器" id4sysml="-43882212"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_GWqG0IqWEeme7vRJotGOoA" name="温度自动调节器" id4sysml="-926221031"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_IZpSQIqWEeme7vRJotGOoA" name="热源" id4sysml="-2018448719"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_KlmzgIqWEeme7vRJotGOoA" name="操作接口" id4sysml="1808269197"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_MjdAQIqWEeme7vRJotGOoA" name="alarm" id4sysml="-1045844343"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_KRY30IpmEeme7vRJotGOoA" name="容错处理"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_kjW6UIpnEeme7vRJotGOoA" name="DeriveReqt40" client="_TSsVsIplEeme7vRJotGOoA" supplier="_KRY30IpmEeme7vRJotGOoA"/>
@@ -244,17 +260,17 @@
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_qIuAUIpnEeme7vRJotGOoA" name="DeriveReqt43" client="_fY55kIplEeme7vRJotGOoA" supplier="_KRY30IpmEeme7vRJotGOoA"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_qz32IIpnEeme7vRJotGOoA" name="DeriveReqt44" client="_izgYMIplEeme7vRJotGOoA" supplier="_KRY30IpmEeme7vRJotGOoA"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_xwlJkIpnEeme7vRJotGOoA" name="DeriveReqt44" client="_Z5u7IIplEeme7vRJotGOoA" supplier="_KRY30IpmEeme7vRJotGOoA"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_uCGawIppEeme7vRJotGOoA" name="feedback" informationSource="_19lmoIgkEem7TYMKJXdmUw" informationTarget="_FUhpsIhMEem7TYMKJXdmUw" id4sysml="1028438074"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_vmrL4IppEeme7vRJotGOoA" name="operator_setting" informationSource="_19lmoIgkEem7TYMKJXdmUw" informationTarget="_GoZsYIhMEem7TYMKJXdmUw" id4sysml="-91282339"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_uCGawIppEeme7vRJotGOoA" name="feedback" informationSource="_19lmoIgkEem7TYMKJXdmUw _t3mjgIgPEem7TYMKJXdmUw _FUhpsIhMEem7TYMKJXdmUw" informationTarget="_FUhpsIhMEem7TYMKJXdmUw _t3mjgIgPEem7TYMKJXdmUw _4NWuAIqOEeme7vRJotGOoA _19lmoIgkEem7TYMKJXdmUw" id4sysml="-773701747"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_vmrL4IppEeme7vRJotGOoA" name="operator_setting" informationSource="_19lmoIgkEem7TYMKJXdmUw _GoZsYIhMEem7TYMKJXdmUw" informationTarget="_GoZsYIhMEem7TYMKJXdmUw _4NWuAIqOEeme7vRJotGOoA _19lmoIgkEem7TYMKJXdmUw" id4sysml="-123775076"/>
     <packagedElement xmi:type="uml:Class" xmi:id="_h2C4IIpqEeme7vRJotGOoA" name="调节温度">
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_qr-XAIpqEeme7vRJotGOoA" name="数据处理" id4sysml="-1706058794"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_udWW4IpqEeme7vRJotGOoA" name="温度调节" id4sysml="1436221267"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_vyAcsIpqEeme7vRJotGOoA" name="设置温度范围" id4sysml="-1704265094"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_wvoikIpqEeme7vRJotGOoA" name="feedback" id4sysml="1763503024"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_wflQYIqWEeme7vRJotGOoA" name="数据处理子组件" id4sysml="-1635134654"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_yoNJwIqWEeme7vRJotGOoA" name="温度调节子组件" id4sysml="1840112715"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_0egkEIqWEeme7vRJotGOoA" name="设置温度范围子组件" id4sysml="-204379937"/>
-      <nestedClassifier xmi:type="uml:Class" xmi:id="_2YI_MIqWEeme7vRJotGOoA" name="feedback子组件" id4sysml="1900186318"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_qr-XAIpqEeme7vRJotGOoA" name="数据处理" id4sysml="372700701"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_udWW4IpqEeme7vRJotGOoA" name="温度调节" id4sysml="-1667670766"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_vyAcsIpqEeme7vRJotGOoA" name="设置温度范围" id4sysml="1524765523"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_wvoikIpqEeme7vRJotGOoA" name="feedback" id4sysml="-1964185799"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_wflQYIqWEeme7vRJotGOoA" name="数据处理子组件" id4sysml="313556010"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_yoNJwIqWEeme7vRJotGOoA" name="温度调节子组件" id4sysml="-217564537"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_0egkEIqWEeme7vRJotGOoA" name="设置温度范围子组件" id4sysml="301563297"/>
+      <nestedClassifier xmi:type="uml:Class" xmi:id="_2YI_MIqWEeme7vRJotGOoA" name="feedback子组件" id4sysml="766427500"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_hk4ysIqWEeme7vRJotGOoA" name="Satisfy47" client="_EO6-QIqWEeme7vRJotGOoA" supplier="_TSsVsIplEeme7vRJotGOoA"/>
     <packagedElement xmi:type="uml:Abstraction" xmi:id="_jaELoIqWEeme7vRJotGOoA" name="Satisfy48" client="_GWqG0IqWEeme7vRJotGOoA" supplier="_Z5u7IIplEeme7vRJotGOoA"/>
@@ -356,7 +372,7 @@
       <node xmi:type="uml:OpaqueAction" xmi:id="_H_JQEI3iEemBe6s4BI75Ig" name="调节温度"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Signal" xmi:id="_OKEWsI3hEemBe6s4BI75Ig" name="Signal72"/>
-    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_N9GbsI_kEemhxvj2t8aK_g" name="ItemFlow74" informationSource="_KybWcIhEEem7TYMKJXdmUw" informationTarget="_uZAicIhGEem7TYMKJXdmUw" id4sysml="1550443803"/>
+    <packagedElement xmi:type="uml:InformationFlow" xmi:id="_N9GbsI_kEemhxvj2t8aK_g" name="ItemFlow74" informationSource="_KybWcIhEEem7TYMKJXdmUw" informationTarget="_uZAicIhGEem7TYMKJXdmUw" id4sysml="-1092772774"/>
     <profileApplication xmi:type="uml:ProfileApplication" xmi:id="_t6lmEIgPEem7TYMKJXdmUw">
       <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_t6pQcIgPEem7TYMKJXdmUw" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/sysml/1.4/SysML#/"/>

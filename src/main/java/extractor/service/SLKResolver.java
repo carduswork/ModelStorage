@@ -24,6 +24,8 @@ import extractor.DAO.mapper._taskMapper;
 import extractor.DAO.mapper.busMapper;
 import extractor.DAO.mapper.communicationchannelMapper;
 import extractor.DAO.mapper.componentMapper;
+import extractor.DAO.mapper.componenttransitionMapper;
+import extractor.DAO.mapper.dataobjectMapper;
 import extractor.DAO.mapper.deviceMapper;
 import extractor.DAO.mapper.linkpointMapper;
 import extractor.DAO.mapper.rtosMapper;
@@ -40,6 +42,7 @@ import extractor.model._task;
 import extractor.model.bus;
 import extractor.model.communicationchannel;
 import extractor.model.component;
+import extractor.model.componenttransition;
 import extractor.model.dataobject;
 import extractor.model.device;
 import extractor.model.linkpoint;
@@ -63,8 +66,11 @@ public class SLKResolver {
 	@Autowired
 	private componentMapper camArchMapper;
 	@Autowired
+	private componenttransitionMapper cttm;
+	@Autowired
 	private linkpointMapper portsMapper;
-
+	@Autowired
+	private dataobjectMapper dom;
 	@Autowired
 	private _provideMapper pM;
 	@Autowired
@@ -210,15 +216,16 @@ public class SLKResolver {
 				String[] ps = props.getText().split("\n");
 				for (String s : ps) {
 					if (s.contains("wcet")) {
-						// TODO 组件的wcet待确认
-
+						String[] wcet = s.split(" ");
+						c.setWcet(wcet[2]);
 					}
 				}
 			}
 			insert_component(c);
 
 			LinkpointResolver(filepath, n.getUniquePath(), c);
-			TaskResolver(filepath, c);
+			StateResolver(filepath, c);
+			transitionResolver(filepath, c);
 		}
 	}
 
@@ -244,12 +251,18 @@ public class SLKResolver {
 			// TODO 等那俩更新xml文件后调试一下
 			Element portdatadescription = (Element) document
 					.selectSingleNode(portdata.getUniquePath() + "/P[@Name='description']");
-//			dataobject d=new dataobject();
-//			d.setFrom(linkpointID);
-
 			if (portdatadescription != null) {
 				String[] att = portdatadescription.getText().split("=");
 				ports1.setPeriod(att[1] + "ms");
+			}
+
+			Element typElement = (Element) document
+					.selectSingleNode(portdata.getParent().getUniquePath() + "/P[@Name='dataType']");
+			if (typElement != null) {
+				dataobject d = new dataobject();
+				d.setDatatype(typElement.getText());
+				// TODO 更多信息
+				dom.insert(d);
 			}
 
 			insert_ports(ports1);
@@ -275,8 +288,6 @@ public class SLKResolver {
 					.selectSingleNode("//chart/Children/data[@name='" + element2.attributeValue("Name") + "']");
 			Element portdatadescription = (Element) document
 					.selectSingleNode(portdata.getUniquePath() + "/P[@Name='description']");
-//			dataobject d=new dataobject();
-//			d.setFrom(linkpointID);
 
 			if (portdatadescription != null) {
 				String[] att = portdatadescription.getText().split("=");
@@ -293,31 +304,87 @@ public class SLKResolver {
 
 	}
 
-	private void TaskResolver(String modelfilename, component father) throws Exception {
+	private void StateResolver(String modelfilename, component father) throws Exception {
 		Document document = ModelResolver(modelfilename);
-		String gettask = "//chart/P[contains(text(),'" + father.getName() + "')]/Children/state";
+		String gettask = "//Stateflow/machine/Children/chart/P[contains(text(),'" + father.getName() + "')]/following-sibling::Children/state";
 		List<? extends Node> namelist = document.selectNodes(gettask);
 		for (Node n : namelist) {
 			Element element2 = (Element) n;
 			component component = new component();
 			Integer idString = (int) GetID.getId();
 			component.setComponentid(idString);
-
 			component.setModeltype("simulink");
 			Element ls = (Element) document.selectSingleNode(element2.getUniquePath() + "/P[@Name='labelString']");
-			component.setName(ls.getText());
+
+			String[] ps = ls.getText().split("\n");
+//			for (String s : ps) {
+//				if (!s.contains(" ")) {
+//					component.setName(s);
+//				}
+//			}
+			component.setName(ps[0]);
+			Element dElement = (Element) document
+					.selectSingleNode(element2.getUniquePath() + "/P[@Name='description']");
+			if(dElement!=null) {
+				
+				component.setWcet(dElement.getText().split(" ")[2]);
+			}
+
 			component.setType("task");
 			insert_component(component);
+
 			_task t = new _task();
-			t.setName(ls.getText());
+			t.setName(ps[0]);
 			t.setTaskid(idString);
+			t.setFatherid(father.getComponentid());
 			try {
 				AppendID.AppendID(modelfilename, element2.getUniquePath(), t.getTaskid().toString());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-//			tasklist.add(t);
 			insert_task(t);
+		}
+	}
+
+	private void transitionResolver(String modelfilename, component father) throws Exception {
+		Document document = ModelResolver(modelfilename);
+		String gettransition = "//Stateflow/machine/Children/chart/P[contains(text(),'" + father.getName()
+				+ "')]/following-sibling::Children/transition";
+		List<Node> transitionlist = document.selectNodes(gettransition);
+		for (Node n : transitionlist) {
+			Element transitionElement = (Element) n;
+			Integer idString = (int) GetID.getId();
+			transition t = new transition();
+			t.setTransitionid(idString);
+			AppendID.AppendID(modelfilename, n.getUniquePath(), idString.toString());
+			// trigger要从source找
+			Element idElement = (Element) document.selectSingleNode(n.getUniquePath() + "/src/P[@Name='SSID']");
+			if (idElement != null) {
+
+				Map<String, String> r = getstateinfo(modelfilename, transitionElement, idElement.getText());
+				_event e = new _event();
+				Integer eventid = (int) GetID.getId();
+				e.setEventid(eventid);
+				e.setName(r.get("trigger"));
+				insert_event(e);
+
+				t.setTriggerid(eventid);
+				Element attreElement = (Element) document
+						.selectSingleNode(n.getUniquePath() + "/P[@Name='labelString']");
+				t.setName(attreElement.getText());
+				insert_transition(t);
+				transitionstate ts = new transitionstate();
+				ts.setSourceid(Integer.valueOf(r.get("id")));
+				ts.setTransitionid(idString);
+				Element idElement2 = (Element) document.selectSingleNode(n.getUniquePath() + "/dst/P[@Name='SSID']");
+				Map<String, String> r2 = getstateinfo(modelfilename, transitionElement, idElement2.getText());
+				ts.setOutid(Integer.valueOf(r2.get("id")));
+				insert_tss(ts);
+				componenttransition ctt=new componenttransition();
+				ctt.setComponentid(father.getComponentid().toString());
+				ctt.setTransitionid(idString.toString());
+				cttm.insert(ctt);
+			}
 		}
 	}
 
@@ -429,5 +496,21 @@ public class SLKResolver {
 
 	public Integer getCmpIDbyName(String name) {
 		return camArchMapper.getIDbyName(name).getComponentid();
+	}
+
+	private Map<String, String> getstateinfo(String modelfilename, Element transition, String ssid) throws Exception {
+		Document document = ModelResolver(modelfilename);
+		Element pElement = (Element) document.selectSingleNode(
+				transition.getParent().getUniquePath() + "/state[@SSID='" + ssid + "']/P[@Name='labelString']");
+		Map<String, String> r = new HashMap<>();
+		r.put("id", pElement.getParent().attributeValue("id"));
+		String[] strings = pElement.getText().split("\n");
+		for (String s : strings) {
+			if (s.contains("entry")) {
+
+				r.put("trigger", s.split(":")[1]);
+			}
+		}
+		return r;
 	}
 }

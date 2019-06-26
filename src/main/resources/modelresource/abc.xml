@@ -8,7 +8,7 @@
       <P Name="NumRootInports">0</P>
       <P Name="NumRootOutports">0</P>
       <P Name="ParameterArgumentNames"></P>
-      <P Name="ComputedModelVersion">1.17</P>
+      <P Name="ComputedModelVersion">1.20</P>
       <P Name="NumModelReferences">0</P>
       <P Name="NumTestPointedSignals">0</P>
     </GraphicalInterface>
@@ -40,8 +40,8 @@
           <P Name="ViewObjType" Class="char">SimulinkTopLevel</P>
           <P Name="LoadSaveID" Class="char">0</P>
           <P Name="Extents" Class="double">[1646.0, 899.0]</P>
-          <P Name="ZoomFactor" Class="double">2.0</P>
-          <P Name="Offset" Class="double">[260.87619047618796, 71.730952380950839]</P>
+          <P Name="ZoomFactor" Class="double">1.7885010266940451</P>
+          <P Name="Offset" Class="double">[126.83811710677378, 108.17221584385763]</P>
         </Object>
       </Object>
     </Object>
@@ -52,9 +52,9 @@
       <P Name="ModifiedByFormat">%&lt;Auto&gt;</P>
       <P Name="LastModifiedBy">kexinlan</P>
       <P Name="ModifiedDateFormat">%&lt;Auto&gt;</P>
-      <P Name="LastModifiedDate">Sun Jun 16 15:56:07 2019</P>
-      <P Name="RTWModifiedTimeStamp">482601351</P>
-      <P Name="ModelVersionFormat">1.%&lt;AutoIncrement:17&gt;</P>
+      <P Name="LastModifiedDate">Sat Jun 22 14:05:22 2019</P>
+      <P Name="RTWModifiedTimeStamp">483201304</P>
+      <P Name="ModelVersionFormat">1.%&lt;AutoIncrement:20&gt;</P>
       <P Name="ConfigurationManager">none</P>
     </ConfigManagerSettings>
     <EditorSettings>
@@ -737,6 +737,8 @@
         <P Name="DisplayOption">none</P>
         <P Name="BusSelectionMode">off</P>
       </Block>
+      <Block BlockType="Ground">
+      </Block>
       <Block BlockType="Inport">
         <P Name="Port">1</P>
         <P Name="OutputFunctionCall">off</P>
@@ -812,101 +814,9 @@
       <P Name="Location">[0, 0, 1680, 1050]</P>
       <P Name="Open">on</P>
       <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
-      <P Name="ZoomFactor">200</P>
+      <P Name="ZoomFactor">179</P>
       <P Name="ReportName">simulink-default.rpt</P>
       <P Name="SIDHighWatermark">11</P>
-      <Block BlockType="SubSystem" Name="Air " SID="7">
-        <P Name="Ports">[1, 1]</P>
-        <P Name="Position">[515, 501, 705, 579]</P>
-        <P Name="ZOrder">6</P>
-        <P Name="LibraryVersion">1.267</P>
-        <P Name="ErrorFcn">Stateflow.Translate.translate</P>
-        <P Name="PermitHierarchicalResolution">ExplicitOnly</P>
-        <P Name="TreatAsAtomicUnit">on</P>
-        <P Name="RequestExecContextInheritance">off</P>
-        <P Name="SFBlockType">Chart</P>
-        <P Name="Variant">off</P>
-        <Port>
-          <P Name="PortNumber">1</P>
-          <P Name="Name">hello_lankx</P>
-          <P Name="PropagatedSignals">Heat2</P>
-          <P Name="RTWStorageClass">Auto</P>
-          <P Name="DataLoggingNameMode">SignalName</P>
-        </Port>
-        <System>
-          <P Name="Location">[612, 0, 1680, 1050]</P>
-          <P Name="Open">off</P>
-          <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
-          <P Name="ZoomFactor">100</P>
-          <P Name="SIDHighWatermark">79</P>
-          <Block BlockType="Inport" Name="Heat" SID="7::78">
-            <P Name="Position">[20, 101, 40, 119]</P>
-            <P Name="ZOrder">58</P>
-            <P Name="IconDisplay">Port number</P>
-          </Block>
-          <Block BlockType="Demux" Name=" Demux " SID="7::74">
-            <P Name="Ports">[1, 1]</P>
-            <P Name="Position">[270, 230, 320, 270]</P>
-            <P Name="ZOrder">54</P>
-            <P Name="Outputs">1</P>
-          </Block>
-          <Block BlockType="S-Function" Name=" SFunction " SID="7::73">
-            <P Name="Tag">Stateflow S-Function infant0528 5</P>
-            <P Name="Ports">[1, 2]</P>
-            <P Name="Position">[180, 100, 230, 160]</P>
-            <P Name="ZOrder">53</P>
-            <P Name="FunctionName">sf_sfun</P>
-            <P Name="PortCounts">[1 2]</P>
-            <P Name="SFunctionDeploymentMode">off</P>
-            <P Name="EnableBusSupport">off</P>
-            <Port>
-              <P Name="PortNumber">2</P>
-              <P Name="Name">Heat2</P>
-              <P Name="RTWStorageClass">Auto</P>
-              <P Name="DataLoggingNameMode">SignalName</P>
-            </Port>
-          </Block>
-          <Block BlockType="Terminator" Name=" Terminator " SID="7::75">
-            <P Name="Position">[460, 241, 480, 259]</P>
-            <P Name="ZOrder">55</P>
-          </Block>
-          <Block BlockType="Outport" Name="Heat2" SID="7::77">
-            <P Name="Position">[460, 101, 480, 119]</P>
-            <P Name="ZOrder">57</P>
-            <P Name="IconDisplay">Port number</P>
-          </Block>
-          <Line>
-            <P Name="ZOrder">6</P>
-            <P Name="SrcBlock">Heat</P>
-            <P Name="SrcPort">1</P>
-            <P Name="DstBlock"> SFunction </P>
-            <P Name="DstPort">1</P>
-          </Line>
-          <Line>
-            <P Name="Name">Heat2</P>
-            <P Name="ZOrder">7</P>
-            <P Name="Labels">[0, 0]</P>
-            <P Name="SrcBlock"> SFunction </P>
-            <P Name="SrcPort">2</P>
-            <P Name="DstBlock">Heat2</P>
-            <P Name="DstPort">1</P>
-          </Line>
-          <Line>
-            <P Name="ZOrder">8</P>
-            <P Name="SrcBlock"> Demux </P>
-            <P Name="SrcPort">1</P>
-            <P Name="DstBlock"> Terminator </P>
-            <P Name="DstPort">1</P>
-          </Line>
-          <Line>
-            <P Name="ZOrder">9</P>
-            <P Name="SrcBlock"> SFunction </P>
-            <P Name="SrcPort">1</P>
-            <P Name="DstBlock"> Demux </P>
-            <P Name="DstPort">1</P>
-          </Line>
-        </System>
-      </Block>
       <Block BlockType="SubSystem" Name="Alarm" SID="9">
         <P Name="Description">wcet = 1ms
 period = 10ms</P>
@@ -921,7 +831,7 @@ period = 10ms</P>
         <P Name="SFBlockType">Chart</P>
         <P Name="Variant">off</P>
         <System>
-          <P Name="Location">[0, 23, 1680, 958]</P>
+          <P Name="Location">[0, 0, 1680, 1050]</P>
           <P Name="Open">off</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
@@ -995,7 +905,7 @@ period = 10ms</P>
         </System>
       </Block>
       <Block BlockType="SubSystem" Name="Heat Source " SID="6">
-        <P Name="Ports">[1, 1]</P>
+        <P Name="Ports">[1]</P>
         <P Name="Position">[785, 354, 940, 426]</P>
         <P Name="ZOrder">5</P>
         <P Name="LibraryVersion">1.267</P>
@@ -1018,60 +928,40 @@ period = 10ms</P>
           </Block>
           <Block BlockType="Demux" Name=" Demux " SID="6::74">
             <P Name="Ports">[1, 1]</P>
-            <P Name="Position">[270, 230, 320, 270]</P>
+            <P Name="Position">[270, 100, 320, 140]</P>
             <P Name="ZOrder">54</P>
             <P Name="Outputs">1</P>
           </Block>
           <Block BlockType="S-Function" Name=" SFunction " SID="6::73">
             <P Name="Tag">Stateflow S-Function infant0528 4</P>
-            <P Name="Ports">[1, 2]</P>
-            <P Name="Position">[180, 100, 230, 160]</P>
+            <P Name="Ports">[1, 1]</P>
+            <P Name="Position">[180, 100, 230, 140]</P>
             <P Name="ZOrder">53</P>
             <P Name="FunctionName">sf_sfun</P>
-            <P Name="PortCounts">[1 2]</P>
+            <P Name="PortCounts">[1 1]</P>
             <P Name="SFunctionDeploymentMode">off</P>
             <P Name="EnableBusSupport">off</P>
-            <Port>
-              <P Name="PortNumber">2</P>
-              <P Name="Name">Heat</P>
-              <P Name="RTWStorageClass">Auto</P>
-              <P Name="DataLoggingNameMode">SignalName</P>
-            </Port>
           </Block>
           <Block BlockType="Terminator" Name=" Terminator " SID="6::75">
-            <P Name="Position">[460, 241, 480, 259]</P>
+            <P Name="Position">[460, 111, 480, 129]</P>
             <P Name="ZOrder">55</P>
           </Block>
-          <Block BlockType="Outport" Name="Heat" SID="6::78">
-            <P Name="Position">[460, 101, 480, 119]</P>
-            <P Name="ZOrder">58</P>
-            <P Name="IconDisplay">Port number</P>
-          </Block>
           <Line>
-            <P Name="ZOrder">7</P>
+            <P Name="ZOrder">11</P>
             <P Name="SrcBlock">Heat_Control</P>
             <P Name="SrcPort">1</P>
             <P Name="DstBlock"> SFunction </P>
             <P Name="DstPort">1</P>
           </Line>
           <Line>
-            <P Name="Name">Heat</P>
-            <P Name="ZOrder">8</P>
-            <P Name="Labels">[0, 0]</P>
-            <P Name="SrcBlock"> SFunction </P>
-            <P Name="SrcPort">2</P>
-            <P Name="DstBlock">Heat</P>
-            <P Name="DstPort">1</P>
-          </Line>
-          <Line>
-            <P Name="ZOrder">9</P>
+            <P Name="ZOrder">12</P>
             <P Name="SrcBlock"> Demux </P>
             <P Name="SrcPort">1</P>
             <P Name="DstBlock"> Terminator </P>
             <P Name="DstPort">1</P>
           </Line>
           <Line>
-            <P Name="ZOrder">10</P>
+            <P Name="ZOrder">13</P>
             <P Name="SrcBlock"> SFunction </P>
             <P Name="SrcPort">1</P>
             <P Name="DstBlock"> Demux </P>
@@ -1181,7 +1071,7 @@ period = 10ms</P>
       <Block BlockType="SubSystem" Name="Temperature&#xA;Sensor" SID="1">
         <P Name="Description">wcet = 0.1ms
 period = 5ms</P>
-        <P Name="Ports">[1, 1]</P>
+        <P Name="Ports">[0, 1]</P>
         <P Name="Position">[240, 353, 435, 427]</P>
         <P Name="ZOrder">2</P>
         <P Name="LibraryVersion">1.267</P>
@@ -1196,17 +1086,16 @@ period = 5ms</P>
           <P Name="Open">off</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
-          <P Name="SIDHighWatermark">78</P>
-          <Block BlockType="Inport" Name="Heat1" SID="1::78">
-            <P Name="Position">[20, 101, 40, 119]</P>
-            <P Name="ZOrder">58</P>
-            <P Name="IconDisplay">Port number</P>
-          </Block>
+          <P Name="SIDHighWatermark">79</P>
           <Block BlockType="Demux" Name=" Demux " SID="1::74">
             <P Name="Ports">[1, 1]</P>
             <P Name="Position">[270, 230, 320, 270]</P>
             <P Name="ZOrder">54</P>
             <P Name="Outputs">1</P>
+          </Block>
+          <Block BlockType="Ground" Name=" Ground " SID="1::79">
+            <P Name="Position">[20, 121, 40, 139]</P>
+            <P Name="ZOrder">59</P>
           </Block>
           <Block BlockType="S-Function" Name=" SFunction " SID="1::73">
             <P Name="Tag">Stateflow S-Function infant0528 3</P>
@@ -1234,15 +1123,8 @@ period = 5ms</P>
             <P Name="IconDisplay">Port number</P>
           </Block>
           <Line>
-            <P Name="ZOrder">11</P>
-            <P Name="SrcBlock">Heat1</P>
-            <P Name="SrcPort">1</P>
-            <P Name="DstBlock"> SFunction </P>
-            <P Name="DstPort">1</P>
-          </Line>
-          <Line>
             <P Name="Name">Current_Temperature</P>
-            <P Name="ZOrder">12</P>
+            <P Name="ZOrder">15</P>
             <P Name="Labels">[0, 0]</P>
             <P Name="SrcBlock"> SFunction </P>
             <P Name="SrcPort">2</P>
@@ -1250,14 +1132,21 @@ period = 5ms</P>
             <P Name="DstPort">1</P>
           </Line>
           <Line>
-            <P Name="ZOrder">13</P>
+            <P Name="ZOrder">16</P>
+            <P Name="SrcBlock"> Ground </P>
+            <P Name="SrcPort">1</P>
+            <P Name="DstBlock"> SFunction </P>
+            <P Name="DstPort">1</P>
+          </Line>
+          <Line>
+            <P Name="ZOrder">17</P>
             <P Name="SrcBlock"> Demux </P>
             <P Name="SrcPort">1</P>
             <P Name="DstBlock"> Terminator </P>
             <P Name="DstPort">1</P>
           </Line>
           <Line>
-            <P Name="ZOrder">14</P>
+            <P Name="ZOrder">18</P>
             <P Name="SrcBlock"> SFunction </P>
             <P Name="SrcPort">1</P>
             <P Name="DstBlock"> Demux </P>
@@ -1426,25 +1315,6 @@ Sensor</P>
         <P Name="DstBlock">Thermostat</P>
         <P Name="DstPort">1</P>
       </Line>
-      <Line>
-        <P Name="ZOrder">5</P>
-        <P Name="SrcBlock">Heat Source </P>
-        <P Name="SrcPort">1</P>
-        <P Name="Points">[9, 0; 0, 213; -453, 0; 0, -63]</P>
-        <P Name="DstBlock">Air </P>
-        <P Name="DstPort">1</P>
-      </Line>
-      <Line>
-        <P Name="Name">hello_lankx</P>
-        <P Name="ZOrder">6</P>
-        <P Name="Labels">[3, 1]</P>
-        <P Name="SrcBlock">Air </P>
-        <P Name="SrcPort">1</P>
-        <P Name="Points">[9, 0; 0, -60; -495, 0; 0, -90]</P>
-        <P Name="DstBlock">Temperature
-Sensor</P>
-        <P Name="DstPort">1</P>
-      </Line>
     </System>
   </Model>
   <Stateflow>
@@ -1453,13 +1323,13 @@ Sensor</P>
       <P Name="isLibrary">0</P>
       <P Name="sfVersion">80000006</P>
       <Children>
-        <target id="120" name="sfun">
+        <target id="114" name="sfun">
           <P Name="description">Default Simulink S-Function Target.</P>
         </target>
         <chart id="32">
           <P Name="name">Thermostat</P>
           <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
-          <P Name="viewLimits">[0 1646 0 899]</P>
+          <P Name="viewLimits">[0 1646 0 877]</P>
           <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
@@ -1509,9 +1379,10 @@ entry: set the
               <P Name="visible">0</P>
               <P Name="subviewer">32</P>
               <subviewS>
-                <P Name="panLimits">[-24 417 -24 349]</P>
+                <P Name="panLimits">[6.995 1526.235 10.605 713.923]</P>
                 <P Name="x1">20</P>
                 <P Name="y1">20</P>
+                <P Name="zoomFactor">0.923</P>
                 <P Name="pos">[40 40 659 461]</P>
               </subviewS>
               <P Name="type">OR_STATE</P>
@@ -1554,10 +1425,12 @@ data
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
                 <state SSID="25">
-                  <P Name="description">wcet = 0.5ms</P>
+                  <P Name="description">wcet = 0.5ms
+faultType = Invalid Data
+faultState = true</P>
                   <P Name="labelString">Fault_Invalid Data
-entry: report this fault</P>
-                  <P Name="position">[135.5 380 137 62]</P>
+exit: report fault message</P>
+                  <P Name="position">[135.5 381.846 142.5379 62.923]</P>
                   <P Name="fontSize">12</P>
                   <P Name="visible">0</P>
                   <P Name="subviewer">20</P>
@@ -1587,18 +1460,18 @@ entry: report this fault</P>
                 </transition>
                 <transition SSID="29">
                   <P Name="labelString"></P>
-                  <P Name="labelPosition">[83.313 250.623 0 0]</P>
+                  <P Name="labelPosition">[82.822 251.607 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
                     <P Name="SSID">25</P>
-                    <P Name="intersection">[4 -1 0 0.867 135.5 388.246 0 0]</P>
+                    <P Name="intersection">[4 -1 0 0.867 135.5 390.2147 0 0]</P>
                   </src>
                   <dst>
                     <P Name="SSID">27</P>
                     <P Name="intersection">[4 -1 0 0.4667 159 149 0 0]</P>
                   </dst>
-                  <P Name="midPoint">[83.3131 268.623]</P>
-                  <P Name="dataLimits">[82.825 159 146.6 388.246]</P>
+                  <P Name="midPoint">[82.8219 269.6074]</P>
+                  <P Name="dataLimits">[82.342 159 146.6 390.215]</P>
                   <P Name="subviewer">20</P>
                   <P Name="drawStyle">SMART</P>
                   <slide>
@@ -1650,18 +1523,18 @@ entry: report this fault</P>
                 </transition>
                 <transition SSID="26">
                   <P Name="labelString">[data is invalid]</P>
-                  <P Name="labelPosition">[216 333 81.297 14]</P>
+                  <P Name="labelPosition">[219.438 333.803 81.297 14]</P>
                   <P Name="fontSize">12</P>
                   <src>
                     <P Name="SSID">22</P>
-                    <P Name="intersection">[3 0 1 0.5192 202 316.5 0 0]</P>
+                    <P Name="intersection">[3 0 1 0.4862 205.4381 316.5 0 0]</P>
                   </src>
                   <dst>
                     <P Name="SSID">25</P>
-                    <P Name="intersection">[1 -0 -1 0.4854 202 380 0 0]</P>
+                    <P Name="intersection">[1 -0 -1 0.4907 205.4381 381.846 0 0]</P>
                   </dst>
-                  <P Name="midPoint">[202 344.25]</P>
-                  <P Name="dataLimits">[199.6 204.4 316.5 380]</P>
+                  <P Name="midPoint">[205.4381 345.173]</P>
+                  <P Name="dataLimits">[203.038 207.838 316.5 381.846]</P>
                   <P Name="subviewer">20</P>
                   <P Name="drawStyle">SMART</P>
                   <slide>
@@ -1995,7 +1868,7 @@ temperature</P>
         <chart id="63">
           <P Name="name">Operator Interface</P>
           <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
-          <P Name="viewLimits">[0 800 0 899]</P>
+          <P Name="viewLimits">[0 1646 0 899]</P>
           <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
@@ -2209,13 +2082,16 @@ feedback</P>
           <P Name="name">Temperature
 Sensor</P>
           <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
-          <P Name="viewLimits">[0 1646 0 899]</P>
+          <P Name="viewLimits">[0 1646 0 877]</P>
           <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
           <P Name="chartColor">[1 0.9882352941176471 0.9254901960784314]</P>
           <P Name="screen">[1 1 3200 1200 1.25]</P>
           <P Name="viewObj">76</P>
+          <P Name="visible">1</P>
+          <subviewS>
+          </subviewS>
           <P Name="ssIdHighWaterMark">8</P>
           <P Name="decomposition">CLUSTER_CHART</P>
           <P Name="chartFileNumber">3</P>
@@ -2260,23 +2136,6 @@ Thermostat </P>
                 </type>
                 <P Name="complexity">SF_COMPLEX_INHERITED</P>
                 <P Name="frame">SF_FRAME_NO</P>
-              </props>
-              <P Name="dataType">Inherit: Same as Simulink</P>
-            </data>
-            <data SSID="2" name="Heat1">
-              <P Name="scope">INPUT_DATA</P>
-              <props>
-                <array>
-                  <P Name="size">-1</P>
-                </array>
-                <type>
-                  <P Name="method">SF_INHERITED_TYPE</P>
-                  <P Name="primitive">SF_DOUBLE_TYPE</P>
-                  <P Name="isSigned">1</P>
-                  <P Name="wordLength">16</P>
-                </type>
-                <P Name="complexity">SF_COMPLEX_INHERITED</P>
-                <P Name="frame">SF_FRAME_INHERITED</P>
               </props>
               <P Name="dataType">Inherit: Same as Simulink</P>
             </data>
@@ -2344,7 +2203,7 @@ Thermostat </P>
             </transition>
           </Children>
         </chart>
-        <chart id="85">
+        <chart id="84">
           <P Name="name">Heat Source </P>
           <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
           <P Name="viewLimits">[0 1646 0 899]</P>
@@ -2353,7 +2212,10 @@ Thermostat </P>
           <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
           <P Name="chartColor">[1 0.9882352941176471 0.9254901960784314]</P>
           <P Name="screen">[1 1 3200 1200 1.25]</P>
-          <P Name="viewObj">85</P>
+          <P Name="viewObj">84</P>
+          <P Name="visible">1</P>
+          <subviewS>
+          </subviewS>
           <P Name="ssIdHighWaterMark">8</P>
           <P Name="decomposition">CLUSTER_CHART</P>
           <P Name="chartFileNumber">4</P>
@@ -2367,7 +2229,7 @@ Thermostat </P>
               <P Name="position">[99 116 90 60]</P>
               <P Name="fontSize">12</P>
               <P Name="visible">0</P>
-              <P Name="subviewer">85</P>
+              <P Name="subviewer">84</P>
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
@@ -2378,7 +2240,7 @@ entry: produce
               <P Name="position">[377 116 90 60]</P>
               <P Name="fontSize">12</P>
               <P Name="visible">0</P>
-              <P Name="subviewer">85</P>
+              <P Name="subviewer">84</P>
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
@@ -2390,29 +2252,12 @@ entry: produce
                 </array>
                 <type>
                   <P Name="method">SF_INHERITED_TYPE</P>
-                  <P Name="primitive">SF_DOUBLE_TYPE</P>
+                  <P Name="primitive">SF_SINGLE_TYPE</P>
                   <P Name="isSigned">1</P>
                   <P Name="wordLength">16</P>
                 </type>
                 <P Name="complexity">SF_COMPLEX_INHERITED</P>
                 <P Name="frame">SF_FRAME_INHERITED</P>
-              </props>
-              <P Name="dataType">Inherit: Same as Simulink</P>
-            </data>
-            <data SSID="2" name="Heat">
-              <P Name="scope">OUTPUT_DATA</P>
-              <props>
-                <array>
-                  <P Name="size">-1</P>
-                </array>
-                <type>
-                  <P Name="method">SF_INHERITED_TYPE</P>
-                  <P Name="primitive">SF_DOUBLE_TYPE</P>
-                  <P Name="isSigned">1</P>
-                  <P Name="wordLength">16</P>
-                </type>
-                <P Name="complexity">SF_COMPLEX_INHERITED</P>
-                <P Name="frame">SF_FRAME_NO</P>
               </props>
               <P Name="dataType">Inherit: Same as Simulink</P>
             </data>
@@ -2429,7 +2274,7 @@ entry: produce
               </dst>
               <P Name="midPoint">[143 101]</P>
               <P Name="dataLimits">[140.6 145.4 86 116]</P>
-              <P Name="subviewer">85</P>
+              <P Name="subviewer">84</P>
               <P Name="drawStyle">SMART</P>
               <slide>
                 <P Name="sticky">BOTH_STICK</P>
@@ -2451,7 +2296,7 @@ entry: produce
               </dst>
               <P Name="midPoint">[279 144]</P>
               <P Name="dataLimits">[189 377 141.6 146.4]</P>
-              <P Name="subviewer">85</P>
+              <P Name="subviewer">84</P>
               <P Name="drawStyle">SMART</P>
               <slide>
                 <P Name="sticky">BOTH_STICK</P>
@@ -2472,7 +2317,7 @@ entry: produce
               </dst>
               <P Name="midPoint">[283 244.531]</P>
               <P Name="dataLimits">[151.6 412 176 244.67]</P>
-              <P Name="subviewer">85</P>
+              <P Name="subviewer">84</P>
               <P Name="drawStyle">SMART</P>
               <slide>
                 <P Name="sticky">BOTH_STICK</P>
@@ -2481,70 +2326,20 @@ entry: produce
             </transition>
           </Children>
         </chart>
-        <chart id="94">
-          <P Name="name">Air </P>
-          <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
-          <P Name="viewLimits">[0 1034 0 899]</P>
-          <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
-          <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
-          <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
-          <P Name="chartColor">[1 0.9882352941176471 0.9254901960784314]</P>
-          <P Name="screen">[1 1 3200 1200 1.25]</P>
-          <P Name="viewObj">94</P>
-          <P Name="ssIdHighWaterMark">4</P>
-          <P Name="decomposition">CLUSTER_CHART</P>
-          <P Name="chartFileNumber">5</P>
-          <P Name="saturateOnIntegerOverflow">1</P>
-          <P Name="userSpecifiedStateTransitionExecutionOrder">1</P>
-          <P Name="disableImplicitCasting">1</P>
-          <P Name="actionLanguage">2</P>
-          <Children>
-            <data SSID="1" name="Heat2">
-              <P Name="scope">OUTPUT_DATA</P>
-              <props>
-                <array>
-                  <P Name="size">-1</P>
-                </array>
-                <type>
-                  <P Name="method">SF_INHERITED_TYPE</P>
-                  <P Name="primitive">SF_DOUBLE_TYPE</P>
-                  <P Name="isSigned">1</P>
-                  <P Name="wordLength">16</P>
-                </type>
-                <P Name="complexity">SF_COMPLEX_INHERITED</P>
-                <P Name="frame">SF_FRAME_NO</P>
-              </props>
-              <P Name="dataType">Inherit: Same as Simulink</P>
-            </data>
-            <data SSID="2" name="Heat">
-              <P Name="scope">INPUT_DATA</P>
-              <props>
-                <array>
-                  <P Name="size">-1</P>
-                </array>
-                <type>
-                  <P Name="method">SF_INHERITED_TYPE</P>
-                  <P Name="primitive">SF_DOUBLE_TYPE</P>
-                  <P Name="isSigned">1</P>
-                  <P Name="wordLength">16</P>
-                </type>
-                <P Name="complexity">SF_COMPLEX_INHERITED</P>
-                <P Name="frame">SF_FRAME_INHERITED</P>
-              </props>
-              <P Name="dataType">Inherit: Same as Simulink</P>
-            </data>
-          </Children>
-        </chart>
-        <chart id="98">
+        <chart id="92">
           <P Name="name">Alarm</P>
           <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
-          <P Name="viewLimits">[0 1646 0 762]</P>
+          <P Name="viewLimits">[109.517 724.483 77.561 413.439]</P>
+          <P Name="zoomFactor">0.374</P>
           <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="junctionColor">[0.7764705882352941 0.4980392156862745 0]</P>
           <P Name="chartColor">[1 0.9882352941176471 0.9254901960784314]</P>
           <P Name="screen">[1 1 3200 1200 1.25]</P>
-          <P Name="viewObj">98</P>
+          <P Name="viewObj">92</P>
+          <P Name="visible">1</P>
+          <subviewS>
+          </subviewS>
           <P Name="ssIdHighWaterMark">21</P>
           <P Name="decomposition">CLUSTER_CHART</P>
           <P Name="chartFileNumber">6</P>
@@ -2561,11 +2356,12 @@ entry: produce
               <P Name="fontSize">12</P>
               <P Name="superState">SUBCHART</P>
               <P Name="visible">0</P>
-              <P Name="subviewer">98</P>
+              <P Name="subviewer">92</P>
               <subviewS>
-                <P Name="panLimits">[-24 1622 -24 875]</P>
+                <P Name="panLimits">[-64.103 803.103 33.678 507.322]</P>
                 <P Name="x1">20</P>
                 <P Name="y1">20</P>
+                <P Name="zoomFactor">0.527</P>
                 <P Name="pos">[40 40 659 461]</P>
               </subviewS>
               <P Name="type">OR_STATE</P>
@@ -2608,10 +2404,12 @@ data
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
                 <state SSID="21">
-                  <P Name="description">wcet = 0.5ms</P>
+                  <P Name="description">wcet = 0.5ms
+faultType = Invalid Data
+faultState = true</P>
                   <P Name="labelString">Fault_Invalid Data
-entry: report this fault</P>
-                  <P Name="position">[135.5 383 137 62]</P>
+exit: report fault message</P>
+                  <P Name="position">[135.5 383 140 62]</P>
                   <P Name="fontSize">12</P>
                   <P Name="visible">0</P>
                   <P Name="subviewer">12</P>
@@ -2716,7 +2514,7 @@ entry: report this fault</P>
                   </src>
                   <dst>
                     <P Name="SSID">21</P>
-                    <P Name="intersection">[1 -0 -1 0.4854 202 383 0 0]</P>
+                    <P Name="intersection">[1 -0 -1 0.475 202 383 0 0]</P>
                   </dst>
                   <P Name="midPoint">[202 345.75]</P>
                   <P Name="visible">0</P>
@@ -2735,7 +2533,7 @@ entry: report this fault</P>
               <P Name="position">[114 141 90 60]</P>
               <P Name="fontSize">12</P>
               <P Name="visible">0</P>
-              <P Name="subviewer">98</P>
+              <P Name="subviewer">92</P>
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
@@ -2745,7 +2543,7 @@ entry: report this fault</P>
               <P Name="position">[371 321 90 60]</P>
               <P Name="fontSize">12</P>
               <P Name="visible">0</P>
-              <P Name="subviewer">98</P>
+              <P Name="subviewer">92</P>
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
@@ -2755,7 +2553,7 @@ entry: report this fault</P>
               <P Name="position">[630 321 90 60]</P>
               <P Name="fontSize">12</P>
               <P Name="visible">0</P>
-              <P Name="subviewer">98</P>
+              <P Name="subviewer">92</P>
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
@@ -2806,7 +2604,7 @@ entry: report this fault</P>
               </dst>
               <P Name="midPoint">[158 122.5]</P>
               <P Name="dataLimits">[155.6 160.4 112 141]</P>
-              <P Name="subviewer">98</P>
+              <P Name="subviewer">92</P>
               <P Name="drawStyle">SMART</P>
               <slide>
                 <P Name="sticky">BOTH_STICK</P>
@@ -2828,7 +2626,7 @@ temperature]</P>
               </dst>
               <P Name="midPoint">[276.75 179]</P>
               <P Name="dataLimits">[204 357.5 176.6 181.4]</P>
-              <P Name="subviewer">98</P>
+              <P Name="subviewer">92</P>
               <P Name="drawStyle">SMART</P>
               <slide>
                 <P Name="sticky">BOTH_STICK</P>
@@ -2849,7 +2647,7 @@ temperature]</P>
               </dst>
               <P Name="midPoint">[229.946 313.554]</P>
               <P Name="dataLimits">[151.6 371 201 353]</P>
-              <P Name="subviewer">98</P>
+              <P Name="subviewer">92</P>
               <P Name="drawStyle">SMART</P>
               <slide>
                 <P Name="sticky">BOTH_STICK</P>
@@ -2870,7 +2668,7 @@ temperature]</P>
               </dst>
               <P Name="midPoint">[415 258.75]</P>
               <P Name="dataLimits">[412.6 417.4 204.5 321]</P>
-              <P Name="subviewer">98</P>
+              <P Name="subviewer">92</P>
               <P Name="drawStyle">SMART</P>
               <slide>
                 <P Name="sticky">BOTH_STICK</P>
@@ -2892,7 +2690,7 @@ temperature]</P>
               </dst>
               <P Name="midPoint">[541.5 350]</P>
               <P Name="dataLimits">[461 630 347.6 352.4]</P>
-              <P Name="subviewer">98</P>
+              <P Name="subviewer">92</P>
               <P Name="drawStyle">SMART</P>
               <slide>
                 <P Name="sticky">BOTH_STICK</P>
@@ -2913,26 +2711,21 @@ temperature]</P>
       <P Name="machine">31</P>
       <P Name="chart">63</P>
     </instance>
-    <instance id="84">
+    <instance id="83">
       <P Name="name">Temperature
 Sensor</P>
       <P Name="machine">31</P>
       <P Name="chart">76</P>
     </instance>
-    <instance id="93">
+    <instance id="91">
       <P Name="name">Heat Source </P>
       <P Name="machine">31</P>
-      <P Name="chart">85</P>
+      <P Name="chart">84</P>
     </instance>
-    <instance id="97">
-      <P Name="name">Air </P>
-      <P Name="machine">31</P>
-      <P Name="chart">94</P>
-    </instance>
-    <instance id="119">
+    <instance id="113">
       <P Name="name">Alarm</P>
       <P Name="machine">31</P>
-      <P Name="chart">98</P>
+      <P Name="chart">92</P>
     </instance>
   </Stateflow>
 </ModelInformation>
