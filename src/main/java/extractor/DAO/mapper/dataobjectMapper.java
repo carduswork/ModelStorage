@@ -62,4 +62,6 @@ public interface dataobjectMapper {
      * @mbg.generated Mon Jun 17 21:27:04 CST 2019
      */
     int updateByPrimaryKey(dataobject record);
+    
+    dataobject getByFrom(Integer _from);
 }

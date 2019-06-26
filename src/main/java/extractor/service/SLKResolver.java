@@ -257,9 +257,11 @@ public class SLKResolver {
 			}
 
 			Element typElement = (Element) document
-					.selectSingleNode(portdata.getParent().getUniquePath() + "/P[@Name='dataType']");
+					.selectSingleNode(portdata.getUniquePath() + "/P[@Name='dataType']");
 			if (typElement != null) {
 				dataobject d = new dataobject();
+				d.setFrom(linkpointID);
+//				d.setTo(to);
 				d.setDatatype(typElement.getText());
 				// TODO 更多信息
 				dom.insert(d);
@@ -317,11 +319,7 @@ public class SLKResolver {
 			Element ls = (Element) document.selectSingleNode(element2.getUniquePath() + "/P[@Name='labelString']");
 
 			String[] ps = ls.getText().split("\n");
-//			for (String s : ps) {
-//				if (!s.contains(" ")) {
-//					component.setName(s);
-//				}
-//			}
+
 			component.setName(ps[0]);
 			Element dElement = (Element) document
 					.selectSingleNode(element2.getUniquePath() + "/P[@Name='description']");
@@ -343,8 +341,48 @@ public class SLKResolver {
 				e.printStackTrace();
 			}
 			insert_task(t);
+			Element childElement=element2.element("Children");
+			//有thread
+			if(childElement!=null) {
+				Document doc = ModelResolver(modelfilename);
+//				String getthread = "//Stateflow/machine/Children/chart/P[contains(text(),'" + father.getName() + "')]/following-sibling::Children/state";
+				List<? extends Node> threalist = doc.selectNodes(childElement.getUniquePath()+"/state");
+				for (Node n2 : threalist) {
+					Element threadElement = (Element) n2;
+					component threadcomp = new component();
+					Integer id2 = (int) GetID.getId();
+					threadcomp.setComponentid(id2);
+					threadcomp.setModeltype("simulink");
+					Element namElement = (Element) doc.selectSingleNode(threadElement.getUniquePath() + "/P[@Name='labelString']");
+
+					String[] threadprop = namElement.getText().split("\n");
+
+					threadcomp.setName(threadprop[0]);
+					Element descElement = (Element) doc
+							.selectSingleNode(threadElement.getUniquePath() + "/P[@Name='description']");
+					if(descElement!=null) {
+						
+						threadcomp.setWcet(descElement.getText().split(" ")[2]);
+					}
+
+					threadcomp.setType("task");
+					insert_component(threadcomp);
+
+					_task threadTask = new _task();
+					threadTask.setName(threadprop[0]);
+					threadTask.setTaskid(id2);
+					threadTask.setFatherid(idString);
+					try {
+						AppendID.AppendID(modelfilename, threadElement.getUniquePath(), threadTask.getTaskid().toString());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					insert_task(threadTask);
+				transitionResolver(modelfilename, threadcomp);
+				}
+			}}
 		}
-	}
+	
 
 	private void transitionResolver(String modelfilename, component father) throws Exception {
 		Document document = ModelResolver(modelfilename);

@@ -22,10 +22,10 @@
           <states name="Incorrect"/>
         </behaviors>
         <behaviors name="FailStopTransient">
-          <events xsi:type="errorModel:ErrorEvent" name="Failure" id="-1871779222"/>
-          <events xsi:type="errorModel:ErrorEvent" name="Recoverevent" id="-83648215"/>
-          <states name="Operational" intial="true" id="-1199970971"/>
-          <states name="FailStop" id="-1883973274"/>
+          <events xsi:type="errorModel:ErrorEvent" name="Failure" id="-2063950393"/>
+          <events xsi:type="errorModel:ErrorEvent" name="Recoverevent" id="1201589326"/>
+          <states name="Operational" intial="true" id="-1626374709"/>
+          <states name="FailStop" id="-482941830"/>
           <transitions name="FailureTransition" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0" target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.1">
             <ownedComment body="-- sensor failure may be transient. We assume a 20% persistent sesnor failure rate."/>
             <condition xsi:type="errorModel:ConditionElement">

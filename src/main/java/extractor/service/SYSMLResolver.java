@@ -25,6 +25,7 @@ import extractor.DAO.mapper._taskMapper;
 import extractor.DAO.mapper.busMapper;
 import extractor.DAO.mapper.communicationchannelMapper;
 import extractor.DAO.mapper.componentMapper;
+import extractor.DAO.mapper.dataobjectMapper;
 import extractor.DAO.mapper.deviceMapper;
 import extractor.DAO.mapper.linkpointMapper;
 import extractor.DAO.mapper.rtosMapper;
@@ -41,6 +42,7 @@ import extractor.model._task;
 import extractor.model.bus;
 import extractor.model.communicationchannel;
 import extractor.model.component;
+import extractor.model.dataobject;
 import extractor.model.device;
 import extractor.model.linkpoint;
 import extractor.model.rtos;
@@ -91,6 +93,8 @@ public class SYSMLResolver {
 	private rtosMapper rsmMapper;
 	@Autowired
 	private _taskMapper _tm;
+	@Autowired
+	private dataobjectMapper dobjm;
 
 	private int insert_component(component c) {
 		return camArchMapper.insert(c);
@@ -201,7 +205,7 @@ public class SYSMLResolver {
 		return document;
 	}
 
-	public void MatchComponents(String filepath, String contenttype) throws Exception {          
+	public void MatchComponents(String filepath, String contenttype) throws Exception {
 		Document document = ModelResolver(filepath);
 
 		String getCompponents = "//packagedElement[@xmi:type='uml:Class']/nestedClassifier[@xmi:type='uml:Class' or @xmi:type='uml:Device']";
@@ -223,9 +227,10 @@ public class SYSMLResolver {
 			} else {
 				c.setType("device");
 			}
-			Element wcetElement=(Element)document.selectSingleNode(e.getUniquePath()+"/ownedAttribute[@name='delay']");
-			if(wcetElement!=null) {
-				c.setWcet(wcetElement.element("defaultValue").attributeValue("value")+"ms");
+			Element wcetElement = (Element) document
+					.selectSingleNode(e.getUniquePath() + "/ownedAttribute[@name='delay']");
+			if (wcetElement != null) {
+				c.setWcet(wcetElement.element("defaultValue").attributeValue("value") + "ms");
 			}
 			insert_component(c);
 			if (e.element("ownedRule[@xmi:type='uml:Constraint']") != null) {
@@ -242,21 +247,20 @@ public class SYSMLResolver {
 				String[] exceptionlist = ((Element) document
 						.selectSingleNode("//Requirements:Requirement[@base_Class='" + exceptionlistid + "']"))
 								.attributeValue("text").split("、");
-				for(String s:exceptionlist) {			
+				for (String s : exceptionlist) {
 					_exception ex = new _exception();
 					ex.setType("sysmlexception");
-					
+
 					ex.setName(s);
 					ex.setComponentid(Integer.valueOf(idString));
 					insert_exception(ex);
 				}
 			}
-			LinkpointResolver(filepath, n.getUniquePath(), "rtos");
+			LinkpointResolver(filepath, n.getUniquePath(), "subsys");
 			TaskResolver(filepath, n.getUniquePath(), c);
 		}
 	}
 
-//TODO provide,require
 	private void LinkpointResolver(String linkpointfile, String fatherpath, String fathertype) throws Exception {
 		Document document = ModelResolver(linkpointfile);
 
@@ -268,23 +272,36 @@ public class SYSMLResolver {
 			ports1.setModeltype("sysml");
 			Integer linkpointID = (int) GetID.getId();
 			ports1.setLinkpointid(linkpointID);
-			try {
-				AppendID.AppendID4sysml(linkpointfile, element2.getUniquePath(), linkpointID.toString());
-				// type指向赋予id
-				QName qname1 = QName.get("type");
-				if (fathertype.equals("rtos")) {
 
-					String g = "//ownedAttribute[@xmi:id='" + element2.attributeValue(qname1) + "']";
-					AppendID.AppendID4sysml(linkpointfile, g, linkpointID.toString());
-				} else {
-					String g = "//nestedClassifier[@xmi:id='" + element2.attributeValue(qname1) + "']";
-					AppendID.AppendID4sysml(linkpointfile, g, linkpointID.toString());
-				}
-			} catch (Exception e) {
-//				System.out.println();
+//			try {
+			AppendID.AppendID4sysml(linkpointfile, element2.getUniquePath(), linkpointID.toString());
+			// type指向赋予id
+			QName qname1 = QName.get("type");
+//				if (fathertype.equals("subsys")) {
+//
+//					String g = "//ownedAttribute[@xmi:id='" + element2.attributeValue(qname1) + "']";
+//					AppendID.AppendID4sysml(linkpointfile, g, linkpointID.toString());
+//					Element dataElement = (Element) document.selectSingleNode(g);
+//					dataobject dobj = new dataobject();
+//					dobj.setDatatype(dataElement.attributeValue("name"));
+//					dobj.setFrom(linkpointID);
+//					dobjm.insert(dobj);
+//				} else {
+			if( element2.attributeValue(qname1)!=null) {
+				
+				String g = "//nestedClassifier[@xmi:id='" + element2.attributeValue(qname1) + "']";
+				AppendID.AppendID4sysml(linkpointfile, g, linkpointID.toString());
+				Element dataElement = (Element) document.selectSingleNode(g);
+				dataobject dobj = new dataobject();
+				dobj.setDatatype(dataElement.attributeValue("name"));
+				dobj.setFrom(linkpointID);
+				dobjm.insert(dobj);
 			}
+			// }
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
 			insert_ports(ports1);
-			// portlist.add(ports1);
 
 		}
 	}

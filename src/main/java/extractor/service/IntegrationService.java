@@ -25,6 +25,7 @@ import extractor.DAO.mapper._taskMapper;
 import extractor.DAO.mapper.communicationchannelMapper;
 import extractor.DAO.mapper.componentMapper;
 import extractor.DAO.mapper.componenttransitionMapper;
+import extractor.DAO.mapper.dataobjectMapper;
 import extractor.DAO.mapper.linkpointMapper;
 import extractor.DAO.mapper.processorMapper;
 import extractor.DAO.mapper.transitionMapper;
@@ -37,6 +38,7 @@ import extractor.model._task;
 import extractor.model.communicationchannel;
 import extractor.model.component;
 import extractor.model.componenttransition;
+import extractor.model.dataobject;
 import extractor.model.linkpoint;
 import extractor.model.transition;
 import extractor.model.transitionstate;
@@ -73,7 +75,8 @@ public class IntegrationService {
 	private _eventMapper evtm;
 	@Autowired
 	private componenttransitionMapper cttm;
-
+@Autowired
+private dataobjectMapper dm;
 	public static Document ModelResolver(String url) throws DocumentException {
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(url);
@@ -121,6 +124,10 @@ public class IntegrationService {
 					}
 					if (rm.selectByportid(v2.getLinkpointid()) != null) {
 						lp.addAttribute("direction", "in");
+					}
+					if(dm.getByFrom(v2.getLinkpointid())!=null) {
+						
+						lp.addAttribute("datatype", dm.getByFrom(v2.getLinkpointid()).getDatatype());
 					}
 				});
 				List<_exception> ecplist = em.selectByComp(compv.getComponentid());
@@ -306,6 +313,11 @@ public class IntegrationService {
 					if (rm.selectByportid(v2.getLinkpointid()) != null) {
 						lp.addAttribute("direction", "in");
 					}
+					if( dm.getByFrom(v2.getLinkpointid())!=null) {
+						
+						lp.addAttribute("datatype", dm.getByFrom(v2.getLinkpointid()).getDatatype());
+					}
+
 				});
 				List<_exception> ecplist = em.selectByComp(compv.getComponentid());
 				ecplist.forEach((ecpv) -> {

@@ -29,6 +29,7 @@ import extractor.DAO.mapper.communicationchannelMapper;
 import extractor.DAO.mapper.componentMapper;
 import extractor.DAO.mapper.componenttransitionMapper;
 import extractor.DAO.mapper.connectionsMapper;
+import extractor.DAO.mapper.dataobjectMapper;
 import extractor.DAO.mapper.deviceMapper;
 import extractor.DAO.mapper.linkpointMapper;
 import extractor.DAO.mapper.rtosMapper;
@@ -51,6 +52,7 @@ import extractor.model.communicationchannel;
 import extractor.model.component;
 import extractor.model.componenttransition;
 import extractor.model.connections;
+import extractor.model.dataobject;
 import extractor.model.device;
 import extractor.model.linkpoint;
 import extractor.model.rtos;
@@ -147,7 +149,8 @@ public class AADLResolver {
 	private _partitionMapper ptm;
 	@Autowired
 	private componenttransitionMapper cttm;
-
+@Autowired
+private dataobjectMapper dobjm;
 	private int insert_partition(_partition p) {
 		return ptm.insert(p);
 	}
@@ -712,14 +715,23 @@ public class AADLResolver {
 						.selectNodes("//ownedClassifier[@xsi:type='aadl2:DataType' and @name='" + datapath[2] + "']");
 				for (Node node : datalist) {
 					Element dataElement = (Element) node;
-					if (dataElement.element("ownedPropertyAssociation").attributeValue("property").contains("period")) {
-						ports1.setPeriod(dataElement.element("ownedPropertyAssociation").element("ownedValue")
-								.element("ownedValue").attributeValue("value") + "ms");
+					List<Element> props = dataElement.elements("ownedPropertyAssociation");
+					for (Element e : props) {
+						if (e.attributeValue("property").contains("period")) {
+							ports1.setPeriod(
+									e.element("ownedValue").element("ownedValue").attributeValue("value") + "ms");
+						}
+						if (e.attributeValue("property").contains("porttype")) {
+
+							dataobject doj = new dataobject();
+							doj.setDatatype(e.element("ownedValue").element("ownedValue").attributeValue("value"));
+							doj.setFrom(linkpointID);
+							dobjm.insert(doj);
+						}
 					}
 				}
 			} catch (Exception e) {
-				System.out.println(portElement.attributeValue("name"));
-			}
+e.printStackTrace();			}
 			portsMapper.insert(ports1);
 
 			switch (portType) {

@@ -28,9 +28,9 @@
           </propagations>
         </parsedAnnexSubclause>
       </ownedAnnexSubclause>
-      <ownedDataPort name="currentT" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem" id="-1395767295"/>
+      <ownedDataPort name="currentT" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem" id="-1963226536"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="alarm.impl" id="1889171065">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="alarm.impl" id="2077087707">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
       <ownedPortConnection name="new_connection">
         <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.2" connectionEnd="#//@ownedPublicSection/@ownedClassifier.6/@ownedDataPort.0"/>

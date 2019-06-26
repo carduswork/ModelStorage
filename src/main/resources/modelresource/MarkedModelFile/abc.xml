@@ -817,7 +817,7 @@
       <P Name="ZoomFactor">179</P>
       <P Name="ReportName">simulink-default.rpt</P>
       <P Name="SIDHighWatermark">11</P>
-      <Block BlockType="SubSystem" Name="Alarm" SID="9" id="-1697326652">
+      <Block BlockType="SubSystem" Name="Alarm" SID="9" id="1744696874">
         <P Name="Description">wcet = 1ms
 period = 10ms</P>
         <P Name="Ports">[1, 1]</P>
@@ -836,7 +836,7 @@ period = 10ms</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">80</P>
-          <Block BlockType="Inport" Name="Current_Temperature" SID="9::79" id="1890222165">
+          <Block BlockType="Inport" Name="Current_Temperature" SID="9::79" id="488870615">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">59</P>
             <P Name="IconDisplay">Port number</P>
@@ -867,7 +867,7 @@ period = 10ms</P>
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">55</P>
           </Block>
-          <Block BlockType="Outport" Name="Send_Out_Alarm" SID="9::80" id="-1848116981">
+          <Block BlockType="Outport" Name="Send_Out_Alarm" SID="9::80" id="1515364889">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">60</P>
             <P Name="IconDisplay">Port number</P>
@@ -904,7 +904,7 @@ period = 10ms</P>
           </Line>
         </System>
       </Block>
-      <Block BlockType="SubSystem" Name="Heat Source " SID="6" id="83924509">
+      <Block BlockType="SubSystem" Name="Heat Source " SID="6" id="-648950360">
         <P Name="Ports">[1]</P>
         <P Name="Position">[785, 354, 940, 426]</P>
         <P Name="ZOrder">5</P>
@@ -921,7 +921,7 @@ period = 10ms</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">78</P>
-          <Block BlockType="Inport" Name="Heat_Control" SID="6::77" id="226496705">
+          <Block BlockType="Inport" Name="Heat_Control" SID="6::77" id="-156428486">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">57</P>
             <P Name="IconDisplay">Port number</P>
@@ -969,7 +969,7 @@ period = 10ms</P>
           </Line>
         </System>
       </Block>
-      <Block BlockType="SubSystem" Name="Operator Interface" SID="5" id="-624167506">
+      <Block BlockType="SubSystem" Name="Operator Interface" SID="5" id="1986597004">
         <P Name="Description">wcet = 1ms</P>
         <P Name="Ports">[2, 1]</P>
         <P Name="Position">[520, 136, 710, 214]</P>
@@ -987,12 +987,12 @@ period = 10ms</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">82</P>
-          <Block BlockType="Inport" Name="Operator_Feedback" SID="5::78" id="1629618459">
+          <Block BlockType="Inport" Name="Operator_Feedback" SID="5::78" id="687599233">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">58</P>
             <P Name="IconDisplay">Port number</P>
           </Block>
-          <Block BlockType="Inport" Name="Inter_Act_Input" SID="5::79" id="-789278773">
+          <Block BlockType="Inport" Name="Inter_Act_Input" SID="5::79" id="-1608557744">
             <P Name="Position">[20, 136, 40, 154]</P>
             <P Name="ZOrder">59</P>
             <P Name="Port">2</P>
@@ -1024,7 +1024,7 @@ period = 10ms</P>
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">61</P>
           </Block>
-          <Block BlockType="Outport" Name="Operator_Settings" SID="5::77" id="-764162018">
+          <Block BlockType="Outport" Name="Operator_Settings" SID="5::77" id="-647438721">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">57</P>
             <P Name="IconDisplay">Port number</P>
@@ -1068,7 +1068,7 @@ period = 10ms</P>
           </Line>
         </System>
       </Block>
-      <Block BlockType="SubSystem" Name="Temperature Sensor" SID="1" id="-1197125386">
+      <Block BlockType="SubSystem" Name="Temperature Sensor" SID="1" id="-1293287638">
         <P Name="Description">wcet = 0.1ms
 period = 5ms</P>
         <P Name="Ports">[0, 1]</P>
@@ -1117,7 +1117,7 @@ period = 5ms</P>
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">55</P>
           </Block>
-          <Block BlockType="Outport" Name="Current_Temperature" SID="1::77" id="224564080">
+          <Block BlockType="Outport" Name="Current_Temperature" SID="1::77" id="-1291623641">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">57</P>
             <P Name="IconDisplay">Port number</P>
@@ -1154,7 +1154,7 @@ period = 5ms</P>
           </Line>
         </System>
       </Block>
-      <Block BlockType="SubSystem" Name="Thermostat" SID="4" id="348152961">
+      <Block BlockType="SubSystem" Name="Thermostat" SID="4" id="2115894671">
         <P Name="Description">wcet = 1ms</P>
         <P Name="Ports">[2, 2]</P>
         <P Name="Position">[520, 321, 705, 414]</P>
@@ -1172,12 +1172,12 @@ period = 5ms</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">80</P>
-          <Block BlockType="Inport" Name="Operator_Settings" SID="4::77" id="246778942">
+          <Block BlockType="Inport" Name="Operator_Settings" SID="4::77" id="1210686811">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">57</P>
             <P Name="IconDisplay">Port number</P>
           </Block>
-          <Block BlockType="Inport" Name="Current_Temperature" SID="4::80" id="-996217592">
+          <Block BlockType="Inport" Name="Current_Temperature" SID="4::80" id="1089404195">
             <P Name="Position">[20, 136, 40, 154]</P>
             <P Name="ZOrder">60</P>
             <P Name="Port">2</P>
@@ -1215,12 +1215,12 @@ period = 5ms</P>
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">55</P>
           </Block>
-          <Block BlockType="Outport" Name="Operator_Feedback" SID="4::78" id="-2070722316">
+          <Block BlockType="Outport" Name="Operator_Feedback" SID="4::78" id="740248108">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">58</P>
             <P Name="IconDisplay">Port number</P>
           </Block>
-          <Block BlockType="Outport" Name="Heat_Control" SID="4::79" id="786024806">
+          <Block BlockType="Outport" Name="Heat_Control" SID="4::79" id="185442190">
             <P Name="Position">[460, 136, 480, 154]</P>
             <P Name="ZOrder">59</P>
             <P Name="Port">2</P>
@@ -1274,32 +1274,32 @@ period = 5ms</P>
           </Line>
         </System>
       </Block>
-      <Line id="1019628175">
+      <Line id="1457135869">
         <P Name="ZOrder">1</P>
         <P Name="SrcBlock">Temperature
 Sensor</P>
         <P Name="SrcPort">1</P>
         <P Name="Points">[44, 0]</P>
-        <Branch id="1591542649">
+        <Branch id="-1164978265">
           <P Name="ZOrder">8</P>
           <P Name="Points">[0, -66; -264, 0; 0, -64]</P>
           <P Name="DstBlock">Alarm</P>
           <P Name="DstPort">1</P>
         </Branch>
-        <Branch id="1347328452">
+        <Branch id="279583201">
           <P Name="ZOrder">7</P>
           <P Name="DstBlock">Thermostat</P>
           <P Name="DstPort">2</P>
         </Branch>
       </Line>
-      <Line id="834291520">
+      <Line id="2015579967">
         <P Name="ZOrder">2</P>
         <P Name="SrcBlock">Thermostat</P>
         <P Name="SrcPort">2</P>
         <P Name="DstBlock">Heat Source </P>
         <P Name="DstPort">1</P>
       </Line>
-      <Line id="2041971555">
+      <Line id="643345129">
         <P Name="ZOrder">3</P>
         <P Name="SrcBlock">Thermostat</P>
         <P Name="SrcPort">1</P>
@@ -1307,7 +1307,7 @@ Sensor</P>
         <P Name="DstBlock">Operator Interface</P>
         <P Name="DstPort">1</P>
       </Line>
-      <Line id="420312746">
+      <Line id="64884133">
         <P Name="ZOrder">4</P>
         <P Name="SrcBlock">Operator Interface</P>
         <P Name="SrcPort">1</P>
@@ -1347,7 +1347,7 @@ Sensor</P>
           <P Name="disableImplicitCasting">1</P>
           <P Name="actionLanguage">2</P>
           <Children>
-            <state SSID="5" id="1394395265">
+            <state SSID="5" id="1343735327">
               <P Name="labelString">Idle</P>
               <P Name="position">[389 195 90 60]</P>
               <P Name="fontSize">12</P>
@@ -1356,7 +1356,7 @@ Sensor</P>
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
-            <state SSID="11" id="1782185659">
+            <state SSID="11" id="-529471924">
               <P Name="description">wcet = 0.5ms</P>
               <P Name="labelString">Setting
 entry: set the
@@ -1369,7 +1369,7 @@ entry: set the
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
-            <state SSID="20" id="-947376887">
+            <state SSID="20" id="1064818499">
               <P Name="description">wcet = 1ms</P>
               <P Name="labelString">Data_Process
 </P>
@@ -1388,7 +1388,7 @@ entry: set the
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
               <Children>
-                <state SSID="27">
+                <state SSID="27" id="-1890286435">
                   <P Name="labelString">Idle</P>
                   <P Name="position">[159 117 90 60]</P>
                   <P Name="fontSize">12</P>
@@ -1397,7 +1397,7 @@ entry: set the
                   <P Name="type">OR_STATE</P>
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
-                <state SSID="23">
+                <state SSID="23" id="884774673">
                   <P Name="description">wcet = 0.5ms</P>
                   <P Name="labelString">Format
 entry: format the
@@ -1411,7 +1411,7 @@ exit: send data</P>
                   <P Name="type">OR_STATE</P>
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
-                <state SSID="22">
+                <state SSID="22" id="783284286">
                   <P Name="description">wcet = 0.5ms</P>
                   <P Name="labelString">Data Validate
 entry: validate the
@@ -1424,7 +1424,7 @@ data
                   <P Name="type">OR_STATE</P>
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
-                <state SSID="25">
+                <state SSID="25" id="27598354">
                   <P Name="description">wcet = 0.5ms
 faultType = Invalid Data
 faultState = true</P>
@@ -1544,7 +1544,7 @@ exit: report fault message</P>
                 </transition>
               </Children>
             </state>
-            <state SSID="9" id="683196041">
+            <state SSID="9" id="433559259">
               <P Name="description">wcet = 0.5ms</P>
               <P Name="labelString">Checking
 entry: compare
@@ -1557,7 +1557,7 @@ entry: compare
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
-            <state SSID="8" id="1400530991">
+            <state SSID="8" id="-621090801">
               <P Name="description">wcet = 0.5ms</P>
               <P Name="labelString">Control
 entry: send heat
@@ -1569,7 +1569,7 @@ entry: send heat
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
-            <state SSID="7" id="1469177441">
+            <state SSID="7" id="-2093634948">
               <P Name="description">wcet = 0.5ms</P>
               <P Name="labelString">Feedback</P>
               <P Name="position">[642 444 90 60]</P>
@@ -1648,7 +1648,7 @@ entry: send heat
               </props>
               <P Name="dataType">Inherit: Same as Simulink</P>
             </data>
-            <transition SSID="6" id="1083053269">
+            <transition SSID="6" id="-723176290">
               <P Name="labelString"/>
               <P Name="labelPosition">[434 162 0 0]</P>
               <P Name="fontSize">12</P>
@@ -1668,7 +1668,7 @@ entry: send heat
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="19" id="-2097703624">
+            <transition SSID="19" id="-992184696">
               <P Name="labelString"/>
               <P Name="labelPosition">[161.494 376.908 0 0]</P>
               <P Name="fontSize">12</P>
@@ -1689,7 +1689,7 @@ entry: send heat
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="12" id="-1196398052">
+            <transition SSID="12" id="2056129061">
               <P Name="labelString">receive operator
 setting</P>
               <P Name="labelPosition">[523.913 192 88.641 26]</P>
@@ -1711,7 +1711,7 @@ setting</P>
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="18" id="-427431125">
+            <transition SSID="18" id="-361920894">
               <P Name="labelString">[current temperature
 below limits]</P>
               <P Name="labelPosition">[215.698 328.341 110.609 26]</P>
@@ -1733,7 +1733,7 @@ below limits]</P>
               </slide>
               <P Name="executionOrder">2</P>
             </transition>
-            <transition SSID="16" id="1308836125">
+            <transition SSID="16" id="-1249367682">
               <P Name="labelString"/>
               <P Name="labelPosition">[595.629 313.733 0 0]</P>
               <P Name="fontSize">12</P>
@@ -1754,7 +1754,7 @@ below limits]</P>
               </slide>
               <P Name="executionOrder">2</P>
             </transition>
-            <transition SSID="14" id="575962427">
+            <transition SSID="14" id="1285099391">
               <P Name="labelString">receive current
 temperature</P>
               <P Name="labelPosition">[442 286.456 81.297 26]</P>
@@ -1776,7 +1776,7 @@ temperature</P>
               </slide>
               <P Name="executionOrder">2</P>
             </transition>
-            <transition SSID="13" id="1061149126">
+            <transition SSID="13" id="-1890574419">
               <P Name="labelString">send operator
 feedback</P>
               <P Name="labelPosition">[700.611 328.54 76 26]</P>
@@ -1798,7 +1798,7 @@ feedback</P>
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="21" id="178249647">
+            <transition SSID="21" id="-1090418914">
               <P Name="labelString">[valid data]</P>
               <P Name="labelPosition">[444 408 59.984 14]</P>
               <P Name="fontSize">12</P>
@@ -1819,7 +1819,7 @@ feedback</P>
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="17" id="-1989869651">
+            <transition SSID="17" id="-1633171699">
               <P Name="labelString"> [current temperature
  exceed set limits]</P>
               <P Name="labelPosition">[238.533 485.331 113.938 26]</P>
@@ -1841,7 +1841,7 @@ feedback</P>
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="15" id="383150939">
+            <transition SSID="15" id="323441471">
               <P Name="labelString">receive current
 temperature</P>
               <P Name="labelPosition">[529.696 490 81.297 26]</P>
@@ -1886,7 +1886,7 @@ temperature</P>
           <P Name="disableImplicitCasting">1</P>
           <P Name="actionLanguage">2</P>
           <Children>
-            <state SSID="7" id="-732875068">
+            <state SSID="7" id="-490296315">
               <P Name="description">wcet = 0.5ms</P>
               <P Name="labelString">Send
 entry: send operator
@@ -1898,7 +1898,7 @@ entry: send operator
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
-            <state SSID="5" id="1267547950">
+            <state SSID="5" id="-633779664">
               <P Name="labelString">Idle</P>
               <P Name="position">[185 151 90 60]</P>
               <P Name="fontSize">12</P>
@@ -1907,7 +1907,7 @@ entry: send operator
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
-            <state SSID="10" id="1330376643">
+            <state SSID="10" id="-498625793">
               <P Name="description">wcet = 0.5ms</P>
               <P Name="labelString">Show 
 entry: show operator
@@ -1970,7 +1970,7 @@ entry: show operator
               </props>
               <P Name="dataType">Inherit: Same as Simulink</P>
             </data>
-            <transition SSID="6" id="777449061">
+            <transition SSID="6" id="-562894311">
               <P Name="labelString"/>
               <P Name="labelPosition">[228 114.5 0 0]</P>
               <P Name="fontSize">12</P>
@@ -1990,7 +1990,7 @@ entry: show operator
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="8" id="34991852">
+            <transition SSID="8" id="-727044237">
               <P Name="labelString">[Nurse Input]
 </P>
               <P Name="labelPosition">[335.348 154.903 70.641 26]</P>
@@ -2012,7 +2012,7 @@ entry: show operator
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="12" id="-2023244901">
+            <transition SSID="12" id="712807924">
               <P Name="labelString"/>
               <P Name="labelPosition">[101 244 0 0]</P>
               <P Name="fontSize">12</P>
@@ -2033,7 +2033,7 @@ entry: show operator
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="11" id="-926569915">
+            <transition SSID="11" id="-1035072891">
               <P Name="labelString">receive operator
 feedback</P>
               <P Name="labelPosition">[119.5 255 88.641 26]</P>
@@ -2055,7 +2055,7 @@ feedback</P>
               </slide>
               <P Name="executionOrder">2</P>
             </transition>
-            <transition SSID="9" id="933850084">
+            <transition SSID="9" id="-1992453169">
               <P Name="labelString"/>
               <P Name="labelPosition">[362.25 251.887 0 0]</P>
               <P Name="fontSize">12</P>
@@ -2100,7 +2100,7 @@ Sensor</P>
           <P Name="disableImplicitCasting">1</P>
           <P Name="actionLanguage">2</P>
           <Children>
-            <state SSID="6" id="710239350">
+            <state SSID="6" id="910485995">
               <P Name="labelString">Send data
 entry: send data 
 to Alarm and 
@@ -2112,7 +2112,7 @@ Thermostat </P>
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
-            <state SSID="3" id="-1802077964">
+            <state SSID="3" id="-1872887599">
               <P Name="labelString">Collect Data</P>
               <P Name="position">[139 122 90 60]</P>
               <P Name="fontSize">12</P>
@@ -2139,7 +2139,7 @@ Thermostat </P>
               </props>
               <P Name="dataType">Inherit: Same as Simulink</P>
             </data>
-            <transition SSID="4" id="-354991917">
+            <transition SSID="4" id="987182529">
               <P Name="labelString"/>
               <P Name="labelPosition">[183 107 0 0]</P>
               <P Name="fontSize">12</P>
@@ -2159,7 +2159,7 @@ Thermostat </P>
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="7" id="-721307618">
+            <transition SSID="7" id="-1465812590">
               <P Name="labelString">Timer</P>
               <P Name="labelPosition">[278 120 32.188 14]</P>
               <P Name="fontSize">12</P>
@@ -2180,7 +2180,7 @@ Thermostat </P>
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="8" id="-121505161">
+            <transition SSID="8" id="-551935669">
               <P Name="labelString"/>
               <P Name="labelPosition">[297.5 144.5 0 0]</P>
               <P Name="fontSize">12</P>
@@ -2224,7 +2224,7 @@ Thermostat </P>
           <P Name="disableImplicitCasting">1</P>
           <P Name="actionLanguage">2</P>
           <Children>
-            <state SSID="3" id="1772817556">
+            <state SSID="3" id="1708681756">
               <P Name="labelString">Idle</P>
               <P Name="position">[99 116 90 60]</P>
               <P Name="fontSize">12</P>
@@ -2233,7 +2233,7 @@ Thermostat </P>
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
-            <state SSID="5" id="237398007">
+            <state SSID="5" id="-1765191236">
               <P Name="labelString">Heating
 entry: produce
  heat</P>
@@ -2261,7 +2261,7 @@ entry: produce
               </props>
               <P Name="dataType">Inherit: Same as Simulink</P>
             </data>
-            <transition SSID="4" id="590613079">
+            <transition SSID="4" id="-424619459">
               <P Name="labelString"/>
               <P Name="labelPosition">[143 101 0 0]</P>
               <P Name="fontSize">12</P>
@@ -2281,7 +2281,7 @@ entry: produce
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="6" id="-739611733">
+            <transition SSID="6" id="-571688492">
               <P Name="labelString">[receive Heat Control]
 </P>
               <P Name="labelPosition">[229.522 122 117.938 26]</P>
@@ -2303,7 +2303,7 @@ entry: produce
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="8" id="-1271615477">
+            <transition SSID="8" id="1281764620">
               <P Name="labelString"/>
               <P Name="labelPosition">[283 226.531 0 0]</P>
               <P Name="fontSize">12</P>
@@ -2348,7 +2348,7 @@ entry: produce
           <P Name="disableImplicitCasting">1</P>
           <P Name="actionLanguage">2</P>
           <Children>
-            <state SSID="12" id="-827124590">
+            <state SSID="12" id="-1779087676">
               <P Name="description">wcet = 1ms</P>
               <P Name="labelString">Data_Process
 </P>
@@ -2367,7 +2367,7 @@ entry: produce
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
               <Children>
-                <state SSID="18">
+                <state SSID="18" id="-943881239">
                   <P Name="labelString">Idle</P>
                   <P Name="position">[159 117 90 60]</P>
                   <P Name="fontSize">12</P>
@@ -2376,7 +2376,7 @@ entry: produce
                   <P Name="type">OR_STATE</P>
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
-                <state SSID="19">
+                <state SSID="19" id="66224215">
                   <P Name="description">wcet = 0.5ms</P>
                   <P Name="labelString">Format
 entry: format the
@@ -2390,7 +2390,7 @@ exit: send data</P>
                   <P Name="type">OR_STATE</P>
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
-                <state SSID="20">
+                <state SSID="20" id="-1923480503">
                   <P Name="description">wcet = 0.5ms</P>
                   <P Name="labelString">Data Validate
 entry: validate the
@@ -2403,7 +2403,7 @@ data
                   <P Name="type">OR_STATE</P>
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
-                <state SSID="21">
+                <state SSID="21" id="-1218441075">
                   <P Name="description">wcet = 0.5ms
 faultType = Invalid Data
 faultState = true</P>
@@ -2528,7 +2528,7 @@ exit: report fault message</P>
                 </transition>
               </Children>
             </state>
-            <state SSID="3" id="-2117021566">
+            <state SSID="3" id="697287757">
               <P Name="labelString">Idle</P>
               <P Name="position">[114 141 90 60]</P>
               <P Name="fontSize">12</P>
@@ -2537,7 +2537,7 @@ exit: report fault message</P>
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
-            <state SSID="5" id="-351635844">
+            <state SSID="5" id="729242282">
               <P Name="description">wcet = 0.5ms</P>
               <P Name="labelString">Checking</P>
               <P Name="position">[371 321 90 60]</P>
@@ -2547,7 +2547,7 @@ exit: report fault message</P>
               <P Name="type">OR_STATE</P>
               <P Name="decomposition">CLUSTER_STATE</P>
             </state>
-            <state SSID="6" id="-1746278747">
+            <state SSID="6" id="-856247500">
               <P Name="description">wcet = 0.5ms</P>
               <P Name="labelString">Alarming</P>
               <P Name="position">[630 321 90 60]</P>
@@ -2591,7 +2591,7 @@ exit: report fault message</P>
               </props>
               <P Name="dataType">Inherit: Same as Simulink</P>
             </data>
-            <transition SSID="4" id="-1182967502">
+            <transition SSID="4" id="1932445995">
               <P Name="labelString"/>
               <P Name="labelPosition">[158 104.5 0 0]</P>
               <P Name="fontSize">12</P>
@@ -2611,7 +2611,7 @@ exit: report fault message</P>
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="7" id="1276611001">
+            <transition SSID="7" id="-1656236467">
               <P Name="labelString">[receive current 
 temperature]</P>
               <P Name="labelPosition">[235.437 141.685 87.953 26]</P>
@@ -2633,7 +2633,7 @@ temperature]</P>
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="9" id="19956451">
+            <transition SSID="9" id="-2104964980">
               <P Name="labelString">[not dangerous]</P>
               <P Name="labelPosition">[177.518 322.056 85.344 14]</P>
               <P Name="fontSize">12</P>
@@ -2654,7 +2654,7 @@ temperature]</P>
               </slide>
               <P Name="executionOrder">2</P>
             </transition>
-            <transition SSID="11" id="652640644">
+            <transition SSID="11" id="1266479615">
               <P Name="labelString">[valid data]</P>
               <P Name="labelPosition">[430 256 59.984 14]</P>
               <P Name="fontSize">12</P>
@@ -2675,7 +2675,7 @@ temperature]</P>
               </slide>
               <P Name="executionOrder">1</P>
             </transition>
-            <transition SSID="8" id="1451796265">
+            <transition SSID="8" id="-1490762937">
               <P Name="labelString">[exceed dangerous
 temperature]</P>
               <P Name="labelPosition">[505.152 310.84 104.031 26]</P>

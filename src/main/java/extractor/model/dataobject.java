@@ -35,7 +35,7 @@ public class dataobject {
      *
      * @mbg.generated Mon Jun 17 21:27:04 CST 2019
      */
-    private Integer to;
+    private Integer _to;
 
     /**
      *
@@ -44,7 +44,7 @@ public class dataobject {
      *
      * @mbg.generated Mon Jun 17 21:27:04 CST 2019
      */
-    private Integer from;
+    private Integer _from;
 
     /**
      *
@@ -163,7 +163,7 @@ public class dataobject {
      * @mbg.generated Mon Jun 17 21:27:04 CST 2019
      */
     public Integer getTo() {
-        return to;
+        return _to;
     }
 
     /**
@@ -174,8 +174,8 @@ public class dataobject {
      *
      * @mbg.generated Mon Jun 17 21:27:04 CST 2019
      */
-    public void setTo(Integer to) {
-        this.to = to;
+    public void setTo(Integer _to) {
+        this._to = _to;
     }
 
     /**
@@ -187,7 +187,7 @@ public class dataobject {
      * @mbg.generated Mon Jun 17 21:27:04 CST 2019
      */
     public Integer getFrom() {
-        return from;
+        return _from;
     }
 
     /**
@@ -198,8 +198,8 @@ public class dataobject {
      *
      * @mbg.generated Mon Jun 17 21:27:04 CST 2019
      */
-    public void setFrom(Integer from) {
-        this.from = from;
+    public void setFrom(Integer _from) {
+        this._from = _from;
     }
 
     /**
