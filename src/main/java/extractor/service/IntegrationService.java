@@ -370,11 +370,11 @@ public class IntegrationService {
 					tsk.addAttribute("period", taskv.getPeriod());
 					tsk.addAttribute("wcet", taskv.getWcet());
 
+
 					List<_exception> exception1 = em.selectByComp(taskv.getTaskid());
 					if (exception1.size() > 0) {
 						tsk.addAttribute("faultType", exception1.get(0).getName());
 					}
-
 					slkstate slkstat = slksm.selectByTask(taskv.getTaskid());
 					if (slkstat != null) {
 
@@ -396,7 +396,7 @@ public class IntegrationService {
 							child.addAttribute("faultType", exception2.get(0).getName());
 						}
 
-						slkstate slkstat2 = slksm.selectByTask(taskv.getTaskid());
+						slkstate slkstat2 = slksm.selectByTask(v6.getTaskid());
 						if (slkstat2 != null) {
 							child.addAttribute("exit", slkstat2.getExitinfo());
 							child.addAttribute("faultState", slkstat2.getSlkstatecol());

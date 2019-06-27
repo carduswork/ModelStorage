@@ -75,7 +75,7 @@
           </propagations>
         </parsedAnnexSubclause>
       </ownedAnnexSubclause>
-      <ownedDataPort name="currentTemperature" out="true" id="-667119456"/>
+      <ownedDataPort name="currentTemperature" out="true" id="-197437695"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceImplementation" name="temperature_sensor.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.4"/>
@@ -91,8 +91,8 @@
           </propagations>
         </parsedAnnexSubclause>
       </ownedAnnexSubclause>
-      <ownedDataPort name="heatcontrol" in="true" id="1648636424"/>
-      <ownedDataPort name="heat" out="true" id="-224045880"/>
+      <ownedDataPort name="heatcontrol" in="true" id="558808556"/>
+      <ownedDataPort name="heat" out="true" id="-242355726"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceImplementation" name="heatsource.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.6"/>

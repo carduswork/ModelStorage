@@ -315,19 +315,19 @@ public class SLKResolver {
 				+ "')]/following-sibling::Children/state";
 		List<? extends Node> namelist = document.selectNodes(gettask);
 		for (Node n : namelist) {
-			Element element2 = (Element) n;
+			Element taskElement = (Element) n;
 			component component = new component();
 			Integer idString = (int) GetID.getId();
 			component.setComponentid(idString);
 			component.setModeltype("simulink");
-			Element ls = (Element) document.selectSingleNode(element2.getUniquePath() + "/P[@Name='labelString']");
+			Element ls = (Element) document.selectSingleNode(taskElement.getUniquePath() + "/P[@Name='labelString']");
 
 			String[] ps = ls.getText().split("\n");
 
 			component.setName(ps[0]);
 			slkstate sks = new slkstate();
 			sks.setTaskid(idString.toString());
-
+//从名字中解析exit
 			String regString = "(?<=exit:).*";
 			Pattern pattern = Pattern.compile(regString);
 			Matcher m = pattern.matcher(ls.getText());
@@ -340,16 +340,16 @@ public class SLKResolver {
 
 			_task t = new _task();
 			Element dElement = (Element) document
-					.selectSingleNode(element2.getUniquePath() + "/P[@Name='description']");
+					.selectSingleNode(taskElement.getUniquePath() + "/P[@Name='description']");
 			if (dElement != null) {
 				String[] props = dElement.getText().split("\n");
 				for (String s : props) {
 					if (s.contains("faultType")) {
 						_exception e = new _exception();
-						Element namElement = (Element) document
-								.selectSingleNode(element2.getUniquePath() + "/P[@Name='labelString']");
-						e.setName(namElement.getText());
-						e.setType(s.split("=")[1]);
+//						Element namElement = (Element) document
+//								.selectSingleNode(taskElement.getUniquePath() + "/P[@Name='labelString']");
+//						e.setName(namElement.getText());
+						e.setName(s.split("=")[1]);
 						e.setComponentid(idString);
 						_em.insert(e);
 					}
@@ -366,38 +366,37 @@ public class SLKResolver {
 			t.setTaskid(idString);
 			t.setFatherid(father.getComponentid());
 			try {
-				AppendID.AppendID(modelfilename, element2.getUniquePath(), t.getTaskid().toString());
+				AppendID.AppendID(modelfilename, taskElement.getUniquePath(), t.getTaskid().toString());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			insert_task(t);
-			Element childElement = element2.element("Children");
+			
 			// 有thread
+			Element childElement = taskElement.element("Children");
 			if (childElement != null) {
 				Document doc = ModelResolver(modelfilename);
-//				String getthread = "//Stateflow/machine/Children/chart/P[contains(text(),'" + father.getName() + "')]/following-sibling::Children/state";
 				List<? extends Node> threalist = doc.selectNodes(childElement.getUniquePath() + "/state");
 				for (Node n2 : threalist) {
 					Element threadElement = (Element) n2;
 					component threadcomp = new component();
-					Integer id2 = (int) GetID.getId();
-					threadcomp.setComponentid(id2);
+					Integer threadid = (int) GetID.getId();
+					threadcomp.setComponentid(threadid);
 					threadcomp.setModeltype("simulink");
-					Element namElement = (Element) doc
+					Element threadnamElement = (Element) doc
 							.selectSingleNode(threadElement.getUniquePath() + "/P[@Name='labelString']");
 
-					String[] threadprop = namElement.getText().split("\n");
+					String[] threadprop = threadnamElement.getText().split("\n");
 
 					threadcomp.setName(threadprop[0]);
 
 					slkstate sks2 = new slkstate();
-					sks2.setTaskid(idString.toString());
+					sks2.setTaskid(threadid.toString());
 
 					String regString2 = "(?<=exit:).*";
 					Pattern pattern2 = Pattern.compile(regString2);
-					Matcher m2 = pattern2.matcher(ls.getText());
+					Matcher m2 = pattern2.matcher(threadnamElement.getText());
 					if (m2.find()) {
-
 						sks2.setExitinfo(m2.group());
 					}
 
@@ -409,11 +408,8 @@ public class SLKResolver {
 						for (String s : props) {
 							if (s.contains("faultType")) {
 								_exception e2 = new _exception();
-								Element threadnamElement = (Element) document
-										.selectSingleNode(element2.getUniquePath() + "/P[@Name='labelString']");
-								e2.setName(threadnamElement.getText());
-								e2.setType(s.split("=")[1]);
-								e2.setComponentid(id2);
+								e2.setName(s.split("=")[1]);
+								e2.setComponentid(threadid);
 								_em.insert(e2);
 							}
 							if (s.contains("faultState")) {
@@ -421,8 +417,7 @@ public class SLKResolver {
 								slksm.insert(sks2);
 							}
 							if (s.contains("wcet")) {
-
-								component.setWcet(s.split(" ")[2]);
+								threadcomp.setWcet(s.split(" ")[2]);
 								threadTask.setWcet(s.split(" ")[2]);
 							}
 						}
@@ -432,7 +427,7 @@ public class SLKResolver {
 					insert_component(threadcomp);
 
 					threadTask.setName(threadprop[0]);
-					threadTask.setTaskid(id2);
+					threadTask.setTaskid(threadid);
 					threadTask.setFatherid(idString);
 					try {
 						AppendID.AppendID(modelfilename, threadElement.getUniquePath(),
