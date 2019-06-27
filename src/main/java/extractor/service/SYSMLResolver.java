@@ -219,7 +219,7 @@ public class SYSMLResolver {
 			c.setComponentid(idString);
 			c.setName(e.attributeValue("name"));
 			c.setModeltype("sysml");
-			// TODO sysml组件种类鉴别
+			//sysml组件种类鉴别
 			Element root = document.getRootElement();
 			QName q = QName.get("type", root.getNamespaceForPrefix("xmi"));
 			if (e.attributeValue(q).equals("uml:Class")) {
@@ -370,7 +370,7 @@ public class SYSMLResolver {
 
 				t.setPeriod(periodElement.element("defaultValue").attributeValue("value") + "ms");
 			}
-			// TODO 块图的partition不存在
+			//块图的partition不存在
 			try {
 				AppendID.AppendID4sysml(modelfilename, taskElement.getUniquePath(), t.getTaskid().toString());
 				LinkpointResolver(modelfilename, taskElement.getUniquePath(), "task");
@@ -381,7 +381,6 @@ public class SYSMLResolver {
 			threadResolver(modelfilename, n.getUniquePath(), t);
 			// operation即task有错误定义
 			if (taskElement.element("ownedRule") != null) {
-				// TODO 解析错误exception
 				// Element e2 = element2.element("ownedRule[@xmi:type='uml:Constraint']");
 				Element e2 = taskElement.element("ownedRule");
 				_exception ex = new _exception();

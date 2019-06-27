@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -29,6 +31,7 @@ import extractor.DAO.mapper.dataobjectMapper;
 import extractor.DAO.mapper.deviceMapper;
 import extractor.DAO.mapper.linkpointMapper;
 import extractor.DAO.mapper.rtosMapper;
+import extractor.DAO.mapper.slkstateMapper;
 import extractor.DAO.mapper.transitionMapper;
 import extractor.DAO.mapper.transitionstateMapper;
 import extractor.model.InvocationChannel;
@@ -47,6 +50,7 @@ import extractor.model.dataobject;
 import extractor.model.device;
 import extractor.model.linkpoint;
 import extractor.model.rtos;
+import extractor.model.slkstate;
 import extractor.model.transition;
 import extractor.model.transitionstate;
 
@@ -99,6 +103,8 @@ public class SLKResolver {
 	private rtosMapper rsmMapper;
 	@Autowired
 	private _taskMapper _tm;
+	@Autowired
+	private slkstateMapper slksm;
 
 	private int insert_component(component c) {
 		return camArchMapper.insert(c);
@@ -248,7 +254,6 @@ public class SLKResolver {
 			// 端口的数据
 			Element portdata = (Element) document
 					.selectSingleNode("//chart/Children/data[@name='" + element2.attributeValue("Name") + "']");
-			// TODO 等那俩更新xml文件后调试一下
 			Element portdatadescription = (Element) document
 					.selectSingleNode(portdata.getUniquePath() + "/P[@Name='description']");
 			if (portdatadescription != null) {
@@ -262,7 +267,6 @@ public class SLKResolver {
 				d.setFrom(linkpointID);
 //				d.setTo(to);
 				d.setDatatype(typElement.getText());
-				// TODO 更多信息
 				dom.insert(d);
 			}
 
@@ -321,6 +325,16 @@ public class SLKResolver {
 			String[] ps = ls.getText().split("\n");
 
 			component.setName(ps[0]);
+			slkstate sks = new slkstate();
+			sks.setTaskid(idString.toString());
+
+			String regString = "(?<=exit:).*";
+			Pattern pattern = Pattern.compile(regString);
+			Matcher m = pattern.matcher(ls.getText());
+			if (m.find()) {
+
+				sks.setExitinfo(m.group());
+			}
 
 			component.setType("task");
 
@@ -338,6 +352,10 @@ public class SLKResolver {
 						e.setType(s.split("=")[1]);
 						e.setComponentid(idString);
 						_em.insert(e);
+					}
+					if (s.contains("faultState")) {
+						sks.setSlkstatecol(s.split("=")[1]);
+						slksm.insert(sks);
 					}
 				}
 				t.setWcet(dElement.getText().split(" ")[2]);
@@ -371,6 +389,18 @@ public class SLKResolver {
 					String[] threadprop = namElement.getText().split("\n");
 
 					threadcomp.setName(threadprop[0]);
+
+					slkstate sks2 = new slkstate();
+					sks2.setTaskid(idString.toString());
+
+					String regString2 = "(?<=exit:).*";
+					Pattern pattern2 = Pattern.compile(regString2);
+					Matcher m2 = pattern2.matcher(ls.getText());
+					if (m2.find()) {
+
+						sks2.setExitinfo(m2.group());
+					}
+
 					Element descElement = (Element) doc
 							.selectSingleNode(threadElement.getUniquePath() + "/P[@Name='description']");
 					_task threadTask = new _task();
@@ -386,9 +416,16 @@ public class SLKResolver {
 								e2.setComponentid(id2);
 								_em.insert(e2);
 							}
+							if (s.contains("faultState")) {
+								sks2.setSlkstatecol(s.split("=")[1]);
+								slksm.insert(sks2);
+							}
+							if (s.contains("wcet")) {
+
+								component.setWcet(s.split(" ")[2]);
+								threadTask.setWcet(s.split(" ")[2]);
+							}
 						}
-						component.setWcet(descElement.getText().split(" ")[2]);
-						threadTask.setWcet(descElement.getText().split(" ")[2]);
 					}
 
 					threadcomp.setType("task");

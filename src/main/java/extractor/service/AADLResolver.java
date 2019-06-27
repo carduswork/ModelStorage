@@ -149,8 +149,9 @@ public class AADLResolver {
 	private _partitionMapper ptm;
 	@Autowired
 	private componenttransitionMapper cttm;
-@Autowired
-private dataobjectMapper dobjm;
+	@Autowired
+	private dataobjectMapper dobjm;
+
 	private int insert_partition(_partition p) {
 		return ptm.insert(p);
 	}
@@ -457,7 +458,7 @@ private dataobjectMapper dobjm;
 				String destid = GetElementID(CompositeName1,
 						element.element("destination").attributeValue("connectionEnd"));
 				// Integer destportid = getPortIDByComponentName(CompositeName1, PortName1);
-				// TODO 有的没source dest
+				// 有的没source dest
 				if (destid.equals("")) {
 					cchannel.setDestid(0);
 				} else {
@@ -522,16 +523,21 @@ private dataobjectMapper dobjm;
 		components = document.selectNodes(gettask);
 		TaskResolver(modelfilename);
 		// task间的连接
+		document = ModelResolver(modelfilename);
 		List<Node> portconnectionlist = document
 				.selectNodes("//ownedClassifier[@xsi:type='aadl2:SystemImplementation']/ownedPortConnection");
 		for (Node n2 : portconnectionlist) {
 			Element e = (Element) n2;
 			connections c = new connections();
+			c.setFathercmpid(e.getParent().attributeValue("id"));
 			if (e.element("source").attributeValue("context") != null) {
 				// 没有context是指当前组件
-				Element sourcecomponent = (Element) document
+				Element declare = (Element) document
 						.selectSingleNode(GetXPath(e.element("source").attributeValue("context")));
-				c.setStartcomponentid(Integer.valueOf(e.getParent().attributeValue("id")));
+				//这里指向声明！
+				Element sourcecomponent = (Element) document
+						.selectSingleNode(GetXPath42layer(declare.attributeValue("processSubcomponentType")));
+				c.setStartcomponentid(Integer.valueOf(sourcecomponent.attributeValue("id")));
 			} else {
 				c.setStartcomponentid(Integer.valueOf(e.getParent().attributeValue("id")));
 			}
@@ -539,9 +545,11 @@ private dataobjectMapper dobjm;
 					.selectSingleNode(GetXPath(e.element("source").attributeValue("connectionEnd")));
 			c.setStartinterface(sourceport.attributeValue("id"));
 			if (e.element("destination").attributeValue("context") != null) {
-				Element dstcomponent = (Element) document
+				Element declare = (Element) document
 						.selectSingleNode(GetXPath(e.element("destination").attributeValue("context")));
-				c.setEndcomponentid(Integer.valueOf(e.getParent().attributeValue("id")));
+				Element dstcomponent = (Element) document
+						.selectSingleNode(GetXPath42layer(declare.attributeValue("processSubcomponentType")));
+				c.setEndcomponentid(Integer.valueOf(dstcomponent.attributeValue("id")));
 
 			} else {
 				c.setEndcomponentid(Integer.valueOf(e.getParent().attributeValue("id")));
@@ -585,7 +593,7 @@ private dataobjectMapper dobjm;
 			// partition.setRtosid();
 			// partitionlist.add(partition);
 			// }
-			// TODO RTOS与partition的部署关系
+			// RTOS与partition的部署关系
 //			device d = new device();
 //			d.setDeviceid(idString2);
 //			devicelist.add(d);
@@ -658,7 +666,6 @@ private dataobjectMapper dobjm;
 		}
 	}
 
-//TODO dataobject
 	private void LinkpointResolver(String linkpointfile, List<? extends Node> ports, Integer fatherid,
 			String fathertype, String componetname) throws Exception {
 		switch (fathertype) {
@@ -706,7 +713,7 @@ private dataobjectMapper dobjm;
 			Integer linkpointID = (int) GetID.getId();
 			ports1.setLinkpointid(linkpointID);
 			// 获取data
-			// TODO 目前设定为只读取定义在composition中的data
+			// 目前设定为只读取定义在composition中的data
 			try {
 				String[] datapath = portElement.attributeValue("dataFeatureClassifier").split("\\.");
 				String f = Getfilename(portElement.attributeValue("dataFeatureClassifier"));
@@ -731,7 +738,8 @@ private dataobjectMapper dobjm;
 					}
 				}
 			} catch (Exception e) {
-e.printStackTrace();			}
+				e.printStackTrace();
+			}
 			portsMapper.insert(ports1);
 
 			switch (portType) {
@@ -1189,25 +1197,29 @@ e.printStackTrace();			}
 			threadResolver(taskElement, idString, getimpl, modelfilename);
 			insert_task(t);
 			// thread的连接
+			// 文档变化了,document要重新加载
+			document = ModelResolver(modelfilename);
 			List<Node> portconnectionlist = document.selectNodes(getimpl + "/ownedPortConnection");
 			for (Node n2 : portconnectionlist) {
 				Element e = (Element) n2;
 				connections c = new connections();
+				c.setFathercmpid(e.getParent().attributeValue("id"));
 				if (e.element("source").attributeValue("context") != null) {
 					// 没有context是指当前组件
 					Element sourcecomponent = (Element) document
 							.selectSingleNode(GetXPath(e.element("source").attributeValue("context")));
-					c.setStartcomponentid(Integer.valueOf(idString));
+					c.setStartcomponentid(Integer.valueOf(sourcecomponent.attributeValue("id")));
 				} else {
 					c.setStartcomponentid(Integer.valueOf(idString));
 				}
 				Element sourceport = (Element) document
 						.selectSingleNode(GetXPath(e.element("source").attributeValue("connectionEnd")));
 				c.setStartinterface(sourceport.attributeValue("id"));
+
 				if (e.element("destination").attributeValue("context") != null) {
 					Element dstcomponent = (Element) document
 							.selectSingleNode(GetXPath(e.element("destination").attributeValue("context")));
-					c.setEndcomponentid(Integer.valueOf(idString));
+					c.setEndcomponentid(Integer.valueOf(dstcomponent.attributeValue("id")));
 
 				} else {
 					c.setEndcomponentid(Integer.valueOf(idString));
@@ -1224,17 +1236,17 @@ e.printStackTrace();			}
 			throws Exception {
 		Document d = ModelResolver(modelfilename);
 		Element e = (Element) d.selectSingleNode(rawimplpath);
-
+		AppendID.AppendID(modelfilename, e.getUniquePath(), fatherid.toString());
 		List<Element> thread = e.elements("ownedThreadSubcomponent");
 		if (thread.size() > 0) {
 			for (Element e2 : thread) {
 				Element theadElement = (Element) d
 						.selectSingleNode(GetXPath42layer(e2.attributeValue("threadSubcomponentType")));
 
-				// TODO 找的是impl，dataport这次又定义在声明里面！
+				// 找的是impl，dataport这次又定义在声明里面！
 				component component = new component();
 				Integer idString = (int) GetID.getId();
-
+				AppendID.AppendID(modelfilename, e2.getUniquePath(), idString.toString());
 				AppendID.AppendID(modelfilename, theadElement.getUniquePath(), idString.toString());
 
 				component.setComponentid(idString);

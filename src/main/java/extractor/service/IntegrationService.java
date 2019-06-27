@@ -25,9 +25,11 @@ import extractor.DAO.mapper._taskMapper;
 import extractor.DAO.mapper.communicationchannelMapper;
 import extractor.DAO.mapper.componentMapper;
 import extractor.DAO.mapper.componenttransitionMapper;
+import extractor.DAO.mapper.connectionsMapper;
 import extractor.DAO.mapper.dataobjectMapper;
 import extractor.DAO.mapper.linkpointMapper;
 import extractor.DAO.mapper.processorMapper;
+import extractor.DAO.mapper.slkstateMapper;
 import extractor.DAO.mapper.transitionMapper;
 import extractor.DAO.mapper.transitionstateMapper;
 import extractor.model._event;
@@ -38,8 +40,10 @@ import extractor.model._task;
 import extractor.model.communicationchannel;
 import extractor.model.component;
 import extractor.model.componenttransition;
+import extractor.model.connections;
 import extractor.model.dataobject;
 import extractor.model.linkpoint;
+import extractor.model.slkstate;
 import extractor.model.transition;
 import extractor.model.transitionstate;
 
@@ -75,8 +79,13 @@ public class IntegrationService {
 	private _eventMapper evtm;
 	@Autowired
 	private componenttransitionMapper cttm;
-@Autowired
-private dataobjectMapper dm;
+	@Autowired
+	private slkstateMapper slksm;
+	@Autowired
+	private dataobjectMapper dm;
+	@Autowired
+	private connectionsMapper cnm;
+
 	public static Document ModelResolver(String url) throws DocumentException {
 		SAXReader reader = new SAXReader();
 		Document document = reader.read(url);
@@ -125,8 +134,8 @@ private dataobjectMapper dm;
 					if (rm.selectByportid(v2.getLinkpointid()) != null) {
 						lp.addAttribute("direction", "in");
 					}
-					if(dm.getByFrom(v2.getLinkpointid())!=null) {
-						
+					if (dm.getByFrom(v2.getLinkpointid()) != null) {
+
 						lp.addAttribute("datatype", dm.getByFrom(v2.getLinkpointid()).getDatatype());
 					}
 				});
@@ -136,8 +145,8 @@ private dataobjectMapper dm;
 					ecpelement.addAttribute("name", ecpv.getName());
 
 				});
-				List<_state> sList=sm.getStateUnderCMP(compv.getComponentid());
-				for(_state state:sList){
+				List<_state> sList = sm.getStateUnderCMP(compv.getComponentid());
+				for (_state state : sList) {
 					Element stateElement = comp.addElement("state");
 					stateElement.addAttribute("id", state.getStateid().toString());
 					stateElement.addAttribute("name", state.getName());
@@ -250,6 +259,15 @@ private dataobjectMapper dm;
 						});
 					});
 				});
+				//TODO 设置task间的连接
+				List<connections> connectionlist=cnm.selectByfather(compv.getComponentid());
+				connectionlist.forEach((c)->{
+					Element e=comp.addElement("connection");
+					e.addAttribute("source", c.getStartcomponentid().toString());
+					e.addAttribute("dest",c.getEndcomponentid().toString());
+					e.addAttribute("id", c.getIdconnections().toString());
+					
+				});
 			});
 			// 设置cchannel
 			List<communicationchannel> channellist = cchannelMapper.getAll(modeltype);
@@ -313,12 +331,13 @@ private dataobjectMapper dm;
 					if (rm.selectByportid(v2.getLinkpointid()) != null) {
 						lp.addAttribute("direction", "in");
 					}
-					if( dm.getByFrom(v2.getLinkpointid())!=null) {
-						
+					if (dm.getByFrom(v2.getLinkpointid()) != null) {
+
 						lp.addAttribute("datatype", dm.getByFrom(v2.getLinkpointid()).getDatatype());
 					}
 
 				});
+				// 暂时没有component的错误
 				List<_exception> ecplist = em.selectByComp(compv.getComponentid());
 				ecplist.forEach((ecpv) -> {
 					Element ecpelement = comp.addElement("exception");
@@ -335,6 +354,18 @@ private dataobjectMapper dm;
 					tsk.addAttribute("period", taskv.getPeriod());
 					tsk.addAttribute("wcet", taskv.getWcet());
 
+					List<_exception> exception1 = em.selectByComp(taskv.getTaskid());
+					if (exception1.size() > 0) {
+						tsk.addAttribute("faultType", exception1.get(0).getName());
+					}
+
+					slkstate slkstat = slksm.selectByTask(taskv.getTaskid());
+					if (slkstat != null) {
+
+						tsk.addAttribute("exit", slkstat.getExitinfo());
+						tsk.addAttribute("faultState", slkstat.getSlkstatecol());
+					}
+
 					List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
 					childtasklist.forEach((v6) -> {
 						Element child = tsk.addElement("state");
@@ -343,6 +374,17 @@ private dataobjectMapper dm;
 						child.addAttribute("deadline", v6.getDeadline());
 						child.addAttribute("period", v6.getPeriod());
 						child.addAttribute("wcet", v6.getWcet());
+
+						List<_exception> exception2 = em.selectByComp(v6.getTaskid());
+						if (exception2.size() > 0) {
+							child.addAttribute("faultType", exception2.get(0).getName());
+						}
+
+						slkstate slkstat2 = slksm.selectByTask(taskv.getTaskid());
+						if (slkstat2 != null) {
+							child.addAttribute("exit", slkstat2.getExitinfo());
+							child.addAttribute("faultState", slkstat2.getSlkstatecol());
+						}
 
 						List<linkpoint> threadports = lm.getPortUnderCMP(v6.getTaskid());
 						threadports.forEach((v8) -> {

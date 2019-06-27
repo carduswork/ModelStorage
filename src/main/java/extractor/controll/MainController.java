@@ -110,7 +110,6 @@ public class MainController {
 
 	public void SetSysFileID(String archfilepath, String sysfilepath) throws Exception {
 		ar.initComponentID(archfilepath);
-		// TODO 重复操作了
 		ar.SetSysFileID(archfilepath, sysfilepath);
 		ar.setAadlFiles(aadlFiles);
 
