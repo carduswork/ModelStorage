@@ -199,7 +199,7 @@ public class IntegrationService {
 								lp.addAttribute("direction", "in");
 							}
 						});
-
+						//设置thread
 						List<_task> childtasklist = _tm.selectChild(v4.getTaskid());
 						childtasklist.forEach((v6) -> {
 							Element child = tsk.addElement("task");
@@ -221,12 +221,20 @@ public class IntegrationService {
 									lp.addAttribute("direction", "in");
 								}
 							});
+							
+							List<connections> connectionlist=cnm.selectByfather(v6.getTaskid());
+							connectionlist.forEach((c)->{
+								Element e=comp.addElement("connection");
+								e.addAttribute("source", c.getStartcomponentid().toString());
+								e.addAttribute("dest",c.getEndcomponentid().toString());
+								e.addAttribute("id", c.getIdconnections().toString());
+								
+							});
 						});
 
 					});
 				});
 				// 设置不在partition上的task
-				// 新增对于simulink的支持
 				List<_task> tasklist = _tm.selectChild(compv.getComponentid());
 				tasklist.forEach((taskv) -> {
 					Element tsk = comp.addElement("task");
@@ -244,7 +252,7 @@ public class IntegrationService {
 						child.addAttribute("deadline", v6.getDeadline());
 						child.addAttribute("period", v6.getPeriod());
 						child.addAttribute("wcet", v6.getWcet());
-
+						
 						List<linkpoint> threadports = lm.getPortUnderCMP(v6.getTaskid());
 						threadports.forEach((v8) -> {
 							Element lp = child.addElement("port");
@@ -256,6 +264,14 @@ public class IntegrationService {
 							if (rm.selectByportid(v8.getLinkpointid()) != null) {
 								lp.addAttribute("direction", "in");
 							}
+						});
+						List<connections> connectionlist=cnm.selectByfather(v6.getTaskid());
+						connectionlist.forEach((c)->{
+							Element e=comp.addElement("connection");
+							e.addAttribute("source", c.getStartcomponentid().toString());
+							e.addAttribute("dest",c.getEndcomponentid().toString());
+							e.addAttribute("id", c.getIdconnections().toString());
+							
 						});
 					});
 				});
