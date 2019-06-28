@@ -494,7 +494,7 @@ public class SLKResolver {
 
 			communicationchannel cchannel = new communicationchannel();
 			Integer idString = (int) GetID.getId();
-			AppendID.AppendID(modelfilename, n.getUniquePath(), idString.toString());
+			//
 			cchannel.setModeltype("simulink");
 			cchannel.setType("sync");
 			cchannel.setName("linkinslk");
@@ -529,12 +529,15 @@ public class SLKResolver {
 
 					Element dstcmp = (Element) document
 							.selectSingleNode("//Model/System/Block[@Name='" + blockname + "']");
+					portList=document.selectNodes(
+							dstcmp.getUniquePath() + "/System/Block[@BlockType='Inport' or @BlockType='Outport']");
 					GetPortByID(document, cchannel, port, portList, "dest");
 
 					insert_cchannel(cchannel);
 				}
 
 			} else {
+				AppendID.AppendID(modelfilename, n.getUniquePath(), idString.toString());
 				Element sb = (Element) document.selectSingleNode(element.getUniquePath() + "/P[@Name='SrcBlock']");
 				Element db = (Element) document.selectSingleNode(element.getUniquePath() + "/P[@Name='DstBlock']");
 				String blockname = sb.getText();
@@ -554,6 +557,9 @@ public class SLKResolver {
 				port = document.selectSingleNode(db.getUniquePath() + "/following-sibling::P[@Name='DstPort']")
 						.getText();
 				Element dstcmp = (Element) document.selectSingleNode("//Model/System/Block[@Name='" + blockname + "']");
+				
+				portList=document.selectNodes(
+						dstcmp.getUniquePath() + "/System/Block[@BlockType='Inport' or @BlockType='Outport']");
 				GetPortByID(document, cchannel, port, portList, "dest");
 				insert_cchannel(cchannel);
 			}

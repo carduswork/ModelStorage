@@ -509,9 +509,9 @@ public class AADLResolver {
 	// TODO rtos与processor的关系绑定
 	public void InnerSystem(String modelfilename) throws Exception {
 		Document document = ModelResolver(modelfilename);
-		String getsys="//ownedClassifier[@xsi:type='aadl2:SystemImplementation']";
-		Element sysElement=(Element)document.selectSingleNode(getsys);
-		
+		String getsys = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation']";
+		Element sysElement = (Element) document.selectSingleNode(getsys);
+
 		// 从集成的角度看，先直接解析task，等以后有了shcedule再绑定上级
 		// String gettask = "//ownedClassifier[@xsi:type='aadl2:ProcessType' or
 		// @xsi:type='aadl2:ThreadType']";
@@ -523,7 +523,7 @@ public class AADLResolver {
 		resolverChild(modelfilename, "device");
 
 		components = document.selectNodes(gettask);
-		TaskResolver(modelfilename,Integer.valueOf(sysElement.attributeValue("id")));
+		TaskResolver(modelfilename, Integer.valueOf(sysElement.attributeValue("id")));
 		// task间的连接
 		document = ModelResolver(modelfilename);
 		List<Node> portconnectionlist = document
@@ -536,7 +536,7 @@ public class AADLResolver {
 				// 没有context是指当前组件
 				Element declare = (Element) document
 						.selectSingleNode(GetXPath(e.element("source").attributeValue("context")));
-				//这里指向声明！
+				// 这里指向声明！
 				Element sourcecomponent = (Element) document
 						.selectSingleNode(GetXPath42layer(declare.attributeValue("processSubcomponentType")));
 				c.setStartcomponentid(Integer.valueOf(sourcecomponent.attributeValue("id")));
@@ -631,6 +631,16 @@ public class AADLResolver {
 				dynamicfilename = Getfilename(element.attributeValue("systemSubcomponentType"));
 
 				component.setType("rtos");
+
+				String getwcetinsys = "//ownedPublicSection/ownedClassifier[@name='" + component.getName()
+						+ "']/ownedPropertyAssociation[contains(@property,'wcet4sys')]";
+				Document document1 = ModelResolver(modeldirectory+dynamicfilename);
+				Element sysElement = (Element) document1.selectSingleNode(getwcetinsys);
+				if (sysElement != null) {
+					component.setWcet(
+							sysElement.element("ownedValue").element("ownedValue").attributeValue("value") + "ms");
+				}
+
 				camArchMapper.insert(component);
 				rtos r = new rtos();
 				r.setRtosid(componentID);
@@ -1148,7 +1158,7 @@ public class AADLResolver {
 		return "";
 	}
 
-	private void TaskResolver(String modelfilename,Integer fatherid) throws Exception {
+	private void TaskResolver(String modelfilename, Integer fatherid) throws Exception {
 
 		for (Node n : components) {
 			// 解析component
