@@ -56,4 +56,6 @@ public interface _taskMapper {
     List<_task> selectBypartition(Integer partitionid);
 
     List<_task> selectChild(Integer fatherid);
+    
+    List<_task> selectChildnotinpart(Integer fatherid);
 }

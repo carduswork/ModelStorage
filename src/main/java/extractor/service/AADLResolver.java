@@ -509,7 +509,9 @@ public class AADLResolver {
 	// TODO rtos与processor的关系绑定
 	public void InnerSystem(String modelfilename) throws Exception {
 		Document document = ModelResolver(modelfilename);
-
+		String getsys="//ownedClassifier[@xsi:type='aadl2:SystemImplementation']";
+		Element sysElement=(Element)document.selectSingleNode(getsys);
+		
 		// 从集成的角度看，先直接解析task，等以后有了shcedule再绑定上级
 		// String gettask = "//ownedClassifier[@xsi:type='aadl2:ProcessType' or
 		// @xsi:type='aadl2:ThreadType']";
@@ -521,7 +523,7 @@ public class AADLResolver {
 		resolverChild(modelfilename, "device");
 
 		components = document.selectNodes(gettask);
-		TaskResolver(modelfilename);
+		TaskResolver(modelfilename,Integer.valueOf(sysElement.attributeValue("id")));
 		// task间的连接
 		document = ModelResolver(modelfilename);
 		List<Node> portconnectionlist = document
@@ -1146,7 +1148,7 @@ public class AADLResolver {
 		return "";
 	}
 
-	private void TaskResolver(String modelfilename) throws Exception {
+	private void TaskResolver(String modelfilename,Integer fatherid) throws Exception {
 
 		for (Node n : components) {
 			// 解析component
@@ -1168,6 +1170,7 @@ public class AADLResolver {
 			_task t = new _task();
 			t.setName(component.getName());
 			t.setTaskid(idString);
+			t.setFatherid(fatherid);
 			List<Element> ports = taskElement.elements("ownedDataPort");
 			TraverseOwnedPorts4task(modelfilename, ports, idString, "dataport");
 
@@ -1187,7 +1190,6 @@ public class AADLResolver {
 					String getwcet = e2.element("ownedValue").element("ownedValue").attributeValue("value");
 					t.setWcet(getwcet + "ms");
 				}
-
 			}
 			// 要到impl里去找
 			Document document = ModelResolver(modelfilename);

@@ -292,6 +292,12 @@ public class SYSMLResolver {
 				String g = "//nestedClassifier[@xmi:id='" + element2.attributeValue(qname1) + "']";
 				AppendID.AppendID4sysml(linkpointfile, g, linkpointID.toString());
 				Element dataElement = (Element) document.selectSingleNode(g);
+				
+				Element periodelElement=(Element) document.selectSingleNode(dataElement.getUniquePath()+"/ownedAttribute[@name='period']/defaultValue");
+				if(periodelElement!=null) {
+					
+					ports1.setPeriod(periodelElement.attributeValue("value")+"ms");
+				}
 				dataobject dobj = new dataobject();
 				dobj.setDatatype(dataElement.attributeValue("name"));
 				dobj.setFrom(linkpointID);
@@ -346,14 +352,14 @@ public class SYSMLResolver {
 		List<? extends Node> namelist = document.selectNodes(gettask);
 		for (Node n : namelist) {
 			Element taskElement = (Element) n;
-			component linkpointcomponent = new component();
+			component taskcomponent = new component();
 			Integer idString = (int) GetID.getId();
-			linkpointcomponent.setComponentid(idString);
+			taskcomponent.setComponentid(idString);
 
-			linkpointcomponent.setModeltype("sysml");
-			linkpointcomponent.setName(taskElement.attributeValue("name"));
-			linkpointcomponent.setType("task");
-			insert_component(linkpointcomponent);
+			taskcomponent.setModeltype("sysml");
+			taskcomponent.setName(taskElement.attributeValue("name"));
+			taskcomponent.setType("task");
+			insert_component(taskcomponent);
 			_task t = new _task();
 			t.setName(taskElement.attributeValue("name"));
 			t.setTaskid(idString);
@@ -423,6 +429,7 @@ public class SYSMLResolver {
 
 				task.setPeriod(periodElement.element("defaultValue").attributeValue("value") + "ms");
 			}
+			LinkpointResolver(modelfilename, threadElement.getUniquePath(), "task");
 			insert_task(task);
 		}
 	}
@@ -457,7 +464,5 @@ public class SYSMLResolver {
 				insert_provide(p);
 			}
 		}
-
-//		portsMapper.selectByPrimaryKey(portid);
 	}
 }

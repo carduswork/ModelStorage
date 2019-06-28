@@ -178,8 +178,9 @@ public class IntegrationService {
 					Element psr = comp.addElement("partition");
 					psr.addAttribute("id", v5.getPartitionid().toString());
 					// 设置task
-					List<_task> tasklist = _tm.selectBypartition(v5.getPartitionid());
-					tasklist.forEach((v4) -> {
+					List<_task> tasklistinpart=new ArrayList<_task>();
+					tasklistinpart = _tm.selectBypartition(v5.getPartitionid());
+					tasklistinpart.forEach((v4) -> {
 						Element tsk = psr.addElement("task");
 						tsk.addAttribute("Name", v4.getName());
 						tsk.addAttribute("id", v4.getTaskid().toString());
@@ -235,7 +236,7 @@ public class IntegrationService {
 					});
 				});
 				// 设置不在partition上的task
-				List<_task> tasklist = _tm.selectChild(compv.getComponentid());
+				List<_task> tasklist = _tm.selectChildnotinpart(compv.getComponentid());
 				tasklist.forEach((taskv) -> {
 					Element tsk = comp.addElement("task");
 					tsk.addAttribute("Name", taskv.getName());
@@ -243,7 +244,20 @@ public class IntegrationService {
 					tsk.addAttribute("deadline", taskv.getDeadline());
 					tsk.addAttribute("period", taskv.getPeriod());
 					tsk.addAttribute("wcet", taskv.getWcet());
-
+					
+					List<linkpoint> threadports = lm.getPortUnderCMP(taskv.getTaskid());
+					threadports.forEach((v8) -> {
+						Element lp = tsk.addElement("port");
+						lp.addAttribute("name", v8.getName());
+						lp.addAttribute("id", v8.getLinkpointid().toString());
+						if (pvm.selectByportid(v8.getLinkpointid()) != null) {
+							lp.addAttribute("direction", "out");
+						}
+						if (rm.selectByportid(v8.getLinkpointid()) != null) {
+							lp.addAttribute("direction", "in");
+						}
+					});
+					
 					List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
 					childtasklist.forEach((v6) -> {
 						Element child = tsk.addElement("task");
@@ -253,8 +267,8 @@ public class IntegrationService {
 						child.addAttribute("period", v6.getPeriod());
 						child.addAttribute("wcet", v6.getWcet());
 						
-						List<linkpoint> threadports = lm.getPortUnderCMP(v6.getTaskid());
-						threadports.forEach((v8) -> {
+						List<linkpoint> threadports2 = lm.getPortUnderCMP(v6.getTaskid());
+						threadports2.forEach((v8) -> {
 							Element lp = child.addElement("port");
 							lp.addAttribute("name", v8.getName());
 							lp.addAttribute("id", v8.getLinkpointid().toString());
@@ -265,6 +279,7 @@ public class IntegrationService {
 								lp.addAttribute("direction", "in");
 							}
 						});
+						
 						List<connections> connectionlist=cnm.selectByfather(v6.getTaskid());
 						connectionlist.forEach((c)->{
 							Element e=comp.addElement("connection");
