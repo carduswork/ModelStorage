@@ -186,15 +186,15 @@ public class IntegrationService {
 					// 设置task
 					List<_task> tasklistinpart = new ArrayList<_task>();
 					tasklistinpart = _tm.selectBypartition(v5.getPartitionid());
-					tasklistinpart.forEach((v4) -> {
+					tasklistinpart.forEach((taskv) -> {
 						Element tsk = psr.addElement("task");
-						tsk.addAttribute("Name", v4.getName());
-						tsk.addAttribute("id", v4.getTaskid().toString());
-						tsk.addAttribute("deadline", v4.getDeadline());
-						tsk.addAttribute("period", v4.getPeriod());
-						tsk.addAttribute("wcet", v4.getWcet());
+						tsk.addAttribute("Name", taskv.getName());
+						tsk.addAttribute("id", taskv.getTaskid().toString());
+						tsk.addAttribute("deadline", taskv.getDeadline());
+						tsk.addAttribute("period", taskv.getPeriod());
+						tsk.addAttribute("wcet", taskv.getWcet());
 
-						List<linkpoint> taskports = lm.getPortUnderCMP(v4.getTaskid());
+						List<linkpoint> taskports = lm.getPortUnderCMP(taskv.getTaskid());
 						taskports.forEach((v7) -> {
 							Element lp = tsk.addElement("port");
 							lp.addAttribute("name", v7.getName());
@@ -207,7 +207,7 @@ public class IntegrationService {
 							}
 						});
 						// 设置thread
-						List<_task> childtasklist = _tm.selectChild(v4.getTaskid());
+						List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
 						childtasklist.forEach((v6) -> {
 							Element child = tsk.addElement("task");
 							child.addAttribute("Name", v6.getName());
@@ -229,8 +229,8 @@ public class IntegrationService {
 								}
 							});
 						});
-						//partition上thread的连接
-						List<connections> connectionlist = cnm.selectByfather(compv.getComponentid());
+						// partition上thread的连接
+						List<connections> connectionlist = cnm.selectByfather(taskv.getTaskid());
 						connectionlist.forEach((c) -> {
 							Element e = tsk.addElement("connection");
 							e.addAttribute("source", c.getStartcomponentid().toString());
@@ -239,14 +239,14 @@ public class IntegrationService {
 							e.addAttribute("name", c.getConnectiontype());
 						});
 					});
-					//partition上 process的连接
+					// partition上 process的连接
 					List<connections> threadconnectionlist = cnm.selectByfather(v5.getPartitionid());
 					threadconnectionlist.forEach((threadconnection) -> {
 						Element e = psr.addElement("connection");
 						e.addAttribute("source", threadconnection.getStartcomponentid().toString());
 						e.addAttribute("dest", threadconnection.getEndcomponentid().toString());
 						e.addAttribute("id", threadconnection.getIdconnections().toString());
-						
+
 					});
 				});
 				// 设置不在partition上的task
@@ -271,17 +271,17 @@ public class IntegrationService {
 							lp.addAttribute("direction", "in");
 						}
 					});
-					//不在partition上的thread
+					// 不在partition上的thread
 					List<_task> threadlist = _tm.selectChild(taskv.getTaskid());
-					threadlist.forEach((v6) -> {
+					threadlist.forEach((threadv) -> {
 						Element child = tsk.addElement("task");
-						child.addAttribute("Name", v6.getName());
-						child.addAttribute("id", v6.getTaskid().toString());
-						child.addAttribute("deadline", v6.getDeadline());
-						child.addAttribute("period", v6.getPeriod());
-						child.addAttribute("wcet", v6.getWcet());
+						child.addAttribute("Name", threadv.getName());
+						child.addAttribute("id", threadv.getTaskid().toString());
+						child.addAttribute("deadline", threadv.getDeadline());
+						child.addAttribute("period", threadv.getPeriod());
+						child.addAttribute("wcet", threadv.getWcet());
 
-						List<linkpoint> threadports2 = lm.getPortUnderCMP(v6.getTaskid());
+						List<linkpoint> threadports2 = lm.getPortUnderCMP(threadv.getTaskid());
 						threadports2.forEach((v8) -> {
 							Element lp = child.addElement("port");
 							lp.addAttribute("name", v8.getName());
@@ -292,10 +292,9 @@ public class IntegrationService {
 							if (rm.selectByportid(v8.getLinkpointid()) != null) {
 								lp.addAttribute("direction", "in");
 							}
-
 						});
 						// 不在partition上的thread的连接
-						List<connections> connectionlist = cnm.selectByfather(v6.getTaskid());
+						List<connections> connectionlist = cnm.selectByfather(threadv.getTaskid());
 						connectionlist.forEach((c) -> {
 							Element e = tsk.addElement("connection");
 							e.addAttribute("source", c.getStartcomponentid().toString());
@@ -305,7 +304,7 @@ public class IntegrationService {
 						});
 					});
 				});
-				//设置不在partition上的task间的连接
+				// 设置不在partition上的task间的连接
 				List<connections> connectionlist = cnm.selectByfather(compv.getComponentid());
 				connectionlist.forEach((c) -> {
 					Element e = comp.addElement("connection");
