@@ -233,8 +233,8 @@ public class IntegrationService {
 						List<connections> connectionlist = cnm.selectByfather(taskv.getTaskid());
 						connectionlist.forEach((c) -> {
 							Element e = tsk.addElement("connection");
-							e.addAttribute("source", c.getStartcomponentid().toString());
-							e.addAttribute("dest", c.getEndcomponentid().toString());
+							e.addAttribute("source", c.getStartinterface().toString());
+							e.addAttribute("dest", c.getEndinterface().toString());
 							e.addAttribute("id", c.getIdconnections().toString());
 							e.addAttribute("name", c.getConnectiontype());
 						});
@@ -243,8 +243,8 @@ public class IntegrationService {
 					List<connections> threadconnectionlist = cnm.selectByfather(v5.getPartitionid());
 					threadconnectionlist.forEach((threadconnection) -> {
 						Element e = psr.addElement("connection");
-						e.addAttribute("source", threadconnection.getStartcomponentid().toString());
-						e.addAttribute("dest", threadconnection.getEndcomponentid().toString());
+						e.addAttribute("source", threadconnection.getStartinterface().toString());
+						e.addAttribute("dest", threadconnection.getEndinterface().toString());
 						e.addAttribute("id", threadconnection.getIdconnections().toString());
 
 					});
@@ -297,8 +297,8 @@ public class IntegrationService {
 						List<connections> connectionlist = cnm.selectByfather(threadv.getTaskid());
 						connectionlist.forEach((c) -> {
 							Element e = tsk.addElement("connection");
-							e.addAttribute("source", c.getStartcomponentid().toString());
-							e.addAttribute("dest", c.getEndcomponentid().toString());
+							e.addAttribute("source", c.getStartinterface().toString());
+							e.addAttribute("dest", c.getEndinterface().toString());
 							e.addAttribute("id", c.getIdconnections().toString());
 							e.addAttribute("name", c.getConnectiontype());
 						});
@@ -308,10 +308,10 @@ public class IntegrationService {
 				List<connections> connectionlist = cnm.selectByfather(compv.getComponentid());
 				connectionlist.forEach((c) -> {
 					Element e = comp.addElement("connection");
-					e.addAttribute("source", c.getStartcomponentid().toString());
-					e.addAttribute("dest", c.getEndcomponentid().toString());
+					e.addAttribute("source", c.getStartinterface().toString());
+					e.addAttribute("dest", c.getEndinterface().toString());
 					e.addAttribute("id", c.getIdconnections().toString());
-
+					e.addAttribute("name", c.getConnectiontype());
 				});
 			});
 			// 设置cchannel

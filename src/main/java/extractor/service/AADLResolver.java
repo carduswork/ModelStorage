@@ -848,11 +848,11 @@ public class AADLResolver {
 	private void TraverseOwnedPorts4task(String modelfile, List<? extends Node> ports, Integer fatherid,
 			String portType) throws Exception {
 		for (Node n2 : ports) {
-			Element element2 = (Element) n2;
+			Element taskportElement = (Element) n2;
 
 			linkpoint ports1 = new linkpoint();
 			// 暂时只设置name这一个
-			ports1.setName(element2.attributeValue("name"));
+			ports1.setName(taskportElement.attributeValue("name"));
 			ports1.setModeltype("aadl");
 			Integer linkpointID = (int) GetID.getId();
 			ports1.setLinkpointid(linkpointID);
@@ -864,13 +864,13 @@ public class AADLResolver {
 				si.setSyncinterfaceid(linkpointID);
 				try {
 
-					AppendID.AppendID(modelfile, element2.getUniquePath(), linkpointID.toString());
+					AppendID.AppendID(modelfile, taskportElement.getUniquePath(), linkpointID.toString());
 
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 
-				if (!(element2.attribute("in") == null)) {
+				if (!(taskportElement.attribute("in") == null)) {
 					// 是输入端口
 					_require r = new _require();
 					r.setRequired(linkpointID);
@@ -884,10 +884,10 @@ public class AADLResolver {
 				}
 				break;
 			case "busaccess":
-				AppendID.AppendID(compositelibfile, element2.getUniquePath(), linkpointID.toString());
+				AppendID.AppendID(compositelibfile, taskportElement.getUniquePath(), linkpointID.toString());
 				ASyncMessaging asm = new ASyncMessaging();
 				asm.setAsyncmessagingid(linkpointID);
-				if (element2.attribute("kind").equals("requires")) {
+				if (taskportElement.attribute("kind").equals("requires")) {
 					// 是输入端口
 					_require r = new _require();
 					r.setRequired(linkpointID);
@@ -1244,6 +1244,7 @@ public class AADLResolver {
 		Document d = ModelResolver(modelfilename);
 		Element e = (Element) d.selectSingleNode(rawimplpath);
 		AppendID.AppendID(modelfilename, e.getUniquePath(), fatherid.toString());
+		//指向了impl
 		List<Element> thread = e.elements("ownedThreadSubcomponent");
 		if (thread.size() > 0) {
 			for (Element e2 : thread) {
@@ -1262,7 +1263,12 @@ public class AADLResolver {
 				component.setName(theadElement.attributeValue("name"));
 				component.setType("task");
 				insert_component(component);
-				List<Element> ports = fatherdeclare.elements("ownedDataPort");
+				//这里他又指向impl....
+				String getdeclare = theadElement.getUniquePath() + "/preceding-sibling::ownedClassifier[@name='"
+						+ theadElement.attributeValue("name").split("\\.")[0] + "']";
+				Element declareElement=(Element)d.selectSingleNode(getdeclare);
+				
+				List<Element> ports = declareElement.elements("ownedDataPort");
 				TraverseOwnedPorts4task(modelfilename, ports, idString, "dataport");
 
 				_task t = new _task();
@@ -1271,12 +1277,9 @@ public class AADLResolver {
 				t.setTaskid(idString);
 				t.setFatherid(fatherid);
 				insert_task(t);
-//				tasklist.add(t);
-//				taskcomponentlist.put(e2.attributeValue("name"), component);
+
 			}
 		}
-
-		// String getthreads="";
 	}
 
 	private static String Getfilename(String systemSubcomponentType) {

@@ -29,12 +29,12 @@
         </parsedAnnexSubclause>
       </ownedAnnexSubclause>
       <ownedAbstractFeature name="ObservableFailure" out="true"/>
-      <ownedDataPort name="operatorFeedback" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.ofb" id="220512356"/>
-      <ownedDataPort name="operatorsettings" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.os" id="795732446"/>
-      <ownedDataPort name="heating" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.heating1" id="-838342595"/>
-      <ownedDataPort name="currentTemperature" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem" id="379309524"/>
+      <ownedDataPort name="operatorFeedback" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.ofb" id="1373163748"/>
+      <ownedDataPort name="operatorsettings" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.os" id="-2073156142"/>
+      <ownedDataPort name="heating" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.heating1" id="975795048"/>
+      <ownedDataPort name="currentTemperature" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem" id="-173459748"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="-934458765">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="-313149535">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <appliesTo>
           <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.1"/>
@@ -104,9 +104,9 @@
       <ownedProcessSubcomponent name="feedback" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.5"/>
       <ownedProcessSubcomponent name="temadjust" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.7"/>
       <ownedProcessSubcomponent name="datadeal" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.9"/>
-      <ownedProcessorSubcomponent name="LSP" processorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.15" id="825698983"/>
+      <ownedProcessorSubcomponent name="LSP" processorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.15" id="1850372698"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessType" name="setTemrange" id="-1680419615">
+    <ownedClassifier xsi:type="aadl2:ProcessType" name="setTemrange" id="-1135963824">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">
         <ownedValue>
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
@@ -117,14 +117,14 @@
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedDataPort name="insetting" in="true" id="401089771"/>
-      <ownedDataPort name="out4back" out="true" id="-68718470"/>
-      <ownedDataPort name="out4adjust" out="true" id="1500615529"/>
+      <ownedDataPort name="insetting" in="true" id="579677609"/>
+      <ownedDataPort name="out4back" out="true" id="1404452491"/>
+      <ownedDataPort name="out4adjust" out="true" id="-1434119618"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="setTemrange.impl" id="-1680419615">
+    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="setTemrange.impl" id="-1135963824">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.2"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessType" name="feedback" id="-571656780">
+    <ownedClassifier xsi:type="aadl2:ProcessType" name="feedback" id="451941661">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">
         <ownedValue>
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
@@ -135,13 +135,13 @@
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedDataPort name="setting" in="true" id="1191028963"/>
-      <ownedDataPort name="feedback" out="true" id="-158312652"/>
+      <ownedDataPort name="setting" in="true" id="-1722277978"/>
+      <ownedDataPort name="feedback" out="true" id="-1246908011"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="feedback.impl" id="-571656780">
+    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="feedback.impl" id="451941661">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.4"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessType" name="temadjust" id="-1685066163">
+    <ownedClassifier xsi:type="aadl2:ProcessType" name="temadjust" id="-2036941785">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">
         <ownedValue>
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
@@ -152,14 +152,14 @@
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedDataPort name="setting" in="true" id="1167334585"/>
-      <ownedDataPort name="ct" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem" id="1357752378"/>
-      <ownedDataPort name="heating" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.heating1" id="738678868"/>
+      <ownedDataPort name="setting" in="true" id="-1763083280"/>
+      <ownedDataPort name="ct" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem" id="-624883214"/>
+      <ownedDataPort name="heating" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.heating1" id="1133585711"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="temadjust.impl" id="-1685066163">
+    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="temadjust.impl" id="-2036941785">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.6"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessType" name="datadeal" id="-2136828237">
+    <ownedClassifier xsi:type="aadl2:ProcessType" name="datadeal" id="-1046931488">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">
         <ownedValue>
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
@@ -170,10 +170,10 @@
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="2"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedDataPort name="datain" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem" id="-1995338540"/>
-      <ownedDataPort name="dataout" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem" id="-2098143302"/>
+      <ownedDataPort name="datain" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem" id="298766234"/>
+      <ownedDataPort name="dataout" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem" id="-1551330461"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="datadeal.impl" id="-2136828237">
+    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="datadeal.impl" id="-1046931488">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.8"/>
       <ownedPortConnection name="new_connection">
         <destination context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.10/@ownedDataPort.0"/>
@@ -187,8 +187,8 @@
         <destination connectionEnd="#//@ownedPublicSection/@ownedClassifier.8/@ownedDataPort.1"/>
         <source context="#//@ownedPublicSection/@ownedClassifier.9/@ownedThreadSubcomponent.1" connectionEnd="#//@ownedPublicSection/@ownedClassifier.12/@ownedDataPort.1"/>
       </ownedPortConnection>
-      <ownedThreadSubcomponent name="verify" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.11" id="576737925"/>
-      <ownedThreadSubcomponent name="format" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.13" id="833407348"/>
+      <ownedThreadSubcomponent name="verify" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.11" id="1008601803"/>
+      <ownedThreadSubcomponent name="format" threadSubcomponentType="#//@ownedPublicSection/@ownedClassifier.13" id="379560075"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadType" name="verify">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">
@@ -211,10 +211,10 @@
           </propagations>
         </parsedAnnexSubclause>
       </ownedAnnexSubclause>
-      <ownedDataPort name="currT" in="true"/>
-      <ownedDataPort name="currT2" out="true"/>
+      <ownedDataPort name="currT" in="true" id="510044246"/>
+      <ownedDataPort name="currT2" out="true" id="1282815329"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="verify.impl" id="576737925">
+    <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="verify.impl" id="1008601803">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.10"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:ThreadType" name="format">
@@ -228,13 +228,13 @@
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedDataPort name="currT" in="true"/>
-      <ownedDataPort name="currT2" out="true"/>
+      <ownedDataPort name="currT" in="true" id="-1006793437"/>
+      <ownedDataPort name="currT2" out="true" id="222061176"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="format.impl" id="833407348">
+    <ownedClassifier xsi:type="aadl2:ThreadImplementation" name="format.impl" id="379560075">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.12"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessorType" name="LSP" id="890746880"/>
+    <ownedClassifier xsi:type="aadl2:ProcessorType" name="LSP" id="-1581327335"/>
     <ownedClassifier xsi:type="aadl2:ProcessorImplementation" name="lsp.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.14"/>
       <ownedVirtualProcessorSubcomponent name="part1" virtualProcessorSubcomponentType="#//@ownedPublicSection/@ownedClassifier.17">
