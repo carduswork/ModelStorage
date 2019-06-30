@@ -280,19 +280,22 @@ public class AADLResolver {
 		});
 		String[] innersysfile = aadlFiles.get("系统内部结构").split(";");
 		for (String s : innersysfile) {
-			AADLResolver.dynamicfilename = s;
-			InnerSystem(dynamicfilename);
-		}
+			if (s != null) {
 
-		Document d = ModelResolver(aadlFiles.get("系统内部结构"));
-		List<? extends Node> nodes = d.selectNodes("//ownedClassifier[@xsi:type='aadl2:SystemImplementation']");
-		for (Node n : nodes) {
-			StateResolver(aadlFiles.get("系统内部结构"), ((Element) n).attributeValue("id"));
+				AADLResolver.dynamicfilename = s;
+				InnerSystem(dynamicfilename);
+
+				Document d = ModelResolver(s);
+				List<? extends Node> nodes = d.selectNodes("//ownedClassifier[@xsi:type='aadl2:SystemImplementation']");
+				for (Node n : nodes) {
+					StateResolver(s, ((Element) n).attributeValue("id"));
+				}
+
+				scheduleResolver(s);
+				partitionResolver(s);
+			}
+
 		}
-//		statelist.forEach((v) -> {
-//			insert_state(v);
-//		});
-		// if (errlibfile != null) {
 		ExceptionResolver(dynamicfilename, "aadl");
 		exceptionlist.forEach((v) -> {
 			insert_exception(v);
@@ -301,27 +304,7 @@ public class AADLResolver {
 		if (errlibfile != null) {
 			// eventResolver(aadlFiles.get("系统内部结构"), "aadl");
 		}
-//		eventlist.forEach((v) -> {
-//			insert_event(v);
-//		});
-		// TransitionResolver(aadlFiles.get("系统内部结构"), );
-//		tslist.forEach((v) -> {
-//			insert_transition(v);
-//		});
-//		ts_slist.forEach((v) -> {
-//			insert_tss(v);
-//		});
-//		taskcomponentlist.forEach((k, v) -> {
-//			insert_component(v);
-//		});
-//		tasklist.forEach((v) -> {
-//			insert_task(v);
-//		});
-		scheduleResolver(aadlFiles.get("系统内部结构"));
-		partitionResolver(aadlFiles.get("系统内部结构"));
-//		partitionlist.forEach((v) -> {
-//			insert_partition(v);
-//		});
+
 	}
 
 	/* 当前模型的全部组件与port、task */
@@ -634,7 +617,7 @@ public class AADLResolver {
 
 				String getwcetinsys = "//ownedPublicSection/ownedClassifier[@name='" + component.getName()
 						+ "']/ownedPropertyAssociation[contains(@property,'wcet4sys')]";
-				Document document1 = ModelResolver(modeldirectory+dynamicfilename);
+				Document document1 = ModelResolver(modeldirectory + dynamicfilename);
 				Element sysElement = (Element) document1.selectSingleNode(getwcetinsys);
 				if (sysElement != null) {
 					component.setWcet(
@@ -658,7 +641,6 @@ public class AADLResolver {
 				Document document = ModelResolver(compositelibfile);
 				Element devicElement = (Element) document.selectSingleNode(getwcet);
 				if (devicElement != null) {
-
 					component.setWcet(
 							devicElement.element("ownedValue").element("ownedValue").attributeValue("value") + "ms");
 				}
@@ -960,10 +942,21 @@ public class AADLResolver {
 
 				_exception e = new _exception();
 				e.setName(systemElement.element("ownedAbstractFeature").attributeValue("name"));
-				String exceptionTypeString = getType(systemElement.element("ownedAnnexSubclause")
-						.element("parsedAnnexSubclause").element("propagations").element("typeSet")
-						.element("typeTokens").attributeValue("type"));
-				e.setType(exceptionTypeString);
+
+				Element typesetElement = systemElement.element("ownedAnnexSubclause").element("parsedAnnexSubclause")
+						.element("propagations").element("typeSet");
+				List<Element> typelist = typesetElement.elements("typeTokens");
+				StringBuffer exceptionTypeString = new StringBuffer();
+				for (Element typElement : typelist) {
+					exceptionTypeString.append(getType(typElement.attributeValue("type")) + "、");
+				}
+				e.setType(exceptionTypeString.toString());
+
+				String getimpl = systemElement.getUniquePath() + "/following-sibling::ownedClassifier[@name='"
+						+ systemElement.attributeValue("name") + ".impl" + "']";
+				Element implElement = (Element) document.selectSingleNode(getimpl);
+				e.setComponentid(Integer.valueOf(implElement.attributeValue("id")));
+
 				systemElement = systemElement.element("ownedAnnexSubclause").element("parsedAnnexSubclause")
 						.element("propagations");
 				Integer sourceid = 0, destid = 0;
@@ -1150,7 +1143,7 @@ public class AADLResolver {
 
 	// 获取Exception的类型
 	private static String getType(String typepath) {
-		if (typepath.contains(".")) {
+		if (typepath!=null&&typepath.contains(".")) {
 
 			String[] s = typepath.split("\\.");
 			return s[s.length - 1];
@@ -1208,6 +1201,7 @@ public class AADLResolver {
 
 			threadResolver(taskElement, idString, getimpl, modelfilename);
 			insert_task(t);
+
 			// thread的连接
 			// 文档变化了,document要重新加载
 			document = ModelResolver(modelfilename);
@@ -1216,6 +1210,7 @@ public class AADLResolver {
 				Element e = (Element) n2;
 				connections c = new connections();
 				c.setFathercmpid(e.getParent().attributeValue("id"));
+				c.setConnectiontype(e.attributeValue("name"));
 				if (e.element("source").attributeValue("context") != null) {
 					// 没有context是指当前组件
 					Element sourcecomponent = (Element) document
@@ -1422,10 +1417,21 @@ public class AADLResolver {
 			String sysname = raw;
 
 			String sys = "//ownedClassifier[@xsi:type='aadl2:SystemImplementation' and @name='" + sysname + "']";
-			document = ModelResolver(sysfilepath);
-			Element e = (Element) n;
+			if (!sysfilepath.contains(";")) {
 
-			AppendID.AppendID(sysfilepath, sys, e.attributeValue("id"));
+				document = ModelResolver(sysfilepath);
+				Element e = (Element) n;
+
+				AppendID.AppendID(sysfilepath, sys, e.attributeValue("id"));
+			} else {
+				String[] sysfiles = sysfilepath.split(";");
+				for (String s : sysfiles) {
+					document = ModelResolver(s);
+					Element e = (Element) n;
+
+					AppendID.AppendID(s, sys, e.attributeValue("id"));
+				}
+			}
 		}
 	}
 

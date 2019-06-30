@@ -219,7 +219,7 @@ public class SYSMLResolver {
 			c.setComponentid(idString);
 			c.setName(e.attributeValue("name"));
 			c.setModeltype("sysml");
-			//sysml组件种类鉴别
+			// sysml组件种类鉴别
 			Element root = document.getRootElement();
 			QName q = QName.get("type", root.getNamespaceForPrefix("xmi"));
 			if (e.attributeValue(q).equals("uml:Class")) {
@@ -256,12 +256,13 @@ public class SYSMLResolver {
 					insert_exception(ex);
 				}
 			}
-			LinkpointResolver(filepath, n.getUniquePath(), "subsys");
+			LinkpointResolver(filepath, e.getUniquePath(), idString, "subsys");
 			TaskResolver(filepath, n.getUniquePath(), c);
 		}
 	}
 
-	private void LinkpointResolver(String linkpointfile, String fatherpath, String fathertype) throws Exception {
+	private void LinkpointResolver(String linkpointfile, String fatherpath, Integer fatherid, String fathertype)
+			throws Exception {
 		Document document = ModelResolver(linkpointfile);
 
 		List<? extends Node> ports = document.selectNodes(fatherpath + "/ownedAttribute[@xmi:type='uml:Port']");
@@ -277,38 +278,51 @@ public class SYSMLResolver {
 			AppendID.AppendID4sysml(linkpointfile, element2.getUniquePath(), linkpointID.toString());
 			// type指向赋予id
 			QName qname1 = QName.get("type");
-//				if (fathertype.equals("subsys")) {
-//
-//					String g = "//ownedAttribute[@xmi:id='" + element2.attributeValue(qname1) + "']";
-//					AppendID.AppendID4sysml(linkpointfile, g, linkpointID.toString());
-//					Element dataElement = (Element) document.selectSingleNode(g);
-//					dataobject dobj = new dataobject();
-//					dobj.setDatatype(dataElement.attributeValue("name"));
-//					dobj.setFrom(linkpointID);
-//					dobjm.insert(dobj);
-//				} else {
-			if( element2.attributeValue(qname1)!=null) {
-				
+
+			if (element2.attributeValue(qname1) != null) {
+
 				String g = "//nestedClassifier[@xmi:id='" + element2.attributeValue(qname1) + "']";
 				AppendID.AppendID4sysml(linkpointfile, g, linkpointID.toString());
 				Element dataElement = (Element) document.selectSingleNode(g);
-				
-				Element periodelElement=(Element) document.selectSingleNode(dataElement.getUniquePath()+"/ownedAttribute[@name='period']/defaultValue");
-				if(periodelElement!=null) {
-					
-					ports1.setPeriod(periodelElement.attributeValue("value")+"ms");
+
+				Element periodelElement = (Element) document
+						.selectSingleNode(dataElement.getUniquePath() + "/ownedAttribute[@name='period']/defaultValue");
+				if (periodelElement != null) {
+
+					ports1.setPeriod(periodelElement.attributeValue("value") + "ms");
 				}
 				dataobject dobj = new dataobject();
 				dobj.setDatatype(dataElement.attributeValue("name"));
 				dobj.setFrom(linkpointID);
 				dobjm.insert(dobj);
 			}
-			// }
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
 			insert_ports(ports1);
-
+			if (element2.element("ownedComment") != null) {
+				Element direcElement = element2.element("ownedComment").element("body");
+				if (direcElement.getText().contains("in")) {
+					_require r = new _require();
+					r.setRequired(Integer.valueOf(linkpointID));
+					r.setRequirer(fatherid);
+					insert_require(r);
+				} else {
+					_provide p = new _provide();
+					p.setProvided(Integer.valueOf(linkpointID));
+					p.setProvider(fatherid);
+					insert_provide(p);
+				}
+			}
+			else {
+				//双向端口
+				_require r = new _require();
+				r.setRequired(Integer.valueOf(linkpointID));
+				r.setRequirer(fatherid);
+				insert_require(r);
+				
+				_provide p = new _provide();
+				p.setProvided(Integer.valueOf(linkpointID));
+				p.setProvider(fatherid);
+				insert_provide(p);
+			}
 		}
 	}
 
@@ -331,13 +345,15 @@ public class SYSMLResolver {
 				Integer portid = GetCMPIDByXMIID(modelfilename, element.attributeValue("informationSource"));
 				cchannel.setSourceid(portid);
 
-				Updateportinfo(modelfilename, element.attributeValue("informationSource"), "out");
+				// Updateportinfo(modelfilename, element.attributeValue("informationSource"),
+				// "out");
 			}
 
 			if (element.attributeValue("informationTarget") != null) {
 
 				cchannel.setDestid(GetCMPIDByXMIID(modelfilename, element.attributeValue("informationTarget")));
-				Updateportinfo(modelfilename, element.attributeValue("informationTarget"), "in");
+				// Updateportinfo(modelfilename, element.attributeValue("informationTarget"),
+				// "in");
 				insert_cchannel(cchannel);
 
 			}
@@ -376,10 +392,10 @@ public class SYSMLResolver {
 
 				t.setPeriod(periodElement.element("defaultValue").attributeValue("value") + "ms");
 			}
-			//块图的partition不存在
+			// 块图的partition不存在
 			try {
 				AppendID.AppendID4sysml(modelfilename, taskElement.getUniquePath(), t.getTaskid().toString());
-				LinkpointResolver(modelfilename, taskElement.getUniquePath(), "task");
+				LinkpointResolver(modelfilename, taskElement.getUniquePath(), idString, "task");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -429,7 +445,7 @@ public class SYSMLResolver {
 
 				task.setPeriod(periodElement.element("defaultValue").attributeValue("value") + "ms");
 			}
-			LinkpointResolver(modelfilename, threadElement.getUniquePath(), "task");
+			LinkpointResolver(modelfilename, threadElement.getUniquePath(), idString, "task");
 			insert_task(task);
 		}
 	}

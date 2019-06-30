@@ -51,32 +51,38 @@ public class MainController {
 		is.GenerateIntegaraton("sysml.xml","sysml");
 		is.GenerateIntegaraton4SLK("simulink.xml","simulink");
 	}
-
+//转存复制到新目录下
 	public void restore() throws Exception {
 		aadlFiles.forEach((k, v) -> {
+			//如果有这个分隔符说明是系统内部结构
 			if (v.contains(";")) {
 				String[] innersysfile = v.split(";");
+				StringBuffer newinnerfile=new StringBuffer();
 				for (String v2 : innersysfile) {
 					File s = new File(v2);
 					File d = new File(markedfolder + getName(v2));
 
 					try {
 						Files.copy(s.toPath(), d.toPath(), StandardCopyOption.REPLACE_EXISTING);
-						aadlFiles.put(k, d.getPath());
+						newinnerfile.append(d.getPath()+";");
+						//aadlFiles.put(k, d.getPath());
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
+				aadlFiles.put(k, newinnerfile.toString());
 			} else {
 				File s = new File(v);
 				File d = new File(markedfolder + getName(v));
 
 				try {
 					Files.copy(s.toPath(), d.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					//newinnerfile.append(d.getPath()+";");
 					aadlFiles.put(k, d.getPath());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				//aadlFiles.put(k, newinnerfile.toString());
 			}
 
 		});
