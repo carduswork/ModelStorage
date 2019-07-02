@@ -1143,7 +1143,7 @@ public class AADLResolver {
 
 	// 获取Exception的类型
 	private static String getType(String typepath) {
-		if (typepath!=null&&typepath.contains(".")) {
+		if (typepath != null && typepath.contains(".")) {
 
 			String[] s = typepath.split("\\.");
 			return s[s.length - 1];
@@ -1244,7 +1244,7 @@ public class AADLResolver {
 		Document d = ModelResolver(modelfilename);
 		Element e = (Element) d.selectSingleNode(rawimplpath);
 		AppendID.AppendID(modelfilename, e.getUniquePath(), fatherid.toString());
-		//指向了impl
+		// 指向了impl
 		List<Element> thread = e.elements("ownedThreadSubcomponent");
 		if (thread.size() > 0) {
 			for (Element e2 : thread) {
@@ -1258,16 +1258,15 @@ public class AADLResolver {
 				AppendID.AppendID(modelfilename, theadElement.getUniquePath(), idString.toString());
 
 				component.setComponentid(idString);
-
 				component.setModeltype("aadl");
 				component.setName(theadElement.attributeValue("name"));
 				component.setType("task");
 				insert_component(component);
-				//这里他又指向impl....
+				// 这里他又指向impl....
 				String getdeclare = theadElement.getUniquePath() + "/preceding-sibling::ownedClassifier[@name='"
 						+ theadElement.attributeValue("name").split("\\.")[0] + "']";
-				Element declareElement=(Element)d.selectSingleNode(getdeclare);
-				
+				Element declareElement = (Element) d.selectSingleNode(getdeclare);
+
 				List<Element> ports = declareElement.elements("ownedDataPort");
 				TraverseOwnedPorts4task(modelfilename, ports, idString, "dataport");
 
@@ -1277,7 +1276,6 @@ public class AADLResolver {
 				t.setTaskid(idString);
 				t.setFatherid(fatherid);
 				insert_task(t);
-
 			}
 		}
 	}
