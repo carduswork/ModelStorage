@@ -188,7 +188,7 @@ public class IntegrationService {
 					tasklistinpart = _tm.selectBypartition(v5.getPartitionid());
 					tasklistinpart.forEach((taskv) -> {
 						Element tsk = psr.addElement("task");
-						tsk.addAttribute("Name", taskv.getName());
+						tsk.addAttribute("name", taskv.getName());
 						tsk.addAttribute("id", taskv.getTaskid().toString());
 						tsk.addAttribute("deadline", taskv.getDeadline());
 						tsk.addAttribute("period", taskv.getPeriod());
@@ -210,7 +210,7 @@ public class IntegrationService {
 						List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
 						childtasklist.forEach((v6) -> {
 							Element child = tsk.addElement("task");
-							child.addAttribute("Name", v6.getName());
+							child.addAttribute("name", v6.getName());
 							child.addAttribute("id", v6.getTaskid().toString());
 							child.addAttribute("deadline", v6.getDeadline());
 							child.addAttribute("period", v6.getPeriod());
@@ -253,7 +253,7 @@ public class IntegrationService {
 				List<_task> tasklist = _tm.selectChildnotinpart(compv.getComponentid());
 				tasklist.forEach((taskv) -> {
 					Element tsk = comp.addElement("task");
-					tsk.addAttribute("Name", taskv.getName());
+					tsk.addAttribute("name", taskv.getName());
 					tsk.addAttribute("id", taskv.getTaskid().toString());
 					tsk.addAttribute("deadline", taskv.getDeadline());
 					tsk.addAttribute("period", taskv.getPeriod());
@@ -275,7 +275,7 @@ public class IntegrationService {
 					List<_task> threadlist = _tm.selectChild(taskv.getTaskid());
 					threadlist.forEach((threadv) -> {
 						Element child = tsk.addElement("task");
-						child.addAttribute("Name", threadv.getName());
+						child.addAttribute("name", threadv.getName());
 						child.addAttribute("id", threadv.getTaskid().toString());
 						child.addAttribute("deadline", threadv.getDeadline());
 						child.addAttribute("period", threadv.getPeriod());
@@ -393,7 +393,7 @@ public class IntegrationService {
 				List<_task> tasklist = _tm.selectChild(compv.getComponentid());
 				tasklist.forEach((taskv) -> {
 					Element tsk = comp.addElement("state");
-					tsk.addAttribute("Name", taskv.getName());
+					tsk.addAttribute("name", taskv.getName());
 					tsk.addAttribute("id", taskv.getTaskid().toString());
 					tsk.addAttribute("deadline", taskv.getDeadline());
 					tsk.addAttribute("period", taskv.getPeriod());
@@ -413,7 +413,7 @@ public class IntegrationService {
 					List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
 					childtasklist.forEach((v6) -> {
 						Element child = tsk.addElement("state");
-						child.addAttribute("Name", v6.getName());
+						child.addAttribute("name", v6.getName());
 						child.addAttribute("id", v6.getTaskid().toString());
 						child.addAttribute("deadline", v6.getDeadline());
 						child.addAttribute("period", v6.getPeriod());
