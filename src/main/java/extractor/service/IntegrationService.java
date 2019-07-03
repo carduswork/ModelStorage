@@ -390,6 +390,7 @@ public class IntegrationService {
 
 				});
 				// 新增对于simulink的支持
+				//task
 				List<_task> tasklist = _tm.selectChild(compv.getComponentid());
 				tasklist.forEach((taskv) -> {
 					Element tsk = comp.addElement("state");
@@ -409,7 +410,7 @@ public class IntegrationService {
 						tsk.addAttribute("exit", slkstat.getExitinfo());
 						tsk.addAttribute("faultState", slkstat.getSlkstatecol());
 					}
-
+					//thread
 					List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
 					childtasklist.forEach((v6) -> {
 						Element child = tsk.addElement("state");
@@ -441,6 +442,29 @@ public class IntegrationService {
 							if (rm.selectByportid(v8.getLinkpointid()) != null) {
 								lp.addAttribute("direction", "in");
 							}
+						});
+					});
+					//下级state的连接
+					List<componenttransition> ct = cttm.selectByComponent(taskv.getTaskid());
+					ct.forEach((ctv) -> {
+						List<transitionstate> tsslist = tssm.selectbytransition(Integer.valueOf(ctv.getTransitionid()));
+						tsslist.forEach((vtss) -> {
+							// 设置transition
+							transition ts = tsm.selectByPrimaryKey(vtss.getTransitionid());
+							Element transitionElement = tsk.addElement("transition");
+							transitionElement.addAttribute("id", ts.getTransitionid().toString());
+							// 设置event
+							_event event = evtm.selectByPrimaryKey(ts.getTriggerid());
+							transitionElement.addAttribute("event", event.getName());
+							
+							// 设置 source state
+							_task s = _tm.selectByPrimaryKey(vtss.getSourceid());
+							transitionElement.addAttribute("source", s.getTaskid().toString());
+							
+							// 设置dest state
+							_task d = _tm.selectByPrimaryKey(vtss.getOutid());
+							transitionElement.addAttribute("dest", d.getTaskid().toString());
+							
 						});
 					});
 				});
