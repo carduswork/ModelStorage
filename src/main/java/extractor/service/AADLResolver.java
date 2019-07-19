@@ -221,7 +221,7 @@ public class AADLResolver {
 	}
 
 	public Integer getPortIDByComponentName(String name, String portname) {
-		Integer aIntegers = camArchMapper.getPortIDByComponentName(name, portname);
+//		Integer aIntegers = camArchMapper.getPortIDByComponentName(name, portname);
 		return camArchMapper.getPortIDByComponentName(name, portname);
 	}
 
@@ -904,6 +904,35 @@ public class AADLResolver {
 		}
 	}
 
+	public void ExceptionResolver4Task(String modelfilename, String fatherpath, Integer taskid) throws Exception {
+		Document document = ModelResolver(modelfilename);
+
+		List<Node> nodelist = document
+				.selectNodes(fatherpath + "/ownedAnnexSubclause/parsedAnnexSubclause/propagations");
+		nodelist.forEach((v)->{
+			Element e=(Element)v;
+			Element portElement=e.element("featureorPPRef");
+			_exception taskException = new _exception();
+			Integer exceptionid = (int) GetID.getId();
+			taskException.setComponentid(taskid);	
+			
+			List<Element> namelist=e.element("typeSet").elements("typeTokens");
+			StringBuffer sbname=new StringBuffer();
+			namelist.forEach((namev)->{
+				sbname.append(getType(namev.attributeValue("type"))+"、");
+			});
+			taskException.setType(sbname.toString());
+			
+			taskException.setName("task的故障");
+			try {
+				taskException.setLinkpointid(Integer.valueOf(GetElementID(modelfilename, e.element("featureorPPRef").attributeValue("featureorPP"))));
+			}catch(Exception err){}
+			
+			insert_exception(taskException);
+		});
+
+	}
+
 	// 错误附件的解析
 	public void ExceptionResolver(String modelfilename, String modelType) throws Exception {
 		Document document = ModelResolver(modelfilename);
@@ -1085,7 +1114,6 @@ public class AADLResolver {
 
 	// 需要系统内部结构文件,state是组件的state
 	private void StateResolver(String modelfilename, String Compositeid) throws Exception {
-		// TODO state与interface的关联
 		Document document = ModelResolver(modelfilename);
 
 		List<? extends Node> stateInfo = document
@@ -1236,6 +1264,7 @@ public class AADLResolver {
 				c.setEndinterface(dstport.attributeValue("id"));
 				cm.insert(c);
 			}
+			ExceptionResolver4Task(modelfilename, n.getUniquePath(), idString);
 		}
 	}
 
@@ -1333,7 +1362,6 @@ public class AADLResolver {
 				comp.setName(((Element) document.selectSingleNode(GetXPath(partitionPath))).attributeValue("name"));
 				camArchMapper.insert(comp);
 				ptm.insert(p);
-				// TODO partition作为component，设置task的partitionID
 				_task t = new _task();
 				t.setTaskid(Integer.valueOf(taskid));
 				t.setPartitionid(pid);

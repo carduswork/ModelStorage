@@ -233,29 +233,58 @@ public class SYSMLResolver {
 				c.setWcet(wcetElement.element("defaultValue").attributeValue("value") + "ms");
 			}
 			insert_component(c);
-			if (e.element("ownedRule[@xmi:type='uml:Constraint']") != null) {
-				Element e2 = e.element("ownedRule[@xmi:type='uml:Constraint']");
-				_exception ex = new _exception();
-				ex.setName(e2.attributeValue("name"));
-				exceptionlist.add(ex);
-			}
-			// component的operation是错误处理的
-			if (e.element("ownedOperation") != null) {
-				String e2 = e.element("ownedOperation").attributeValue("name");
-				String exceptionlistid = ((Element) document.selectSingleNode("//packagedElement[@name='" + e2 + "']"))
-						.attributeValue("id");
-				String[] exceptionlist = ((Element) document
-						.selectSingleNode("//Requirements:Requirement[@base_Class='" + exceptionlistid + "']"))
-								.attributeValue("text").split("、");
-				for (String s : exceptionlist) {
-					_exception ex = new _exception();
-					ex.setType("sysmlexception");
+//			if (e.element("ownedRule[@xmi:type='uml:Constraint']") != null) {
+//				Element e2 = e.element("ownedRule[@xmi:type='uml:Constraint']");
+//				_exception ex = new _exception();
+//				ex.setName(e2.attributeValue("name"));
+//				exceptionlist.add(ex);
+//			}
+			List<Element> opElements = e.elements("ownedOperation");
+			opElements.forEach((vop) -> {
+				if (vop.attribute("raisedException") != null) {
 
-					ex.setName(s);
-					ex.setComponentid(Integer.valueOf(idString));
-					insert_exception(ex);
+					String exid = vop.attributeValue("raisedException");
+					// 多个异常
+					if (exid.contains(" ")) {
+						String[] exids=exid.split(" ");
+						for(String s:exids) {
+							_exception ex = new _exception();
+							Element excElement = (Element) document
+									.selectSingleNode("//nestedClassifier[@xmi:id='" + s + "']");
+							ex.setName(excElement.attributeValue("name"));
+							ex.setType("sysmlexception");
+							ex.setComponentid(Integer.valueOf(idString));
+							exceptionlist.add(ex);
+						}
+					} else {
+
+						_exception ex = new _exception();
+						Element excElement = (Element) document
+								.selectSingleNode("//nestedClassifier[@xmi:id='" + exid + "']");
+						ex.setName(excElement.attributeValue("name"));
+						ex.setType("sysmlexception");
+						ex.setComponentid(Integer.valueOf(idString));
+						exceptionlist.add(ex);
+					}
 				}
-			}
+			});
+			// component的operation是错误处理的
+//			if (e.element("ownedOperation") != null) {
+//				String e2 = e.element("ownedOperation").attributeValue("name");
+//				String exceptionlistid = ((Element) document.selectSingleNode("//packagedElement[@name='" + e2 + "']"))
+//						.attributeValue("id");
+//				String[] exceptionlist = ((Element) document
+//						.selectSingleNode("//Requirements:Requirement[@base_Class='" + exceptionlistid + "']"))
+//								.attributeValue("text").split("、");
+//				for (String s : exceptionlist) {
+//					_exception ex = new _exception();
+//					ex.setType("sysmlexception");
+//
+//					ex.setName(s);
+//					ex.setComponentid(Integer.valueOf(idString));
+//					insert_exception(ex);
+//				}
+//			}
 			LinkpointResolver(filepath, e.getUniquePath(), idString, "subsys");
 			TaskResolver(filepath, n.getUniquePath(), c);
 		}
@@ -310,14 +339,13 @@ public class SYSMLResolver {
 					p.setProvider(fatherid);
 					insert_provide(p);
 				}
-			}
-			else {
-				//双向端口
+			} else {
+				// 双向端口
 				_require r = new _require();
 				r.setRequired(Integer.valueOf(linkpointID));
 				r.setRequirer(fatherid);
 				insert_require(r);
-				
+
 				_provide p = new _provide();
 				p.setProvided(Integer.valueOf(linkpointID));
 				p.setProvider(fatherid);
