@@ -48,7 +48,7 @@ public class MainController {
 
 	public void startIntegration() {
 		is.GenerateIntegaraton("aadl.xml","aadl");
-		is.GenerateIntegaraton("sysml.xml","sysml");
+		is.GenerateIntegaraton4SYSML("sysml.xml","sysml");
 		is.GenerateIntegaraton4SLK("simulink.xml","simulink");
 	}
 //转存复制到新目录下

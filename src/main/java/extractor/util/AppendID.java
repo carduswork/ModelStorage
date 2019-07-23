@@ -1,4 +1,4 @@
-package extractor.service;
+package extractor.util;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;

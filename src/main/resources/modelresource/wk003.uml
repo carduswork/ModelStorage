@@ -67,7 +67,7 @@
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_DQaUUYg1Eem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="_xR4SMIg0Eem7TYMKJXdmUw" name="数据故障处理" raisedException="_hOXFcKXnEemmzcMSwrLmAQ">
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_xR4SMIg0Eem7TYMKJXdmUw" name="FaultTask:UnexceptedError异常处理">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_lPaWIIhFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_lPaWIYhFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
@@ -77,6 +77,8 @@
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_SDaOkYg1Eem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_Pj0PsKtgEemCe-v-Ottt6g" name="FaultTask:InvalidaParameter异常处理"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_VDBDUKtgEemCe-v-Ottt6g" name="FaultTask:Violation异常处理"/>
         </nestedClassifier>
         <nestedClassifier xmi:type="uml:Class" xmi:id="_kyJ_8IglEem7TYMKJXdmUw" name="温度检测">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_VxJroIg1Eem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
@@ -222,7 +224,7 @@
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_TNlvd4hFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
-          <ownedOperation xmi:type="uml:Operation" xmi:id="_TNlveIhFEem7TYMKJXdmUw" name="数据故障处理" raisedException="_hOXFcKXnEemmzcMSwrLmAQ">
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_TNlveIhFEem7TYMKJXdmUw" name="Violation异常处理">
             <ownedParameter xmi:type="uml:Parameter" xmi:id="_pu-RsIhFEem7TYMKJXdmUw" name="delay" type="_tGpwQIgmEem7TYMKJXdmUw">
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_pu-RsYhFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
@@ -232,6 +234,8 @@
               <defaultValue xmi:type="uml:LiteralReal" xmi:id="_TNlve4hFEem7TYMKJXdmUw" value="1.0"/>
             </ownedParameter>
           </ownedOperation>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_eaCdEKtgEemCe-v-Ottt6g" name="UnexceptedError异常处理"/>
+          <ownedOperation xmi:type="uml:Operation" xmi:id="_jSNF4KtgEemCe-v-Ottt6g" name="InvalidaParameter异常处理"/>
         </nestedClassifier>
         <nestedClassifier xmi:type="uml:DataType" xmi:id="_uU2K0I__Eemhxvj2t8aK_g" name="operator_feedback">
           <ownedAttribute xmi:type="uml:Property" xmi:id="_omXIkJAAEemhxvj2t8aK_g" name="period" visibility="public" type="_tGpwQIgmEem7TYMKJXdmUw">

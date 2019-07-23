@@ -12,6 +12,7 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.mybatis.generator.codegen.ibatis2.Ibatis2FormattingUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,9 @@ import extractor.DAO.mapper.componenttransitionMapper;
 import extractor.DAO.mapper.connectionsMapper;
 import extractor.DAO.mapper.dataobjectMapper;
 import extractor.DAO.mapper.deviceMapper;
+import extractor.DAO.mapper.errorpathMapper;
 import extractor.DAO.mapper.linkpointMapper;
+import extractor.DAO.mapper.propagationMapper;
 import extractor.DAO.mapper.rtosMapper;
 import extractor.DAO.mapper.taskscheduleMapper;
 import extractor.DAO.mapper.transitionMapper;
@@ -54,13 +57,17 @@ import extractor.model.componenttransition;
 import extractor.model.connections;
 import extractor.model.dataobject;
 import extractor.model.device;
+import extractor.model.errorpath;
 import extractor.model.linkpoint;
+import extractor.model.propagation;
 import extractor.model.rtos;
 import extractor.model.shareddataaccess;
 import extractor.model.syncinterface;
 import extractor.model.taskschedule;
 import extractor.model.transition;
 import extractor.model.transitionstate;
+import extractor.util.AppendID;
+import extractor.util.GetID;
 
 //解析模型,本模块只负责模型文件的解析
 @Service("AADLResolver")
@@ -151,6 +158,10 @@ public class AADLResolver {
 	private componenttransitionMapper cttm;
 	@Autowired
 	private dataobjectMapper dobjm;
+	@Autowired
+	private propagationMapper propgm;
+	@Autowired
+	private errorpathMapper epm;
 
 	private int insert_partition(_partition p) {
 		return ptm.insert(p);
@@ -257,7 +268,8 @@ public class AADLResolver {
 		AADLResolver.compositelibfile = aadlFiles.get("组件库");
 		AADLResolver.errlibfile = aadlFiles.get("错误库");
 		AADLResolver.hardmodelfile = aadlFiles.get("总体架构");
-		MatchComponents(hardmodelfile, "总体架构");
+
+		ComponentResolver(hardmodelfile, "总体架构");
 		rtoslist.forEach((v) -> {
 			insert_rtos(v);
 		});
@@ -267,7 +279,25 @@ public class AADLResolver {
 		devicelist.forEach((v) -> {
 			insert_device(v);
 		});
+		String[] innersysfile = aadlFiles.get("系统内部结构").split(";");
+		for (String s : innersysfile) {
+			if (s != null) {
 
+				AADLResolver.dynamicfilename = s;
+				InnerSystem(dynamicfilename);
+
+//				Document d = ModelResolver(s);
+//				List<? extends Node> nodes = d
+//						.selectNodes("//ownedClassifier[@xsi:type='aadl2:SystemImplementation']");
+//				for (Node n2 : nodes) {
+//					StateResolver(s, ((Element) n2).attributeValue("id"));
+//				}
+
+				scheduleResolver(s);
+				partitionResolver(s);
+			}
+
+		}
 		MatchCChannel(hardmodelfile, "aadl");
 		cclist.forEach((v) -> {
 			insert_cchannel(v);
@@ -278,37 +308,14 @@ public class AADLResolver {
 		ivclist.forEach((v) -> {
 			insert_ivcchannel(v);
 		});
-		String[] innersysfile = aadlFiles.get("系统内部结构").split(";");
-		for (String s : innersysfile) {
-			if (s != null) {
-
-				AADLResolver.dynamicfilename = s;
-				InnerSystem(dynamicfilename);
-
-				Document d = ModelResolver(s);
-				List<? extends Node> nodes = d.selectNodes("//ownedClassifier[@xsi:type='aadl2:SystemImplementation']");
-				for (Node n : nodes) {
-					StateResolver(s, ((Element) n).attributeValue("id"));
-				}
-
-				scheduleResolver(s);
-				partitionResolver(s);
-			}
-
-		}
-		ExceptionResolver(dynamicfilename, "aadl");
 		exceptionlist.forEach((v) -> {
 			insert_exception(v);
 		});
-		// }
-		if (errlibfile != null) {
-			// eventResolver(aadlFiles.get("系统内部结构"), "aadl");
-		}
 
 	}
 
 	/* 当前模型的全部组件与port、task */
-	public void MatchComponents(String filepath, String contenttype) throws Exception {
+	public void ComponentResolver(String filepath, String contenttype) throws Exception {
 		Document document = ModelResolver(filepath);
 		if (contenttype.equals("总体架构")) {
 			Element systemElement = (Element) document.selectSingleNode("//ownedClassifier[@name='isolette']");
@@ -404,8 +411,6 @@ public class AADLResolver {
 					// dest是端口
 					String CompositeName = GetName(modelfilename,
 							element.element("destination").attributeValue("context"));
-//					String PortName = GetName("src/main/resources/modelresource/JH_FK/packages/Composition.aaxl2",
-//							element.element("destination").attributeValue("connectionEnd"));
 					String PortName = GetName(compositelibfile,
 							element.element("destination").attributeValue("connectionEnd"));
 
@@ -597,11 +602,11 @@ public class AADLResolver {
 			component component = new component();
 
 			Integer componentID = Integer.valueOf(element.attributeValue("id"));
-			// AppendID.AppendID(filepath, element.getPath(), idString.toString());
 
 			component.setModeltype("aadl");
 			component.setName(element.attributeValue("name"));
 			component.setComponentid(componentID);
+
 			switch (t) {
 			case "bus":
 				component.setType("bus");
@@ -612,7 +617,11 @@ public class AADLResolver {
 				break;
 			case "sys":
 				dynamicfilename = Getfilename(element.attributeValue("systemSubcomponentType"));
-
+//				String getwcet = "//ownedClassifier[@xsi:type='aadl2:SystemType' and @name='" + component.getName()
+//				+ "']//ownedPropertyAssociation[contains(@property,'wcet4sys')]/ownedValue/ownedValue";
+//		
+//		Element wcetElement = (Element) document.selectSingleNode(getwcet);
+//		component.setWcet(wcetElement.attributeValue("value") + "ms");
 				component.setType("rtos");
 
 				String getwcetinsys = "//ownedPublicSection/ownedClassifier[@name='" + component.getName()
@@ -632,7 +641,9 @@ public class AADLResolver {
 
 				String sysdef = modeldirectory + Getfilename(element.attributeValue("systemSubcomponentType"));
 				LinkpointResolver(sysdef, ports, componentID, t, element.attributeValue("name"));
+				// 解析state，否则无法解析transition
 
+				ExceptionResolver(dynamicfilename, componentID.toString());
 				break;
 			case "device":
 				component.setType("device");
@@ -655,8 +666,6 @@ public class AADLResolver {
 				LinkpointResolver(compositelibfile, ports, componentID, t, element.attributeValue("name"));
 				break;
 			}
-
-			// componentlist.put(element.attributeValue("name"), component);
 		}
 	}
 
@@ -906,124 +915,115 @@ public class AADLResolver {
 
 	public void ExceptionResolver4Task(String modelfilename, String fatherpath, Integer taskid) throws Exception {
 		Document document = ModelResolver(modelfilename);
-
+		// propagation的解析
 		List<Node> nodelist = document
 				.selectNodes(fatherpath + "/ownedAnnexSubclause/parsedAnnexSubclause/propagations");
-		nodelist.forEach((v)->{
-			Element e=(Element)v;
-			Element portElement=e.element("featureorPPRef");
+		nodelist.forEach((v) -> {
+			Element e = (Element) v;
+			Element portElement = e.element("featureorPPRef");
 			_exception taskException = new _exception();
 			Integer exceptionid = (int) GetID.getId();
-			taskException.setComponentid(taskid);	
-			
-			List<Element> namelist=e.element("typeSet").elements("typeTokens");
-			StringBuffer sbname=new StringBuffer();
-			namelist.forEach((namev)->{
-				sbname.append(getType(namev.attributeValue("type"))+"、");
+			taskException.setComponentid(taskid);
+
+			List<Element> namelist = e.element("typeSet").elements("typeTokens");
+			StringBuffer sbname = new StringBuffer();
+			namelist.forEach((namev) -> {
+				sbname.append(getType(namev.attributeValue("type")) + "、");
 			});
 			taskException.setType(sbname.toString());
-			
+
 			taskException.setName("task的故障");
 			try {
-				taskException.setLinkpointid(Integer.valueOf(GetElementID(modelfilename, e.element("featureorPPRef").attributeValue("featureorPP"))));
-			}catch(Exception err){}
-			
+				taskException.setLinkpointid(Integer.valueOf(
+						GetElementID(modelfilename, e.element("featureorPPRef").attributeValue("featureorPP"))));
+			} catch (Exception err) {
+			}
+
 			insert_exception(taskException);
 		});
 
 	}
 
 	// 错误附件的解析
-	public void ExceptionResolver(String modelfilename, String modelType) throws Exception {
+	public void ExceptionResolver(String modelfilename, String componentID) throws Exception {
 		Document document = ModelResolver(modelfilename);
-
 		List<? extends Node> nodelist = new ArrayList<>();
-		if (modelType.equals("aadl")) {
-			// 读取system节点
-			nodelist = document.selectNodes("//ownedClassifier[@xsi:type='aadl2:SystemType']");
-			nodelist.forEach((v) -> {
 
-				Element systemElement = (Element) v;
+		// 读取system节点
+		nodelist = document.selectNodes("//ownedClassifier[@xsi:type='aadl2:SystemType']");
+		nodelist.forEach((v) -> {
+			Element systemElement = (Element) v;
 
-				try {
-					String[] behaviorcontent = systemElement.element("ownedAnnexSubclause")
-							.element("parsedAnnexSubclause").attributeValue("useBehavior").split("\\.");
-					String behaviorname = behaviorcontent[2];
-					eventResolver(modelfilename, "aadl");
+			try {
+				// 如果有错误附件，获取behavior，里面有当前组件的全部错误类型
+				if (systemElement.element("ownedAnnexSubclause") != null) {
+					if (systemElement.element("ownedAnnexSubclause").element("parsedAnnexSubclause")
+							.attribute("useBehavior") != null) {
 
-					String getimpl = systemElement.getUniquePath() + "/following-sibling::ownedClassifier[@name='"
-							+ systemElement.attributeValue("name") + ".impl" + "']";
-					Element implElement = (Element) document.selectSingleNode(getimpl);
-					// 因为解析路径有些相似就顺手放在这里了
-					String getwcet = systemElement.getUniquePath()
-							+ "/ownedPropertyAssociation[contains(@property,'wcet4sys')]/ownedValue/ownedValue";
-					Element wcetElement = (Element) document.selectSingleNode(getwcet);
-					component c = new component();
-					c.setComponentid(Integer.valueOf(implElement.attributeValue("id")));
-					c.setWcet(wcetElement.attributeValue("value") + "ms");
-					camArchMapper.updateByPrimaryKeySelective(c);
-
-					TransitionResolver(behaviorname, implElement.attributeValue("id"));
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				String compositename = systemElement.attributeValue("name");
-
-				_exception e = new _exception();
-				e.setName(systemElement.element("ownedAbstractFeature").attributeValue("name"));
-
-				Element typesetElement = systemElement.element("ownedAnnexSubclause").element("parsedAnnexSubclause")
-						.element("propagations").element("typeSet");
-				List<Element> typelist = typesetElement.elements("typeTokens");
-				StringBuffer exceptionTypeString = new StringBuffer();
-				for (Element typElement : typelist) {
-					exceptionTypeString.append(getType(typElement.attributeValue("type")) + "、");
-				}
-				e.setType(exceptionTypeString.toString());
-
-				String getimpl = systemElement.getUniquePath() + "/following-sibling::ownedClassifier[@name='"
-						+ systemElement.attributeValue("name") + ".impl" + "']";
-				Element implElement = (Element) document.selectSingleNode(getimpl);
-				e.setComponentid(Integer.valueOf(implElement.attributeValue("id")));
-
-				systemElement = systemElement.element("ownedAnnexSubclause").element("parsedAnnexSubclause")
-						.element("propagations");
-				Integer sourceid = 0, destid = 0;
-				// 没有direction或者
-				if (systemElement.attribute("direction") != null
-						&& systemElement.attributeValue("direction").equals("out")) {
-					String getsourceportPath = systemElement.element("featureorPPRef").attributeValue("featureorPP");
-					try {
-						Element portElement = (Element) document.selectSingleNode(GetXPath(getsourceportPath));
-						sourceid = Integer.valueOf(portElement.attributeValue("id"));
-//						sourceid = getPortIDByComponentName(compositename,
-//								GetName(modelfilename, GetXPath(getsourceportPath)));
-						e.setLinkpointid(sourceid);
-					} catch (Exception e1) {
-						e1.printStackTrace();
-					}
-				} else {
-
-					String getsourceportPath = systemElement.element("featureorPPRef").attributeValue("featureorPP");
-					try {
-//						destid = getPortIDByComponentName(compositename,
-//								GetName(modelfilename, GetXPath(getsourceportPath)));
-						Element portElement = (Element) document.selectSingleNode(GetXPath(getsourceportPath));
-						// TODO 设置propagation linkpoint
-						destid = Integer.valueOf(portElement.attributeValue("id"));
-						e.setLinkpointid(destid);
-					} catch (Exception e1) {
-						e1.printStackTrace();
-						System.out.println(compositename + getsourceportPath);
+						String[] behaviorcontent = systemElement.element("ownedAnnexSubclause")
+								.element("parsedAnnexSubclause").attributeValue("useBehavior").split("\\.");
+						String behaviorname = behaviorcontent[2];
+						// TODO 在这里放state的解析
+						StateResolver(modelfilename, componentID);
+						// 解析event
+						eventResolver(modelfilename, "aadl");
+						// 解析transition
+						TransitionResolver(behaviorname, componentID);
 					}
 
+					// 解析propagation,useType没用，一个组件真正有哪些错误要看p
+
+					List<Element> propagationList = systemElement.element("ownedAnnexSubclause")
+							.element("parsedAnnexSubclause").elements("propagations");
+					propagationList.forEach((pv) -> {
+
+						// out propagation
+						List<Element> faultList = pv.element("typeSet").elements("typeTokens");
+						faultList.forEach((fv) -> {
+							String getportPath = pv.element("featureorPPRef").attributeValue("featureorPP");
+							Element portElement = (Element) document.selectSingleNode(GetXPath(getportPath));
+
+							// try {
+							propagation p = new propagation();
+							p.setFaultname(fv.attributeValue("type").split("\\.")[2]);
+							p.setComponentid(componentID);
+							p.setLinkpointid(portElement.attributeValue("id"));
+							propgm.insert(p);
+//							} catch (Exception e1) {
+//								e1.printStackTrace();
+//							}
+						});
+
+					});
+					// 解析error flow
+					List<Element> flowList = systemElement.element("ownedAnnexSubclause")
+							.element("parsedAnnexSubclause").elements("flows");
+					flowList.forEach((fv) -> {
+						errorpath ep = new errorpath();
+						ep.setComponentid(componentID);
+
+						String sourcepropagationpath = GetXPath4State(fv.attributeValue("incoming"));
+						Element spropElement = (Element) document
+								.selectSingleNode(sourcepropagationpath);
+						Element portElement = (Element) document.selectSingleNode(
+								GetXPath(spropElement.element("featureorPPRef").attributeValue("featureorPP")));
+						String sourceportid = portElement.attributeValue("id");
+						ep.setStartportid(sourceportid);
+						String destpropagationpath = GetXPath4State(fv.attributeValue("outgoing"));
+						spropElement = (Element) document.selectSingleNode(destpropagationpath);
+						portElement = (Element) document.selectSingleNode(
+								GetXPath(spropElement.element("featureorPPRef").attributeValue("featureorPP")));
+						String destportid = portElement.attributeValue("id");
+						ep.setEndportid(destportid);
+
+						epm.insert(ep);
+					});
 				}
-				e.setCommunicationchannelid(getCChannelBysd(sourceid, destid));
+			} catch (Exception e1) {
 
-				exceptionlist.add(e);
-			});
-
-		}
+				e1.printStackTrace();
+			}
+		});
 	}
 
 	// 需要的文件是系统内部结构，而且要先解析错误库中的event
@@ -1033,33 +1033,36 @@ public class AADLResolver {
 				.selectNodes("//parsedAnnexLibrary/behaviors[@name='" + behaviorname + "']/transitions");
 
 		transNodes.forEach((v) -> {
-			Element element = (Element) v;
+			Element transitionElement = (Element) v;
 			// transition与作为trigger的event关联
-			String getTriggerevent = element.element("condition").element("qualifiedErrorPropagationReference")
-					.element("emv2Target").attributeValue("namedElement");
+			String getTriggerevent = transitionElement.element("condition")
+					.element("qualifiedErrorPropagationReference").element("emv2Target").attributeValue("namedElement");
 
 			transition t = new transition();
 			try {
-				t.setTransitionid((int) GetID.getId());
+				Integer transitionid = (int) GetID.getId();
+				AppendID.AppendID(errlibfile, v.getUniquePath(), transitionid.toString());
+
+				t.setTransitionid(transitionid);
 				// 关联event
 				Document d = ModelResolver(errlibfile);
 				String eventpathString = GetXPath4State(getTriggerevent);
 				Node nodes = d.selectSingleNode(eventpathString);
 				String id = ((Element) nodes).attributeValue("id");
 				t.setTriggerid(Integer.valueOf(id));
-				t.setName(getType(element.attributeValue("name")));
+				t.setName(getType(transitionElement.attributeValue("name")));
 
 				insert_transition(t);
 				transitionstate tsTransitionstate = new transitionstate();
 
 				// 这里需要先解析到state
-				Element stateelement = (Element) document
-						.selectSingleNode(GetXPath4State(element.attributeValue("source")));
+				Element stateelement = (Element) d
+						.selectSingleNode(GetXPath4State(transitionElement.attributeValue("source")));
+				//System.out.println(stateelement.attributeValue("id"));
 				tsTransitionstate.setSourceid(Integer.valueOf(stateelement.attributeValue("id")));
-				if (element.attributeValue("target") != null) {
-
+				if (transitionElement.attributeValue("target") != null) {
 					stateelement = (Element) document
-							.selectSingleNode(GetXPath4State(element.attributeValue("target")));
+							.selectSingleNode(GetXPath4State(transitionElement.attributeValue("target")));
 					tsTransitionstate.setOutid(Integer.valueOf(stateelement.attributeValue("id")));
 
 					tsTransitionstate.setTransitionid(t.getTransitionid());
@@ -1071,6 +1074,8 @@ public class AADLResolver {
 					cttm.insert(cmpts);
 				}
 			} catch (Exception e) {
+				//System.out.println("此时解析的是" + transitionElement.getName() + "引用的" + behaviorname);
+				//System.out.println(cmpid);
 				e.printStackTrace();
 			}
 		});
@@ -1566,7 +1571,7 @@ public class AADLResolver {
 		return "//" + result.get(0) + "/" + result.get(1);
 	}
 
-//5层
+	// 5层
 	private static String GetXPath4State(String path) {
 		String reg = "(?<=@).[A-Za-z0-9\\.]+";
 		ArrayList<String> result = new ArrayList<String>();

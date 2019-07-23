@@ -12,11 +12,8 @@
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="3"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**     use types ErrorLib;     use behavior ErrorLib::FailStopTransient;     error propagations   --输入数据格式错误，或长度错误或未接收到输入数据   currentTemperature:in propagation {Violation,InvalidParameter}; --  heating:out propagation{InvalidParameter}; --  flows --   testpath:error path currentTemperature{Violation} when {HardwareFault};   end propagations;     **}">
+      <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**     use types ErrorLib;     use behavior ErrorLib::FailStopTransient;     error propagations   --输入数据格式错误，或长度错误或未接收到输入数据   currentTemperature:in propagation {Violation,InvalidParameter};   heating:out propagation{InvalidParameter};   flows    testpath:error path currentTemperature{InvalidParameter}-&gt;heating{InvalidParameter};    testpath2:error path currentTemperature{Violation}-&gt;heating{InvalidParameter};   end propagations;     **}">
         <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib" useBehavior="ErrorLib.aadl#emv2$ErrorLib.FailStopTransient">
-          <ownedComment body="--  heating:out propagation{InvalidParameter};"/>
-          <ownedComment body="--  flows"/>
-          <ownedComment body="--   testpath:error path currentTemperature{Violation} when {HardwareFault};"/>
           <propagations>
             <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.3">
               <ownedComment body="--输入数据格式错误，或长度错误或未接收到输入数据"/>
@@ -26,6 +23,28 @@
               <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
             </typeSet>
           </propagations>
+          <propagations direction="out">
+            <featureorPPRef featureorPP="#//@ownedPublicSection/@ownedClassifier.0/@ownedDataPort.2"/>
+            <typeSet>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
+            </typeSet>
+          </propagations>
+          <flows xsi:type="errorModel:ErrorPath" name="testpath" incoming="#//@ownedPublicSection/@ownedClassifier.0/@ownedAnnexSubclause.0/@parsedAnnexSubclause/@propagations.0" outgoing="#//@ownedPublicSection/@ownedClassifier.0/@ownedAnnexSubclause.0/@parsedAnnexSubclause/@propagations.1">
+            <typeTokenConstraint>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
+            </typeTokenConstraint>
+            <targetToken>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
+            </targetToken>
+          </flows>
+          <flows xsi:type="errorModel:ErrorPath" name="testpath2" incoming="#//@ownedPublicSection/@ownedClassifier.0/@ownedAnnexSubclause.0/@parsedAnnexSubclause/@propagations.0" outgoing="#//@ownedPublicSection/@ownedClassifier.0/@ownedAnnexSubclause.0/@parsedAnnexSubclause/@propagations.1">
+            <typeTokenConstraint>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.Violation"/>
+            </typeTokenConstraint>
+            <targetToken>
+              <typeTokens type="ErrorLib.aadl#emv2$ErrorLib.InvalidParameter"/>
+            </targetToken>
+          </flows>
         </parsedAnnexSubclause>
       </ownedAnnexSubclause>
       <ownedAbstractFeature name="ObservableFailure" out="true"/>
@@ -34,7 +53,7 @@
       <ownedDataPort name="heating" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.heating1"/>
       <ownedDataPort name="currentTemperature" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.currentTem"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="-533425886">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="thermostat.impl" id="-1096723127">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding">
         <appliesTo>
           <path namedElement="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.1"/>
@@ -171,6 +190,7 @@
         </ownedValue>
       </ownedPropertyAssociation>
       <ownedAnnexSubclause xsi:type="aadl2:DefaultAnnexSubclause" name="EMV2" sourceText="{**     use types ErrorLib;     use behavior ErrorLib::FailStopTransient;     error propagations   --输入数据格式错误，或长度错误或未接收到输入数据   datain:in propagation {Violation,InvalidParameter};    dataout:out propagation{Violation,InvalidParameter}; --  heating:out propagation{InvalidParameter}; --  flows --   testpath:error path currentTemperature{Violation} when {HardwareFault};   end propagations;     **}">
+        <ownedComment body="--TODO 可能删除"/>
         <ownedComment body="--TODO 可能删除"/>
         <parsedAnnexSubclause xsi:type="errorModel:ErrorModelSubclause" name="EMV2" useTypes="ErrorLib.aadl#emv2$ErrorLib" useBehavior="ErrorLib.aadl#emv2$ErrorLib.FailStopTransient">
           <ownedComment body="--  heating:out propagation{InvalidParameter};"/>

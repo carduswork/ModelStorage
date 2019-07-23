@@ -27,8 +27,10 @@ import extractor.DAO.mapper.componentMapper;
 import extractor.DAO.mapper.componenttransitionMapper;
 import extractor.DAO.mapper.connectionsMapper;
 import extractor.DAO.mapper.dataobjectMapper;
+import extractor.DAO.mapper.errorpathMapper;
 import extractor.DAO.mapper.linkpointMapper;
 import extractor.DAO.mapper.processorMapper;
+import extractor.DAO.mapper.propagationMapper;
 import extractor.DAO.mapper.slkstateMapper;
 import extractor.DAO.mapper.transitionMapper;
 import extractor.DAO.mapper.transitionstateMapper;
@@ -42,7 +44,9 @@ import extractor.model.component;
 import extractor.model.componenttransition;
 import extractor.model.connections;
 import extractor.model.dataobject;
+import extractor.model.errorpath;
 import extractor.model.linkpoint;
+import extractor.model.propagation;
 import extractor.model.slkstate;
 import extractor.model.transition;
 import extractor.model.transitionstate;
@@ -85,6 +89,10 @@ public class IntegrationService {
 	private dataobjectMapper dm;
 	@Autowired
 	private connectionsMapper cnm;
+	@Autowired
+	private propagationMapper progm;
+	@Autowired
+	private errorpathMapper epm;
 
 	public static Document ModelResolver(String url) throws DocumentException {
 		SAXReader reader = new SAXReader();
@@ -141,16 +149,24 @@ public class IntegrationService {
 						lp.addAttribute("datatype", dm.getByFrom(v2.getLinkpointid()).getDatatype());
 					}
 				});
-				List<_exception> ecplist = em.selectByComp(compv.getComponentid());
+				List<propagation> ecplist = progm.selectByComponent(compv.getComponentid());
 				ecplist.forEach((ecpv) -> {
 					Element ecpelement = comp.addElement("propagation");
-					ecpelement.addAttribute("name", ecpv.getName());
-					ecpelement.addAttribute("fault", ecpv.getType());
-					ecpelement.addAttribute("id", ecpv.getExceptionid().toString());
-					if (modeltype.equals("aadl")) {
+					ecpelement.addAttribute("name", ecpv.getFaultname());
+					ecpelement.addAttribute("id", ecpv.getId().toString());
 
-						ecpelement.addAttribute("port_id", ecpv.getLinkpointid().toString());
-					}
+					ecpelement.addAttribute("port_id", ecpv.getLinkpointid());
+
+				});
+				// errorpath
+				List<errorpath> epList = epm.selectByComponent(compv.getComponentid().toString());
+				epList.forEach((epv) -> {
+					Element ecpelement = comp.addElement("errorpath");
+					ecpelement.addAttribute("id", epv.getId().toString());
+					ecpelement.addAttribute("startportid", epv.getStartportid());
+
+					ecpelement.addAttribute("endportid", epv.getEndportid());
+
 				});
 				List<_state> sList = sm.getStateUnderCMP(compv.getComponentid());
 				for (_state state : sList) {
@@ -411,12 +427,11 @@ public class IntegrationService {
 				});
 				List<_exception> ecplist = em.selectByComp(compv.getComponentid());
 				ecplist.forEach((ecpv) -> {
-					Element ecpelement = comp.addElement("propagation");
+					Element ecpelement = comp.addElement("exception");
 					ecpelement.addAttribute("name", ecpv.getName());
 					ecpelement.addAttribute("fault", ecpv.getType());
 					ecpelement.addAttribute("id", ecpv.getExceptionid().toString());
 					if (modeltype.equals("aadl")) {
-
 						ecpelement.addAttribute("port_id", ecpv.getLinkpointid().toString());
 					}
 				});
@@ -447,80 +462,84 @@ public class IntegrationService {
 					});
 				});
 				// 设置processor即partition
-				List<_partition> processorlist = ptnm.selectByRTOS(compv.getComponentid());
-				processorlist.forEach((v5) -> {
-					Element psr = comp.addElement("partition");
-					psr.addAttribute("id", v5.getPartitionid().toString());
-					// 设置task
-					List<_task> tasklistinpart = new ArrayList<_task>();
-					tasklistinpart = _tm.selectBypartition(v5.getPartitionid());
-					tasklistinpart.forEach((taskv) -> {
-						Element tsk = psr.addElement("task");
-						tsk.addAttribute("name", taskv.getName());
-						tsk.addAttribute("id", taskv.getTaskid().toString());
-						tsk.addAttribute("deadline", taskv.getDeadline());
-						tsk.addAttribute("period", taskv.getPeriod());
-						tsk.addAttribute("wcet", taskv.getWcet());
-
-						List<linkpoint> taskports = lm.getPortUnderCMP(taskv.getTaskid());
-						taskports.forEach((v7) -> {
-							Element lp = tsk.addElement("port");
-							lp.addAttribute("name", v7.getName());
-							lp.addAttribute("id", v7.getLinkpointid().toString());
-							if (pvm.selectByportid(v7.getLinkpointid()) != null) {
-								lp.addAttribute("direction", "out");
-							}
-							if (rm.selectByportid(v7.getLinkpointid()) != null) {
-								lp.addAttribute("direction", "in");
-							}
-						});
-						// 设置thread
-						List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
-						childtasklist.forEach((v6) -> {
-							Element child = tsk.addElement("task");
-							child.addAttribute("name", v6.getName());
-							child.addAttribute("id", v6.getTaskid().toString());
-							child.addAttribute("deadline", v6.getDeadline());
-							child.addAttribute("period", v6.getPeriod());
-							child.addAttribute("wcet", v6.getWcet());
-
-							List<linkpoint> threadports = lm.getPortUnderCMP(v6.getTaskid());
-							threadports.forEach((v8) -> {
-								Element lp = child.addElement("port");
-								lp.addAttribute("name", v8.getName());
-								lp.addAttribute("id", v8.getLinkpointid().toString());
-								if (pvm.selectByportid(v8.getLinkpointid()) != null) {
-									lp.addAttribute("direction", "out");
-								}
-								if (rm.selectByportid(v8.getLinkpointid()) != null) {
-									lp.addAttribute("direction", "in");
-								}
-							});
-						});
-						// partition上thread的连接
-						List<connections> connectionlist = cnm.selectByfather(taskv.getTaskid());
-						connectionlist.forEach((c) -> {
-							Element e = tsk.addElement("connection");
-							e.addAttribute("source", c.getStartinterface().toString());
-							e.addAttribute("dest", c.getEndinterface().toString());
-							e.addAttribute("id", c.getIdconnections().toString());
-							e.addAttribute("name", c.getConnectiontype());
-						});
-					});
-					// partition上 process的连接
-					List<connections> threadconnectionlist = cnm.selectByfather(v5.getPartitionid());
-					threadconnectionlist.forEach((threadconnection) -> {
-						Element e = psr.addElement("connection");
-						e.addAttribute("source", threadconnection.getStartinterface().toString());
-						e.addAttribute("dest", threadconnection.getEndinterface().toString());
-						e.addAttribute("id", threadconnection.getIdconnections().toString());
-
-					});
-				});
+//				List<_partition> processorlist = ptnm.selectByRTOS(compv.getComponentid());
+//				processorlist.forEach((v5) -> {
+//					Element psr = comp.addElement("partition");
+//					psr.addAttribute("id", v5.getPartitionid().toString());
+//					// 设置task
+//					List<_task> tasklistinpart = new ArrayList<_task>();
+//					tasklistinpart = _tm.selectBypartition(v5.getPartitionid());
+//					tasklistinpart.forEach((taskv) -> {
+//						Element tsk = psr.addElement("task");
+//						tsk.addAttribute("name", taskv.getName());
+//						tsk.addAttribute("id", taskv.getTaskid().toString());
+//						tsk.addAttribute("deadline", taskv.getDeadline());
+//						tsk.addAttribute("period", taskv.getPeriod());
+//						tsk.addAttribute("wcet", taskv.getWcet());
+//
+//						List<linkpoint> taskports = lm.getPortUnderCMP(taskv.getTaskid());
+//						taskports.forEach((v7) -> {
+//							Element lp = tsk.addElement("port");
+//							lp.addAttribute("name", v7.getName());
+//							lp.addAttribute("id", v7.getLinkpointid().toString());
+//							if (pvm.selectByportid(v7.getLinkpointid()) != null) {
+//								lp.addAttribute("direction", "out");
+//							}
+//							if (rm.selectByportid(v7.getLinkpointid()) != null) {
+//								lp.addAttribute("direction", "in");
+//							}
+//						});
+//						// 设置thread
+//						List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
+//						childtasklist.forEach((v6) -> {
+//							Element child = tsk.addElement("task");
+//							child.addAttribute("name", v6.getName());
+//							child.addAttribute("id", v6.getTaskid().toString());
+//							child.addAttribute("deadline", v6.getDeadline());
+//							child.addAttribute("period", v6.getPeriod());
+//							child.addAttribute("wcet", v6.getWcet());
+//
+//							List<linkpoint> threadports = lm.getPortUnderCMP(v6.getTaskid());
+//							threadports.forEach((v8) -> {
+//								Element lp = child.addElement("port");
+//								lp.addAttribute("name", v8.getName());
+//								lp.addAttribute("id", v8.getLinkpointid().toString());
+//								if (pvm.selectByportid(v8.getLinkpointid()) != null) {
+//									lp.addAttribute("direction", "out");
+//								}
+//								if (rm.selectByportid(v8.getLinkpointid()) != null) {
+//									lp.addAttribute("direction", "in");
+//								}
+//							});
+//						});
+//						// partition上thread的连接
+//						List<connections> connectionlist = cnm.selectByfather(taskv.getTaskid());
+//						connectionlist.forEach((c) -> {
+//							Element e = tsk.addElement("connection");
+//							e.addAttribute("source", c.getStartinterface().toString());
+//							e.addAttribute("dest", c.getEndinterface().toString());
+//							e.addAttribute("id", c.getIdconnections().toString());
+//							e.addAttribute("name", c.getConnectiontype());
+//						});
+//					});
+//					// partition上 process的连接
+//					List<connections> threadconnectionlist = cnm.selectByfather(v5.getPartitionid());
+//					threadconnectionlist.forEach((threadconnection) -> {
+//						Element e = psr.addElement("connection");
+//						e.addAttribute("source", threadconnection.getStartinterface().toString());
+//						e.addAttribute("dest", threadconnection.getEndinterface().toString());
+//						e.addAttribute("id", threadconnection.getIdconnections().toString());
+//
+//					});
+//				});
 				// 设置不在partition上的task
 				List<_task> tasklist = _tm.selectChildnotinpart(compv.getComponentid());
 				tasklist.forEach((taskv) -> {
 					Element tsk = comp.addElement("task");
+					if (taskv.getName().contains("FaultTask")) {
+						tsk.setName("FaultTask");
+					} 
+
 					tsk.addAttribute("name", taskv.getName());
 					tsk.addAttribute("id", taskv.getTaskid().toString());
 					tsk.addAttribute("deadline", taskv.getDeadline());
@@ -543,6 +562,9 @@ public class IntegrationService {
 					List<_task> threadlist = _tm.selectChild(taskv.getTaskid());
 					threadlist.forEach((threadv) -> {
 						Element child = tsk.addElement("task");
+						if (threadv.getName().contains("FaultTask")) {
+							child.setName("FaultTask");
+						} 
 						child.addAttribute("name", threadv.getName());
 						child.addAttribute("id", threadv.getTaskid().toString());
 						child.addAttribute("deadline", threadv.getDeadline());

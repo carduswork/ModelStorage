@@ -7,12 +7,12 @@
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="2"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedDataPort name="inoperatorFeedback" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.ofb" id="355966207"/>
-      <ownedDataPort name="outoperatorFeedback" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.ofb" id="-420535133"/>
-      <ownedDataPort name="inoperatorsettings" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.os" id="1297511454"/>
-      <ownedDataPort name="outoperatorsettings" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.os" id="-1391767880"/>
+      <ownedDataPort name="inoperatorFeedback" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.ofb" id="-467736731"/>
+      <ownedDataPort name="outoperatorFeedback" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.ofb" id="-1573136879"/>
+      <ownedDataPort name="inoperatorsettings" in="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.os" id="-1160478620"/>
+      <ownedDataPort name="outoperatorsettings" out="true" dataFeatureClassifier="aadl2:DataType composition.aadl#composition.os" id="991288451"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="operatorinterface.impl" id="-238895285">
+    <ownedClassifier xsi:type="aadl2:SystemImplementation" name="operatorinterface.impl" id="992204422">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.0"/>
       <ownedPortConnection name="new_connection">
         <destination context="#//@ownedPublicSection/@ownedClassifier.1/@ownedProcessSubcomponent.0" connectionEnd="#//@ownedPublicSection/@ownedClassifier.2/@ownedDataPort.0"/>
@@ -33,28 +33,28 @@
       <ownedProcessSubcomponent name="inputsetting" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.3"/>
       <ownedProcessSubcomponent name="show" processSubcomponentType="#//@ownedPublicSection/@ownedClassifier.5"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessType" name="inputsetting" id="1373232709">
+    <ownedClassifier xsi:type="aadl2:ProcessType" name="inputsetting" id="-1546656512">
       <ownedPropertyAssociation property="PS.aadl#PS.wcet">
         <ownedValue>
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedDataPort name="operatorsettings" in="true" id="921807910"/>
-      <ownedDataPort name="outoperatorsettings" out="true" id="-1160365275"/>
+      <ownedDataPort name="operatorsettings" in="true" id="159038804"/>
+      <ownedDataPort name="outoperatorsettings" out="true" id="1067623242"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="inputsetting.impl" id="1373232709">
+    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="inputsetting.impl" id="-1546656512">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.2"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessType" name="show" id="260321540">
+    <ownedClassifier xsi:type="aadl2:ProcessType" name="show" id="671593160">
       <ownedPropertyAssociation property="PS.aadl#PS.wcet">
         <ownedValue>
           <ownedValue xsi:type="aadl2:IntegerLiteral" unit="../../Plugin_Resources/Predeclared_Property_Sets/AADL_Project.aadl#/0/@ownedPropertyType.16/@ownedLiteral.3" value="1"/>
         </ownedValue>
       </ownedPropertyAssociation>
-      <ownedDataPort name="operatorFeedback" in="true" id="1061264353"/>
-      <ownedDataPort name="outoperatorFeedback" out="true" id="-2105022930"/>
+      <ownedDataPort name="operatorFeedback" in="true" id="-1920496564"/>
+      <ownedDataPort name="outoperatorFeedback" out="true" id="1117414522"/>
     </ownedClassifier>
-    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="show.impl" id="260321540">
+    <ownedClassifier xsi:type="aadl2:ProcessImplementation" name="show.impl" id="671593160">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.4"/>
     </ownedClassifier>
   </ownedPublicSection>

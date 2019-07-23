@@ -1,4 +1,4 @@
-package extractor.service;
+package extractor.util;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

@@ -53,6 +53,8 @@ import extractor.model.rtos;
 import extractor.model.slkstate;
 import extractor.model.transition;
 import extractor.model.transitionstate;
+import extractor.util.AppendID;
+import extractor.util.GetID;
 
 @Service("SLKResolver")
 
