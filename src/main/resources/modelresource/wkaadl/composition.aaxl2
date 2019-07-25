@@ -48,6 +48,11 @@
           <ownedValue xsi:type="aadl2:StringLiteral" value="signal"/>
         </ownedValue>
       </ownedPropertyAssociation>
+      <ownedPropertyAssociation property="PS.aadl#PS.protocol">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:StringLiteral" value="TCP"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceType" name="temperature_sensor">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">

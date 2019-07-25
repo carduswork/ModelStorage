@@ -48,6 +48,7 @@ import extractor.model.errorpath;
 import extractor.model.linkpoint;
 import extractor.model.propagation;
 import extractor.model.slkstate;
+import extractor.model.slkstateWithBLOBs;
 import extractor.model.transition;
 import extractor.model.transitionstate;
 
@@ -136,6 +137,8 @@ public class IntegrationService {
 					lp.addAttribute("name", v2.getName());
 					lp.addAttribute("id", v2.getLinkpointid().toString());
 					lp.addAttribute("period", v2.getPeriod());
+					lp.addAttribute("protocol",v2.getProtocol());
+					
 					if (pvm.selectByportid(v2.getLinkpointid()) != null
 							&& rm.selectByportid(v2.getLinkpointid()) != null) {
 						lp.addAttribute("direction", "inout");
@@ -412,6 +415,7 @@ public class IntegrationService {
 					lp.addAttribute("name", v2.getName());
 					lp.addAttribute("id", v2.getLinkpointid().toString());
 					lp.addAttribute("period", v2.getPeriod());
+					lp.addAttribute("protocol", v2.getProtocol());
 					if (pvm.selectByportid(v2.getLinkpointid()) != null
 							&& rm.selectByportid(v2.getLinkpointid()) != null) {
 						lp.addAttribute("direction", "inout");
@@ -660,6 +664,7 @@ public class IntegrationService {
 					lp.addAttribute("name", v2.getName());
 					lp.addAttribute("id", v2.getLinkpointid().toString());
 					lp.addAttribute("period", v2.getPeriod());
+					lp.addAttribute("protocol", v2.getProtocol());
 					if (pvm.selectByportid(v2.getLinkpointid()) != null) {
 						lp.addAttribute("direction", "out");
 					}
@@ -694,11 +699,12 @@ public class IntegrationService {
 					if (exception1.size() > 0) {
 						tsk.addAttribute("faultType", exception1.get(0).getName());
 					}
-					slkstate slkstat = slksm.selectByTask(taskv.getTaskid());
+					slkstateWithBLOBs slkstat = slksm.selectByTask(taskv.getTaskid());
 					if (slkstat != null) {
-
+						tsk.addAttribute("do", slkstat.getDoinfo());
 						tsk.addAttribute("exit", slkstat.getExitinfo());
-						tsk.addAttribute("faultState", slkstat.getSlkstatecol());
+						tsk.addAttribute("faultState", slkstat.getFaultstate());
+						tsk.addAttribute("entry", slkstat.getEntry());
 					}
 					// thread
 					List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());
@@ -715,10 +721,12 @@ public class IntegrationService {
 							child.addAttribute("faultType", exception2.get(0).getName());
 						}
 
-						slkstate slkstat2 = slksm.selectByTask(v6.getTaskid());
+						slkstateWithBLOBs slkstat2 = slksm.selectByTask(v6.getTaskid());
 						if (slkstat2 != null) {
+							child.addAttribute("do", slkstat2.getDoinfo());
 							child.addAttribute("exit", slkstat2.getExitinfo());
-							child.addAttribute("faultState", slkstat2.getSlkstatecol());
+							child.addAttribute("faultState", slkstat2.getFaultstate());
+							child.addAttribute("entry", slkstat2.getEntry());
 						}
 
 						List<linkpoint> threadports = lm.getPortUnderCMP(v6.getTaskid());
@@ -745,8 +753,8 @@ public class IntegrationService {
 							transitionElement.addAttribute("id", ts.getTransitionid().toString());
 							// 设置event
 							_event event = evtm.selectByPrimaryKey(ts.getTriggerid());
-							transitionElement.addAttribute("event", event.getName());
-
+							//transitionElement.addAttribute("event", event.getName());
+							transitionElement.addAttribute("event", ts.getName());
 							// 设置 source state
 							_task s = _tm.selectByPrimaryKey(vtss.getSourceid());
 							transitionElement.addAttribute("source", s.getTaskid().toString());

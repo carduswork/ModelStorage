@@ -731,6 +731,9 @@ public class AADLResolver {
 							ports1.setPeriod(
 									e.element("ownedValue").element("ownedValue").attributeValue("value") + "ms");
 						}
+						if(e.attributeValue("property").contains("protocol")) {
+							ports1.setProtocol(e.element("ownedValue").element("ownedValue").attributeValue("value"));
+						}
 						if (e.attributeValue("property").contains("porttype")) {
 
 							dataobject doj = new dataobject();

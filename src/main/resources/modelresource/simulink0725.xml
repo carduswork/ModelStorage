@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ModelInformation Version="1.0">
   <Model Name="infant0528">
     <P Name="Version">8.6</P>
@@ -7,8 +7,8 @@
     <GraphicalInterface>
       <P Name="NumRootInports">0</P>
       <P Name="NumRootOutports">0</P>
-      <P Name="ParameterArgumentNames"/>
-      <P Name="ComputedModelVersion">1.32</P>
+      <P Name="ParameterArgumentNames"></P>
+      <P Name="ComputedModelVersion">1.34</P>
       <P Name="NumModelReferences">0</P>
       <P Name="NumTestPointedSignals">0</P>
     </GraphicalInterface>
@@ -24,7 +24,7 @@
     <Object PropName="BdWindowsInfo" ObjectID="1" ClassName="Simulink.BDWindowsInfo">
       <Object PropName="WindowsInfo" ObjectID="2" ClassName="Simulink.WindowInfo">
         <P Name="IsActive" Class="logical">1</P>
-        <P Name="Location" Class="double">[0.0, 0.0, 1680.0, 1050.0]</P>
+        <P Name="Location" Class="double">[0.0, 23.0, 1680.0, 935.0]</P>
         <Object PropName="ModelBrowserInfo" ObjectID="3" ClassName="Simulink.ModelBrowserInfo">
           <P Name="Visible" Class="logical">0</P>
           <P Name="DockPosition" Class="char">Left</P>
@@ -39,7 +39,7 @@
           <P Name="IsActive" Class="logical">1</P>
           <P Name="ViewObjType" Class="char">SimulinkTopLevel</P>
           <P Name="LoadSaveID" Class="char">0</P>
-          <P Name="Extents" Class="double">[1646.0, 899.0]</P>
+          <P Name="Extents" Class="double">[1646.0, 762.0]</P>
           <P Name="ZoomFactor" Class="double">1.5</P>
           <P Name="Offset" Class="double">[0.0, 0.0]</P>
         </Object>
@@ -52,9 +52,9 @@
       <P Name="ModifiedByFormat">%&lt;Auto&gt;</P>
       <P Name="LastModifiedBy">kexinlan</P>
       <P Name="ModifiedDateFormat">%&lt;Auto&gt;</P>
-      <P Name="LastModifiedDate">Sun Jul 21 15:03:52 2019</P>
-      <P Name="RTWModifiedTimeStamp">485621421</P>
-      <P Name="ModelVersionFormat">1.%&lt;AutoIncrement:32&gt;</P>
+      <P Name="LastModifiedDate">Thu Jul 25 15:00:56 2019</P>
+      <P Name="RTWModifiedTimeStamp">485967393</P>
+      <P Name="ModelVersionFormat">1.%&lt;AutoIncrement:34&gt;</P>
       <P Name="ConfigurationManager">none</P>
     </ConfigManagerSettings>
     <EditorSettings>
@@ -427,14 +427,14 @@
                 <Cell Class="char">CreateSILPILBlock</Cell>
               </Array>
               <P Name="SystemTargetFile">grt.tlc</P>
-              <P Name="TLCOptions"/>
+              <P Name="TLCOptions"></P>
               <P Name="GenCodeOnly">off</P>
               <P Name="MakeCommand">make_rtw</P>
               <P Name="GenerateMakefile">on</P>
               <P Name="PackageGeneratedCodeAndArtifacts">off</P>
               <P Name="TemplateMakefile">grt_default_tmf</P>
-              <P Name="PostCodeGenCommand"/>
-              <P Name="Description"/>
+              <P Name="PostCodeGenCommand"></P>
+              <P Name="Description"></P>
               <P Name="GenerateReport">off</P>
               <P Name="SaveLog">off</P>
               <P Name="RTWVerbose">on</P>
@@ -468,7 +468,7 @@
               <P Name="GenerateCodeReplacementReport">off</P>
               <P Name="GenerateMissedCodeReplacementReport">off</P>
               <P Name="RTWCompilerOptimization">off</P>
-              <P Name="RTWCustomCompilerOptimizations"/>
+              <P Name="RTWCustomCompilerOptimizations"></P>
               <P Name="CheckMdlBeforeBuild">Off</P>
               <P Name="SharedConstantsCachingThreshold">1024</P>
               <Array PropName="Components" Type="Handle" Dimension="1*2">
@@ -554,8 +554,8 @@
                     <Cell Class="char">SupportNonInlinedSFcns</Cell>
                   </Array>
                   <P Name="TargetFcnLib">ansi_tfl_table_tmw.mat</P>
-                  <P Name="TargetLibSuffix"/>
-                  <P Name="TargetPreCompLibLocation"/>
+                  <P Name="TargetLibSuffix"></P>
+                  <P Name="TargetPreCompLibLocation"></P>
                   <P Name="GenFloatMathFcnCalls">NOT IN USE</P>
                   <P Name="TargetLangStandard">C89/C90 (ANSI)</P>
                   <P Name="CodeReplacementLibrary">None</P>
@@ -774,7 +774,7 @@
       </Block>
       <Block BlockType="S-Function">
         <P Name="FunctionName">system</P>
-        <P Name="SFunctionModules">''</P>
+        <P Name="SFunctionModules">&apos;&apos;</P>
         <P Name="PortCounts">[]</P>
       </Block>
       <Block BlockType="SubSystem">
@@ -811,13 +811,13 @@
       </Block>
     </BlockParameterDefaults>
     <System>
-      <P Name="Location">[0, 0, 1680, 1050]</P>
+      <P Name="Location">[0, 23, 1680, 958]</P>
       <P Name="Open">on</P>
       <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
       <P Name="ZoomFactor">150</P>
       <P Name="ReportName">simulink-default.rpt</P>
       <P Name="SIDHighWatermark">11</P>
-      <Block BlockType="SubSystem" Name="Alarm" SID="9" id="-1023628484">
+      <Block BlockType="SubSystem" Name="Alarm" SID="9">
         <P Name="Description">wcet = 1ms
 period = 10ms</P>
         <P Name="Ports">[1, 1]</P>
@@ -831,12 +831,12 @@ period = 10ms</P>
         <P Name="SFBlockType">Chart</P>
         <P Name="Variant">off</P>
         <System>
-          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Location">[-2, 23, 1678, 958]</P>
           <P Name="Open">off</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
           <P Name="SIDHighWatermark">80</P>
-          <Block BlockType="Inport" Name="cur_temperature" SID="9::79" id="616228961">
+          <Block BlockType="Inport" Name="cur_temperature" SID="9::79">
             <P Name="Position">[20, 101, 40, 119]</P>
             <P Name="ZOrder">59</P>
             <P Name="IconDisplay">Port number</P>
@@ -867,7 +867,7 @@ period = 10ms</P>
             <P Name="Position">[460, 241, 480, 259]</P>
             <P Name="ZOrder">55</P>
           </Block>
-          <Block BlockType="Outport" Name="alarming" SID="9::80" id="-1245503737">
+          <Block BlockType="Outport" Name="alarming" SID="9::80">
             <P Name="Position">[460, 101, 480, 119]</P>
             <P Name="ZOrder">60</P>
             <P Name="IconDisplay">Port number</P>
@@ -916,7 +916,7 @@ period = 10ms</P>
         <P Name="SFBlockType">Chart</P>
         <P Name="Variant">off</P>
         <System>
-          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Location">[-1, 23, 1679, 958]</P>
           <P Name="Open">off</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
@@ -982,7 +982,7 @@ period = 10ms</P>
         <P Name="SFBlockType">Chart</P>
         <P Name="Variant">off</P>
         <System>
-          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Location">[-2, 23, 1678, 958]</P>
           <P Name="Open">off</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
@@ -1068,7 +1068,7 @@ period = 10ms</P>
           </Line>
         </System>
       </Block>
-      <Block BlockType="SubSystem" Name="Temperature Sensor" SID="1">
+      <Block BlockType="SubSystem" Name="Temperature&#xA;Sensor" SID="1">
         <P Name="Description">wcet = 0.1ms
 period = 5ms</P>
         <P Name="Ports">[0, 1]</P>
@@ -1082,7 +1082,7 @@ period = 5ms</P>
         <P Name="SFBlockType">Chart</P>
         <P Name="Variant">off</P>
         <System>
-          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Location">[-1, 23, 1679, 958]</P>
           <P Name="Open">off</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
@@ -1167,7 +1167,7 @@ period = 5ms</P>
         <P Name="SFBlockType">Chart</P>
         <P Name="Variant">off</P>
         <System>
-          <P Name="Location">[0, 0, 1680, 1050]</P>
+          <P Name="Location">[-2, 23, 1678, 958]</P>
           <P Name="Open">off</P>
           <P Name="TiledPaperMargins">[0.500000, 0.500000, 0.500000, 0.500000]</P>
           <P Name="ZoomFactor">100</P>
@@ -1329,7 +1329,7 @@ Sensor</P>
         <chart id="36">
           <P Name="name">Thermostat</P>
           <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
-          <P Name="viewLimits">[15.342 955.208 115.676 629.005]</P>
+          <P Name="viewLimits">[15.342 955.208 115.676 550.778]</P>
           <P Name="zoomFactor">0.571</P>
           <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
@@ -1413,7 +1413,7 @@ lower_limit = Operator_Settings%100;</P>
               <P Name="visible">0</P>
               <P Name="subviewer">36</P>
               <subviewS>
-                <P Name="panLimits">[6.995 946.861 10.605 523.934]</P>
+                <P Name="panLimits">[85.63 1026.202 66.73 502.159]</P>
                 <P Name="x1">20</P>
                 <P Name="y1">20</P>
                 <P Name="zoomFactor">0.571</P>
@@ -1436,10 +1436,9 @@ lower_limit = Operator_Settings%100;</P>
                   <P Name="labelString">Format
 entry: format the
  current temperature
- data
-do： nothing
+ data,
 exit: send data</P>
-                  <P Name="position">[491.683 250 120 69]</P>
+                  <P Name="position">[491.683 250 120 76]</P>
                   <P Name="fontSize">12</P>
                   <P Name="visible">0</P>
                   <P Name="subviewer">20</P>
@@ -1473,7 +1472,7 @@ exit: report fault message</P>
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
                 <transition SSID="30">
-                  <P Name="labelString"/>
+                  <P Name="labelString"></P>
                   <P Name="labelPosition">[444.808 138.534 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
@@ -1494,7 +1493,7 @@ exit: report fault message</P>
                   <P Name="executionOrder">1</P>
                 </transition>
                 <transition SSID="29">
-                  <P Name="labelString"/>
+                  <P Name="labelString"></P>
                   <P Name="labelPosition">[82.822 251.607 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
@@ -1545,7 +1544,7 @@ exit: report fault message</P>
                   </src>
                   <dst>
                     <P Name="SSID">23</P>
-                    <P Name="intersection">[4 -1 -0 0.4928 491.683 285 0 0]</P>
+                    <P Name="intersection">[4 -1 -0 0.5395 491.683 285 0 0]</P>
                   </dst>
                   <P Name="midPoint">[369.8415 285]</P>
                   <P Name="dataLimits">[256 491.683 282.6 287.4]</P>
@@ -1605,8 +1604,8 @@ entry: send heat
             <state SSID="7">
               <P Name="description">wcet = 0.5ms</P>
               <P Name="labelString">Feedback
-entry:Operator_Feedback = 1;</P>
-              <P Name="position">[642 444 157 74.5]</P>
+entry:Operator_Feedback = 1</P>
+              <P Name="position">[642 444 164.423 73.929]</P>
               <P Name="fontSize">12</P>
               <P Name="visible">0</P>
               <P Name="subviewer">36</P>
@@ -1687,7 +1686,7 @@ communicationProtocol = TCP</P>
               <P Name="dataType">Inherit: Same as Simulink</P>
             </data>
             <transition SSID="6">
-              <P Name="labelString"/>
+              <P Name="labelString"></P>
               <P Name="labelPosition">[434 162 0 0]</P>
               <P Name="fontSize">12</P>
               <src>
@@ -1707,7 +1706,7 @@ communicationProtocol = TCP</P>
               <P Name="executionOrder">1</P>
             </transition>
             <transition SSID="19">
-              <P Name="labelString"/>
+              <P Name="labelString"></P>
               <P Name="labelPosition">[161.494 376.908 0 0]</P>
               <P Name="fontSize">12</P>
               <src>
@@ -1770,12 +1769,12 @@ communicationProtocol = TCP</P>
               <P Name="executionOrder">2</P>
             </transition>
             <transition SSID="16">
-              <P Name="labelString"/>
+              <P Name="labelString"></P>
               <P Name="labelPosition">[595.629 313.733 0 0]</P>
               <P Name="fontSize">12</P>
               <src>
                 <P Name="SSID">7</P>
-                <P Name="intersection">[1 0 -1 0.1401 664 444 0 0]</P>
+                <P Name="intersection">[1 0 -1 0.1338 664 444 0 0]</P>
               </src>
               <dst>
                 <P Name="SSID">5</P>
@@ -1812,7 +1811,7 @@ communicationProtocol = TCP</P>
               <P Name="executionOrder">2</P>
             </transition>
             <transition SSID="13">
-              <P Name="labelString"/>
+              <P Name="labelString"></P>
               <P Name="labelPosition">[687 331.836 2 14]</P>
               <P Name="fontSize">12</P>
               <src>
@@ -1821,7 +1820,7 @@ communicationProtocol = TCP</P>
               </src>
               <dst>
                 <P Name="SSID">7</P>
-                <P Name="intersection">[1 -0 -1 0.2866 687 444 0 0]</P>
+                <P Name="intersection">[1 -0 -1 0.2737 687 444 0 0]</P>
               </dst>
               <P Name="midPoint">[687 349.8355]</P>
               <P Name="dataLimits">[684.6 689.4 263.671 444]</P>
@@ -1880,7 +1879,7 @@ communicationProtocol = TCP</P>
               <P Name="fontSize">12</P>
               <src>
                 <P Name="SSID">7</P>
-                <P Name="intersection">[4 -1 0 0.557 642 477 0 0]</P>
+                <P Name="intersection">[4 -1 0 0.5536 642 477 0 0]</P>
               </src>
               <dst>
                 <P Name="SSID">9</P>
@@ -1900,7 +1899,7 @@ communicationProtocol = TCP</P>
         <chart id="69">
           <P Name="name">Operator Interface</P>
           <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
-          <P Name="viewLimits">[115 1212.882 85.333 684.966]</P>
+          <P Name="viewLimits">[115 1212.882 85.333 593.587]</P>
           <P Name="zoomFactor">0.667</P>
           <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
@@ -1924,7 +1923,7 @@ communicationProtocol = TCP</P>
               <P Name="visible">0</P>
               <P Name="subviewer">69</P>
               <subviewS>
-                <P Name="panLimits">[-25.051 1072.282 -33.093 566.24]</P>
+                <P Name="panLimits">[-25.051 269.096 -33.093 215.698]</P>
                 <P Name="x1">20</P>
                 <P Name="y1">20</P>
                 <P Name="zoomFactor">0.667</P>
@@ -1953,7 +1952,7 @@ communicationProtocol = TCP</P>
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
                 <transition SSID="25">
-                  <P Name="labelString"/>
+                  <P Name="labelString"></P>
                   <P Name="labelPosition">[179.915 89 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
@@ -1973,7 +1972,7 @@ communicationProtocol = TCP</P>
                   <P Name="executionOrder">1</P>
                 </transition>
                 <transition SSID="26">
-                  <P Name="labelString"/>
+                  <P Name="labelString"></P>
                   <P Name="labelPosition">[97.788 186.957 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
@@ -2055,7 +2054,7 @@ communicationProtocol = TCP</P>
                 </state>
                 <state SSID="20">
                   <P Name="labelString">Setting
-entry:
+en:
 Operator_settings = nurse_input;</P>
                   <P Name="position">[138 260 182.713 62.668]</P>
                   <P Name="fontSize">12</P>
@@ -2065,7 +2064,7 @@ Operator_settings = nurse_input;</P>
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
                 <transition SSID="32">
-                  <P Name="labelString"/>
+                  <P Name="labelString"></P>
                   <P Name="labelPosition">[182.103 110 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
@@ -2106,7 +2105,7 @@ Operator_settings = nurse_input;</P>
                   <P Name="executionOrder">2</P>
                 </transition>
                 <transition SSID="34">
-                  <P Name="labelString"/>
+                  <P Name="labelString"></P>
                   <P Name="labelPosition">[333.292 148.339 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
@@ -2127,7 +2126,7 @@ Operator_settings = nurse_input;</P>
                   <P Name="executionOrder">1</P>
                 </transition>
                 <transition SSID="33">
-                  <P Name="labelString"/>
+                  <P Name="labelString"></P>
                   <P Name="labelPosition">[169.43 208.5 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
@@ -2230,7 +2229,7 @@ Operator_settings = nurse_input;</P>
           <P Name="name">Temperature
 Sensor</P>
           <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
-          <P Name="viewLimits">[-114.026 1202.774 -0.14 719.06]</P>
+          <P Name="viewLimits">[-114.026 1202.774 -0.14 609.46]</P>
           <P Name="zoomFactor">0.8</P>
           <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
@@ -2306,7 +2305,7 @@ communicationProtocol = TUDP</P>
               <P Name="dataType">boolean</P>
             </data>
             <transition SSID="4">
-              <P Name="labelString"/>
+              <P Name="labelString"></P>
               <P Name="labelPosition">[181.857 89 0 0]</P>
               <P Name="fontSize">12</P>
               <src>
@@ -2347,7 +2346,7 @@ communicationProtocol = TUDP</P>
               <P Name="executionOrder">1</P>
             </transition>
             <transition SSID="8">
-              <P Name="labelString"/>
+              <P Name="labelString"></P>
               <P Name="labelPosition">[296.929 144 0 0]</P>
               <P Name="fontSize">12</P>
               <src>
@@ -2372,7 +2371,7 @@ communicationProtocol = TUDP</P>
         <chart id="98">
           <P Name="name">Heat Source </P>
           <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
-          <P Name="viewLimits">[92.148 1032.014 77.148 590.477]</P>
+          <P Name="viewLimits">[92.148 1032.014 77.148 512.25]</P>
           <P Name="zoomFactor">0.571</P>
           <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
@@ -2427,7 +2426,7 @@ entry: produce
               <P Name="dataType">Inherit: Same as Simulink</P>
             </data>
             <transition SSID="4">
-              <P Name="labelString"/>
+              <P Name="labelString"></P>
               <P Name="labelPosition">[143 101 0 0]</P>
               <P Name="fontSize">12</P>
               <src>
@@ -2468,7 +2467,7 @@ entry: produce
               <P Name="executionOrder">1</P>
             </transition>
             <transition SSID="8">
-              <P Name="labelString"/>
+              <P Name="labelString"></P>
               <P Name="labelPosition">[283 226.531 0 0]</P>
               <P Name="fontSize">12</P>
               <src>
@@ -2493,7 +2492,7 @@ entry: produce
         <chart id="106">
           <P Name="name">Alarm</P>
           <P Name="windowPosition">[199.5 216.75 417 348.75]</P>
-          <P Name="viewLimits">[38.043 977.909 9.843 523.172]</P>
+          <P Name="viewLimits">[38.043 977.909 9.843 444.945]</P>
           <P Name="zoomFactor">0.571</P>
           <P Name="transitionColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
           <P Name="transitionLabelColor">[0.3215686274509804 0.5450980392156862 0.7725490196078432]</P>
@@ -2519,10 +2518,10 @@ entry: produce
               <P Name="visible">0</P>
               <P Name="subviewer">106</P>
               <subviewS>
-                <P Name="panLimits">[11.396 1108.729 31.716 631.049]</P>
+                <P Name="panLimits">[11.396 263.207 31.716 244.699]</P>
                 <P Name="x1">20</P>
                 <P Name="y1">20</P>
-                <P Name="zoomFactor">0.667</P>
+                <P Name="zoomFactor">0.571</P>
                 <P Name="pos">[40 40 659 461]</P>
               </subviewS>
               <P Name="type">OR_STATE</P>
@@ -2542,8 +2541,7 @@ entry: produce
                   <P Name="labelString">Format
 entry: format the
  current temperature
- data
-do: nothing
+ data,
 exit: send data</P>
                   <P Name="position">[450 250 120 69]</P>
                   <P Name="fontSize">12</P>
@@ -2579,7 +2577,7 @@ exit: report fault message</P>
                   <P Name="decomposition">CLUSTER_STATE</P>
                 </state>
                 <transition SSID="22">
-                  <P Name="labelString"/>
+                  <P Name="labelString"></P>
                   <P Name="labelPosition">[200.27 102 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
@@ -2599,7 +2597,7 @@ exit: report fault message</P>
                   <P Name="executionOrder">1</P>
                 </transition>
                 <transition SSID="13">
-                  <P Name="labelString"/>
+                  <P Name="labelString"></P>
                   <P Name="labelPosition">[419.116 143.384 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
@@ -2621,7 +2619,7 @@ exit: report fault message</P>
                   <P Name="executionOrder">1</P>
                 </transition>
                 <transition SSID="14">
-                  <P Name="labelString"/>
+                  <P Name="labelString"></P>
                   <P Name="labelPosition">[82.565 252.123 0 0]</P>
                   <P Name="fontSize">12</P>
                   <src>
@@ -2775,7 +2773,7 @@ exit: report fault message</P>
               <P Name="dataType">Inherit: Same as Simulink</P>
             </data>
             <transition SSID="4">
-              <P Name="labelString"/>
+              <P Name="labelString"></P>
               <P Name="labelPosition">[158 104.5 0 0]</P>
               <P Name="fontSize">12</P>
               <src>

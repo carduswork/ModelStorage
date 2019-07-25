@@ -48,7 +48,7 @@ public class ConsoleApplication implements CommandLineRunner {
 		aadlFiles.put("组件库", "src/main/resources/modelresource/wkaadl/composition.aaxl2");
 		aadlFiles.put("错误库", "src/main/resources/modelresource/wkaadl/ErrorLib.aaxl2");
 		sysmlFiles.put("文件", "src/main/resources/modelresource/wk003.uml");
-		slkFiles.put("文件", "src/main/resources/modelresource/abc.xml");
+		slkFiles.put("文件", "src/main/resources/modelresource/simulink0725.xml");
 		mc.setAadlFiles(aadlFiles);
 		mc.setSysmlFiles(sysmlFiles);
 		mc.setSlkFiles(slkFiles);

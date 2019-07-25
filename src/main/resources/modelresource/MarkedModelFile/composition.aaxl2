@@ -48,6 +48,11 @@
           <ownedValue xsi:type="aadl2:StringLiteral" value="signal"/>
         </ownedValue>
       </ownedPropertyAssociation>
+      <ownedPropertyAssociation property="PS.aadl#PS.protocol">
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:StringLiteral" value="TCP"/>
+        </ownedValue>
+      </ownedPropertyAssociation>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceType" name="temperature_sensor">
       <ownedPropertyAssociation property="../../Plugin_Resources/Predeclared_Property_Sets/Timing_Properties.aadl#Timing_Properties.Deadline">
@@ -75,7 +80,7 @@
           </propagations>
         </parsedAnnexSubclause>
       </ownedAnnexSubclause>
-      <ownedDataPort name="currentTemperature" out="true" id="-1490456638"/>
+      <ownedDataPort name="currentTemperature" out="true" id="1787393105"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceImplementation" name="temperature_sensor.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.4"/>
@@ -91,8 +96,8 @@
           </propagations>
         </parsedAnnexSubclause>
       </ownedAnnexSubclause>
-      <ownedDataPort name="heatcontrol" in="true" id="1141667563"/>
-      <ownedDataPort name="heat" out="true" id="1865425924"/>
+      <ownedDataPort name="heatcontrol" in="true" id="-1672736538"/>
+      <ownedDataPort name="heat" out="true" id="-616133455"/>
     </ownedClassifier>
     <ownedClassifier xsi:type="aadl2:DeviceImplementation" name="heatsource.impl">
       <ownedRealization implemented="#//@ownedPublicSection/@ownedClassifier.6"/>

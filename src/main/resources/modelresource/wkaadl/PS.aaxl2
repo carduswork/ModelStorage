@@ -31,4 +31,10 @@
       <metaclassName>data</metaclassName>
     </appliesTo>
   </ownedProperty>
+  <ownedProperty name="protocol">
+    <ownedPropertyType xsi:type="aadl2:AadlString"/>
+    <appliesTo xsi:type="aadl2:MetaclassReference">
+      <metaclassName>data</metaclassName>
+    </appliesTo>
+  </ownedProperty>
 </aadl2:PropertySet>

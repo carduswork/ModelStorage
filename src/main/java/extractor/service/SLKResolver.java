@@ -51,10 +51,12 @@ import extractor.model.device;
 import extractor.model.linkpoint;
 import extractor.model.rtos;
 import extractor.model.slkstate;
+import extractor.model.slkstateWithBLOBs;
 import extractor.model.transition;
 import extractor.model.transitionstate;
 import extractor.util.AppendID;
 import extractor.util.GetID;
+import extractor.util.MyTextReader;
 
 @Service("SLKResolver")
 
@@ -242,25 +244,35 @@ public class SLKResolver {
 		List<? extends Node> outports = document.selectNodes(fatherpath + "/System/Block[@BlockType='Outport']");
 		List<? extends Node> inports = document.selectNodes(fatherpath + "/System/Block[@BlockType='Inport']");
 		for (Node n : outports) {
-			Element element2 = (Element) n;
+			Element portElement = (Element) n;
 			linkpoint ports1 = new linkpoint();
-			ports1.setName(element2.attributeValue("Name"));
+			ports1.setName(portElement.attributeValue("Name"));
 			ports1.setModeltype("simulink");
 			Integer linkpointID = (int) GetID.getId();
 			ports1.setLinkpointid(linkpointID);
 			try {
-				AppendID.AppendID(linkpointfile, element2.getUniquePath(), linkpointID.toString());
+				AppendID.AppendID(linkpointfile, portElement.getUniquePath(), linkpointID.toString());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			// 端口的数据
 			Element portdata = (Element) document
-					.selectSingleNode("//chart/Children/data[@name='" + element2.attributeValue("Name") + "']");
+					.selectSingleNode("//chart/Children/data[@name='" + portElement.attributeValue("Name") + "']");
 			Element portdatadescription = (Element) document
 					.selectSingleNode(portdata.getUniquePath() + "/P[@Name='description']");
 			if (portdatadescription != null) {
-				String[] att = portdatadescription.getText().split("=");
-				ports1.setPeriod(att[1] + "ms");
+				//period与protocol
+				String[] att = portdatadescription.getText().split("\n");
+				for(String s:att) {
+					//System.out.println(s);
+					if(s.contains("period")) {
+						
+						ports1.setPeriod(s.split("=")[1] + "ms");
+					}
+					if(s.contains("communicationProtocol")) {
+						ports1.setProtocol(s.split("=")[1]);
+					}
+				}
 			}
 
 			Element typElement = (Element) document.selectSingleNode(portdata.getUniquePath() + "/P[@Name='dataType']");
@@ -318,25 +330,30 @@ public class SLKResolver {
 		List<? extends Node> namelist = document.selectNodes(gettask);
 		for (Node n : namelist) {
 			Element taskElement = (Element) n;
+			//只另存在component中
 			component taskcomponent = new component();
 			Integer idString = (int) GetID.getId();
 			taskcomponent.setComponentid(idString);
 			taskcomponent.setModeltype("simulink");
 			Element ls = (Element) document.selectSingleNode(taskElement.getUniquePath() + "/P[@Name='labelString']");
 
-			String[] ps = ls.getText().split("\n");
+			//第一行是名字，然后按照entry,do,exit这个顺序
+			MyTextReader mtr=new MyTextReader(ls.getText());
+			taskcomponent.setName(mtr.getParam("Name"));
+			//String[] ps = ls.getText().split("\n");
 
-			taskcomponent.setName(ps[0]);
-			slkstate sks = new slkstate();
+			//taskcomponent.setName(ps[0]);
+			slkstateWithBLOBs sks = new slkstateWithBLOBs();
 			sks.setTaskid(idString.toString());
-//从名字中解析exit
-			String regString = "(?<=exit:).*";
-			Pattern pattern = Pattern.compile(regString);
-			Matcher m = pattern.matcher(ls.getText());
-			if (m.find()) {
-
-				sks.setExitinfo(m.group());
-			}
+			sks.setExitinfo(mtr.getParam("exit"));
+			sks.setDoinfo(mtr.getParam("do"));
+			sks.setEntry(mtr.getParam("entry"));
+//			String regString = "(?<=exit:).*";
+//			Pattern pattern = Pattern.compile(regString);
+//			Matcher m = pattern.matcher(ls.getText());
+//			if (m.find()) {
+//				sks.setExitinfo(m.group());
+//			}
 
 			taskcomponent.setType("task");
 
@@ -353,15 +370,17 @@ public class SLKResolver {
 						_em.insert(e);
 					}
 					if (s.contains("faultState")) {
-						sks.setSlkstatecol(s.split("=")[1]);
-						slksm.insert(sks);
+						sks.setFaultstate(s.split("=")[1]);
+						
+
 					}
 				}
+				slksm.insert(sks);
 				t.setWcet(dElement.getText().split(" ")[2]);
 				taskcomponent.setWcet(dElement.getText().split(" ")[2]);
 			}
 			insert_component(taskcomponent);
-			t.setName(ps[0]);
+			t.setName(mtr.getParam("Name"));
 			t.setTaskid(idString);
 			t.setFatherid(father.getComponentid());
 //			try {
@@ -389,15 +408,21 @@ public class SLKResolver {
 
 					threadcomp.setName(threadprop[0]);
 
-					slkstate sks2 = new slkstate();
+					slkstateWithBLOBs sks2 = new slkstateWithBLOBs();
 					sks2.setTaskid(threadid.toString());
 
-					String regString2 = "(?<=exit:).*";
-					Pattern pattern2 = Pattern.compile(regString2);
-					Matcher m2 = pattern2.matcher(threadnamElement.getText());
-					if (m2.find()) {
-						sks2.setExitinfo(m2.group());
-					}
+					MyTextReader mtr2=new MyTextReader(threadnamElement.getText());
+
+					sks2.setExitinfo(mtr2.getParam("exit"));
+					sks2.setDoinfo(mtr2.getParam("do"));
+					sks2.setEntry(mtr2.getParam("entry"));
+					
+//					String regString2 = "(?<=exit:).*";
+//					Pattern pattern2 = Pattern.compile(regString2);
+//					Matcher m2 = pattern2.matcher(threadnamElement.getText());
+//					if (m2.find()) {
+//						sks2.setExitinfo(m2.group());
+//					}
 
 					Element descElement = (Element) doc
 							.selectSingleNode(threadElement.getUniquePath() + "/P[@Name='description']");
@@ -412,14 +437,14 @@ public class SLKResolver {
 								_em.insert(e2);
 							}
 							if (s.contains("faultState")) {
-								sks2.setSlkstatecol(s.split("=")[1]);
-								slksm.insert(sks2);
+								sks2.setFaultstate(s.split("=")[1]);								
 							}
 							if (s.contains("wcet")) {
 								threadcomp.setWcet(s.split(" ")[2]);
 								threadTask.setWcet(s.split(" ")[2]);
 							}
 						}
+						slksm.insert(sks2);
 					}
 
 					threadcomp.setType("task");
@@ -452,7 +477,6 @@ public class SLKResolver {
 			// trigger要从source找
 			Element idElement = (Element) document.selectSingleNode(n.getUniquePath() + "/src/P[@Name='SSID']");
 			if (idElement != null) {
-
 				Map<String, String> r = getstateinfo(modelfilename, transitionElement, idElement.getText());
 				_event e = new _event();
 				Integer eventid = (int) GetID.getId();
@@ -499,13 +523,23 @@ public class SLKResolver {
 				_event e = new _event();
 				Integer eventid = (int) GetID.getId();
 				e.setEventid(eventid);
-				e.setName(r.get("trigger"));
-				insert_event(e);
-
-				t.setTriggerid(eventid);
 				Element attreElement = (Element) document
 						.selectSingleNode(n.getUniquePath() + "/P[@Name='labelString']");
-				t.setName(attreElement.getText());
+				
+				MyTextReader mtr=new MyTextReader(attreElement.getText());
+				
+					
+				e.setName(mtr.getParam("Name"));								
+//				e.setName(r.get("trigger"));
+				try {
+				insert_event(e);
+				}catch(Exception ex){
+					System.out.println(mtr.getParam("Name"));
+					ex.printStackTrace();
+				}
+				t.setTriggerid(eventid);
+				t.setName("simulinktransition");
+				//t.setName(mtr.getParam("Name"));
 				insert_transition(t);
 				transitionstate ts = new transitionstate();
 				ts.setSourceid(Integer.valueOf(r.get("id")));
@@ -645,12 +679,17 @@ public class SLKResolver {
 		Map<String, String> r = new HashMap<>();
 		r.put("id", pElement.getParent().attributeValue("id"));
 		String[] strings = pElement.getText().split("\n");
-		for (String s : strings) {
-			if (s.contains("entry")) {
-
-				r.put("trigger", s.split(":")[1]);
-			}
-		}
+//		for (String s : strings) {
+//			if (s.contains("entry")) {
+//				try {
+//					
+//					r.put("trigger", s.split(":")[1]);
+//				}catch(Exception e) {
+//					System.out.println("发生错误"+transition.getName()+"的"+s);
+//					e.printStackTrace();
+//				}
+//			}
+//		}
 		return r;
 	}
 }

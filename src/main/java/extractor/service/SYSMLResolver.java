@@ -248,8 +248,8 @@ public class SYSMLResolver {
 					String exid = vop.attributeValue("raisedException");
 					// 多个异常
 					if (exid.contains(" ")) {
-						String[] exids=exid.split(" ");
-						for(String s:exids) {
+						String[] exids = exid.split(" ");
+						for (String s : exids) {
 							_exception ex = new _exception();
 							Element excElement = (Element) document
 									.selectSingleNode("//nestedClassifier[@xmi:id='" + s + "']");
@@ -322,6 +322,13 @@ public class SYSMLResolver {
 
 					ports1.setPeriod(periodelElement.attributeValue("value") + "ms");
 				}
+				Element protocolElement = (Element) document.selectSingleNode(
+						dataElement.getUniquePath() + "/ownedAttribute[@name='communicationProtocol']/defaultValue");
+				if (protocolElement != null) {
+
+					ports1.setProtocol(protocolElement.attributeValue("value"));
+				}
+				
 				dataobject dobj = new dataobject();
 				dobj.setDatatype(dataElement.attributeValue("name"));
 				dobj.setFrom(linkpointID);
