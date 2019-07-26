@@ -694,7 +694,6 @@ public class IntegrationService {
 					tsk.addAttribute("deadline", taskv.getDeadline());
 					tsk.addAttribute("period", taskv.getPeriod());
 					tsk.addAttribute("wcet", taskv.getWcet());
-
 					List<_exception> exception1 = em.selectByComp(taskv.getTaskid());
 					if (exception1.size() > 0) {
 						tsk.addAttribute("faultType", exception1.get(0).getName());
@@ -705,6 +704,7 @@ public class IntegrationService {
 						tsk.addAttribute("exit", slkstat.getExitinfo());
 						tsk.addAttribute("faultState", slkstat.getFaultstate());
 						tsk.addAttribute("entry", slkstat.getEntry());
+						tsk.addAttribute("parallel", slkstat.getIsparalle());
 					}
 					// thread
 					List<_task> childtasklist = _tm.selectChild(taskv.getTaskid());

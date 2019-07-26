@@ -22,11 +22,11 @@
           <states name="Incorrect"/>
         </behaviors>
         <behaviors name="FailStopTransient">
-          <events xsi:type="errorModel:ErrorEvent" name="Failure" id="1252869109"/>
-          <events xsi:type="errorModel:ErrorEvent" name="Recoverevent" id="69275006"/>
-          <states name="Operational" intial="true" id="-35572443"/>
-          <states name="FailStop" id="468878648"/>
-          <transitions name="FailureTransition" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0" target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.1" id="1194317788">
+          <events xsi:type="errorModel:ErrorEvent" name="Failure" id="441178807"/>
+          <events xsi:type="errorModel:ErrorEvent" name="Recoverevent" id="-542352072"/>
+          <states name="Operational" intial="true" id="-1946863017"/>
+          <states name="FailStop" id="575798603"/>
+          <transitions name="FailureTransition" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0" target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.1" id="1598967303">
             <ownedComment body="-- sensor failure may be transient. We assume a 20% persistent sesnor failure rate."/>
             <condition xsi:type="errorModel:ConditionElement">
               <qualifiedErrorPropagationReference xsi:type="errorModel:QualifiedErrorEventOrPropagation">
@@ -34,7 +34,7 @@
               </qualifiedErrorPropagationReference>
             </condition>
           </transitions>
-          <transitions name="RecoverTransitiom" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.1" target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0" id="-2000308267">
+          <transitions name="RecoverTransitiom" source="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.1" target="#//@ownedPublicSection/@ownedAnnexLibrary.0/@parsedAnnexLibrary/@behaviors.2/@states.0" id="1069778989">
             <ownedComment body="--FailureTransition: Operational -[Failure]-&gt; (FailStop with 0.2, Operational with 0.8);"/>
             <condition xsi:type="errorModel:ConditionElement">
               <qualifiedErrorPropagationReference xsi:type="errorModel:QualifiedErrorEventOrPropagation">

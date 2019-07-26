@@ -349,23 +349,18 @@ public class SLKResolver {
 			//第一行是名字，然后按照entry,do,exit这个顺序
 			MyTextReader mtr=new MyTextReader(ls.getText());
 			taskcomponent.setName(mtr.getParam("Name"));
-			//String[] ps = ls.getText().split("\n");
 
-			//taskcomponent.setName(ps[0]);
 			slkstateWithBLOBs sks = new slkstateWithBLOBs();
 			sks.setTaskid(idString.toString());
 			sks.setExitinfo(mtr.getParam("exit"));
 			sks.setDoinfo(mtr.getParam("do"));
 			sks.setEntry(mtr.getParam("entry"));
-//			String regString = "(?<=exit:).*";
-//			Pattern pattern = Pattern.compile(regString);
-//			Matcher m = pattern.matcher(ls.getText());
-//			if (m.find()) {
-//				sks.setExitinfo(m.group());
-//			}
-
+			Element typElement=(Element)document.selectSingleNode(n.getUniquePath()+"/P[@Name='type']");
+			
+			if(typElement!=null&&typElement.getText().equals("AND_STATE")) {
+					sks.setIsparalle("true");
+			}
 			taskcomponent.setType("task");
-
 			_task t = new _task();
 			Element dElement = (Element) document
 					.selectSingleNode(taskElement.getUniquePath() + "/P[@Name='description']");
@@ -379,24 +374,21 @@ public class SLKResolver {
 						_em.insert(e);
 					}
 					if (s.contains("faultState")) {
-						sks.setFaultstate(s.split("=")[1]);
-						
-
+						sks.setFaultstate(s.split("=")[1]);						
 					}
 				}
 				slksm.insert(sks);
 				t.setWcet(dElement.getText().split(" ")[2]);
 				taskcomponent.setWcet(dElement.getText().split(" ")[2]);
+			}else {
+				slksm.insert(sks);
 			}
 			insert_component(taskcomponent);
 			t.setName(mtr.getParam("Name"));
 			t.setTaskid(idString);
 			t.setFatherid(father.getComponentid());
-//			try {
 			AppendID.AppendID(modelfilename, taskElement.getUniquePath(), t.getTaskid().toString());
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
+
 			insert_task(t);
 
 			// 有thread
@@ -426,12 +418,13 @@ public class SLKResolver {
 					sks2.setDoinfo(mtr2.getParam("do"));
 					sks2.setEntry(mtr2.getParam("entry"));
 					
-//					String regString2 = "(?<=exit:).*";
-//					Pattern pattern2 = Pattern.compile(regString2);
-//					Matcher m2 = pattern2.matcher(threadnamElement.getText());
-//					if (m2.find()) {
-//						sks2.setExitinfo(m2.group());
-//					}
+					Element typElement2=(Element)document.selectSingleNode(n.getUniquePath()+"/P[@Name='type']");
+					
+					if(typElement2!=null) {								
+						if(typElement2.getText().equals("AND_STATE")) {							
+							sks2.setIsparalle("true");
+						}
+					}
 
 					Element descElement = (Element) doc
 							.selectSingleNode(threadElement.getUniquePath() + "/P[@Name='description']");
@@ -453,6 +446,8 @@ public class SLKResolver {
 								threadTask.setWcet(s.split(" ")[2]);
 							}
 						}
+						slksm.insert(sks2);
+					}else {
 						slksm.insert(sks2);
 					}
 

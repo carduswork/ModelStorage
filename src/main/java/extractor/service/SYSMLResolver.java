@@ -305,7 +305,6 @@ public class SYSMLResolver {
 			Integer linkpointID = (int) GetID.getId();
 			ports1.setLinkpointid(linkpointID);
 
-//			try {
 			AppendID.AppendID4sysml(linkpointfile, element2.getUniquePath(), linkpointID.toString());
 			// type指向赋予id
 			QName qname1 = QName.get("type");
@@ -325,7 +324,7 @@ public class SYSMLResolver {
 				Element protocolElement = (Element) document.selectSingleNode(
 						dataElement.getUniquePath() + "/ownedAttribute[@name='communicationProtocol']/defaultValue");
 				if (protocolElement != null) {
-					System.out.println(protocolElement.attributeValue("name")+"ok");
+					//System.out.println(protocolElement.attributeValue("name")+"ok");
 					ports1.setProtocol(protocolElement.attributeValue("name"));
 				}
 				
@@ -401,7 +400,7 @@ public class SYSMLResolver {
 	private void TaskResolver(String modelfilename, String fatherpath, component father) throws Exception {
 		Document document = ModelResolver(modelfilename);
 //		String gettask = fatherpath + "/ownedOperation[@xmi:type='uml:Operation']";
-		String gettask = fatherpath + "/nestedClassifier";
+		String gettask = fatherpath + "/nestedClassifier[@xmi:type='uml:Class']";
 		List<? extends Node> namelist = document.selectNodes(gettask);
 		for (Node n : namelist) {
 			Element taskElement = (Element) n;
