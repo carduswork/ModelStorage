@@ -325,8 +325,8 @@ public class SYSMLResolver {
 				Element protocolElement = (Element) document.selectSingleNode(
 						dataElement.getUniquePath() + "/ownedAttribute[@name='communicationProtocol']/defaultValue");
 				if (protocolElement != null) {
-
-					ports1.setProtocol(protocolElement.attributeValue("value"));
+					System.out.println(protocolElement.attributeValue("name")+"ok");
+					ports1.setProtocol(protocolElement.attributeValue("name"));
 				}
 				
 				dataobject dobj = new dataobject();

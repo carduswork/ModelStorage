@@ -179,7 +179,7 @@
     where LinkpointID = #{linkpointid,jdbcType=INTEGER}
   </select>
   <select id="getPortUnderCMP" parameterType="java.lang.Integer" resultMap="ViewRM">
-		select portid,portname,period from getdistinctport where
+		select portid,portname,period,protocol from getdistinctport where
 		ComponentID=#{cmpid} group by portid,portname
 	</select>	
 </mapper>

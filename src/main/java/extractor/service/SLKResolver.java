@@ -264,9 +264,7 @@ public class SLKResolver {
 				//period与protocol
 				String[] att = portdatadescription.getText().split("\n");
 				for(String s:att) {
-					//System.out.println(s);
 					if(s.contains("period")) {
-						
 						ports1.setPeriod(s.split("=")[1] + "ms");
 					}
 					if(s.contains("communicationProtocol")) {
@@ -309,8 +307,19 @@ public class SLKResolver {
 					.selectSingleNode(portdata.getUniquePath() + "/P[@Name='description']");
 
 			if (portdatadescription != null) {
-				String[] att = portdatadescription.getText().split("=");
-				ports1.setPeriod(att[1] + "ms");
+//				String[] att = portdatadescription.getText().split("=");
+				String[] att = portdatadescription.getText().split("\n");
+//				ports1.setPeriod(att[1] + "ms");
+				
+				
+				for(String s:att) {
+					if(s.contains("period")) {
+						ports1.setPeriod(s.split("=")[1] + "ms");
+					}
+					if(s.contains("communicationProtocol")) {
+						ports1.setProtocol(s.split("=")[1]);
+					}
+				}
 			}
 			insert_ports(ports1);
 
